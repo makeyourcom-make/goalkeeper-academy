@@ -2,29 +2,31 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { routing, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { href: "/academie", label: "Académie" },
-  { href: "/offres", label: "Offres & tarifs" },
-  { href: "/stages", label: "Stages" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contact", label: "Contact" },
-] as const;
-
-const LOCALES = [
-  { code: "fr", label: "FR" },
-  { code: "en", label: "EN" },
+  { href: "/", key: "home" },
+  { href: "/academie", key: "academy" },
+  { href: "/offres", key: "offers" },
+  { href: "/stages", key: "camps" },
+  { href: "/blog", key: "blog" },
+  { href: "/contact", key: "contact" },
 ] as const;
 
 export function Header() {
+  const t = useTranslations("Header");
+  const locale = useLocale() as Locale;
+  const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [activeLocale, setActiveLocale] = React.useState<"fr" | "en">("fr");
+  const [isPending, startTransition] = React.useTransition();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -40,6 +42,46 @@ export function Header() {
     };
   }, [mobileOpen]);
 
+  const switchLocale = (next: Locale) => {
+    if (next === locale) return;
+    startTransition(() => {
+      // pathname is a runtime string; cast to the router's expected href type
+      // which excludes dynamic segments from the typed-routes union.
+      type ReplaceHref = Parameters<typeof router.replace>[0];
+      router.replace(pathname as ReplaceHref, { locale: next });
+    });
+  };
+
+  const renderLocaleSwitch = (className?: string) => (
+    <div
+      role="group"
+      aria-label={t("localeGroup")}
+      className={cn(
+        "flex items-center rounded-full border border-grey-300 p-0.5 text-xs font-semibold",
+        isPending && "opacity-60",
+        className,
+      )}
+    >
+      {routing.locales.map((code) => (
+        <button
+          key={code}
+          type="button"
+          aria-pressed={locale === code}
+          onClick={() => switchLocale(code)}
+          disabled={isPending}
+          className={cn(
+            "rounded-full px-3 py-1 uppercase transition-colors",
+            locale === code
+              ? "bg-navy text-white"
+              : "text-grey-500 hover:text-navy",
+          )}
+        >
+          {code}
+        </button>
+      ))}
+    </div>
+  );
+
   return (
     <header
       className={cn(
@@ -52,7 +94,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between gap-4 lg:h-20">
         <Link
           href="/"
-          aria-label="Goalkeeper Academy — Accueil"
+          aria-label={t("homeAriaLabel")}
           className="flex items-center gap-3"
           onClick={() => setMobileOpen(false)}
         >
@@ -70,7 +112,7 @@ export function Header() {
         </Link>
 
         <nav
-          aria-label="Navigation principale"
+          aria-label={t("primaryNav")}
           className="hidden items-center gap-8 lg:flex"
         >
           {NAV_ITEMS.map((item) => (
@@ -79,42 +121,21 @@ export function Header() {
               href={item.href}
               className="text-sm font-semibold text-navy transition-colors hover:text-orange"
             >
-              {item.label}
+              {t(`nav.${item.key}`)}
             </Link>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <div
-            role="group"
-            aria-label="Choix de la langue"
-            className="flex items-center rounded-full border border-grey-300 p-0.5 text-xs font-semibold"
-          >
-            {LOCALES.map((locale) => (
-              <button
-                key={locale.code}
-                type="button"
-                aria-pressed={activeLocale === locale.code}
-                onClick={() => setActiveLocale(locale.code)}
-                className={cn(
-                  "rounded-full px-3 py-1 transition-colors",
-                  activeLocale === locale.code
-                    ? "bg-navy text-white"
-                    : "text-grey-500 hover:text-navy",
-                )}
-              >
-                {locale.label}
-              </button>
-            ))}
-          </div>
+          {renderLocaleSwitch()}
           <Button asChild variant="primary" size="sm">
-            <Link href="/connexion">Connexion</Link>
+            <Link href="/connexion">{t("login")}</Link>
           </Button>
         </div>
 
         <button
           type="button"
-          aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           onClick={() => setMobileOpen((v) => !v)}
@@ -141,35 +162,14 @@ export function Header() {
                 onClick={() => setMobileOpen(false)}
                 className="rounded-lg px-3 py-3 text-base font-semibold text-navy hover:bg-grey-100"
               >
-                {item.label}
+                {t(`nav.${item.key}`)}
               </Link>
             ))}
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-grey-100 pt-4">
-              <div
-                role="group"
-                aria-label="Choix de la langue"
-                className="flex items-center rounded-full border border-grey-300 p-0.5 text-xs font-semibold"
-              >
-                {LOCALES.map((locale) => (
-                  <button
-                    key={locale.code}
-                    type="button"
-                    aria-pressed={activeLocale === locale.code}
-                    onClick={() => setActiveLocale(locale.code)}
-                    className={cn(
-                      "rounded-full px-3 py-1 transition-colors",
-                      activeLocale === locale.code
-                        ? "bg-navy text-white"
-                        : "text-grey-500 hover:text-navy",
-                    )}
-                  >
-                    {locale.label}
-                  </button>
-                ))}
-              </div>
+              {renderLocaleSwitch()}
               <Button asChild variant="primary" size="sm">
                 <Link href="/connexion" onClick={() => setMobileOpen(false)}>
-                  Connexion
+                  {t("login")}
                 </Link>
               </Button>
             </div>

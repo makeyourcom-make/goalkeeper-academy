@@ -1,6 +1,8 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
+
+import { Link } from "@/i18n/navigation";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -40,43 +42,46 @@ function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
 
 const COLUMNS = [
   {
-    title: "L'académie",
+    key: "academy",
     links: [
-      { href: "/academie", label: "Notre mission" },
-      { href: "/academie#equipe", label: "L'équipe" },
-      { href: "/academie#methode", label: "Notre méthode" },
-      { href: "/contact", label: "Contact" },
+      { href: "/academie", labelKey: "mission" },
+      { href: "/academie", labelKey: "team", hash: "#equipe" },
+      { href: "/academie", labelKey: "method", hash: "#methode" },
+      { href: "/contact", labelKey: "contact" },
     ],
   },
   {
-    title: "Offres",
+    key: "offers",
     links: [
-      { href: "/offres", label: "Formules enfants" },
-      { href: "/stages", label: "Stages vacances" },
-      { href: "/offres#cours-particuliers", label: "Cours particuliers" },
-      { href: "/offres#clubs", label: "Contrat clubs" },
+      { href: "/offres", labelKey: "kids" },
+      { href: "/stages", labelKey: "camps" },
+      { href: "/offres", labelKey: "private", hash: "#cours-particuliers" },
+      { href: "/offres", labelKey: "clubs", hash: "#clubs" },
     ],
   },
   {
-    title: "Ressources",
+    key: "resources",
     links: [
-      { href: "/blog", label: "Blog" },
-      { href: "/stages/giana-stop-and-shoot", label: "Giana Stop & Shoot" },
-      { href: "/connexion", label: "Espace membre" },
+      { href: "/blog", labelKey: "blog" },
+      { href: "/stages/giana-stop-and-shoot", labelKey: "giana" },
+      { href: "/connexion", labelKey: "members" },
     ],
   },
   {
-    title: "Légal",
+    key: "legal",
     links: [
-      { href: "/mentions-legales", label: "Mentions légales" },
-      { href: "/cgv", label: "CGV" },
-      { href: "/confidentialite", label: "Confidentialité" },
-      { href: "/cookies", label: "Cookies" },
+      { href: "/mentions-legales", labelKey: "imprint" },
+      { href: "/cgv", labelKey: "terms" },
+      { href: "/confidentialite", labelKey: "privacy" },
+      { href: "/cookies", labelKey: "cookies" },
     ],
   },
 ] as const;
 
 export function Footer() {
+  const t = useTranslations("Footer");
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-navy text-white">
       <div className="container py-16">
@@ -98,57 +103,54 @@ export function Footer() {
                 Goalkeeper Academy
               </span>
             </Link>
-            <p className="max-w-sm text-sm text-white/70">
-              L&apos;académie de gardiens de but du Chablais valaisan. Formation
-              spécialisée pour les jeunes gardiens de 6 à 18 ans.
-            </p>
+            <p className="max-w-sm text-sm text-white/70">{t("tagline")}</p>
             <div className="space-y-1.5 text-sm text-white/70">
               <p className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-orange" /> Chablais valaisan,
-                Suisse
+                <MapPin className="h-4 w-4 text-orange" /> {t("location")}
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-orange" />
-                <a
-                  href="mailto:contact@goalkeeperacademy.ch"
-                  className="hover:text-white"
-                >
-                  contact@goalkeeperacademy.ch
+                <a href={`mailto:${t("email")}`} className="hover:text-white">
+                  {t("email")}
                 </a>
               </p>
             </div>
           </div>
 
           {COLUMNS.map((col) => (
-            <div key={col.title} className="flex flex-col gap-3">
+            <div key={col.key} className="flex flex-col gap-3">
               <h3 className="font-anton text-base uppercase tracking-wide text-white">
-                {col.title}
+                {t(`columns.${col.key}.title`)}
               </h3>
               <ul className="flex flex-col gap-2 text-sm">
-                {col.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-white/70 transition-colors hover:text-orange"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const hash = "hash" in link ? link.hash : undefined;
+                  return (
+                    <li key={`${col.key}-${link.labelKey}`}>
+                      <Link
+                        href={
+                          hash
+                            ? { pathname: link.href, hash: hash.slice(1) }
+                            : link.href
+                        }
+                        className="text-white/70 transition-colors hover:text-orange"
+                      >
+                        {t(`columns.${col.key}.${link.labelKey}`)}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-sm text-white/60 md:flex-row md:items-center">
-          <p>
-            © {new Date().getFullYear()} Goalkeeper Academy — Tous droits
-            réservés.
-          </p>
+          <p>{t("copyright", { year })}</p>
           <div className="flex items-center gap-5">
             <a
               href="https://www.instagram.com/"
-              aria-label="Instagram"
+              aria-label={t("social.instagram")}
               target="_blank"
               rel="noreferrer noopener"
               className="text-white/70 transition-colors hover:text-orange"
@@ -157,7 +159,7 @@ export function Footer() {
             </a>
             <a
               href="https://www.facebook.com/"
-              aria-label="Facebook"
+              aria-label={t("social.facebook")}
               target="_blank"
               rel="noreferrer noopener"
               className="text-white/70 transition-colors hover:text-orange"

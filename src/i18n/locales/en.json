@@ -1,0 +1,94 @@
+{
+  "Metadata": {
+    "title": "Goalkeeper Academy",
+    "titleTemplate": "%s | Goalkeeper Academy",
+    "description": "Goalkeeper academy in the Chablais Valais region. Specialized training for young goalkeepers aged 6 to 18."
+  },
+  "Header": {
+    "skipToContent": "Skip to content",
+    "homeAriaLabel": "Goalkeeper Academy — Home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primaryNav": "Primary navigation",
+    "localeGroup": "Language selector",
+    "login": "Sign in",
+    "nav": {
+      "home": "Home",
+      "academy": "Academy",
+      "offers": "Offers & pricing",
+      "camps": "Camps",
+      "blog": "Blog",
+      "contact": "Contact"
+    }
+  },
+  "Footer": {
+    "tagline": "The goalkeeper academy of the Chablais Valais region. Specialized training for young goalkeepers aged 6 to 18.",
+    "location": "Chablais Valais, Switzerland",
+    "email": "contact@goalkeeperacademy.ch",
+    "copyright": "© {year} Goalkeeper Academy — All rights reserved.",
+    "columns": {
+      "academy": {
+        "title": "The academy",
+        "mission": "Our mission",
+        "team": "The team",
+        "method": "Our method",
+        "contact": "Contact"
+      },
+      "offers": {
+        "title": "Offers",
+        "kids": "Kids programs",
+        "camps": "Holiday camps",
+        "private": "Private lessons",
+        "clubs": "Club contracts"
+      },
+      "resources": {
+        "title": "Resources",
+        "blog": "Blog",
+        "giana": "Giana Stop & Shoot",
+        "members": "Members area"
+      },
+      "legal": {
+        "title": "Legal",
+        "imprint": "Legal notice",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "cookies": "Cookies"
+      }
+    },
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    }
+  },
+  "HomePage": {
+    "badge": "Phase 2 — bilingual i18n",
+    "title": "Training tomorrow's goalkeepers",
+    "subtitle": "The goalkeeper academy of the Chablais Valais region. Bilingual routing is now in place — public pages are coming in phase 3.",
+    "cta": {
+      "offers": "Browse offers",
+      "contact": "Contact us"
+    },
+    "preview": {
+      "badge": "Component preview",
+      "title": "Design system building blocks",
+      "subtitle": "Buttons, badges, cards — the visual foundation shared across every page."
+    },
+    "cards": {
+      "kids": {
+        "title": "Kids programs",
+        "description": "Annual or monthly",
+        "content": "1 to 2 sessions per week, individual coaching, gear included."
+      },
+      "camps": {
+        "title": "Holiday camps",
+        "description": "Easter · Summer · Autumn",
+        "content": "Skill-building camps by age group, half-day or full-day formats."
+      },
+      "clubs": {
+        "title": "Club contracts",
+        "description": "Annual B2B service",
+        "content": "We come to your club to train every goalkeeper across all teams."
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "Metadata": {
+    "title": "Goalkeeper Academy",
+    "titleTemplate": "%s | Goalkeeper Academy",
+    "description": "Académie de gardiens de but du Chablais valaisan. Formation spécialisée pour les jeunes gardiens de 6 à 18 ans."
+  },
+  "Header": {
+    "skipToContent": "Aller au contenu",
+    "homeAriaLabel": "Goalkeeper Academy — Accueil",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu",
+    "primaryNav": "Navigation principale",
+    "localeGroup": "Choix de la langue",
+    "login": "Connexion",
+    "nav": {
+      "home": "Accueil",
+      "academy": "Académie",
+      "offers": "Offres & tarifs",
+      "camps": "Stages",
+      "blog": "Blog",
+      "contact": "Contact"
+    }
+  },
+  "Footer": {
+    "tagline": "L'académie de gardiens de but du Chablais valaisan. Formation spécialisée pour les jeunes gardiens de 6 à 18 ans.",
+    "location": "Chablais valaisan, Suisse",
+    "email": "contact@goalkeeperacademy.ch",
+    "copyright": "© {year} Goalkeeper Academy — Tous droits réservés.",
+    "columns": {
+      "academy": {
+        "title": "L'académie",
+        "mission": "Notre mission",
+        "team": "L'équipe",
+        "method": "Notre méthode",
+        "contact": "Contact"
+      },
+      "offers": {
+        "title": "Offres",
+        "kids": "Formules enfants",
+        "camps": "Stages vacances",
+        "private": "Cours particuliers",
+        "clubs": "Contrat clubs"
+      },
+      "resources": {
+        "title": "Ressources",
+        "blog": "Blog",
+        "giana": "Giana Stop & Shoot",
+        "members": "Espace membre"
+      },
+      "legal": {
+        "title": "Légal",
+        "imprint": "Mentions légales",
+        "terms": "CGV",
+        "privacy": "Confidentialité",
+        "cookies": "Cookies"
+      }
+    },
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook"
+    }
+  },
+  "HomePage": {
+    "badge": "Phase 2 — i18n bilingue",
+    "title": "Former les gardiens de demain",
+    "subtitle": "L'académie de gardiens de but du Chablais valaisan. Le routing bilingue est désormais en place — les pages publiques arrivent en phase 3.",
+    "cta": {
+      "offers": "Découvrir les offres",
+      "contact": "Nous contacter"
+    },
+    "preview": {
+      "badge": "Aperçu composants",
+      "title": "Briques du design system",
+      "subtitle": "Boutons, badges, cartes — le socle visuel commun à toutes les pages."
+    },
+    "cards": {
+      "kids": {
+        "title": "Formules enfants",
+        "description": "Annuel ou mensuel",
+        "content": "1 à 2 séances par semaine, suivi individuel, matériel fourni."
+      },
+      "camps": {
+        "title": "Stages vacances",
+        "description": "Pâques · Été · Automne",
+        "content": "Camps de perfectionnement par tranches d'âge, demi-journée ou journée complète."
+      },
+      "clubs": {
+        "title": "Contrats clubs",
+        "description": "Prestation B2B annuelle",
+        "content": "Intervention dans votre club pour former tous vos gardiens, toutes équipes confondues."
+      }
+    }
+  }
+}
