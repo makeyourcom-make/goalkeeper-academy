@@ -5,9 +5,12 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 
+import type { AuthChangeEvent, Session, User } from "@supabase/supabase-js";
+
 import { Button } from "@/components/ui/button";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -27,6 +30,27 @@ export function Header() {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isPending, startTransition] = React.useTransition();
+  const [isAuthed, setIsAuthed] = React.useState(false);
+
+  React.useEffect(() => {
+    const supabase = createSupabaseBrowserClient();
+    if (!supabase) return;
+    let cancelled = false;
+    supabase.auth
+      .getUser()
+      .then(({ data }: { data: { user: User | null } }) => {
+        if (!cancelled) setIsAuthed(Boolean(data.user));
+      });
+    const { data: sub } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        setIsAuthed(Boolean(session?.user));
+      },
+    );
+    return () => {
+      cancelled = true;
+      sub.subscription.unsubscribe();
+    };
+  }, []);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -91,7 +115,7 @@ export function Header() {
           : "bg-white",
       )}
     >
-      <div className="container flex h-16 items-center justify-between gap-4 lg:h-20">
+      <div className="container flex h-20 items-center justify-between gap-4 lg:h-24">
         <Link
           href="/"
           aria-label={t("homeAriaLabel")}
@@ -101,10 +125,10 @@ export function Header() {
           <Image
             src="/logos/Logo-transparent.png"
             alt="Goalkeeper Academy"
-            width={48}
-            height={48}
+            width={160}
+            height={160}
             priority
-            className="h-10 w-auto lg:h-12"
+            className="h-14 w-auto lg:h-20"
           />
           <span className="hidden font-anton text-lg uppercase tracking-wide text-navy sm:inline">
             Goalkeeper Academy
@@ -129,7 +153,11 @@ export function Header() {
         <div className="hidden items-center gap-3 lg:flex">
           {renderLocaleSwitch()}
           <Button asChild variant="primary" size="sm">
-            <Link href="/connexion">{t("login")}</Link>
+            {isAuthed ? (
+              <Link href="/mon-compte">{t("account")}</Link>
+            ) : (
+              <Link href="/connexion">{t("login")}</Link>
+            )}
           </Button>
         </div>
 
@@ -168,9 +196,15 @@ export function Header() {
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-grey-100 pt-4">
               {renderLocaleSwitch()}
               <Button asChild variant="primary" size="sm">
-                <Link href="/connexion" onClick={() => setMobileOpen(false)}>
-                  {t("login")}
-                </Link>
+                {isAuthed ? (
+                  <Link href="/mon-compte" onClick={() => setMobileOpen(false)}>
+                    {t("account")}
+                  </Link>
+                ) : (
+                  <Link href="/connexion" onClick={() => setMobileOpen(false)}>
+                    {t("login")}
+                  </Link>
+                )}
               </Button>
             </div>
           </div>

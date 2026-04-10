@@ -1,0 +1,158 @@
+[
+  {
+    "slug": "stage-paques-2026",
+    "startDate": "2026-04-13",
+    "endDate": "2026-04-17",
+    "location": "Monthey",
+    "venue": "Centre sportif du Verney, Monthey",
+    "ageMin": 8,
+    "ageMax": 12,
+    "format": "fullDay",
+    "dailyHours": "09h00 – 16h30",
+    "price": 380,
+    "spotsTotal": 20,
+    "spotsLeft": 6,
+    "image": "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1200&q=80",
+    "title": {
+      "fr": "Stage de Pâques 2026 — U8 à U12",
+      "en": "Easter Camp 2026 — U8 to U12"
+    },
+    "description": {
+      "fr": "5 jours intensifs sur les fondamentaux du gardien : appuis, prises de balle, plongeons et premiers exercices de jeu au pied. Repas de midi inclus.",
+      "en": "5 intensive days on goalkeeper fundamentals: footwork, handling, diving and first distribution drills. Lunch included."
+    },
+    "highlights": {
+      "fr": [
+        "5 jours, 25 heures d'entraînement spécifique",
+        "Ratio 1 coach pour 6 gardiens maximum",
+        "Repas de midi équilibré inclus",
+        "Bilan technique individualisé en fin de stage",
+        "T-shirt et gourde Goalkeeper Academy offerts"
+      ],
+      "en": [
+        "5 days, 25 hours of specific training",
+        "Max 1 coach per 6 goalkeepers",
+        "Balanced lunch included",
+        "Individual technical report at the end",
+        "Goalkeeper Academy t-shirt and bottle included"
+      ]
+    }
+  },
+  {
+    "slug": "stage-ete-monthey-2026",
+    "startDate": "2026-07-06",
+    "endDate": "2026-07-10",
+    "location": "Monthey",
+    "venue": "Centre sportif du Verney, Monthey",
+    "ageMin": 10,
+    "ageMax": 14,
+    "format": "fullDay",
+    "dailyHours": "08h30 – 17h00",
+    "price": 420,
+    "spotsTotal": 24,
+    "spotsLeft": 18,
+    "image": "https://images.unsplash.com/photo-1493924317585-818d70dc6830?w=1200&q=80",
+    "title": {
+      "fr": "Stage été #1 — Monthey",
+      "en": "Summer Camp #1 — Monthey"
+    },
+    "description": {
+      "fr": "Première semaine d'été à Monthey. Mix technique et tactique, séances vidéo en début d'après-midi, ateliers de jeu au pied avancés.",
+      "en": "First summer week in Monthey. Mix of technique and tactics, early-afternoon video sessions, advanced distribution drills."
+    },
+    "highlights": {
+      "fr": [
+        "5 jours pleins, 30+ heures d'entraînement",
+        "Séances vidéo et analyse de match",
+        "Ateliers spécifiques jeu au pied long et court",
+        "Repas de midi et collations inclus",
+        "Tournoi de fin de stage le vendredi"
+      ],
+      "en": [
+        "5 full days, 30+ hours of training",
+        "Video sessions and match analysis",
+        "Specific long and short distribution drills",
+        "Lunch and snacks included",
+        "End-of-camp tournament on Friday"
+      ]
+    }
+  },
+  {
+    "slug": "stage-ete-vouvry-2026",
+    "startDate": "2026-08-10",
+    "endDate": "2026-08-14",
+    "location": "Vouvry",
+    "venue": "Stade de Bochet, Vouvry",
+    "ageMin": 13,
+    "ageMax": 18,
+    "format": "fullDay",
+    "dailyHours": "08h30 – 17h30",
+    "price": 480,
+    "spotsTotal": 18,
+    "spotsLeft": 12,
+    "image": "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1200&q=80",
+    "title": {
+      "fr": "Stage performance — Vouvry",
+      "en": "Performance Camp — Vouvry"
+    },
+    "description": {
+      "fr": "Camp avancé pour gardiens en filière performance. Préparation physique spécifique, travail vidéo et matchs en fin de semaine.",
+      "en": "Advanced camp for performance-pathway goalkeepers. Specific physical prep, video work and matches at the end of the week."
+    },
+    "highlights": {
+      "fr": [
+        "Stage haute intensité pour filière performance",
+        "Préparation physique avec préparateur diplômé",
+        "Analyse vidéo individuelle quotidienne",
+        "Matchs amicaux contre clubs partenaires",
+        "Bilan complet remis aux familles"
+      ],
+      "en": [
+        "High-intensity camp for performance pathway",
+        "Physical prep with certified trainer",
+        "Daily individual video analysis",
+        "Friendly matches against partner clubs",
+        "Complete report shared with families"
+      ]
+    }
+  },
+  {
+    "slug": "stage-automne-2026",
+    "startDate": "2026-10-19",
+    "endDate": "2026-10-22",
+    "location": "Monthey",
+    "venue": "Salle omnisports de Monthey",
+    "ageMin": 6,
+    "ageMax": 10,
+    "format": "halfDay",
+    "dailyHours": "13h30 – 16h30",
+    "price": 220,
+    "spotsTotal": 16,
+    "spotsLeft": 16,
+    "image": "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=1200&q=80",
+    "title": {
+      "fr": "Stage d'automne — Découverte",
+      "en": "Autumn Camp — Discovery"
+    },
+    "description": {
+      "fr": "4 demi-journées axées découverte du poste pour les plus jeunes. Approche ludique, parcours moteurs et premiers gestes de gardien.",
+      "en": "4 half-days dedicated to discovering the position for the youngest. Playful approach, motor circuits and first goalkeeping gestures."
+    },
+    "highlights": {
+      "fr": [
+        "4 demi-journées adaptées aux 6-10 ans",
+        "Approche 100% ludique et bienveillante",
+        "Parcours moteurs et coordination",
+        "Goûter offert chaque après-midi",
+        "Photos et vidéos partagées avec les parents"
+      ],
+      "en": [
+        "4 half-days adapted for ages 6-10",
+        "100% playful and supportive approach",
+        "Motor and coordination circuits",
+        "Snack provided every afternoon",
+        "Photos and videos shared with parents"
+      ]
+    }
+  }
+]

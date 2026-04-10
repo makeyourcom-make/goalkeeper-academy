@@ -12,6 +12,7 @@
     "primaryNav": "Navigation principale",
     "localeGroup": "Choix de la langue",
     "login": "Connexion",
+    "account": "Mon compte",
     "nav": {
       "home": "Accueil",
       "academy": "Académie",
@@ -61,33 +62,1069 @@
     }
   },
   "HomePage": {
-    "badge": "Phase 2 — i18n bilingue",
-    "title": "Former les gardiens de demain",
-    "subtitle": "L'académie de gardiens de but du Chablais valaisan. Le routing bilingue est désormais en place — les pages publiques arrivent en phase 3.",
-    "cta": {
-      "offers": "Découvrir les offres",
-      "contact": "Nous contacter"
+    "metaTitle": "Académie de gardiens de but — Chablais valaisan",
+    "metaDescription": "Formation spécialisée pour gardiens de but de 6 à 18 ans. Cours hebdomadaires, stages vacances, cours particuliers et interventions clubs dans le Chablais valaisan.",
+    "hero": {
+      "badge": "Académie spécialisée gardiens",
+      "title": "Former les gardiens de demain",
+      "subtitle": "Cours hebdomadaires, stages vacances et coaching individuel pour les gardiennes et gardiens de 6 à 18 ans dans le Chablais valaisan.",
+      "ctaPrimary": "Réserver une séance d'essai",
+      "ctaSecondary": "Découvrir les offres",
+      "imageAlt": "Jeune gardien de but en plein plongeon lors d'un entraînement"
     },
-    "preview": {
-      "badge": "Aperçu composants",
-      "title": "Briques du design system",
-      "subtitle": "Boutons, badges, cartes — le socle visuel commun à toutes les pages."
+    "values": {
+      "eyebrow": "Pourquoi nous choisir",
+      "title": "Une approche pensée pour le poste le plus exigeant",
+      "items": {
+        "specialized": {
+          "title": "100 % gardiens",
+          "description": "Tous nos coachs sont d'anciens gardiens. Aucune séance partagée avec les joueurs de champ — chaque exercice cible un geste spécifique."
+        },
+        "progression": {
+          "title": "Progression mesurée",
+          "description": "Bilan technique tous les trimestres, vidéos d'analyse et objectifs personnalisés. Vous voyez les progrès, votre enfant aussi."
+        },
+        "passion": {
+          "title": "Plaisir avant tout",
+          "description": "Petits groupes, ambiance familiale, exercices ludiques. Nos gardiens reviennent parce qu'ils prennent du plaisir à s'entraîner."
+        }
+      }
+    },
+    "offers": {
+      "eyebrow": "Nos formules",
+      "title": "Trouvez le format qui vous convient",
+      "subtitle": "Que vous cherchiez un suivi régulier, une parenthèse intensive ou un coup de pouce ponctuel, nous avons une formule adaptée.",
+      "items": {
+        "annual": {
+          "badge": "Le plus populaire",
+          "title": "Annuel",
+          "price": "0 CHF / an",
+          "description": "1 séance hebdomadaire de septembre à juin, suivi individuel, matériel fourni.",
+          "bullets": [
+            "30 séances garanties",
+            "Bilan trimestriel",
+            "−10 % vs mensuel"
+          ],
+          "cta": "Voir l'annuel"
+        },
+        "monthly": {
+          "badge": "Flexible",
+          "title": "Mensuel",
+          "price": "0 CHF / mois",
+          "description": "Engagement court, parfait pour découvrir l'académie ou compléter un club.",
+          "bullets": [
+            "Sans engagement long",
+            "Résiliation mensuelle",
+            "Accès aux mêmes coachs"
+          ],
+          "cta": "Voir le mensuel"
+        },
+        "camps": {
+          "badge": "Vacances scolaires",
+          "title": "Stages",
+          "price": "0 CHF / stage",
+          "description": "Camps intensifs sur 3 à 5 jours pendant les vacances. Demi-journée ou journée complète.",
+          "bullets": [
+            "Pâques · été · automne",
+            "Groupes par âge",
+            "Repas inclus en journée"
+          ],
+          "cta": "Voir les stages"
+        }
+      }
+    },
+    "testimonials": {
+      "eyebrow": "Témoignages",
+      "title": "Ce qu'en disent les familles",
+      "items": {
+        "parent": {
+          "quote": "En six mois, le jeu au pied de notre fils a complètement changé. L'équipe est exigeante mais bienveillante, c'est exactement ce qu'on cherchait.",
+          "author": "Sandrine M.",
+          "role": "Maman d'un U13"
+        },
+        "keeper": {
+          "quote": "J'apprends des trucs que je n'avais jamais vus en club. Et en plus on rigole bien à l'entraînement.",
+          "author": "Léo, 14 ans",
+          "role": "Gardien U15"
+        },
+        "club": {
+          "quote": "Goalkeeper Academy s'occupe de la formation spécifique de nos gardiens, ça nous libère un temps précieux pour le travail collectif.",
+          "author": "Marc D.",
+          "role": "Entraîneur FC Monthey"
+        }
+      }
+    },
+    "partners": {
+      "eyebrow": "Partenaires & clubs",
+      "title": "Ils nous font confiance",
+      "subtitle": "Clubs partenaires du Chablais et événement de référence pour les gardiens en Suisse romande."
+    },
+    "blogPreview": {
+      "eyebrow": "Le journal",
+      "title": "Conseils, analyses et coulisses",
+      "cta": "Lire l'article",
+      "viewAll": "Tous les articles",
+      "items": {
+        "post1": {
+          "category": "Technique",
+          "title": "5 exercices pour améliorer ses appuis en sortie aérienne",
+          "excerpt": "Le timing et l'équilibre se travaillent au sol avant de se travailler en l'air. Voici notre routine préférée."
+        },
+        "post2": {
+          "category": "Mental",
+          "title": "Encaisser un but : la routine en 30 secondes",
+          "excerpt": "Comment nos coachs entraînent les gardiens à passer à autre chose immédiatement après une erreur."
+        },
+        "post3": {
+          "category": "Coulisses",
+          "title": "Retour sur le stage de Pâques 2026",
+          "excerpt": "Trois jours d'intensité, deux lieux, 24 gardiens. Le résumé en images et chiffres clés."
+        }
+      }
+    },
+    "ctaFinal": {
+      "title": "Prêt à passer dans les buts ?",
+      "subtitle": "Réservez une séance d'essai gratuite ou contactez-nous pour parler du parcours de votre gardien.",
+      "ctaPrimary": "Réserver l'essai",
+      "ctaSecondary": "Nous contacter"
+    }
+  },
+  "CampsPage": {
+    "metaTitle": "Stages & événements",
+    "metaDescription": "Stages de gardiens pendant les vacances scolaires : Pâques, été, automne. Tous les camps de Goalkeeper Academy en un coup d'œil.",
+    "hero": {
+      "eyebrow": "Stages & événements",
+      "title": "Vacances intensives, progression durable",
+      "subtitle": "3 à 5 jours pour faire un vrai bond entre deux saisons. Petits groupes, par tranche d'âge, repas inclus."
+    },
+    "list": {
+      "ageRange": "U{min}–U{max}",
+      "spotsLeft": "{count, plural, =0 {Complet} =1 {1 place} other {{count} places}}",
+      "format": {
+        "halfDay": "Demi-journée",
+        "fullDay": "Journée complète"
+      },
+      "from": "À partir de",
+      "freeLabel": "Tarif communiqué bientôt",
+      "viewDetails": "Voir le stage",
+      "empty": "Aucun stage planifié pour le moment."
+    },
+    "partner": {
+      "eyebrow": "Événement partenaire",
+      "title": "Giana Stop & Shoot",
+      "description": "Le tournoi de référence des gardiens en Suisse romande. Goalkeeper Academy y est partenaire depuis trois éditions.",
+      "cta": "Découvrir le partenariat"
+    }
+  },
+  "CampDetail": {
+    "backToList": "Retour aux stages",
+    "ageRange": "U{min} – U{max}",
+    "spotsLeft": "{count, plural, =0 {Complet} =1 {1 place restante} other {{count} places restantes}}",
+    "format": {
+      "halfDay": "Demi-journée",
+      "fullDay": "Journée complète"
+    },
+    "info": {
+      "title": "Informations pratiques",
+      "dates": "Dates",
+      "venue": "Lieu",
+      "ages": "Tranche d'âge",
+      "schedule": "Horaires"
+    },
+    "highlights": {
+      "title": "Au programme"
+    },
+    "included": {
+      "title": "Inclus dans le prix",
+      "body": "Encadrement par coachs diplômés UEFA, repas de midi, collations, t-shirt et gourde Goalkeeper Academy, bilan technique individualisé."
+    },
+    "price": {
+      "label": "Tarif",
+      "perChild": "par gardien, tout inclus",
+      "book": "Réserver ce stage",
+      "full": "Stage complet",
+      "secureCheckout": "Paiement sécurisé · Carte, TWINT ou QR-facture"
+    }
+  },
+  "Reservation": {
+    "metaTitle": "Réservation",
+    "eyebrow": "Réservation",
+    "title": "Inscription au stage",
+    "subtitle": "Quelques étapes pour finaliser l'inscription de votre gardien.",
+    "next": "Continuer",
+    "back": "Retour",
+    "steps": {
+      "child": "Participant",
+      "review": "Récapitulatif",
+      "payment": "Paiement"
+    },
+    "step1": {
+      "title": "Qui s'inscrit ?",
+      "subtitle": "Sélectionnez le gardien à inscrire et confirmez votre adresse e-mail.",
+      "selectChild": "Choisissez un gardien :",
+      "guestNameLabel": "Prénom et nom du gardien",
+      "guestNamePlaceholder": "Ex. Léo Martin",
+      "notLoggedIn": "Astuce : créez un compte parent pour retrouver vos gardiens et factures dans votre espace membre.",
+      "emailLabel": "Adresse e-mail du parent"
+    },
+    "step2": {
+      "title": "Récapitulatif",
+      "subtitle": "Vérifiez les informations avant de procéder au paiement.",
+      "camp": "Stage",
+      "dates": "Dates",
+      "location": "Lieu",
+      "participant": "Participant",
+      "email": "E-mail",
+      "terms": "En continuant, vous acceptez les conditions générales de vente de Goalkeeper Academy et notre politique de confidentialité.",
+      "continue": "Procéder au paiement"
+    },
+    "step3": {
+      "title": "Paiement sécurisé",
+      "subtitle": "Choisissez votre moyen de paiement préféré.",
+      "demoBadge": "Mode démo",
+      "methods": {
+        "card": "Carte",
+        "twint": "TWINT",
+        "qr_bill": "QR-facture"
+      },
+      "card": {
+        "number": "Numéro de carte",
+        "expiry": "Expiration",
+        "cvc": "CVC",
+        "demoNote": "Mode démo : aucun paiement réel ne sera effectué. Les champs sont pré-remplis avec une carte de test."
+      },
+      "twint": {
+        "title": "Scannez avec TWINT",
+        "body": "Ouvrez l'application TWINT sur votre téléphone et scannez le code pour finaliser le paiement."
+      },
+      "qr": {
+        "title": "Recevoir une QR-facture",
+        "body": "Vous recevrez une QR-facture suisse par e-mail. Le paiement est attendu sous 30 jours.",
+        "iban": "IBAN :",
+        "beneficiary": "Bénéficiaire :",
+        "due": "Échéance :",
+        "days": "jours"
+      },
+      "total": "Total à payer",
+      "pay": "Payer {amount}",
+      "processing": "Traitement…"
+    },
+    "summary": {
+      "total": "Total",
+      "secure": "Paiement chiffré · démo"
+    },
+    "confirmation": {
+      "metaTitle": "Réservation confirmée",
+      "eyebrow": "Inscription confirmée",
+      "title": "Merci, c'est validé !",
+      "subtitle": "L'inscription de {name} est enregistrée. Vous recevrez un récapitulatif par e-mail dans quelques minutes.",
+      "invoice": {
+        "label": "Numéro de facture"
+      },
+      "camp": "Stage",
+      "dates": "Dates",
+      "location": "Lieu",
+      "participant": "Participant",
+      "paymentMethod": "Moyen de paiement",
+      "paidAt": "Payé le",
+      "totalPaid": "Total payé",
+      "methods": {
+        "card": "Carte bancaire",
+        "twint": "TWINT",
+        "qr_bill": "QR-facture (à payer)"
+      },
+      "emailSent": "Un e-mail de confirmation a été envoyé à {email}.",
+      "ctaAccount": "Voir mon compte",
+      "ctaBrowse": "Découvrir d'autres stages",
+      "demoNote": "Démo — aucun paiement réel n'a été effectué et aucune donnée n'a été transmise à un prestataire de paiement."
+    }
+  },
+  "GianaPage": {
+    "metaTitle": "Giana Stop & Shoot",
+    "metaDescription": "Goalkeeper Academy est partenaire officiel du Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but.",
+    "hero": {
+      "eyebrow": "Événement partenaire",
+      "title": "Giana Stop & Shoot",
+      "subtitle": "Le rendez-vous suisse romand entièrement dédié aux gardiens de but. Une journée, un tournoi, une passion commune."
+    },
+    "about": {
+      "eyebrow": "Le tournoi",
+      "title": "Un format unique pour les gardiens",
+      "intro": "Le Giana Stop & Shoot rassemble chaque année une centaine de gardiens de toute la Suisse romande autour d'épreuves techniques et d'un mini-tournoi à élimination directe. Pas de joueurs de champ : juste des gardiens, leurs gants et un public de connaisseurs.",
+      "stats": {
+        "editions": { "value": "3", "label": "Éditions partenaires" },
+        "keepers": { "value": "100+", "label": "Gardiens / édition" },
+        "regions": { "value": "5", "label": "Cantons représentés" }
+      }
+    },
+    "partnership": {
+      "eyebrow": "Notre engagement",
+      "title": "Pourquoi Goalkeeper Academy est partenaire",
+      "items": {
+        "values": {
+          "title": "Mêmes valeurs",
+          "description": "Mettre le gardien au centre, valoriser le poste et créer des moments de partage entre passionnés."
+        },
+        "coaching": {
+          "title": "Coachs sur place",
+          "description": "Nos coachs animent les ateliers techniques et accompagnent les jeunes gardiens tout au long de la journée."
+        },
+        "spotting": {
+          "title": "Détection",
+          "description": "L'événement est aussi une vitrine pour repérer les talents et leur proposer un suivi à l'académie."
+        }
+      }
+    },
+    "info": {
+      "eyebrow": "Infos pratiques",
+      "title": "L'édition 2026 en bref",
+      "items": {
+        "date": { "label": "Date", "value": "Samedi 6 juin 2026" },
+        "location": { "label": "Lieu", "value": "Stade municipal de Monthey" },
+        "ages": { "label": "Catégories", "value": "U10 · U13 · U15 · U18" },
+        "registration": {
+          "label": "Inscriptions",
+          "value": "Via tournoi-gardiens.ch"
+        }
+      },
+      "external": {
+        "label": "Site officiel du tournoi",
+        "url": "https://www.tournoi-gardiens.ch"
+      }
+    },
+    "cta": {
+      "title": "Envie d'y être ?",
+      "subtitle": "Rejoignez-nous au stade de Monthey ou inscrivez votre gardien via le site officiel.",
+      "ctaPrimary": "Aller sur le site officiel",
+      "ctaSecondary": "Nous contacter"
+    }
+  },
+  "Admin": {
+    "nav": {
+      "title": "Admin",
+      "subtitle": "Tableau de bord équipe",
+      "dashboard": "Vue d'ensemble",
+      "parents": "Parents",
+      "children": "Gardiens",
+      "invoices": "Factures",
+      "camps": "Stages"
+    },
+    "dashboard": {
+      "metaTitle": "Admin · Tableau de bord",
+      "eyebrow": "Administration",
+      "title": "Tableau de bord",
+      "subtitle": "Vue d'ensemble des inscriptions, des paiements et des stages en cours.",
+      "stats": {
+        "parents": "Parents inscrits",
+        "children": "Gardiens",
+        "invoices": "Factures émises",
+        "pendingInvoices": "Factures en attente"
+      },
+      "welcome": {
+        "title": "Bienvenue dans l'espace administration",
+        "body": "Utilisez le menu latéral pour parcourir les parents, les gardiens, les factures et les stages. Les actions sensibles (marquer une facture payée, etc.) sont restreintes au rôle admin via les politiques RLS Supabase."
+      }
+    },
+    "parents": {
+      "metaTitle": "Admin · Parents",
+      "eyebrow": "Administration",
+      "title": "Parents",
+      "count": "{count, plural, =0 {Aucun parent inscrit} one {1 parent inscrit} other {# parents inscrits}}",
+      "empty": "Aucun parent enregistré pour le moment.",
+      "table": {
+        "name": "Nom",
+        "email": "E-mail",
+        "role": "Rôle",
+        "language": "Langue",
+        "joined": "Inscrit le"
+      },
+      "roles": {
+        "parent": "Parent",
+        "club": "Club",
+        "coach": "Coach",
+        "admin": "Admin"
+      }
+    },
+    "children": {
+      "metaTitle": "Admin · Gardiens",
+      "eyebrow": "Administration",
+      "title": "Gardiens",
+      "count": "{count, plural, =0 {Aucun gardien} one {1 gardien enregistré} other {# gardiens enregistrés}}",
+      "empty": "Aucun gardien enregistré pour le moment.",
+      "ageYears": "{age} ans",
+      "table": {
+        "name": "Nom",
+        "age": "Âge",
+        "level": "Niveau",
+        "parent": "Parent"
+      },
+      "levels": {
+        "debutant": "Débutant",
+        "intermediaire": "Intermédiaire",
+        "avance": "Avancé",
+        "competition": "Compétition"
+      }
+    },
+    "invoices": {
+      "metaTitle": "Admin · Factures",
+      "eyebrow": "Administration",
+      "title": "Factures",
+      "count": "{count, plural, =0 {Aucune facture} one {1 facture émise} other {# factures émises}}",
+      "empty": "Aucune facture émise pour le moment.",
+      "markPaid": "Marquer payée",
+      "table": {
+        "number": "N°",
+        "client": "Client",
+        "type": "Type",
+        "amount": "Montant",
+        "status": "Statut",
+        "issued": "Émise le",
+        "actions": "Actions"
+      },
+      "types": {
+        "subscription": "Abonnement",
+        "camp": "Stage",
+        "particulier": "Cours particulier",
+        "club_contract": "Contrat club"
+      },
+      "statuses": {
+        "pending": "En attente",
+        "paid": "Payée",
+        "overdue": "En retard",
+        "cancelled": "Annulée",
+        "refunded": "Remboursée"
+      }
+    },
+    "camps": {
+      "metaTitle": "Admin · Stages",
+      "eyebrow": "Administration",
+      "title": "Stages",
+      "subtitle": "Suivi du remplissage et des prix par stage.",
+      "filling": "Remplissage",
+      "note": "Catalogue actuellement chargé depuis src/data/camps.json. La gestion CRUD complète sera ajoutée à la migration des stages en base."
+    }
+  },
+  "Legal": {
+    "lastUpdated": "Dernière mise à jour : {date}",
+    "placeholderNotice": "Texte type à valider par votre conseiller juridique avant publication. Les éléments factuels (raison sociale, adresse, hébergeur) doivent être complétés.",
+    "imprint": {
+      "metaTitle": "Mentions légales",
+      "metaDescription": "Mentions légales et informations éditoriales du site Goalkeeper Academy.",
+      "title": "Mentions légales",
+      "lastUpdated": "2026-04-10",
+      "intro": "Les présentes mentions légales s'appliquent au site goalkeeperacademy.ch et précisent l'identité de l'éditeur, l'hébergeur et les conditions générales d'utilisation.",
+      "sections": [
+        {
+          "heading": "Éditeur du site",
+          "body": "Goalkeeper Academy — raison sociale à compléter. Siège : Chablais valaisan, Suisse. Email : contact@goalkeeperacademy.ch. Numéro IDE : à compléter."
+        },
+        {
+          "heading": "Directeur de la publication",
+          "body": "Le directeur de la publication est le représentant légal de Goalkeeper Academy."
+        },
+        {
+          "heading": "Hébergement",
+          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA — vercel.com."
+        },
+        {
+          "heading": "Propriété intellectuelle",
+          "body": "L'ensemble des contenus du site (textes, images, logos, code) est protégé par le droit d'auteur. Toute reproduction sans autorisation écrite préalable est interdite."
+        },
+        {
+          "heading": "Responsabilité",
+          "body": "Goalkeeper Academy s'efforce d'assurer l'exactitude des informations publiées mais ne peut être tenue responsable des erreurs, omissions ou de l'indisponibilité temporaire du site."
+        }
+      ]
+    },
+    "terms": {
+      "metaTitle": "Conditions générales de vente",
+      "metaDescription": "Conditions générales de vente applicables aux prestations de Goalkeeper Academy.",
+      "title": "Conditions générales de vente",
+      "lastUpdated": "2026-04-10",
+      "intro": "Les présentes conditions s'appliquent à toute commande de prestation auprès de Goalkeeper Academy : formules annuelles, mensuelles, cours particuliers, stages et contrats club.",
+      "sections": [
+        {
+          "heading": "Objet",
+          "body": "Les CGV régissent la fourniture de prestations de formation au poste de gardien de but. Toute inscription implique l'acceptation pleine et entière des présentes conditions."
+        },
+        {
+          "heading": "Inscription et paiement",
+          "body": "L'inscription se fait via le site ou par email. Le paiement s'effectue par carte, TWINT ou QR-facture. Les tarifs en vigueur sont publiés sur la page Offres."
+        },
+        {
+          "heading": "Annulation et remboursement",
+          "body": "Toute annulation doit être notifiée par écrit. Les conditions de remboursement varient selon la formule (annuelle, mensuelle, stage) et sont précisées au moment de l'inscription."
+        },
+        {
+          "heading": "Responsabilité",
+          "body": "Goalkeeper Academy souscrit une assurance responsabilité civile professionnelle. La responsabilité de l'académie ne saurait être engagée en cas de force majeure ou de non-respect des consignes par le participant."
+        },
+        {
+          "heading": "Droit applicable",
+          "body": "Les présentes CGV sont soumises au droit suisse. Tout litige sera de la compétence des tribunaux du canton du Valais."
+        }
+      ]
+    },
+    "privacy": {
+      "metaTitle": "Politique de confidentialité",
+      "metaDescription": "Politique de confidentialité conforme à la nLPD suisse et au RGPD européen.",
+      "title": "Politique de confidentialité",
+      "lastUpdated": "2026-04-10",
+      "intro": "Goalkeeper Academy attache une importance particulière à la protection de vos données personnelles, conformément à la nouvelle Loi suisse sur la protection des données (nLPD) et au Règlement général sur la protection des données (RGPD).",
+      "sections": [
+        {
+          "heading": "Données collectées",
+          "body": "Nous collectons les données strictement nécessaires : nom, prénom, email, téléphone, informations relatives au gardien (âge, club). Aucune donnée sensible n'est demandée sans motif."
+        },
+        {
+          "heading": "Finalités",
+          "body": "Les données servent à gérer les inscriptions, communiquer avec les familles, émettre les factures et améliorer nos prestations. Elles ne sont jamais revendues."
+        },
+        {
+          "heading": "Conservation",
+          "body": "Les données sont conservées le temps nécessaire à la prestation et aux obligations légales (10 ans pour la comptabilité). Elles sont ensuite supprimées."
+        },
+        {
+          "heading": "Vos droits",
+          "body": "Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité. Pour exercer ces droits, écrivez à contact@goalkeeperacademy.ch."
+        },
+        {
+          "heading": "Sécurité",
+          "body": "Les données sont stockées sur des serveurs européens (Supabase, hébergement Frankfurt) et protégées par chiffrement en transit et au repos."
+        }
+      ]
+    },
+    "cookies": {
+      "metaTitle": "Politique cookies",
+      "metaDescription": "Politique d'utilisation des cookies sur le site Goalkeeper Academy.",
+      "title": "Politique cookies",
+      "lastUpdated": "2026-04-10",
+      "intro": "Cette page décrit comment Goalkeeper Academy utilise les cookies et technologies similaires sur son site web.",
+      "sections": [
+        {
+          "heading": "Qu'est-ce qu'un cookie ?",
+          "body": "Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site web. Il permet au site de vous reconnaître lors de visites ultérieures."
+        },
+        {
+          "heading": "Cookies utilisés",
+          "body": "Notre site utilise uniquement des cookies strictement nécessaires (langue, session). Aucun cookie publicitaire ou de suivi tiers n'est déposé sans votre consentement."
+        },
+        {
+          "heading": "Mesure d'audience",
+          "body": "Nous prévoyons d'utiliser une solution d'analyse respectueuse de la vie privée (Plausible ou équivalent) sans cookie persistant ni partage de données avec des tiers."
+        },
+        {
+          "heading": "Gestion des cookies",
+          "body": "Vous pouvez configurer votre navigateur pour bloquer les cookies. Cela peut altérer certaines fonctionnalités du site."
+        }
+      ]
+    }
+  },
+  "Auth": {
+    "signIn": {
+      "metaTitle": "Connexion",
+      "metaDescription": "Connectez-vous à votre compte Goalkeeper Academy.",
+      "eyebrow": "Connexion",
+      "title": "Accédez à votre espace",
+      "subtitle": "Recevez un lien magique par email — pas besoin de mot de passe.",
+      "emailLabel": "Adresse email",
+      "emailPlaceholder": "vous@exemple.ch",
+      "submit": "Recevoir le lien",
+      "submitting": "Envoi en cours…",
+      "noAccount": "Pas encore de compte ?",
+      "createAccount": "Créer un compte",
+      "success": "Lien envoyé ! Vérifiez votre boîte de réception (et les spams) pour vous connecter.",
+      "error": "Une erreur est survenue. Vérifiez votre adresse email et réessayez.",
+      "errorEmail": "Adresse email invalide.",
+      "errorNotConfigured": "L'authentification n'est pas encore configurée. Réessayez plus tard."
+    },
+    "signUp": {
+      "metaTitle": "Inscription",
+      "metaDescription": "Créez votre compte Goalkeeper Academy.",
+      "eyebrow": "Inscription",
+      "title": "Créez votre compte",
+      "subtitle": "Choisissez votre profil pour démarrer. Vous recevrez un lien magique par email pour activer votre compte.",
+      "roleLabel": "Vous êtes…",
+      "roleParent": "Un parent de gardien",
+      "roleParentDescription": "Inscrivez vos enfants aux séances et stages.",
+      "roleClub": "Un représentant de club",
+      "roleClubDescription": "Mettez en place une convention pour votre club.",
+      "emailLabel": "Adresse email",
+      "emailPlaceholder": "vous@exemple.ch",
+      "consentLabel": "J'accepte la politique de confidentialité et les conditions générales.",
+      "submit": "Créer mon compte",
+      "submitting": "Création en cours…",
+      "alreadyAccount": "Déjà un compte ?",
+      "signInLink": "Se connecter",
+      "success": "Compte créé ! Vérifiez votre boîte de réception pour activer votre compte.",
+      "errorRole": "Sélectionnez votre profil.",
+      "errorEmail": "Adresse email invalide.",
+      "errorConsent": "Vous devez accepter les conditions pour continuer.",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
+    },
+    "callback": {
+      "errorTitle": "Lien invalide ou expiré",
+      "errorMessage": "Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.",
+      "retry": "Retourner à la connexion"
+    }
+  },
+  "Account": {
+    "metaTitle": "Mon compte",
+    "metaDescription": "Tableau de bord parent Goalkeeper Academy.",
+    "hero": {
+      "eyebrow": "Espace membre",
+      "greeting": "Bonjour {name}",
+      "subtitle": "Bienvenue dans votre espace. Retrouvez ici vos enfants, vos séances et vos factures."
     },
     "cards": {
-      "kids": {
-        "title": "Formules enfants",
-        "description": "Annuel ou mensuel",
-        "content": "1 à 2 séances par semaine, suivi individuel, matériel fourni."
+      "children": {
+        "title": "Mes gardiens",
+        "description": "Gérez les profils de vos enfants gardiens.",
+        "empty": "Aucun enfant enregistré.",
+        "count": "{count, plural, one {# gardien} other {# gardiens}}",
+        "cta": "Gérer"
       },
-      "camps": {
-        "title": "Stages vacances",
-        "description": "Pâques · Été · Automne",
-        "content": "Camps de perfectionnement par tranches d'âge, demi-journée ou journée complète."
+      "planning": {
+        "title": "Mon planning",
+        "description": "Vos séances et stages à venir.",
+        "empty": "Aucune séance prévue.",
+        "count": "{count, plural, one {# séance} other {# séances}}",
+        "cta": "Voir"
       },
-      "clubs": {
-        "title": "Contrats clubs",
-        "description": "Prestation B2B annuelle",
-        "content": "Intervention dans votre club pour former tous vos gardiens, toutes équipes confondues."
+      "invoices": {
+        "title": "Mes factures",
+        "description": "Consultez et téléchargez vos factures.",
+        "empty": "Aucune facture.",
+        "count": "{count, plural, one {# facture} other {# factures}}",
+        "cta": "Consulter"
+      }
+    },
+    "editProfile": "Modifier mon profil",
+    "logout": "Se déconnecter",
+    "profile": {
+      "metaTitle": "Mon profil",
+      "metaDescription": "Modifiez vos informations personnelles Goalkeeper Academy.",
+      "eyebrow": "Mon compte",
+      "title": "Mes informations",
+      "subtitle": "Mettez à jour vos coordonnées et vos préférences de communication.",
+      "backToDashboard": "← Retour au tableau de bord",
+      "emailLabel": "Adresse e-mail :",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+41 79 123 45 67",
+      "language": "Langue préférée",
+      "languageFr": "Français",
+      "languageEn": "English",
+      "marketingConsent": "Je souhaite recevoir les actualités et offres de Goalkeeper Academy par e-mail.",
+      "submit": "Enregistrer",
+      "submitting": "Enregistrement…",
+      "success": "Profil mis à jour avec succès.",
+      "errorValidation": "Vérifiez les champs du formulaire.",
+      "errorUnauthenticated": "Vous devez être connecté.",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
+    },
+    "children": {
+      "metaTitle": "Mes gardiens",
+      "metaDescription": "Gérez les profils de vos enfants gardiens.",
+      "newMetaTitle": "Ajouter un gardien",
+      "editMetaTitle": "Modifier un gardien",
+      "eyebrow": "Mon compte",
+      "title": "Mes gardiens",
+      "subtitle": "Ajoutez et gérez les profils de vos enfants inscrits à l'académie.",
+      "newTitle": "Ajouter un gardien",
+      "newSubtitle": "Renseignez les informations principales de votre enfant.",
+      "editSubtitle": "Mettez à jour les informations de votre enfant.",
+      "addChild": "Ajouter un gardien",
+      "edit": "Modifier",
+      "delete": "Supprimer ce profil",
+      "dangerZone": "Zone sensible",
+      "deleteWarning": "La suppression est définitive et entraîne la perte des données liées (séances, progression).",
+      "backToList": "← Retour à la liste",
+      "backToDashboard": "← Retour au tableau de bord",
+      "empty": "Aucun gardien enregistré pour le moment. Ajoutez votre premier enfant pour commencer.",
+      "ageYears": "{age} ans",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "birthDate": "Date de naissance",
+      "level": "Niveau",
+      "dominantHand": "Main dominante",
+      "medicalNotes": "Informations médicales",
+      "medicalNotesPlaceholder": "Allergies, traitement en cours, contre-indications…",
+      "photoConsent": "J'autorise Goalkeeper Academy à photographier/filmer mon enfant lors des séances et stages.",
+      "notSpecified": "Non précisé",
+      "levels": {
+        "debutant": "Débutant",
+        "intermediaire": "Intermédiaire",
+        "avance": "Avancé",
+        "competition": "Compétition"
+      },
+      "hands": {
+        "droite": "Droite",
+        "gauche": "Gauche",
+        "ambidextre": "Ambidextre"
+      },
+      "submitCreate": "Ajouter le gardien",
+      "submitUpdate": "Enregistrer",
+      "submitting": "Enregistrement…",
+      "success": "Profil mis à jour.",
+      "errorValidation": "Vérifiez les champs du formulaire.",
+      "errorUnauthenticated": "Vous devez être connecté.",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
+    },
+    "planning": {
+      "metaTitle": "Mon planning",
+      "metaDescription": "Vos séances et stages à venir.",
+      "eyebrow": "Mon compte",
+      "title": "Mon planning",
+      "subtitle": "Retrouvez ici vos séances individuelles, séances de groupe et stages réservés.",
+      "backToDashboard": "← Retour au tableau de bord",
+      "emptyTitle": "Aucune séance prévue",
+      "emptyDescription": "Vos prochaines séances apparaîtront ici dès qu'elles seront planifiées.",
+      "browseCamps": "Découvrir nos stages"
+    },
+    "invoices": {
+      "metaTitle": "Mes factures",
+      "metaDescription": "Consultez et téléchargez vos factures Goalkeeper Academy.",
+      "eyebrow": "Mon compte",
+      "title": "Mes factures",
+      "subtitle": "Consultez l'historique de vos paiements et téléchargez vos factures au format PDF.",
+      "backToDashboard": "← Retour au tableau de bord",
+      "emptyTitle": "Aucune facture",
+      "emptyDescription": "Vos factures apparaîtront ici après votre première inscription.",
+      "download": "Télécharger PDF",
+      "type": {
+        "subscription": "Abonnement",
+        "camp": "Stage",
+        "particulier": "Cours particulier",
+        "club_contract": "Contrat club"
+      },
+      "status": {
+        "pending": "En attente",
+        "paid": "Payée",
+        "overdue": "En retard",
+        "cancelled": "Annulée",
+        "refunded": "Remboursée"
+      }
+    }
+  },
+  "BlogPage": {
+    "metaTitle": "Blog",
+    "metaDescription": "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés Goalkeeper Academy.",
+    "hero": {
+      "eyebrow": "Blog",
+      "title": "Le journal de l'académie",
+      "subtitle": "Conseils techniques, retours de stage et coulisses du métier de gardien."
+    },
+    "readingTime": "{minutes} min de lecture",
+    "readMore": "Lire l'article",
+    "empty": "Aucun article pour le moment. Revenez bientôt !",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page {current} sur {total}",
+    "backToList": "Retour aux articles",
+    "publishedOn": "Publié le {date}",
+    "by": "par {author}",
+    "tags": "Sujets"
+  },
+  "NotFound": {
+    "metaTitle": "Page introuvable",
+    "title": "404",
+    "subtitle": "Cette page n'existe pas (ou plus).",
+    "description": "Vérifiez l'URL ou revenez à l'accueil pour retrouver votre chemin.",
+    "cta": "Retour à l'accueil"
+  },
+  "ContactPage": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contactez Goalkeeper Academy pour réserver une séance d'essai, demander un devis club ou poser vos questions sur nos formules.",
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Parlons de votre gardien",
+      "subtitle": "Une question, une demande d'inscription, un projet club ? Écrivez-nous, nous répondons sous 48 h ouvrées."
+    },
+    "form": {
+      "title": "Envoyez-nous un message",
+      "fields": {
+        "name": { "label": "Nom complet", "placeholder": "Sandrine Dupont" },
+        "email": { "label": "Adresse email", "placeholder": "vous@exemple.ch" },
+        "subject": {
+          "label": "Sujet",
+          "placeholder": "Choisissez un sujet",
+          "options": {
+            "trial": "Séance d'essai",
+            "annual": "Inscription annuelle / mensuelle",
+            "camp": "Inscription stage",
+            "club": "Demande de devis club",
+            "other": "Autre"
+          }
+        },
+        "message": {
+          "label": "Votre message",
+          "placeholder": "Présentez-vous brièvement et précisez l'âge du gardien si pertinent."
+        },
+        "consent": "J'accepte que mes informations soient utilisées pour traiter ma demande."
+      },
+      "submit": "Envoyer le message",
+      "submitting": "Envoi en cours…",
+      "success": "Merci ! Votre message a bien été envoyé. Nous vous répondons sous 48 h ouvrées.",
+      "errors": {
+        "name": "Merci d'indiquer votre nom.",
+        "email": "Adresse email invalide.",
+        "subject": "Choisissez un sujet.",
+        "message": "Votre message doit contenir au moins 20 caractères.",
+        "consent": "Vous devez accepter pour envoyer le formulaire."
+      },
+      "note": "Le branchement Resend arrive en phase 5 — pour l'instant, le formulaire valide les champs sans envoyer d'email."
+    },
+    "info": {
+      "title": "Informations directes",
+      "items": {
+        "email": { "label": "Email", "value": "contact@goalkeeperacademy.ch" },
+        "phone": { "label": "Téléphone", "value": "+41 (0)27 000 00 00" },
+        "address": {
+          "label": "Adresse",
+          "value": "Stade municipal de Monthey, 1870 Monthey, Suisse"
+        },
+        "hours": {
+          "label": "Disponibilités",
+          "value": "Lundi–vendredi · 9h–18h"
+        }
+      }
+    },
+    "map": {
+      "title": "Lieu d'entraînement principal",
+      "subtitle": "Stade municipal de Monthey — Chablais valaisan."
+    }
+  },
+  "OffersPage": {
+    "metaTitle": "Offres & tarifs",
+    "metaDescription": "Découvrez nos formules pour gardiens : annuel, mensuel, cours particuliers, stages vacances et contrats club. Tarifs et FAQ.",
+    "hero": {
+      "eyebrow": "Offres & tarifs",
+      "title": "Une formule pour chaque parcours",
+      "subtitle": "Choisissez la formule qui correspond à votre rythme et à vos objectifs. Tous les tarifs sont en CHF, TVA incluse."
+    },
+    "compare": {
+      "eyebrow": "Comparatif",
+      "title": "Vue d'ensemble des formules",
+      "headers": {
+        "feature": "Inclus",
+        "annual": "Annuel",
+        "monthly": "Mensuel",
+        "private": "Particulier",
+        "camps": "Stages"
+      },
+      "rows": {
+        "sessions": "Séances par semaine",
+        "duration": "Durée engagement",
+        "review": "Bilan trimestriel",
+        "gear": "Matériel fourni",
+        "video": "Analyse vidéo",
+        "discount": "Tarif préférentiel"
+      },
+      "values": {
+        "annual": ["1×", "10 mois", "Oui", "Oui", "Oui", "−10 %"],
+        "monthly": ["1×", "Mensuel", "Non", "Oui", "Non", "—"],
+        "private": ["Sur demande", "À la séance", "Non", "Oui", "Oui", "—"],
+        "camps": ["—", "3 à 5 jours", "Non", "Oui", "Oui", "—"]
+      }
+    },
+    "annual": {
+      "id": "annuel",
+      "eyebrow": "Formule phare",
+      "title": "Annuel",
+      "price": "0 CHF / an",
+      "description": "1 séance hebdomadaire de septembre à juin, suivi individuel et matériel inclus.",
+      "bullets": [
+        "30 séances garanties sur la saison",
+        "Bilan technique trimestriel",
+        "Maillot et gants fournis",
+        "Accès aux séances de rattrapage",
+        "−10 % vs paiement mensuel"
+      ],
+      "cta": "Demander l'inscription"
+    },
+    "monthly": {
+      "id": "mensuel",
+      "eyebrow": "Sans engagement long",
+      "title": "Mensuel",
+      "price": "0 CHF / mois",
+      "description": "Pour découvrir l'académie ou compléter une saison de club, mois par mois.",
+      "bullets": [
+        "Résiliation chaque mois",
+        "Mêmes coachs que l'annuel",
+        "Matériel fourni",
+        "Idéal pour tester avant l'annuel"
+      ],
+      "cta": "Voir les disponibilités"
+    },
+    "private": {
+      "id": "cours-particuliers",
+      "eyebrow": "Coaching individuel",
+      "title": "Cours particuliers",
+      "price": "0 CHF / heure",
+      "description": "Un coach pour un gardien (ou deux maximum). Objectif fixé ensemble, vidéo et plan d'action.",
+      "bullets": [
+        "1 à 2 gardiens maximum",
+        "Analyse vidéo systématique",
+        "Plan personnalisé envoyé après séance",
+        "Idéal en pré-saison ou post-blessure"
+      ],
+      "cta": "Réserver un créneau"
+    },
+    "camps": {
+      "id": "stages",
+      "eyebrow": "Vacances scolaires",
+      "title": "Stages",
+      "price": "0 CHF / stage",
+      "description": "Camps intensifs pendant les vacances. Demi-journée ou journée complète, par tranche d'âge.",
+      "bullets": [
+        "Pâques, été, automne",
+        "Groupes par âge (U8 à U18)",
+        "Repas inclus en journée",
+        "Goûter et matériel fournis"
+      ],
+      "cta": "Voir le calendrier"
+    },
+    "club": {
+      "id": "clubs",
+      "eyebrow": "B2B",
+      "title": "Contrat club",
+      "price": "Sur devis",
+      "description": "Nous intervenons dans votre club pour former tous vos gardiens, toutes équipes confondues.",
+      "bullets": [
+        "Plan annuel sur mesure",
+        "Coach dédié à votre structure",
+        "Reporting mensuel à la direction technique",
+        "Tarif dégressif selon le nombre de gardiens"
+      ],
+      "cta": "Demander un devis"
+    },
+    "faq": {
+      "eyebrow": "FAQ tarifs",
+      "title": "Vos questions sur les formules",
+      "items": {
+        "trial": {
+          "question": "Y a-t-il une séance d'essai gratuite ?",
+          "answer": "Oui. Toute première séance est offerte, sans engagement. Il suffit de nous contacter pour réserver un créneau adapté à l'âge de votre gardien."
+        },
+        "siblings": {
+          "question": "Existe-t-il une remise frères et sœurs ?",
+          "answer": "Oui, nous appliquons −10 % à partir du deuxième enfant inscrit dans la formule annuelle ou mensuelle."
+        },
+        "payment": {
+          "question": "Quels moyens de paiement acceptez-vous ?",
+          "answer": "Carte bancaire et TWINT en ligne via notre plateforme, ou QR-facture suisse pour un règlement par virement."
+        },
+        "cancel": {
+          "question": "Comment résilier la formule mensuelle ?",
+          "answer": "Un simple email avant le 25 du mois suffit, sans frais. La résiliation prend effet à la fin du mois en cours."
+        },
+        "club": {
+          "question": "Comment fonctionne le contrat club ?",
+          "answer": "Nous discutons d'abord de vos besoins (nombre de gardiens, fréquence, lieu) puis nous établissons un devis personnalisé. La prestation peut commencer dès le mois suivant."
+        }
+      }
+    }
+  },
+  "AcademyPage": {
+    "metaTitle": "L'académie",
+    "metaDescription": "Découvrez Goalkeeper Academy : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais valaisan.",
+    "hero": {
+      "eyebrow": "L'académie",
+      "title": "Spécialistes du gardien depuis la base",
+      "subtitle": "Une structure indépendante, pensée par et pour les gardiens, au cœur du Chablais valaisan.",
+      "imageAlt": "Vue des Dents du Midi depuis le Chablais"
+    },
+    "mission": {
+      "eyebrow": "Notre mission",
+      "title": "Donner à chaque gardien les outils pour s'exprimer",
+      "intro": "Goalkeeper Academy est née d'un constat simple : dans la majorité des clubs, les gardiens reçoivent peu ou pas de formation spécifique. Nous comblons ce vide avec une pédagogie structurée, des coachs spécialisés et un suivi dans la durée.",
+      "stats": {
+        "keepers": { "value": "60+", "label": "Gardiens formés" },
+        "years": { "value": "8 ans", "label": "D'expérience" },
+        "clubs": { "value": "12", "label": "Clubs partenaires" }
+      }
+    },
+    "team": {
+      "eyebrow": "L'équipe",
+      "title": "Des coachs gardiens, anciens gardiens",
+      "subtitle": "Tous nos entraîneurs ont joué au poste à un niveau compétitif et possèdent une certification fédérale.",
+      "members": {
+        "head": {
+          "name": "Antoine R.",
+          "role": "Coach principal & fondateur",
+          "bio": "Ancien gardien semi-pro, diplômé Brevet C+ Gardien. 12 ans d'expérience en formation des jeunes."
+        },
+        "youth": {
+          "name": "Maxime L.",
+          "role": "Coach U6–U10",
+          "bio": "Spécialiste de l'éveil moteur et de l'apprentissage par le jeu pour les plus jeunes."
+        },
+        "perf": {
+          "name": "Julien V.",
+          "role": "Coach U13–U18",
+          "bio": "Préparation physique et mentale pour les gardiens en filière performance."
+        }
+      }
+    },
+    "method": {
+      "eyebrow": "Notre méthode",
+      "title": "Quatre piliers, une progression mesurée",
+      "pillars": {
+        "technical": {
+          "title": "Technique individuelle",
+          "description": "Position de base, prises de balle, plongeons, jeu au pied. Les gestes du métier répétés et corrigés à chaque séance."
+        },
+        "tactical": {
+          "title": "Lecture du jeu",
+          "description": "Placement, communication avec la défense, anticipation. Le gardien moderne joue avec ses pieds et avec sa tête."
+        },
+        "physical": {
+          "title": "Préparation physique",
+          "description": "Coordination, détente, gainage, vitesse de réaction. Adapté à chaque tranche d'âge."
+        },
+        "mental": {
+          "title": "Mental & confiance",
+          "description": "Routines de concentration, gestion de l'erreur, leadership. Le poste qui ne pardonne rien s'apprend aussi dans la tête."
+        }
+      }
+    },
+    "facilities": {
+      "eyebrow": "Infrastructures",
+      "title": "Des terrains pensés pour les gardiens",
+      "subtitle": "Nous nous entraînons sur plusieurs sites du Chablais selon la saison et le groupe d'âge.",
+      "items": {
+        "outdoor": {
+          "title": "Terrains extérieurs",
+          "description": "Pelouse naturelle et synthétique homologuées, à Monthey et Vouvry."
+        },
+        "indoor": {
+          "title": "Salles couvertes",
+          "description": "Sols sportifs en hiver pour garder l'intensité quel que soit le temps."
+        },
+        "gear": {
+          "title": "Matériel pro",
+          "description": "Buts mobiles, mannequins, élastiques, vidéo. Tout l'équipement spécifique est fourni."
+        }
+      }
+    },
+    "values": {
+      "eyebrow": "Nos valeurs",
+      "title": "Ce qui nous fait avancer",
+      "items": {
+        "excellence": {
+          "title": "Exigence bienveillante",
+          "description": "On pousse haut, on n'humilie jamais. Chaque gardien progresse à son rythme."
+        },
+        "respect": {
+          "title": "Respect & fair-play",
+          "description": "Du gardien adverse, de l'arbitre, du coéquipier. Les valeurs du sport avant tout."
+        },
+        "passion": {
+          "title": "Plaisir du poste",
+          "description": "Aimer le poste de gardien, c'est la base. On entretient cette flamme à chaque séance."
+        }
       }
     }
   }

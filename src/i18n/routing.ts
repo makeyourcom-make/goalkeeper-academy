@@ -22,6 +22,18 @@ export const routing = defineRouting({
       fr: "/stages/giana-stop-and-shoot",
       en: "/camps/giana-stop-and-shoot",
     },
+    "/stages/[slug]": {
+      fr: "/stages/[slug]",
+      en: "/camps/[slug]",
+    },
+    "/stages/[slug]/reservation": {
+      fr: "/stages/[slug]/reservation",
+      en: "/camps/[slug]/booking",
+    },
+    "/stages/[slug]/reservation/confirmation": {
+      fr: "/stages/[slug]/reservation/confirmation",
+      en: "/camps/[slug]/booking/confirmation",
+    },
     "/blog": "/blog",
     "/blog/[slug]": "/blog/[slug]",
     "/contact": "/contact",
@@ -32,6 +44,48 @@ export const routing = defineRouting({
     "/inscription": {
       fr: "/inscription",
       en: "/sign-up",
+    },
+    "/mon-compte": {
+      fr: "/mon-compte",
+      en: "/account",
+    },
+    "/mon-compte/profil": {
+      fr: "/mon-compte/profil",
+      en: "/account/profile",
+    },
+    "/mon-compte/enfants": {
+      fr: "/mon-compte/enfants",
+      en: "/account/children",
+    },
+    "/mon-compte/enfants/nouveau": {
+      fr: "/mon-compte/enfants/nouveau",
+      en: "/account/children/new",
+    },
+    "/mon-compte/enfants/[id]": {
+      fr: "/mon-compte/enfants/[id]",
+      en: "/account/children/[id]",
+    },
+    "/mon-compte/planning": {
+      fr: "/mon-compte/planning",
+      en: "/account/schedule",
+    },
+    "/mon-compte/factures": {
+      fr: "/mon-compte/factures",
+      en: "/account/invoices",
+    },
+    "/admin": "/admin",
+    "/admin/parents": "/admin/parents",
+    "/admin/enfants": {
+      fr: "/admin/enfants",
+      en: "/admin/children",
+    },
+    "/admin/factures": {
+      fr: "/admin/factures",
+      en: "/admin/invoices",
+    },
+    "/admin/stages": {
+      fr: "/admin/stages",
+      en: "/admin/camps",
     },
     "/mentions-legales": {
       fr: "/mentions-legales",

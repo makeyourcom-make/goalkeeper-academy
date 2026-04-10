@@ -43,6 +43,7 @@ export async function generateMetadata({
       template: t("titleTemplate"),
     },
     description: t("description"),
+    applicationName: t("title"),
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -50,6 +51,27 @@ export async function generateMetadata({
         en: "/en",
         "x-default": "/fr",
       },
+    },
+    openGraph: {
+      type: "website",
+      siteName: t("title"),
+      title: t("title"),
+      description: t("description"),
+      url: `/${locale}`,
+      locale: locale === "en" ? "en_US" : "fr_CH",
+      alternateLocale: locale === "en" ? "fr_CH" : "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    icons: {
+      icon: "/favicon.ico",
     },
   };
 }
