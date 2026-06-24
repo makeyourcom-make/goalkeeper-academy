@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X } from "lucide-react";
 
-import type { AuthChangeEvent, Session, User } from "@supabase/supabase-js";
+import type { AuthChangeEvent } from "@supabase/supabase-js";
 
 import { Button } from "@/components/ui/button";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
@@ -22,7 +22,11 @@ const NAV_ITEMS = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-export function Header() {
+export function Header({
+  initialIsAuthed = false,
+}: {
+  initialIsAuthed?: boolean;
+}) {
   const t = useTranslations("Header");
   const locale = useLocale() as Locale;
   const router = useRouter();
@@ -30,26 +34,24 @@ export function Header() {
   const [scrolled, setScrolled] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isPending, startTransition] = React.useTransition();
-  const [isAuthed, setIsAuthed] = React.useState(false);
+  // Initial value comes from the server (cookies are readable there); the
+  // browser only listens for live sign-in / sign-out events afterwards.
+  const [isAuthed, setIsAuthed] = React.useState(initialIsAuthed);
+
+  React.useEffect(() => {
+    setIsAuthed(initialIsAuthed);
+  }, [initialIsAuthed]);
 
   React.useEffect(() => {
     const supabase = createSupabaseBrowserClient();
     if (!supabase) return;
-    let cancelled = false;
-    supabase.auth
-      .getUser()
-      .then(({ data }: { data: { user: User | null } }) => {
-        if (!cancelled) setIsAuthed(Boolean(data.user));
-      });
     const { data: sub } = supabase.auth.onAuthStateChange(
-      (_event: AuthChangeEvent, session: Session | null) => {
-        setIsAuthed(Boolean(session?.user));
+      (event: AuthChangeEvent) => {
+        if (event === "SIGNED_IN") setIsAuthed(true);
+        if (event === "SIGNED_OUT") setIsAuthed(false);
       },
     );
-    return () => {
-      cancelled = true;
-      sub.subscription.unsubscribe();
-    };
+    return () => sub.subscription.unsubscribe();
   }, []);
 
   React.useEffect(() => {

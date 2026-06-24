@@ -88,7 +88,7 @@ export const mdxComponents = {
     <h3 className="mt-8 font-anton text-xl uppercase text-navy" {...props} />
   ),
   p: (props: ComponentProps<"p">) => (
-    <p className="my-4 leading-relaxed text-grey-700" {...props} />
+    <p className="my-4 text-justify leading-relaxed text-grey-700" {...props} />
   ),
   ul: (props: ComponentProps<"ul">) => (
     <ul className="my-4 list-disc space-y-2 pl-6 text-grey-700" {...props} />

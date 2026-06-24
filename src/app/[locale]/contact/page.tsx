@@ -28,9 +28,9 @@ const INFO_ITEMS: {
   { key: "hours", Icon: Clock },
 ];
 
-// Monthey, Switzerland — bbox around the municipal stadium area
+// Aigle — Terrain de football de la Mêlée (exact: 46.319178, 6.935711)
 const MAP_EMBED_URL =
-  "https://www.openstreetmap.org/export/embed.html?bbox=6.940%2C46.245%2C6.970%2C46.260&layer=mapnik&marker=46.2517%2C6.9554";
+  "https://www.openstreetmap.org/export/embed.html?bbox=6.921%2C46.309%2C6.951%2C46.329&layer=mapnik&marker=46.319178%2C6.935711";
 
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
@@ -48,6 +48,8 @@ export default async function ContactPage({ params }: Props) {
           </h1>
           <p className="max-w-2xl text-lg text-grey-500">
             {t("hero.subtitle")}
+            <br />
+            {t("hero.subtitle2")}
           </p>
         </div>
       </section>
@@ -79,7 +81,7 @@ export default async function ContactPage({ params }: Props) {
                     <p className="text-sm text-grey-500">
                       {t(`info.items.${key}.label`)}
                     </p>
-                    <p className="font-semibold text-navy">
+                    <p className="whitespace-pre-line font-semibold text-navy">
                       {t(`info.items.${key}.value`)}
                     </p>
                   </div>

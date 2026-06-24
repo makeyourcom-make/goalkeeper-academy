@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Plus, Pencil } from "lucide-react";
+import { Plus, Pencil, User } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -84,13 +85,29 @@ export default async function ChildrenPage({ params }: Props) {
                   className="flex flex-col gap-3 rounded-2xl border border-grey-100 bg-white p-6 shadow-sm"
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h2 className="font-anton text-xl uppercase text-navy">
-                        {child.first_name} {child.last_name}
-                      </h2>
-                      <p className="text-sm text-grey-500">
-                        {t("ageYears", { age: calcAge(child.birth_date) })}
-                      </p>
+                    <div className="flex items-center gap-3">
+                      <span className="border-grey-200 text-grey-400 relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-grey-100">
+                        {child.photo_url ? (
+                          <Image
+                            src={child.photo_url}
+                            alt={`${child.first_name} ${child.last_name}`}
+                            fill
+                            sizes="48px"
+                            className="object-cover"
+                            unoptimized
+                          />
+                        ) : (
+                          <User className="h-6 w-6" />
+                        )}
+                      </span>
+                      <div>
+                        <h2 className="font-anton text-xl uppercase text-navy">
+                          {child.first_name} {child.last_name}
+                        </h2>
+                        <p className="text-sm text-grey-500">
+                          {t("ageYears", { age: calcAge(child.birth_date) })}
+                        </p>
+                      </div>
                     </div>
                     {child.level && (
                       <span className="rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">

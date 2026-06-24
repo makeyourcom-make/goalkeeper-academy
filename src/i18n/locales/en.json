@@ -2,11 +2,11 @@
   "Metadata": {
     "title": "Goalkeeper Academy",
     "titleTemplate": "%s | Goalkeeper Academy",
-    "description": "Goalkeeper academy in the Chablais Valais region. Specialized training for young goalkeepers aged 6 to 18."
+    "description": "Goalkeeper academy in the Chablais region. Specialized training for goalkeepers, from age 10 to senior."
   },
   "Header": {
     "skipToContent": "Skip to content",
-    "homeAriaLabel": "Goalkeeper Academy — Home",
+    "homeAriaLabel": "Goalkeeper Academy home",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "primaryNav": "Primary navigation",
@@ -23,10 +23,10 @@
     }
   },
   "Footer": {
-    "tagline": "The goalkeeper academy of the Chablais Valais region. Specialized training for young goalkeepers aged 6 to 18.",
-    "location": "Chablais Valais, Switzerland",
+    "tagline": "The goalkeeper academy of the Chablais region. Specialized training for goalkeepers, from age 10 to senior.",
+    "location": "Chablais, Switzerland",
     "email": "contact@goalkeeperacademy.ch",
-    "copyright": "© {year} Goalkeeper Academy — All rights reserved.",
+    "copyright": "© {year} Goalkeeper Academy. All rights reserved.",
     "columns": {
       "academy": {
         "title": "The academy",
@@ -37,10 +37,10 @@
       },
       "offers": {
         "title": "Offers",
-        "kids": "Kids programs",
+        "kids": "Youth (from 10)",
+        "adults": "Adults & seniors",
         "camps": "Holiday camps",
-        "private": "Private lessons",
-        "clubs": "Club contracts"
+        "clubs": "Club contract"
       },
       "resources": {
         "title": "Resources",
@@ -59,17 +59,18 @@
     "social": {
       "instagram": "Instagram",
       "facebook": "Facebook"
-    }
+    },
+    "credit": "Made by"
   },
   "HomePage": {
-    "metaTitle": "Goalkeeper academy — Chablais Valais",
-    "metaDescription": "Specialized training for goalkeepers aged 6 to 18. Weekly sessions, holiday camps, private coaching and club partnerships in the Chablais Valais region.",
+    "metaTitle": "Goalkeeper academy in the Chablais region",
+    "metaDescription": "Specialized training for goalkeepers, from age 10 to senior. Weekly sessions, holiday camps, private coaching and club partnerships in the Chablais region.",
     "hero": {
       "badge": "Specialized goalkeeper academy",
       "title": "Training tomorrow's goalkeepers",
-      "subtitle": "Weekly sessions, holiday camps and private coaching for goalkeepers aged 6 to 18 in the Chablais Valais region.",
-      "ctaPrimary": "Book a trial session",
-      "ctaSecondary": "Browse offers",
+      "subtitle": "Weekly sessions, holiday camps and private coaching for goalkeepers, from age 10 to senior, in the Chablais region.",
+      "ctaPrimary": "Book your season",
+      "ctaSecondary": "See the offers",
       "imageAlt": "Young goalkeeper diving during a training session"
     },
     "values": {
@@ -78,11 +79,11 @@
       "items": {
         "specialized": {
           "title": "100% goalkeepers",
-          "description": "Every coach is a former keeper. No mixed sessions with outfield players — every drill targets a specific goalkeeping skill."
+          "description": "Every coach is a former keeper. No mixed sessions with outfield players. Every drill targets a specific goalkeeping skill."
         },
         "progression": {
           "title": "Measured progress",
-          "description": "Quarterly technical reviews, video analysis and personal goals. You can see the progress, and so can your child."
+          "description": "Technical review every quarter, analysis and personalised goals. You see the progress, and so do your player and child."
         },
         "passion": {
           "title": "Fun first",
@@ -95,34 +96,34 @@
       "title": "Find the format that fits you",
       "subtitle": "Whether you're looking for weekly coaching, an intensive camp or a one-off boost, we have a format for you.",
       "items": {
-        "annual": {
-          "badge": "Most popular",
-          "title": "Annual",
-          "price": "CHF 0 / year",
-          "description": "One weekly session from September to June, individual follow-up, gear included.",
+        "tour": {
+          "badge": "Half-season",
+          "title": "The Tour",
+          "price": "From CHF 43 / session",
+          "description": "A commitment over a half-season of 16 sessions, for youth and adults alike.",
           "bullets": [
-            "30 guaranteed sessions",
-            "Quarterly review",
-            "−10% vs monthly"
+            "Tour 1: 16 sessions · Tour 2: 18 sessions",
+            "Sessions of 4 goalkeepers max",
+            "No re-commitment"
           ],
-          "cta": "See annual"
+          "cta": "See pricing"
         },
-        "monthly": {
-          "badge": "Flexible",
-          "title": "Monthly",
-          "price": "CHF 0 / month",
-          "description": "Short-term, perfect to discover the academy or top up a club program.",
+        "season": {
+          "badge": "Most popular",
+          "title": "Full season",
+          "price": "From CHF 40 / session",
+          "description": "The whole season over 34 sessions, the best per-session rate.",
           "bullets": [
-            "No long commitment",
-            "Cancel any month",
-            "Same coaches as annual"
+            "34 sessions over the season",
+            "Sessions of 4 goalkeepers max",
+            "−11% vs single session"
           ],
-          "cta": "See monthly"
+          "cta": "See pricing"
         },
         "camps": {
           "badge": "School holidays",
           "title": "Camps",
-          "price": "CHF 0 / camp",
+          "price": "Coming soon",
           "description": "Intensive 3- to 5-day camps during school holidays. Half-day or full-day formats.",
           "bullets": [
             "Easter · summer · autumn",
@@ -138,7 +139,7 @@
       "title": "What families say",
       "items": {
         "parent": {
-          "quote": "Within six months our son's distribution game changed completely. The team is demanding but caring — exactly what we were looking for.",
+          "quote": "Within six months our son's distribution game changed completely. The team is demanding but caring, exactly what we were looking for.",
           "author": "Sandrine M.",
           "role": "Mum of a U13"
         },
@@ -184,8 +185,8 @@
     },
     "ctaFinal": {
       "title": "Ready to step between the posts?",
-      "subtitle": "Book a free trial session or get in touch to talk about your goalkeeper's journey.",
-      "ctaPrimary": "Book the trial",
+      "subtitle": "Book your season or get in touch to talk about your goalkeeper's journey.",
+      "ctaPrimary": "Book your season",
       "ctaSecondary": "Contact us"
     }
   },
@@ -210,10 +211,16 @@
       "empty": "No camps scheduled for now."
     },
     "partner": {
-      "eyebrow": "Partner event",
+      "eyebrow": "The end-of-season event",
       "title": "Giana Stop & Shoot",
-      "description": "The reference goalkeeper tournament in French-speaking Switzerland. Goalkeeper Academy has been an official partner for three editions.",
-      "cta": "Discover the partnership"
+      "description": "The benchmark goalkeeper tournament in French-speaking Switzerland, created by our co-founder Gianluca Giannarelli.",
+      "cta": "Discover the tournament"
+    },
+    "comingSoon": {
+      "badge": "Coming soon",
+      "title": "Camps coming soon",
+      "description": "Our holiday camps are coming soon. Leave us your details to be notified when registration and dates open.",
+      "cta": "Keep me posted"
     }
   },
   "CampDetail": {
@@ -336,14 +343,14 @@
       "emailSent": "A confirmation email has been sent to {email}.",
       "ctaAccount": "Go to my account",
       "ctaBrowse": "Browse other camps",
-      "demoNote": "Demo — no real payment was processed and no data was sent to a payment provider."
+      "demoNote": "This is a demo. No real payment was processed and no data was sent to a payment provider."
     }
   },
   "GianaPage": {
     "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "Goalkeeper Academy is an official partner of Giana Stop & Shoot, the French-speaking Swiss tournament fully dedicated to goalkeepers.",
+    "metaDescription": "The Giana Stop & Shoot, the French-speaking Swiss tournament entirely dedicated to goalkeepers, created by Gianluca Giannarelli, co-founder of Goalkeeper Academy.",
     "hero": {
-      "eyebrow": "Partner event",
+      "eyebrow": "The end-of-season event",
       "title": "Giana Stop & Shoot",
       "subtitle": "The French-speaking Swiss event fully dedicated to goalkeepers. One day, one tournament, one shared passion."
     },
@@ -352,18 +359,27 @@
       "title": "A unique format for goalkeepers",
       "intro": "Each year, Giana Stop & Shoot gathers around a hundred goalkeepers from all over French-speaking Switzerland for technical contests and a knockout mini-tournament. No outfield players: just goalkeepers, their gloves and an audience of connoisseurs.",
       "stats": {
-        "editions": { "value": "3", "label": "Partner editions" },
-        "keepers": { "value": "100+", "label": "Goalkeepers / edition" },
-        "regions": { "value": "5", "label": "Cantons represented" }
+        "editions": {
+          "value": "5",
+          "label": "Editions"
+        },
+        "keepers": {
+          "value": "30+",
+          "label": "Goalkeepers / edition"
+        },
+        "regions": {
+          "value": "5",
+          "label": "Cantons represented"
+        }
       }
     },
     "partnership": {
-      "eyebrow": "Our commitment",
-      "title": "Why Goalkeeper Academy is a partner",
+      "eyebrow": "Our tournament",
+      "title": "An event created by our co-founder",
       "items": {
         "values": {
           "title": "Shared values",
-          "description": "Putting the goalkeeper at the center, celebrating the position and creating moments of exchange between enthusiasts."
+          "description": "The tournament was born from the same belief as the academy: put the goalkeeper at the centre, celebrate the position and create moments shared between enthusiasts."
         },
         "coaching": {
           "title": "Coaches on site",
@@ -377,11 +393,20 @@
     },
     "info": {
       "eyebrow": "Practical info",
-      "title": "The 2026 edition at a glance",
+      "title": "All the details on the official site",
       "items": {
-        "date": { "label": "Date", "value": "Saturday June 6, 2026" },
-        "location": { "label": "Venue", "value": "Monthey municipal stadium" },
-        "ages": { "label": "Categories", "value": "U10 · U13 · U15 · U18" },
+        "date": {
+          "label": "Date",
+          "value": "Saturday June 6, 2026"
+        },
+        "location": {
+          "label": "Venue",
+          "value": "Monthey municipal stadium"
+        },
+        "ages": {
+          "label": "Categories",
+          "value": "U10 · U13 · U15 · U18"
+        },
         "registration": {
           "label": "Registration",
           "value": "Via tournoi-gardiens.ch"
@@ -404,10 +429,14 @@
       "title": "Admin",
       "subtitle": "Team dashboard",
       "dashboard": "Overview",
-      "parents": "Parents",
+      "parents": "Parents & Clubs",
       "children": "Goalkeepers",
       "invoices": "Invoices",
-      "camps": "Camps"
+      "camps": "Camps",
+      "coaches": "Coaches",
+      "expenses": "Expenses",
+      "accounting": "Accounting",
+      "planning": "Schedule"
     },
     "dashboard": {
       "metaTitle": "Admin · Dashboard",
@@ -415,7 +444,7 @@
       "title": "Dashboard",
       "subtitle": "Overview of registrations, payments and ongoing camps.",
       "stats": {
-        "parents": "Registered parents",
+        "parents": "Parents & clubs",
         "children": "Goalkeepers",
         "invoices": "Invoices issued",
         "pendingInvoices": "Pending invoices"
@@ -426,11 +455,11 @@
       }
     },
     "parents": {
-      "metaTitle": "Admin · Parents",
+      "metaTitle": "Admin · Parents & Clubs",
       "eyebrow": "Administration",
-      "title": "Parents",
-      "count": "{count, plural, =0 {No parents registered} one {1 parent registered} other {# parents registered}}",
-      "empty": "No parents registered yet.",
+      "title": "Parents & Clubs",
+      "count": "{count, plural, =0 {No accounts} one {1 account} other {# accounts}}",
+      "empty": "No parents or clubs registered yet.",
       "table": {
         "name": "Name",
         "email": "Email",
@@ -502,11 +531,164 @@
       "subtitle": "Filling rate and price per camp.",
       "filling": "Filling",
       "note": "Catalog currently loaded from src/data/camps.json. Full CRUD management will be added when camps move to the database."
+    },
+    "coaches": {
+      "metaTitle": "Coaches",
+      "eyebrow": "Administration",
+      "title": "Coaches",
+      "count": "{count, plural, one {# coach} other {# coaches}}",
+      "table": {
+        "name": "Name",
+        "speciality": "Speciality",
+        "rate": "Rate / session",
+        "iban": "IBAN",
+        "status": "Status"
+      },
+      "ibanOk": "Provided",
+      "ibanMissing": "Missing",
+      "active": "Active",
+      "inactive": "Inactive",
+      "empty": "No coaches yet.",
+      "payments": {
+        "title": "Payments",
+        "sessions": "Sessions",
+        "rate": "Rate",
+        "amount": "Amount",
+        "statusCol": "Status",
+        "paid": "Paid",
+        "pending": "Pending",
+        "markPaid": "Mark paid",
+        "markUnpaid": "Undo"
+      }
+    },
+    "expenses": {
+      "metaTitle": "Expenses",
+      "eyebrow": "Administration",
+      "title": "Expenses",
+      "subtitle": "Material, equipment, insurance and other purchases.",
+      "total": "Total expenses",
+      "table": {
+        "date": "Date",
+        "category": "Category",
+        "label": "Label",
+        "amount": "Amount"
+      },
+      "empty": "No expenses recorded."
+    },
+    "accounting": {
+      "metaTitle": "Accounting",
+      "eyebrow": "Administration",
+      "title": "Accounting",
+      "subtitle": "Track the association's income and outflows.",
+      "cards": {
+        "income": "Income",
+        "expense": "Expenses",
+        "balance": "Balance"
+      },
+      "table": {
+        "date": "Date",
+        "type": "Type",
+        "category": "Category",
+        "label": "Label",
+        "amount": "Amount"
+      },
+      "kind": {
+        "income": "Income",
+        "expense": "Expense"
+      },
+      "empty": "No entries yet."
+    },
+    "planning": {
+      "metaTitle": "Schedule",
+      "eyebrow": "Administration",
+      "title": "Schedule",
+      "subtitle": "Create training sessions, call up goalkeepers and assign a coach.",
+      "upcoming": "Upcoming sessions",
+      "empty": "No sessions scheduled.",
+      "meet": "Call",
+      "coachLabel": "Coach",
+      "keepersCount": "{count, plural, =0 {0 keepers} one {1 keeper} other {# keepers}}",
+      "status": {
+        "scheduled": "Scheduled",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "form": {
+        "title": "New session",
+        "sessionTitle": "Title",
+        "sessionTitlePlaceholder": "e.g. U13 goalkeeper training",
+        "date": "Date",
+        "meetTime": "Call time",
+        "startTime": "Start",
+        "endTime": "End",
+        "location": "Location",
+        "coach": "Coach",
+        "coachNone": "— None —",
+        "keepers": "Convened goalkeepers",
+        "keepersEmpty": "No goalkeepers registered yet.",
+        "submit": "Create session",
+        "submitting": "Creating…",
+        "success": "Session created.",
+        "errorAuth": "Access denied.",
+        "errorValidation": "Check the form fields.",
+        "errorGeneric": "An error occurred. Please try again.",
+        "repeat": "Repeat",
+        "repeatNone": "Just once",
+        "repeatWeekly": "Every week",
+        "repeatUntil": "Until",
+        "successMany": "Sessions created across the whole period.",
+        "editTitle": "Edit session",
+        "editSuccess": "Session updated.",
+        "editSubmit": "Save changes"
+      },
+      "editMetaTitle": "Edit session",
+      "editTitle": "Edit session",
+      "backToPlanning": "← Back to planning",
+      "edit": "Edit",
+      "seriesBadge": "Series",
+      "dangerTitle": "Delete",
+      "deleteOne": "Delete this session",
+      "deleteSeries": "Delete the whole series",
+      "deleteSeriesHint": "Deletes this session and all others in the same recurrence."
+    },
+    "finance": {
+      "addTitle": "Add an entry",
+      "addExpenseTitle": "Add an expense",
+      "kind": "Type",
+      "kind_income": "Income",
+      "kind_expense": "Expense",
+      "category": "Category",
+      "categoryPlaceholder": "E.g. equipment, insurance…",
+      "categories": {
+        "materiel": "Equipment",
+        "equipement": "Gear",
+        "assurance": "Insurance",
+        "location": "Rental",
+        "admin": "Administrative",
+        "autre": "Other",
+        "cotisation": "Membership",
+        "stage": "Camp",
+        "sponsor": "Sponsor",
+        "subvention": "Grant"
+      },
+      "date": "Date",
+      "label": "Label",
+      "labelPlaceholder": "E.g. Bought 5 balls",
+      "amount": "Amount (CHF)",
+      "notes": "Notes (optional)",
+      "notesPlaceholder": "Details, supplier, invoice no.…",
+      "submit": "Add",
+      "submitting": "Adding…",
+      "success": "Entry added.",
+      "delete": "Delete",
+      "errorAuth": "Unauthorized.",
+      "errorValidation": "Check the fields (amount, label, category).",
+      "errorGeneric": "Something went wrong. Please try again."
     }
   },
   "Legal": {
     "lastUpdated": "Last updated: {date}",
-    "placeholderNotice": "Template wording — must be reviewed by your legal advisor before publishing. Factual elements (legal name, address, host) need to be filled in.",
+    "placeholderNotice": "Template wording. It must be reviewed by your legal advisor before publishing. Factual elements (legal name, address, host) need to be filled in.",
     "imprint": {
       "metaTitle": "Legal notice",
       "metaDescription": "Legal notice and editorial information for the Goalkeeper Academy website.",
@@ -516,7 +698,7 @@
       "sections": [
         {
           "heading": "Publisher",
-          "body": "Goalkeeper Academy — legal name to be confirmed. Headquarters: Chablais Valais, Switzerland. Email: contact@goalkeeperacademy.ch. Swiss UID: to be confirmed."
+          "body": "Goalkeeper Academy, legal name to be confirmed. Headquarters: Chablais, Switzerland. Email: contact@goalkeeperacademy.ch. Swiss UID: to be confirmed."
         },
         {
           "heading": "Director of publication",
@@ -524,7 +706,7 @@
         },
         {
           "heading": "Hosting",
-          "body": "The website is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA — vercel.com."
+          "body": "The website is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA (vercel.com)."
         },
         {
           "heading": "Intellectual property",
@@ -561,7 +743,7 @@
         },
         {
           "heading": "Governing law",
-          "body": "These terms are governed by Swiss law. Any dispute shall fall under the jurisdiction of the courts of the Canton of Valais."
+          "body": "These terms are governed by Swiss law. Any dispute shall fall under the jurisdiction of the courts of the Canton of Vaud."
         }
       ]
     },
@@ -626,24 +808,28 @@
       "metaDescription": "Sign in to your Goalkeeper Academy account.",
       "eyebrow": "Sign in",
       "title": "Access your account",
-      "subtitle": "Receive a magic link by email — no password needed.",
+      "subtitle": "Sign in with your email and password.",
       "emailLabel": "Email address",
       "emailPlaceholder": "you@example.com",
-      "submit": "Send the link",
-      "submitting": "Sending…",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
       "noAccount": "No account yet?",
       "createAccount": "Create an account",
       "success": "Link sent! Check your inbox (and spam folder) to sign in.",
       "error": "Something went wrong. Check your email address and try again.",
       "errorEmail": "Invalid email address.",
-      "errorNotConfigured": "Authentication is not configured yet. Please try again later."
+      "errorNotConfigured": "Authentication is not configured yet. Please try again later.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "errorCredentials": "Incorrect email or password.",
+      "forgotPassword": "Forgot your password?"
     },
     "signUp": {
       "metaTitle": "Sign up",
       "metaDescription": "Create your Goalkeeper Academy account.",
       "eyebrow": "Sign up",
       "title": "Create your account",
-      "subtitle": "Pick your profile to get started. You will receive a magic link by email to activate your account.",
+      "subtitle": "Choose your profile and create your account.",
       "roleLabel": "You are…",
       "roleParent": "A goalkeeper's parent",
       "roleParentDescription": "Register your children for sessions and camps.",
@@ -660,12 +846,47 @@
       "errorRole": "Please select your profile.",
       "errorEmail": "Invalid email address.",
       "errorConsent": "You must accept the terms to continue.",
-      "errorGeneric": "Something went wrong. Please try again."
+      "errorGeneric": "Something went wrong. Please try again.",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "errorPassword": "Password must be at least 8 characters.",
+      "successConfirm": "Account created! Check your email to confirm your address, then sign in."
     },
     "callback": {
       "errorTitle": "Invalid or expired link",
       "errorMessage": "This link has expired or has already been used. Please request a new one.",
       "retry": "Back to sign in"
+    },
+    "forgotPassword": {
+      "metaTitle": "Forgot password",
+      "metaDescription": "Get a link to reset your password.",
+      "eyebrow": "Forgot password",
+      "title": "Reset your password",
+      "subtitle": "Enter your email and we will send you a reset link.",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Send the link",
+      "submitting": "Sending…",
+      "successReset": "If an account exists for this email, a reset link has just been sent. Check your spam folder too.",
+      "errorEmail": "Invalid email address.",
+      "backToSignIn": "← Back to sign in"
+    },
+    "resetPassword": {
+      "metaTitle": "New password",
+      "metaDescription": "Choose a new password for your account.",
+      "eyebrow": "Security",
+      "title": "New password",
+      "subtitle": "Choose a new password (8 characters minimum).",
+      "passwordLabel": "New password",
+      "passwordPlaceholder": "8 characters minimum",
+      "confirmLabel": "Confirm password",
+      "confirmPlaceholder": "Re-type the password",
+      "submit": "Save password",
+      "submitting": "Saving…",
+      "errorPasswordShort": "Password must be at least 8 characters.",
+      "errorMismatch": "Passwords do not match.",
+      "errorLinkExpired": "Invalid or expired link. Please request a new reset.",
+      "errorGeneric": "Something went wrong. Please try again."
     }
   },
   "Account": {
@@ -674,12 +895,12 @@
     "hero": {
       "eyebrow": "Member area",
       "greeting": "Hello {name}",
-      "subtitle": "Welcome to your account. Find your children, sessions and invoices here."
+      "subtitle": "Welcome to your space. Find your {members}, your sessions and your invoices here."
     },
     "cards": {
       "children": {
         "title": "My goalkeepers",
-        "description": "Manage your children's profiles.",
+        "description": "Manage your {members} profiles.",
         "empty": "No children yet.",
         "count": "{count, plural, one {# goalkeeper} other {# goalkeepers}}",
         "cta": "Manage"
@@ -722,7 +943,16 @@
       "success": "Profile updated successfully.",
       "errorValidation": "Please check the form fields.",
       "errorUnauthenticated": "You must be signed in.",
-      "errorGeneric": "Something went wrong. Please try again."
+      "errorGeneric": "Something went wrong. Please try again.",
+      "avatarAlt": "Profile photo",
+      "avatarUpload": "Choose a photo",
+      "avatarHint": "JPG, PNG or WebP, 4 MB max.",
+      "iban": "IBAN (session payments)",
+      "ibanHint": "Used only to pay you for your coaching sessions. Visible to administrators.",
+      "errorIban": "Invalid IBAN. Swiss format expected (CH…).",
+      "errorAvatarSize": "Image too large (4 MB max).",
+      "errorAvatarType": "Unsupported format (JPG, PNG or WebP).",
+      "errorAvatarUpload": "Photo upload failed. Please try again."
     },
     "children": {
       "metaTitle": "My goalkeepers",
@@ -770,7 +1000,13 @@
       "success": "Profile updated.",
       "errorValidation": "Please check the form fields.",
       "errorUnauthenticated": "You must be signed in.",
-      "errorGeneric": "Something went wrong. Please try again."
+      "errorGeneric": "Something went wrong. Please try again.",
+      "photoAlt": "Keeper photo",
+      "photoUpload": "Add a photo",
+      "photoHint": "JPG, PNG or WebP, 4 MB max.",
+      "errorPhotoSize": "Image too large (4 MB max).",
+      "errorPhotoType": "Unsupported format (JPG, PNG or WebP).",
+      "errorPhotoUpload": "Photo upload failed. Please try again."
     },
     "planning": {
       "metaTitle": "My schedule",
@@ -781,7 +1017,11 @@
       "backToDashboard": "← Back to dashboard",
       "emptyTitle": "No sessions scheduled",
       "emptyDescription": "Your upcoming sessions will appear here once they're scheduled.",
-      "browseCamps": "Browse our camps"
+      "browseCamps": "Browse our camps",
+      "upcomingTitle": "Upcoming sessions",
+      "meet": "Call",
+      "present": "Present",
+      "absent": "Absent"
     },
     "invoices": {
       "metaTitle": "My invoices",
@@ -806,6 +1046,27 @@
         "cancelled": "Cancelled",
         "refunded": "Refunded"
       }
+    },
+    "terms": {
+      "children": "children",
+      "players": "players",
+      "keepers": "keepers"
+    },
+    "password": {
+      "title": "Password",
+      "subtitle": "Change your sign-in password.",
+      "current": "Current password",
+      "new": "New password",
+      "newPlaceholder": "8 characters minimum",
+      "confirm": "Confirm",
+      "submit": "Change password",
+      "submitting": "Saving…",
+      "successPassword": "Password updated.",
+      "errorPasswordShort": "New password must be at least 8 characters.",
+      "errorMismatch": "Passwords do not match.",
+      "errorCurrentPassword": "Current password is incorrect.",
+      "errorUnauthenticated": "You must be signed in.",
+      "errorGeneric": "Something went wrong. Please try again."
     }
   },
   "BlogPage": {
@@ -840,13 +1101,20 @@
     "hero": {
       "eyebrow": "Contact",
       "title": "Let's talk about your goalkeeper",
-      "subtitle": "A question, an enrollment request, a club project? Write to us — we reply within 48 business hours."
+      "subtitle": "A question, an enrollment request, a club project?",
+      "subtitle2": "Write to us and we reply within 48 business hours."
     },
     "form": {
       "title": "Send us a message",
       "fields": {
-        "name": { "label": "Full name", "placeholder": "Sandrine Dupont" },
-        "email": { "label": "Email address", "placeholder": "you@example.ch" },
+        "name": {
+          "label": "Full name",
+          "placeholder": "Sandrine Dupont"
+        },
+        "email": {
+          "label": "Email address",
+          "placeholder": "you@example.ch"
+        },
         "subject": {
           "label": "Subject",
           "placeholder": "Pick a subject",
@@ -874,16 +1142,22 @@
         "message": "Your message must contain at least 20 characters.",
         "consent": "You must agree before submitting."
       },
-      "note": "The Resend integration is coming in phase 5 — for now the form validates fields without actually sending an email."
+      "note": "Your messages reach us directly by email."
     },
     "info": {
       "title": "Direct information",
       "items": {
-        "email": { "label": "Email", "value": "contact@goalkeeperacademy.ch" },
-        "phone": { "label": "Phone", "value": "+41 (0)27 000 00 00" },
+        "email": {
+          "label": "Email",
+          "value": "contact@goalkeeperacademy.ch"
+        },
+        "phone": {
+          "label": "Phone",
+          "value": "Arthur · 078 704 29 16\nGianluca · 079 221 86 28"
+        },
         "address": {
           "label": "Address",
-          "value": "Monthey municipal stadium, 1870 Monthey, Switzerland"
+          "value": "Chem. de la Mêlée 8, 1860 Aigle, Switzerland"
         },
         "hours": {
           "label": "Availability",
@@ -893,147 +1167,194 @@
     },
     "map": {
       "title": "Main training venue",
-      "subtitle": "Monthey municipal stadium — Chablais Valais region."
+      "subtitle": "La Mêlée football ground, in Aigle (Chablais)."
     }
   },
   "OffersPage": {
     "metaTitle": "Offers & pricing",
-    "metaDescription": "Discover our goalkeeper programs: annual, monthly, private lessons, holiday camps and club contracts. Pricing and FAQ.",
+    "metaDescription": "Goalkeeper-specific training prices in the Chablais: discovery session, half-season (Tour) and full season, for youth (from age 10) and adults (18+). Club packages on quote.",
     "hero": {
       "eyebrow": "Offers & pricing",
-      "title": "A program for every journey",
-      "subtitle": "Pick the format that matches your rhythm and goals. All prices in CHF, VAT included."
+      "title": "Clear pricing, for every keeper",
+      "subtitle": "Our season runs over 34 sessions, split into two Tours (16 sessions in the first, 18 in the second). Try a discovery session, commit to a Tour, or get the best rate with the full season."
     },
-    "compare": {
-      "eyebrow": "Compare",
-      "title": "All programs at a glance",
-      "headers": {
-        "feature": "Included",
-        "annual": "Annual",
-        "monthly": "Monthly",
-        "private": "Private",
-        "camps": "Camps"
+    "audiences": {
+      "youth": {
+        "label": "Youth",
+        "age": "Ages 10–18",
+        "single": {
+          "id": "youth-single",
+          "eyebrow": "Discovery",
+          "title": "Discovery session",
+          "price": "CHF 45",
+          "unit": "/ session",
+          "description": "A single session to discover the academy, with no commitment.",
+          "bullets": [
+            "No commitment",
+            "All gear provided",
+            "Perfect for a first try"
+          ],
+          "cta": "Book a session"
+        },
+        "tour": {
+          "id": "youth-tour",
+          "eyebrow": "Half-season",
+          "title": "Tour",
+          "price": "CHF 43",
+          "unit": "/ session",
+          "description": "A commitment over a half-season: 16 sessions in Tour 1, 18 in Tour 2.",
+          "bullets": [
+            "Tour 1: 16 sessions · Tour 2: 18 sessions",
+            "CHF 690 to 775 depending on the Tour",
+            "Half-season commitment"
+          ],
+          "cta": "Choose the Tour"
+        },
+        "season": {
+          "id": "youth-season",
+          "eyebrow": "Best value",
+          "title": "Full season",
+          "price": "CHF 40",
+          "unit": "/ session",
+          "description": "The whole season over 34 sessions, best value for money.",
+          "bullets": [
+            "34 sessions",
+            "−11% vs single session",
+            "Follow-up all season long"
+          ],
+          "cta": "Enrol for the season"
+        }
       },
-      "rows": {
-        "sessions": "Sessions per week",
-        "duration": "Commitment",
-        "review": "Quarterly review",
-        "gear": "Gear provided",
-        "video": "Video analysis",
-        "discount": "Preferential pricing"
-      },
-      "values": {
-        "annual": ["1×", "10 months", "Yes", "Yes", "Yes", "−10%"],
-        "monthly": ["1×", "Monthly", "No", "Yes", "No", "—"],
-        "private": ["On request", "Per session", "No", "Yes", "Yes", "—"],
-        "camps": ["—", "3 to 5 days", "No", "Yes", "Yes", "—"]
+      "adult": {
+        "label": "Adults & seniors",
+        "age": "Ages 18+",
+        "single": {
+          "id": "adult-single",
+          "eyebrow": "Discovery",
+          "title": "Discovery session",
+          "price": "CHF 50",
+          "unit": "/ session",
+          "description": "A single session to try our adult training, with no commitment.",
+          "bullets": [
+            "No commitment",
+            "All gear provided",
+            "Perfect for a first try"
+          ],
+          "cta": "Book a session"
+        },
+        "tour": {
+          "id": "adult-tour",
+          "eyebrow": "Half-season",
+          "title": "Tour",
+          "price": "CHF 48",
+          "unit": "/ session",
+          "description": "A commitment over a half-season: 16 sessions in Tour 1, 18 in Tour 2.",
+          "bullets": [
+            "Tour 1: 16 sessions · Tour 2: 18 sessions",
+            "CHF 770 to 865 depending on the Tour",
+            "Half-season commitment"
+          ],
+          "cta": "Choose the Tour"
+        },
+        "season": {
+          "id": "adult-season",
+          "eyebrow": "Best value",
+          "title": "Full season",
+          "price": "CHF 44",
+          "unit": "/ session",
+          "description": "The whole season over 34 sessions, best value for money.",
+          "bullets": [
+            "34 sessions",
+            "−12% vs single session",
+            "Follow-up all season long"
+          ],
+          "cta": "Enrol for the season"
+        }
       }
-    },
-    "annual": {
-      "id": "annual",
-      "eyebrow": "Flagship program",
-      "title": "Annual",
-      "price": "CHF 0 / year",
-      "description": "One weekly session from September to June, individual follow-up and gear included.",
-      "bullets": [
-        "30 guaranteed sessions per season",
-        "Quarterly technical review",
-        "Jersey and gloves included",
-        "Access to make-up sessions",
-        "−10% vs monthly billing"
-      ],
-      "cta": "Request enrollment"
-    },
-    "monthly": {
-      "id": "monthly",
-      "eyebrow": "No long-term commitment",
-      "title": "Monthly",
-      "price": "CHF 0 / month",
-      "description": "Discover the academy or top up a club season, month by month.",
-      "bullets": [
-        "Cancel any month",
-        "Same coaches as the annual program",
-        "Gear provided",
-        "Ideal to test before going annual"
-      ],
-      "cta": "Check availability"
-    },
-    "private": {
-      "id": "private",
-      "eyebrow": "Individual coaching",
-      "title": "Private lessons",
-      "price": "CHF 0 / hour",
-      "description": "One coach for one (or two) goalkeeper. Goal set together, video review and action plan.",
-      "bullets": [
-        "1 to 2 goalkeepers max",
-        "Systematic video analysis",
-        "Personal plan sent after the session",
-        "Ideal pre-season or post-injury"
-      ],
-      "cta": "Book a slot"
-    },
-    "camps": {
-      "id": "camps",
-      "eyebrow": "School holidays",
-      "title": "Camps",
-      "price": "CHF 0 / camp",
-      "description": "Intensive camps during school breaks. Half-day or full-day, by age group.",
-      "bullets": [
-        "Easter, summer, autumn",
-        "Groups by age (U8 to U18)",
-        "Lunch included on full days",
-        "Snacks and gear provided"
-      ],
-      "cta": "See the calendar"
     },
     "club": {
       "id": "clubs",
-      "eyebrow": "B2B",
-      "title": "Club contract",
-      "price": "On request",
-      "description": "We come to your club to train every goalkeeper across all teams.",
-      "bullets": [
-        "Tailored annual plan",
-        "Dedicated coach for your structure",
-        "Monthly reporting to your technical director",
-        "Sliding pricing based on number of keepers"
-      ],
-      "cta": "Request a quote"
+      "eyebrow": "Clubs & associations",
+      "title": "Is your request more specific?",
+      "price": "On quote",
+      "description": "Get in touch for a quote, based on the number of goalkeepers and the frequency you want.",
+      "cta": "Contact us"
+    },
+    "compare": {
+      "eyebrow": "Comparison",
+      "title": "Session, Tour or Season?",
+      "headers": {
+        "feature": "",
+        "single": "Session",
+        "tour": "Tour",
+        "season": "Season"
+      },
+      "rows": {
+        "sessions": "Number of sessions",
+        "commitment": "Commitment",
+        "youthPrice": "Youth price (10–18)",
+        "adultPrice": "Adult price (18+)",
+        "perSession": "Indicative price / session",
+        "discount": "Saving vs single"
+      },
+      "values": {
+        "single": ["1", "None", "CHF 45", "CHF 50", "CHF 45–50", "None"],
+        "tour": [
+          "16 or 18",
+          "Half-season (one Tour)",
+          "CHF 690–775",
+          "CHF 770–865",
+          "≈ CHF 43–48",
+          "≈ 4%"
+        ],
+        "season": [
+          "34",
+          "Full season",
+          "CHF 1,360",
+          "CHF 1,496",
+          "≈ CHF 40–44",
+          "−11 to −12%"
+        ]
+      }
     },
     "faq": {
       "eyebrow": "Pricing FAQ",
-      "title": "Your questions about our programs",
+      "title": "Your questions about our plans",
       "items": {
         "trial": {
-          "question": "Is there a free trial session?",
-          "answer": "Yes. The very first session is free, with no commitment. Just get in touch to book a slot suited to your goalkeeper's age."
+          "question": "Can I try before committing?",
+          "answer": "Yes. The discovery session (CHF 45 youth, CHF 50 adults) lets you try a full session with no commitment."
         },
         "siblings": {
           "question": "Is there a sibling discount?",
-          "answer": "Yes, we apply −10% from the second child enrolled in the annual or monthly program."
+          "answer": "Yes, a discount is applied automatically from the second child enrolled on a Tour or Season plan."
         },
         "payment": {
           "question": "What payment methods do you accept?",
           "answer": "Card and TWINT online via our platform, or Swiss QR-bill for bank transfers."
         },
         "cancel": {
-          "question": "How do I cancel the monthly program?",
-          "answer": "A short email before the 25th of the month is enough, free of charge. Cancellation takes effect at the end of the current month."
+          "question": "How does the commitment work?",
+          "answer": "You commit by Tour (a half-season of 16 or 18 sessions) or by full season (34 sessions). At the end of a Tour, you're free to continue or not. The discovery session has no commitment at all."
         },
         "club": {
-          "question": "How does a club contract work?",
-          "answer": "We first discuss your needs (number of goalkeepers, frequency, location), then send a tailored quote. The service can start the following month."
+          "question": "How does the club contract work?",
+          "answer": "Our Tour and Season plans are already suited to clubs and associations: simply enrol your goalkeepers. A volume discount is applied automatically based on the number of goalkeepers registered. For more specific needs, contact us for a tailor-made quote."
         }
       }
+    },
+    "banner": {
+      "eyebrow": "Season registration",
+      "text": "Clubs, associations and parents can already choose their pack for the season. A volume discount is applied automatically based on the number of goalkeepers registered."
     }
   },
   "AcademyPage": {
     "metaTitle": "The academy",
-    "metaDescription": "Discover Goalkeeper Academy: our mission, our coaching team, our pedagogical method and our facilities in the Chablais Valais region.",
+    "metaDescription": "Discover Goalkeeper Academy: our mission, our coaching team, our pedagogical method and our facilities in the Chablais region.",
     "hero": {
       "eyebrow": "The academy",
       "title": "Goalkeeper specialists, from the ground up",
-      "subtitle": "An independent academy, built by goalkeepers for goalkeepers, in the heart of the Chablais Valais region.",
+      "subtitle": "An independent academy, built by goalkeepers for goalkeepers, in the heart of the Chablais region.",
       "imageAlt": "View of the Dents du Midi from the Chablais"
     },
     "mission": {
@@ -1041,9 +1362,18 @@
       "title": "Give every goalkeeper the tools to express themselves",
       "intro": "Goalkeeper Academy was born from a simple observation: in most clubs, goalkeepers receive little to no specific training. We fill that gap with a structured curriculum, specialized coaches and long-term follow-up.",
       "stats": {
-        "keepers": { "value": "60+", "label": "Goalkeepers trained" },
-        "years": { "value": "8 years", "label": "Of experience" },
-        "clubs": { "value": "12", "label": "Partner clubs" }
+        "keepers": {
+          "value": "60+",
+          "label": "Goalkeepers trained"
+        },
+        "years": {
+          "value": "8 years",
+          "label": "Of experience"
+        },
+        "clubs": {
+          "value": "12",
+          "label": "Partner clubs"
+        }
       }
     },
     "team": {
@@ -1052,14 +1382,14 @@
       "subtitle": "All our coaches played the position at a competitive level and hold a national coaching certificate.",
       "members": {
         "head": {
-          "name": "Antoine R.",
-          "role": "Head coach & founder",
-          "bio": "Former semi-pro goalkeeper, holds the Goalkeeper C+ diploma. 12 years of youth development experience."
+          "name": "Gianluca Giannarelli",
+          "role": "Co-founder & coach",
+          "bio": "Goalkeeping has always been his passion. He came up through Martigny-Sport, reached the first team and spent 5 years in LNB. After an injury and the club's relegation, he went on to defend the goal for FC Leytron, FC La Combe and FC Fully. He earned his Level 2 coaching diploma at Macolin. He also created the Giana Stop & Shoot tournament, to put goalkeepers in the spotlight at an event dedicated entirely to them."
         },
         "youth": {
-          "name": "Maxime L.",
-          "role": "U6–U10 coach",
-          "bio": "Specialist in motor skills development and play-based learning for the youngest goalkeepers."
+          "name": "Arthur Chazelle",
+          "role": "Co-founder & coach",
+          "bio": "A goalkeeper since his earliest years, his development took off when he joined Dijon FCO at 16. He spent over four years there and broke into the professional squad, in Ligue 2 then Ligue 1. He also kept goal for FC Monthey, FC Aigle and Azzuri in the top amateur division. Passing the game on is in his DNA."
         },
         "perf": {
           "name": "Julien V.",
@@ -1092,16 +1422,12 @@
     },
     "facilities": {
       "eyebrow": "Facilities",
-      "title": "Pitches built for goalkeepers",
-      "subtitle": "We train at several venues across the Chablais depending on the season and the age group.",
+      "title": "Our training venue",
+      "subtitle": "In partnership with FC Aigle, one central, easy-to-reach site in the Chablais.",
       "items": {
         "outdoor": {
-          "title": "Outdoor pitches",
-          "description": "Approved natural and synthetic grass, in Monthey and Vouvry."
-        },
-        "indoor": {
-          "title": "Indoor halls",
-          "description": "Sports flooring in winter so we keep intensity high whatever the weather."
+          "title": "La Mêlée pitch",
+          "description": "In partnership with FC Aigle, the 2026-2027 season trains on the La Mêlée pitch, right next to the motorway exit. A central spot in the Chablais that keeps everything simple to organise. A changing room and showers are available for extra comfort after training."
         },
         "gear": {
           "title": "Pro equipment",
@@ -1126,6 +1452,152 @@
           "description": "Loving the goalkeeping role is the foundation. We feed that fire in every session."
         }
       }
+    },
+    "recruit": {
+      "eyebrow": "Join the team",
+      "title": "We're looking for goalkeeper coaches",
+      "subtitle": "Passionate about the position and keen to pass it on? Get in touch, we'd love to chat.",
+      "cta": "Contact us"
+    }
+  },
+  "Inscription": {
+    "metaTitle": "Book your season",
+    "metaDescription": "Set up your registration in a few steps: profile, plan, goalkeepers and contact details.",
+    "eyebrow": "Registration",
+    "title": "Book your season",
+    "subtitle": "Set up and save your registration in a few steps. You can then find it in your account.",
+    "steps": {
+      "profile": "Profile",
+      "formula": "Goalkeepers",
+      "details": "Contact",
+      "summary": "Summary"
+    },
+    "step1": {
+      "title": "You are…"
+    },
+    "step2": {
+      "title": "Your plan",
+      "audienceLabel": "For whom?",
+      "formulaLabel": "Which plan?",
+      "privateTitle": "Your goalkeepers & plans",
+      "orgTitle": "Your groups",
+      "subtitle": "Pick a plan for each goalkeeper. Add as many as you need.",
+      "addGroup": "Add a group",
+      "removeGroup": "Remove group"
+    },
+    "step3": {
+      "title": "Registration details",
+      "keepersTitle": "Your goalkeepers",
+      "addKeeper": "Add a goalkeeper",
+      "removeKeeper": "Remove",
+      "contactTitle": "Your contact details",
+      "orgTitle": "Club & contact",
+      "contactPerson": "Contact person"
+    },
+    "step4": {
+      "title": "Summary"
+    },
+    "profiles": {
+      "private": {
+        "label": "Parent / Goalkeeper",
+        "desc": "An individual sign-up or for your children."
+      },
+      "club": {
+        "label": "Club or association",
+        "desc": "For a club, an association or an organisation."
+      }
+    },
+    "audiences": {
+      "youth": "Youth (10–18)",
+      "adult": "Adults & seniors"
+    },
+    "formulas": {
+      "single": {
+        "label": "Discovery session",
+        "hint": "One session, no commitment",
+        "totalHint": "for the session"
+      },
+      "tour1": {
+        "label": "Tour 1",
+        "hint": "Half-season · 16 sessions",
+        "totalHint": "for Tour 1 (16 sessions)"
+      },
+      "tour2": {
+        "label": "Tour 2",
+        "hint": "Half-season · 18 sessions",
+        "totalHint": "for Tour 2 (18 sessions)"
+      },
+      "season": {
+        "label": "Full season",
+        "hint": "34 sessions over the season",
+        "totalHint": "for the season (34 sessions)"
+      }
+    },
+    "categories": {
+      "U10": "U10",
+      "U13": "U13",
+      "U15": "U15",
+      "U18": "U18",
+      "adult": "Adult / Senior"
+    },
+    "fields": {
+      "org": "Club / association name",
+      "count": "Number of goalkeepers",
+      "notes": "Specific request",
+      "optional": "optional",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "birthYear": "Year of birth",
+      "category": "Category",
+      "email": "Email",
+      "phone": "Phone",
+      "keeper": "Goalkeeper",
+      "formula": "Plan"
+    },
+    "recap": {
+      "profile": "Profile",
+      "formula": "Plan",
+      "keepers": "Goalkeepers",
+      "discount": "Volume discount",
+      "estimate": "Indicative price",
+      "contact": "Contact",
+      "note": "Indicative price, excluding specific discounts. We confirm the final amount and payment details after receiving your request.",
+      "group": "Group",
+      "total": "Total"
+    },
+    "perSession": "session",
+    "nav": {
+      "back": "Back",
+      "next": "Continue",
+      "send": "Send request",
+      "pay": "Proceed to payment",
+      "confirm": "Confirm registration"
+    },
+    "success": {
+      "title": "Registration saved!",
+      "body": "Thank you! Your registration is saved. You can find it in your account under My invoices. Payment details will follow (or will be handled online once payments are enabled).",
+      "backHome": "Back to home",
+      "invoiceRef": "Invoice reference:",
+      "viewInvoices": "View my invoices"
+    },
+    "mail": {
+      "subject": "Registration request Goalkeeper Academy"
+    },
+    "from": "from",
+    "paid": {
+      "title": "Payment received!",
+      "body": "Thanks! Your registration is confirmed. You will receive a confirmation email. See you on the pitch!"
+    },
+    "auth": {
+      "title": "Sign in to finish",
+      "body": "To save your registration and track it in your account, sign in or create an account. Your entries stay here while you sign in in another tab.",
+      "signIn": "Sign in",
+      "signUp": "Create an account",
+      "required": "You must be signed in to complete the registration.",
+      "bodyShort": "An account is required to complete a registration."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again."
     }
   }
 }

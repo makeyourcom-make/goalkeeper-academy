@@ -1,13 +1,11 @@
 "use client";
 
-import * as React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
-import { CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { signInWithMagicLink, type AuthActionState } from "@/lib/auth/actions";
+import { signIn, type AuthActionState } from "@/lib/auth/actions";
 
 const INITIAL_STATE: AuthActionState = { status: "idle", message: "" };
 
@@ -29,19 +27,7 @@ function SubmitButton({
 export function SignInForm() {
   const t = useTranslations("Auth.signIn");
   const locale = useLocale();
-  const [state, formAction] = useFormState(signInWithMagicLink, INITIAL_STATE);
-
-  if (state.status === "success") {
-    return (
-      <div
-        role="status"
-        className="flex flex-col items-start gap-3 rounded-xl border border-success/30 bg-success/5 p-6"
-      >
-        <CheckCircle2 className="h-8 w-8 text-success" />
-        <p className="text-grey-700">{t("success")}</p>
-      </div>
-    );
-  }
+  const [state, formAction] = useFormState(signIn, INITIAL_STATE);
 
   return (
     <form action={formAction} className="flex flex-col gap-5" noValidate>
@@ -61,6 +47,23 @@ export function SignInForm() {
           autoComplete="email"
           required
           placeholder={t("emailPlaceholder")}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="signin-password"
+          className="text-sm font-semibold text-navy"
+        >
+          {t("passwordLabel")}
+        </label>
+        <Input
+          id="signin-password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          required
+          placeholder={t("passwordPlaceholder")}
         />
       </div>
 

@@ -208,8 +208,6 @@ export function ContactForm() {
       <Button type="submit" disabled={isSubmitting} className="self-start">
         {isSubmitting ? t("submitting") : t("submit")}
       </Button>
-
-      <p className="text-xs text-grey-500">{t("note")}</p>
     </form>
   );
 }

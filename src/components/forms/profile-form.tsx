@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
 import { useTranslations } from "next-intl";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Upload, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,12 +28,62 @@ function SubmitButton({
   );
 }
 
-export function ProfileForm({ profile }: { profile: Profile }) {
+export function ProfileForm({
+  profile,
+  isCoach = false,
+}: {
+  profile: Profile;
+  isCoach?: boolean;
+}) {
   const t = useTranslations("Account.profile");
   const [state, formAction] = useFormState(updateProfile, INITIAL_STATE);
+  const [preview, setPreview] = React.useState<string | null>(
+    profile.avatar_url,
+  );
+
+  function onAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) setPreview(URL.createObjectURL(file));
+  }
 
   return (
     <form action={formAction} className="flex flex-col gap-5" noValidate>
+      {/* Avatar */}
+      <div className="flex items-center gap-5">
+        <span className="border-grey-200 text-grey-400 relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-grey-100">
+          {preview ? (
+            <Image
+              src={preview}
+              alt={t("avatarAlt")}
+              fill
+              sizes="80px"
+              className="object-cover"
+              unoptimized
+            />
+          ) : (
+            <User className="h-8 w-8" />
+          )}
+        </span>
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="avatar"
+            className="inline-flex cursor-pointer items-center gap-2 self-start rounded-lg border border-grey-300 px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-grey-100"
+          >
+            <Upload className="h-4 w-4" />
+            {t("avatarUpload")}
+          </label>
+          <input
+            id="avatar"
+            name="avatar"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+            onChange={onAvatarChange}
+          />
+          <span className="text-xs text-grey-500">{t("avatarHint")}</span>
+        </div>
+      </div>
+
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
           <label
@@ -97,6 +148,23 @@ export function ProfileForm({ profile }: { profile: Profile }) {
           <option value="en">{t("languageEn")}</option>
         </select>
       </div>
+
+      {isCoach && (
+        <div className="flex flex-col gap-2 rounded-lg border border-orange/30 bg-orange/5 p-4">
+          <label htmlFor="iban" className="text-sm font-semibold text-navy">
+            {t("iban")}
+          </label>
+          <Input
+            id="iban"
+            name="iban"
+            type="text"
+            inputMode="text"
+            placeholder="CH00 0000 0000 0000 0000 0"
+            defaultValue={profile.iban ?? ""}
+          />
+          <span className="text-xs text-grey-500">{t("ibanHint")}</span>
+        </div>
+      )}
 
       <label className="flex items-start gap-3 rounded-lg border border-grey-100 bg-grey-100/40 p-4">
         <input

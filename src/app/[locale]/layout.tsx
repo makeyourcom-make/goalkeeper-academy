@@ -9,6 +9,8 @@ import "../globals.css";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { routing } from "@/i18n/routing";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const anton = Anton({
   subsets: ["latin"],
@@ -71,7 +73,26 @@ export async function generateMetadata({
       follow: true,
     },
     icons: {
-      icon: "/favicon.ico",
+      icon: [
+        { url: "/favicons/favicon.ico", sizes: "any" },
+        {
+          url: "/favicons/favicon-32x32.png",
+          type: "image/png",
+          sizes: "32x32",
+        },
+        {
+          url: "/favicons/favicon-16x16.png",
+          type: "image/png",
+          sizes: "16x16",
+        },
+        {
+          url: "/favicons/favicon-512x512.png",
+          type: "image/png",
+          sizes: "512x512",
+        },
+      ],
+      apple: "/favicons/favicon-180x180.png",
+      shortcut: "/favicons/favicon.ico",
     },
   };
 }
@@ -89,11 +110,20 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
 
+  let isAuthed = false;
+  if (isSupabaseConfigured()) {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    isAuthed = Boolean(user);
+  }
+
   return (
     <html lang={locale} className={`${anton.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col bg-white font-sans text-grey-700 antialiased">
         <NextIntlClientProvider>
-          <Header />
+          <Header initialIsAuthed={isAuthed} />
           <main className="flex-1">{children}</main>
           <Footer />
         </NextIntlClientProvider>

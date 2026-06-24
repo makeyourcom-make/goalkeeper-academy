@@ -2,13 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
 
-const PARTNERS = [
-  "FC Monthey",
-  "FC Vionnaz",
-  "Giana Stop & Shoot",
-  "FC Saint-Maurice",
-  "FC Vouvry",
-];
+const PARTNERS = ["FC Aigle", "FC Saint-Maurice", "Giana Stop & Shoot"];
 
 export async function HomePartners() {
   const t = await getTranslations("HomePage.partners");

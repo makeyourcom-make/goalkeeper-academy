@@ -2,11 +2,11 @@
   "Metadata": {
     "title": "Goalkeeper Academy",
     "titleTemplate": "%s | Goalkeeper Academy",
-    "description": "Académie de gardiens de but du Chablais valaisan. Formation spécialisée pour les jeunes gardiens de 6 à 18 ans."
+    "description": "Académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors."
   },
   "Header": {
     "skipToContent": "Aller au contenu",
-    "homeAriaLabel": "Goalkeeper Academy — Accueil",
+    "homeAriaLabel": "Accueil Goalkeeper Academy",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "primaryNav": "Navigation principale",
@@ -23,10 +23,10 @@
     }
   },
   "Footer": {
-    "tagline": "L'académie de gardiens de but du Chablais valaisan. Formation spécialisée pour les jeunes gardiens de 6 à 18 ans.",
-    "location": "Chablais valaisan, Suisse",
+    "tagline": "L'académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors.",
+    "location": "Chablais, Suisse",
     "email": "contact@goalkeeperacademy.ch",
-    "copyright": "© {year} Goalkeeper Academy — Tous droits réservés.",
+    "copyright": "© {year} Goalkeeper Academy. Tous droits réservés.",
     "columns": {
       "academy": {
         "title": "L'académie",
@@ -37,10 +37,10 @@
       },
       "offers": {
         "title": "Offres",
-        "kids": "Formules enfants",
+        "kids": "Jeunes (dès 10 ans)",
+        "adults": "Adultes & séniors",
         "camps": "Stages vacances",
-        "private": "Cours particuliers",
-        "clubs": "Contrat clubs"
+        "clubs": "Contrat club"
       },
       "resources": {
         "title": "Ressources",
@@ -59,17 +59,18 @@
     "social": {
       "instagram": "Instagram",
       "facebook": "Facebook"
-    }
+    },
+    "credit": "Réalisé par"
   },
   "HomePage": {
-    "metaTitle": "Académie de gardiens de but — Chablais valaisan",
-    "metaDescription": "Formation spécialisée pour gardiens de but de 6 à 18 ans. Cours hebdomadaires, stages vacances, cours particuliers et interventions clubs dans le Chablais valaisan.",
+    "metaTitle": "Académie de gardiens de but dans le Chablais",
+    "metaDescription": "Formation spécialisée pour gardiens de but, de 10 ans aux séniors. Cours hebdomadaires, stages vacances, coaching individuel et interventions clubs dans le Chablais.",
     "hero": {
       "badge": "Académie spécialisée gardiens",
       "title": "Former les gardiens de demain",
-      "subtitle": "Cours hebdomadaires, stages vacances et coaching individuel pour les gardiennes et gardiens de 6 à 18 ans dans le Chablais valaisan.",
-      "ctaPrimary": "Réserver une séance d'essai",
-      "ctaSecondary": "Découvrir les offres",
+      "subtitle": "Cours hebdomadaires, stages vacances et coaching individuel pour les gardiennes et gardiens, de 10 ans jusqu'aux séniors, dans le Chablais.",
+      "ctaPrimary": "Réserver votre saison",
+      "ctaSecondary": "Voir les offres",
       "imageAlt": "Jeune gardien de but en plein plongeon lors d'un entraînement"
     },
     "values": {
@@ -78,11 +79,11 @@
       "items": {
         "specialized": {
           "title": "100 % gardiens",
-          "description": "Tous nos coachs sont d'anciens gardiens. Aucune séance partagée avec les joueurs de champ — chaque exercice cible un geste spécifique."
+          "description": "Tous nos coachs sont d'anciens gardiens. Aucune séance partagée avec les joueurs de champ. Chaque exercice cible un geste spécifique."
         },
         "progression": {
           "title": "Progression mesurée",
-          "description": "Bilan technique tous les trimestres, vidéos d'analyse et objectifs personnalisés. Vous voyez les progrès, votre enfant aussi."
+          "description": "Bilan technique tous les trimestres, analyse et objectifs personnalisés. Vous voyez les progrès, votre joueur et enfant aussi."
         },
         "passion": {
           "title": "Plaisir avant tout",
@@ -95,34 +96,34 @@
       "title": "Trouvez le format qui vous convient",
       "subtitle": "Que vous cherchiez un suivi régulier, une parenthèse intensive ou un coup de pouce ponctuel, nous avons une formule adaptée.",
       "items": {
-        "annual": {
-          "badge": "Le plus populaire",
-          "title": "Annuel",
-          "price": "0 CHF / an",
-          "description": "1 séance hebdomadaire de septembre à juin, suivi individuel, matériel fourni.",
+        "tour": {
+          "badge": "Demi-saison",
+          "title": "Le Tour",
+          "price": "Dès 43 CHF / séance",
+          "description": "Un engagement sur une demi-saison de 16 séances, pour les jeunes comme pour les adultes.",
           "bullets": [
-            "30 séances garanties",
-            "Bilan trimestriel",
-            "−10 % vs mensuel"
+            "Tour 1 : 16 séances · Tour 2 : 18 séances",
+            "Séance de 4 gardiens maximum",
+            "Sans réengagement"
           ],
-          "cta": "Voir l'annuel"
+          "cta": "Voir les tarifs"
         },
-        "monthly": {
-          "badge": "Flexible",
-          "title": "Mensuel",
-          "price": "0 CHF / mois",
-          "description": "Engagement court, parfait pour découvrir l'académie ou compléter un club.",
+        "season": {
+          "badge": "Le plus populaire",
+          "title": "Saison complète",
+          "price": "Dès 40 CHF / séance",
+          "description": "Toute la saison sur 34 séances, le meilleur tarif à la séance.",
           "bullets": [
-            "Sans engagement long",
-            "Résiliation mensuelle",
-            "Accès aux mêmes coachs"
+            "34 séances sur la saison",
+            "Séance de 4 gardiens maximum",
+            "−11 % vs séance à l’unité"
           ],
-          "cta": "Voir le mensuel"
+          "cta": "Voir les tarifs"
         },
         "camps": {
           "badge": "Vacances scolaires",
           "title": "Stages",
-          "price": "0 CHF / stage",
+          "price": "À venir",
           "description": "Camps intensifs sur 3 à 5 jours pendant les vacances. Demi-journée ou journée complète.",
           "bullets": [
             "Pâques · été · automne",
@@ -184,8 +185,8 @@
     },
     "ctaFinal": {
       "title": "Prêt à passer dans les buts ?",
-      "subtitle": "Réservez une séance d'essai gratuite ou contactez-nous pour parler du parcours de votre gardien.",
-      "ctaPrimary": "Réserver l'essai",
+      "subtitle": "Réservez votre saison ou contactez-nous pour parler du parcours de votre gardien.",
+      "ctaPrimary": "Réserver votre saison",
       "ctaSecondary": "Nous contacter"
     }
   },
@@ -210,10 +211,16 @@
       "empty": "Aucun stage planifié pour le moment."
     },
     "partner": {
-      "eyebrow": "Événement partenaire",
+      "eyebrow": "L'évènement de la fin d'année",
       "title": "Giana Stop & Shoot",
-      "description": "Le tournoi de référence des gardiens en Suisse romande. Goalkeeper Academy y est partenaire depuis trois éditions.",
-      "cta": "Découvrir le partenariat"
+      "description": "Le tournoi de référence des gardiens en Suisse romande, créé par notre co-fondateur Gianluca Giannarelli.",
+      "cta": "Découvrir le tournoi"
+    },
+    "comingSoon": {
+      "badge": "Bientôt",
+      "title": "Stages à venir",
+      "description": "Nos stages de vacances arrivent prochainement. Laissez-nous vos coordonnées pour être informé·e de l'ouverture des inscriptions et des dates.",
+      "cta": "Être informé·e"
     }
   },
   "CampDetail": {
@@ -336,14 +343,14 @@
       "emailSent": "Un e-mail de confirmation a été envoyé à {email}.",
       "ctaAccount": "Voir mon compte",
       "ctaBrowse": "Découvrir d'autres stages",
-      "demoNote": "Démo — aucun paiement réel n'a été effectué et aucune donnée n'a été transmise à un prestataire de paiement."
+      "demoNote": "Ceci est une démonstration. Aucun paiement réel n'a été effectué et aucune donnée n'a été transmise à un prestataire de paiement."
     }
   },
   "GianaPage": {
     "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "Goalkeeper Academy est partenaire officiel du Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but.",
+    "metaDescription": "Le Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but, créé par Gianluca Giannarelli, co-fondateur de Goalkeeper Academy.",
     "hero": {
-      "eyebrow": "Événement partenaire",
+      "eyebrow": "L'évènement de la fin d'année",
       "title": "Giana Stop & Shoot",
       "subtitle": "Le rendez-vous suisse romand entièrement dédié aux gardiens de but. Une journée, un tournoi, une passion commune."
     },
@@ -352,18 +359,27 @@
       "title": "Un format unique pour les gardiens",
       "intro": "Le Giana Stop & Shoot rassemble chaque année une centaine de gardiens de toute la Suisse romande autour d'épreuves techniques et d'un mini-tournoi à élimination directe. Pas de joueurs de champ : juste des gardiens, leurs gants et un public de connaisseurs.",
       "stats": {
-        "editions": { "value": "3", "label": "Éditions partenaires" },
-        "keepers": { "value": "100+", "label": "Gardiens / édition" },
-        "regions": { "value": "5", "label": "Cantons représentés" }
+        "editions": {
+          "value": "5",
+          "label": "Éditions"
+        },
+        "keepers": {
+          "value": "30+",
+          "label": "Gardiens / édition"
+        },
+        "regions": {
+          "value": "5",
+          "label": "Cantons représentés"
+        }
       }
     },
     "partnership": {
-      "eyebrow": "Notre engagement",
-      "title": "Pourquoi Goalkeeper Academy est partenaire",
+      "eyebrow": "Notre tournoi",
+      "title": "Un événement créé par notre co-fondateur",
       "items": {
         "values": {
           "title": "Mêmes valeurs",
-          "description": "Mettre le gardien au centre, valoriser le poste et créer des moments de partage entre passionnés."
+          "description": "Le tournoi est né de la même conviction que l'académie : mettre le gardien au centre, valoriser le poste et créer des moments de partage entre passionnés."
         },
         "coaching": {
           "title": "Coachs sur place",
@@ -377,11 +393,20 @@
     },
     "info": {
       "eyebrow": "Infos pratiques",
-      "title": "L'édition 2026 en bref",
+      "title": "Toutes les infos sur le site officiel",
       "items": {
-        "date": { "label": "Date", "value": "Samedi 6 juin 2026" },
-        "location": { "label": "Lieu", "value": "Stade municipal de Monthey" },
-        "ages": { "label": "Catégories", "value": "U10 · U13 · U15 · U18" },
+        "date": {
+          "label": "Date",
+          "value": "Samedi 6 juin 2026"
+        },
+        "location": {
+          "label": "Lieu",
+          "value": "Stade municipal de Monthey"
+        },
+        "ages": {
+          "label": "Catégories",
+          "value": "U10 · U13 · U15 · U18"
+        },
         "registration": {
           "label": "Inscriptions",
           "value": "Via tournoi-gardiens.ch"
@@ -404,10 +429,14 @@
       "title": "Admin",
       "subtitle": "Tableau de bord équipe",
       "dashboard": "Vue d'ensemble",
-      "parents": "Parents",
+      "parents": "Parents & Clubs",
       "children": "Gardiens",
       "invoices": "Factures",
-      "camps": "Stages"
+      "camps": "Stages",
+      "coaches": "Entraîneurs",
+      "expenses": "Charges",
+      "accounting": "Comptabilité",
+      "planning": "Planning"
     },
     "dashboard": {
       "metaTitle": "Admin · Tableau de bord",
@@ -415,7 +444,7 @@
       "title": "Tableau de bord",
       "subtitle": "Vue d'ensemble des inscriptions, des paiements et des stages en cours.",
       "stats": {
-        "parents": "Parents inscrits",
+        "parents": "Parents & clubs",
         "children": "Gardiens",
         "invoices": "Factures émises",
         "pendingInvoices": "Factures en attente"
@@ -426,11 +455,11 @@
       }
     },
     "parents": {
-      "metaTitle": "Admin · Parents",
+      "metaTitle": "Admin · Parents & Clubs",
       "eyebrow": "Administration",
-      "title": "Parents",
-      "count": "{count, plural, =0 {Aucun parent inscrit} one {1 parent inscrit} other {# parents inscrits}}",
-      "empty": "Aucun parent enregistré pour le moment.",
+      "title": "Parents & Clubs",
+      "count": "{count, plural, =0 {Aucun compte} one {1 compte} other {# comptes}}",
+      "empty": "Aucun parent ou club enregistré pour le moment.",
       "table": {
         "name": "Nom",
         "email": "E-mail",
@@ -502,6 +531,159 @@
       "subtitle": "Suivi du remplissage et des prix par stage.",
       "filling": "Remplissage",
       "note": "Catalogue actuellement chargé depuis src/data/camps.json. La gestion CRUD complète sera ajoutée à la migration des stages en base."
+    },
+    "coaches": {
+      "metaTitle": "Entraîneurs",
+      "eyebrow": "Administration",
+      "title": "Entraîneurs",
+      "count": "{count, plural, one {# entraîneur} other {# entraîneurs}}",
+      "table": {
+        "name": "Nom",
+        "speciality": "Spécialité",
+        "rate": "Tarif / séance",
+        "iban": "IBAN",
+        "status": "Statut"
+      },
+      "ibanOk": "Renseigné",
+      "ibanMissing": "Manquant",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "empty": "Aucun entraîneur pour le moment.",
+      "payments": {
+        "title": "Paiements",
+        "sessions": "Séances",
+        "rate": "Tarif",
+        "amount": "Montant",
+        "statusCol": "Statut",
+        "paid": "Payé",
+        "pending": "En attente",
+        "markPaid": "Marquer payé",
+        "markUnpaid": "Annuler"
+      }
+    },
+    "expenses": {
+      "metaTitle": "Charges",
+      "eyebrow": "Administration",
+      "title": "Charges",
+      "subtitle": "Achats de matériel, équipement, assurance et autres dépenses.",
+      "total": "Total des charges",
+      "table": {
+        "date": "Date",
+        "category": "Catégorie",
+        "label": "Libellé",
+        "amount": "Montant"
+      },
+      "empty": "Aucune charge enregistrée."
+    },
+    "accounting": {
+      "metaTitle": "Comptabilité",
+      "eyebrow": "Administration",
+      "title": "Comptabilité",
+      "subtitle": "Suivi des entrées et sorties de l'association.",
+      "cards": {
+        "income": "Entrées",
+        "expense": "Sorties",
+        "balance": "Solde"
+      },
+      "table": {
+        "date": "Date",
+        "type": "Type",
+        "category": "Catégorie",
+        "label": "Libellé",
+        "amount": "Montant"
+      },
+      "kind": {
+        "income": "Entrée",
+        "expense": "Sortie"
+      },
+      "empty": "Aucune écriture pour le moment."
+    },
+    "planning": {
+      "metaTitle": "Planning",
+      "eyebrow": "Administration",
+      "title": "Planning",
+      "subtitle": "Créez les séances d'entraînement, convoquez les gardiens et assignez un coach.",
+      "upcoming": "Séances à venir",
+      "empty": "Aucune séance planifiée.",
+      "meet": "Convocation",
+      "coachLabel": "Coach",
+      "keepersCount": "{count, plural, =0 {0 gardien} one {1 gardien} other {# gardiens}}",
+      "status": {
+        "scheduled": "Planifiée",
+        "completed": "Terminée",
+        "cancelled": "Annulée"
+      },
+      "form": {
+        "title": "Nouvelle séance",
+        "sessionTitle": "Intitulé",
+        "sessionTitlePlaceholder": "Ex. Entraînement gardiens U13",
+        "date": "Date",
+        "meetTime": "Convocation",
+        "startTime": "Début",
+        "endTime": "Fin",
+        "location": "Lieu",
+        "coach": "Coach",
+        "coachNone": "— Aucun —",
+        "keepers": "Gardiens convoqués",
+        "keepersEmpty": "Aucun gardien enregistré pour le moment.",
+        "submit": "Créer la séance",
+        "submitting": "Création…",
+        "success": "Séance créée.",
+        "errorAuth": "Accès refusé.",
+        "errorValidation": "Vérifiez les champs du formulaire.",
+        "errorGeneric": "Une erreur est survenue. Réessayez.",
+        "repeat": "Répétition",
+        "repeatNone": "Une seule fois",
+        "repeatWeekly": "Chaque semaine",
+        "repeatUntil": "Jusqu'au",
+        "successMany": "Séances créées sur toute la période.",
+        "editTitle": "Modifier la séance",
+        "editSuccess": "Séance mise à jour.",
+        "editSubmit": "Enregistrer les modifications"
+      },
+      "editMetaTitle": "Modifier la séance",
+      "editTitle": "Modifier la séance",
+      "backToPlanning": "← Retour au planning",
+      "edit": "Modifier",
+      "seriesBadge": "Série",
+      "dangerTitle": "Supprimer",
+      "deleteOne": "Supprimer cette séance",
+      "deleteSeries": "Supprimer toute la série",
+      "deleteSeriesHint": "Supprime cette séance et toutes celles de la même répétition."
+    },
+    "finance": {
+      "addTitle": "Ajouter une écriture",
+      "addExpenseTitle": "Ajouter une charge",
+      "kind": "Type",
+      "kind_income": "Entrée",
+      "kind_expense": "Sortie",
+      "category": "Catégorie",
+      "categoryPlaceholder": "Ex. matériel, assurance…",
+      "categories": {
+        "materiel": "Matériel",
+        "equipement": "Équipement",
+        "assurance": "Assurance",
+        "location": "Location",
+        "admin": "Administratif",
+        "autre": "Autre",
+        "cotisation": "Cotisation",
+        "stage": "Stage",
+        "sponsor": "Sponsor",
+        "subvention": "Subvention"
+      },
+      "date": "Date",
+      "label": "Libellé",
+      "labelPlaceholder": "Ex. Achat de 5 ballons",
+      "amount": "Montant (CHF)",
+      "notes": "Notes (optionnel)",
+      "notesPlaceholder": "Précisions, fournisseur, n° de facture…",
+      "submit": "Ajouter",
+      "submitting": "Ajout…",
+      "success": "Écriture ajoutée.",
+      "delete": "Supprimer",
+      "errorAuth": "Accès non autorisé.",
+      "errorValidation": "Vérifiez les champs (montant, libellé, catégorie).",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
     }
   },
   "Legal": {
@@ -516,7 +698,7 @@
       "sections": [
         {
           "heading": "Éditeur du site",
-          "body": "Goalkeeper Academy — raison sociale à compléter. Siège : Chablais valaisan, Suisse. Email : contact@goalkeeperacademy.ch. Numéro IDE : à compléter."
+          "body": "Goalkeeper Academy, raison sociale à compléter. Siège : Chablais, Suisse. Email : contact@goalkeeperacademy.ch. Numéro IDE : à compléter."
         },
         {
           "heading": "Directeur de la publication",
@@ -524,7 +706,7 @@
         },
         {
           "heading": "Hébergement",
-          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA — vercel.com."
+          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA (vercel.com)."
         },
         {
           "heading": "Propriété intellectuelle",
@@ -561,7 +743,7 @@
         },
         {
           "heading": "Droit applicable",
-          "body": "Les présentes CGV sont soumises au droit suisse. Tout litige sera de la compétence des tribunaux du canton du Valais."
+          "body": "Les présentes CGV sont soumises au droit suisse. Tout litige sera de la compétence des tribunaux du canton de Vaud."
         }
       ]
     },
@@ -626,24 +808,28 @@
       "metaDescription": "Connectez-vous à votre compte Goalkeeper Academy.",
       "eyebrow": "Connexion",
       "title": "Accédez à votre espace",
-      "subtitle": "Recevez un lien magique par email — pas besoin de mot de passe.",
+      "subtitle": "Connectez-vous avec votre email et votre mot de passe.",
       "emailLabel": "Adresse email",
       "emailPlaceholder": "vous@exemple.ch",
-      "submit": "Recevoir le lien",
-      "submitting": "Envoi en cours…",
+      "submit": "Se connecter",
+      "submitting": "Connexion…",
       "noAccount": "Pas encore de compte ?",
       "createAccount": "Créer un compte",
       "success": "Lien envoyé ! Vérifiez votre boîte de réception (et les spams) pour vous connecter.",
       "error": "Une erreur est survenue. Vérifiez votre adresse email et réessayez.",
       "errorEmail": "Adresse email invalide.",
-      "errorNotConfigured": "L'authentification n'est pas encore configurée. Réessayez plus tard."
+      "errorNotConfigured": "L'authentification n'est pas encore configurée. Réessayez plus tard.",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "••••••••",
+      "errorCredentials": "Email ou mot de passe incorrect.",
+      "forgotPassword": "Mot de passe oublié ?"
     },
     "signUp": {
       "metaTitle": "Inscription",
       "metaDescription": "Créez votre compte Goalkeeper Academy.",
       "eyebrow": "Inscription",
       "title": "Créez votre compte",
-      "subtitle": "Choisissez votre profil pour démarrer. Vous recevrez un lien magique par email pour activer votre compte.",
+      "subtitle": "Choisissez votre profil et créez votre compte.",
       "roleLabel": "Vous êtes…",
       "roleParent": "Un parent de gardien",
       "roleParentDescription": "Inscrivez vos enfants aux séances et stages.",
@@ -660,12 +846,47 @@
       "errorRole": "Sélectionnez votre profil.",
       "errorEmail": "Adresse email invalide.",
       "errorConsent": "Vous devez accepter les conditions pour continuer.",
-      "errorGeneric": "Une erreur est survenue. Réessayez."
+      "errorGeneric": "Une erreur est survenue. Réessayez.",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "Au moins 8 caractères",
+      "errorPassword": "Le mot de passe doit faire au moins 8 caractères.",
+      "successConfirm": "Compte créé ! Vérifiez votre email pour confirmer votre adresse, puis connectez-vous."
     },
     "callback": {
       "errorTitle": "Lien invalide ou expiré",
       "errorMessage": "Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau.",
       "retry": "Retourner à la connexion"
+    },
+    "forgotPassword": {
+      "metaTitle": "Mot de passe oublié",
+      "metaDescription": "Recevez un lien pour réinitialiser votre mot de passe.",
+      "eyebrow": "Mot de passe oublié",
+      "title": "Réinitialiser le mot de passe",
+      "subtitle": "Indiquez votre e-mail, nous vous envoyons un lien de réinitialisation.",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "vous@exemple.ch",
+      "submit": "Envoyer le lien",
+      "submitting": "Envoi…",
+      "successReset": "Si un compte existe avec cet e-mail, un lien de réinitialisation vient d être envoyé. Pensez à vérifier vos spams.",
+      "errorEmail": "Adresse e-mail invalide.",
+      "backToSignIn": "← Retour à la connexion"
+    },
+    "resetPassword": {
+      "metaTitle": "Nouveau mot de passe",
+      "metaDescription": "Choisissez un nouveau mot de passe pour votre compte.",
+      "eyebrow": "Sécurité",
+      "title": "Nouveau mot de passe",
+      "subtitle": "Choisissez un nouveau mot de passe (8 caractères minimum).",
+      "passwordLabel": "Nouveau mot de passe",
+      "passwordPlaceholder": "8 caractères minimum",
+      "confirmLabel": "Confirmer le mot de passe",
+      "confirmPlaceholder": "Retapez le mot de passe",
+      "submit": "Enregistrer le mot de passe",
+      "submitting": "Enregistrement…",
+      "errorPasswordShort": "Le mot de passe doit contenir au moins 8 caractères.",
+      "errorMismatch": "Les mots de passe ne correspondent pas.",
+      "errorLinkExpired": "Lien invalide ou expiré. Refaites une demande de réinitialisation.",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
     }
   },
   "Account": {
@@ -674,12 +895,12 @@
     "hero": {
       "eyebrow": "Espace membre",
       "greeting": "Bonjour {name}",
-      "subtitle": "Bienvenue dans votre espace. Retrouvez ici vos enfants, vos séances et vos factures."
+      "subtitle": "Bienvenue dans votre espace. Retrouvez ici vos {members}, vos séances et vos factures."
     },
     "cards": {
       "children": {
         "title": "Mes gardiens",
-        "description": "Gérez les profils de vos enfants gardiens.",
+        "description": "Gérez les profils de vos {members}.",
         "empty": "Aucun enfant enregistré.",
         "count": "{count, plural, one {# gardien} other {# gardiens}}",
         "cta": "Gérer"
@@ -722,7 +943,16 @@
       "success": "Profil mis à jour avec succès.",
       "errorValidation": "Vérifiez les champs du formulaire.",
       "errorUnauthenticated": "Vous devez être connecté.",
-      "errorGeneric": "Une erreur est survenue. Réessayez."
+      "errorGeneric": "Une erreur est survenue. Réessayez.",
+      "avatarAlt": "Photo de profil",
+      "avatarUpload": "Choisir une photo",
+      "avatarHint": "JPG, PNG ou WebP, 4 Mo maximum.",
+      "iban": "IBAN (paiement des séances)",
+      "ibanHint": "Utilisé uniquement pour vous verser vos séances de coaching. Visible par les administrateurs.",
+      "errorIban": "IBAN invalide. Format suisse attendu (CH…).",
+      "errorAvatarSize": "Image trop lourde (4 Mo maximum).",
+      "errorAvatarType": "Format non supporté (JPG, PNG ou WebP).",
+      "errorAvatarUpload": "Échec de l envoi de la photo. Réessayez."
     },
     "children": {
       "metaTitle": "Mes gardiens",
@@ -770,7 +1000,13 @@
       "success": "Profil mis à jour.",
       "errorValidation": "Vérifiez les champs du formulaire.",
       "errorUnauthenticated": "Vous devez être connecté.",
-      "errorGeneric": "Une erreur est survenue. Réessayez."
+      "errorGeneric": "Une erreur est survenue. Réessayez.",
+      "photoAlt": "Photo du gardien",
+      "photoUpload": "Ajouter une photo",
+      "photoHint": "JPG, PNG ou WebP, 4 Mo maximum.",
+      "errorPhotoSize": "Image trop lourde (4 Mo maximum).",
+      "errorPhotoType": "Format non supporté (JPG, PNG ou WebP).",
+      "errorPhotoUpload": "Échec de l envoi de la photo. Réessayez."
     },
     "planning": {
       "metaTitle": "Mon planning",
@@ -781,7 +1017,11 @@
       "backToDashboard": "← Retour au tableau de bord",
       "emptyTitle": "Aucune séance prévue",
       "emptyDescription": "Vos prochaines séances apparaîtront ici dès qu'elles seront planifiées.",
-      "browseCamps": "Découvrir nos stages"
+      "browseCamps": "Découvrir nos stages",
+      "upcomingTitle": "Prochaines séances",
+      "meet": "Convocation",
+      "present": "Présent",
+      "absent": "Absent"
     },
     "invoices": {
       "metaTitle": "Mes factures",
@@ -806,6 +1046,27 @@
         "cancelled": "Annulée",
         "refunded": "Remboursée"
       }
+    },
+    "terms": {
+      "children": "enfants",
+      "players": "joueurs",
+      "keepers": "gardiens"
+    },
+    "password": {
+      "title": "Mot de passe",
+      "subtitle": "Modifiez votre mot de passe de connexion.",
+      "current": "Mot de passe actuel",
+      "new": "Nouveau mot de passe",
+      "newPlaceholder": "8 caractères minimum",
+      "confirm": "Confirmer",
+      "submit": "Changer le mot de passe",
+      "submitting": "Enregistrement…",
+      "successPassword": "Mot de passe mis à jour.",
+      "errorPasswordShort": "Le nouveau mot de passe doit contenir au moins 8 caractères.",
+      "errorMismatch": "Les mots de passe ne correspondent pas.",
+      "errorCurrentPassword": "Mot de passe actuel incorrect.",
+      "errorUnauthenticated": "Vous devez être connecté.",
+      "errorGeneric": "Une erreur est survenue. Réessayez."
     }
   },
   "BlogPage": {
@@ -840,13 +1101,20 @@
     "hero": {
       "eyebrow": "Contact",
       "title": "Parlons de votre gardien",
-      "subtitle": "Une question, une demande d'inscription, un projet club ? Écrivez-nous, nous répondons sous 48 h ouvrées."
+      "subtitle": "Une question, une demande d'inscription, un projet club ?",
+      "subtitle2": "Écrivez-nous, nous répondons sous 48 h ouvrées."
     },
     "form": {
       "title": "Envoyez-nous un message",
       "fields": {
-        "name": { "label": "Nom complet", "placeholder": "Sandrine Dupont" },
-        "email": { "label": "Adresse email", "placeholder": "vous@exemple.ch" },
+        "name": {
+          "label": "Nom complet",
+          "placeholder": "Sandrine Dupont"
+        },
+        "email": {
+          "label": "Adresse email",
+          "placeholder": "vous@exemple.ch"
+        },
         "subject": {
           "label": "Sujet",
           "placeholder": "Choisissez un sujet",
@@ -874,16 +1142,22 @@
         "message": "Votre message doit contenir au moins 20 caractères.",
         "consent": "Vous devez accepter pour envoyer le formulaire."
       },
-      "note": "Le branchement Resend arrive en phase 5 — pour l'instant, le formulaire valide les champs sans envoyer d'email."
+      "note": "Vos messages nous parviennent directement par email."
     },
     "info": {
       "title": "Informations directes",
       "items": {
-        "email": { "label": "Email", "value": "contact@goalkeeperacademy.ch" },
-        "phone": { "label": "Téléphone", "value": "+41 (0)27 000 00 00" },
+        "email": {
+          "label": "Email",
+          "value": "contact@goalkeeperacademy.ch"
+        },
+        "phone": {
+          "label": "Téléphone",
+          "value": "Arthur · 078 704 29 16\nGianluca · 079 221 86 28"
+        },
         "address": {
           "label": "Adresse",
-          "value": "Stade municipal de Monthey, 1870 Monthey, Suisse"
+          "value": "Chem. de la Mêlée 8, 1860 Aigle, Suisse"
         },
         "hours": {
           "label": "Disponibilités",
@@ -893,147 +1167,194 @@
     },
     "map": {
       "title": "Lieu d'entraînement principal",
-      "subtitle": "Stade municipal de Monthey — Chablais valaisan."
+      "subtitle": "Terrain de football de la Mêlée, à Aigle (Chablais)."
     }
   },
   "OffersPage": {
     "metaTitle": "Offres & tarifs",
-    "metaDescription": "Découvrez nos formules pour gardiens : annuel, mensuel, cours particuliers, stages vacances et contrats club. Tarifs et FAQ.",
+    "metaDescription": "Tarifs des entraînements spécifiques gardiens dans le Chablais : séance découverte, Tour (demi-saison) et saison complète, pour les jeunes (dès 10 ans) et les adultes (18+). Formules club sur devis.",
     "hero": {
       "eyebrow": "Offres & tarifs",
-      "title": "Une formule pour chaque parcours",
-      "subtitle": "Choisissez la formule qui correspond à votre rythme et à vos objectifs. Tous les tarifs sont en CHF, TVA incluse."
+      "title": "Des tarifs clairs, pour chaque gardien",
+      "subtitle": "Notre saison se joue en 34 séances, réparties en deux Tours (16 séances au premier, 18 au second). Testez avec une séance découverte, engagez-vous sur un Tour, ou profitez du meilleur tarif sur la saison complète."
     },
-    "compare": {
-      "eyebrow": "Comparatif",
-      "title": "Vue d'ensemble des formules",
-      "headers": {
-        "feature": "Inclus",
-        "annual": "Annuel",
-        "monthly": "Mensuel",
-        "private": "Particulier",
-        "camps": "Stages"
+    "audiences": {
+      "youth": {
+        "label": "Jeunes",
+        "age": "10–18 ans",
+        "single": {
+          "id": "jeunes-seance",
+          "eyebrow": "Découverte",
+          "title": "Séance découverte",
+          "price": "45 CHF",
+          "unit": "/ séance",
+          "description": "Une séance à l'unité pour découvrir l'académie, sans engagement.",
+          "bullets": [
+            "Sans engagement",
+            "Tout le matériel fourni",
+            "Idéale pour un premier essai"
+          ],
+          "cta": "Réserver une séance"
+        },
+        "tour": {
+          "id": "jeunes-tour",
+          "eyebrow": "Demi-saison",
+          "title": "Tour",
+          "price": "43 CHF",
+          "unit": "/ séance",
+          "description": "Un engagement sur une demi-saison : 16 séances au Tour 1, 18 au Tour 2.",
+          "bullets": [
+            "Tour 1 : 16 séances · Tour 2 : 18 séances",
+            "De 690 à 775 CHF selon le tour",
+            "Engagement demi-saison"
+          ],
+          "cta": "Choisir le Tour"
+        },
+        "season": {
+          "id": "jeunes-saison",
+          "eyebrow": "Le plus avantageux",
+          "title": "Saison complète",
+          "price": "40 CHF",
+          "unit": "/ séance",
+          "description": "Toute la saison sur 34 séances, pour le meilleur rapport qualité/prix.",
+          "bullets": [
+            "34 séances",
+            "−11 % vs séance à l’unité",
+            "Suivi sur toute la saison"
+          ],
+          "cta": "Inscrire pour la saison"
+        }
       },
-      "rows": {
-        "sessions": "Séances par semaine",
-        "duration": "Durée engagement",
-        "review": "Bilan trimestriel",
-        "gear": "Matériel fourni",
-        "video": "Analyse vidéo",
-        "discount": "Tarif préférentiel"
-      },
-      "values": {
-        "annual": ["1×", "10 mois", "Oui", "Oui", "Oui", "−10 %"],
-        "monthly": ["1×", "Mensuel", "Non", "Oui", "Non", "—"],
-        "private": ["Sur demande", "À la séance", "Non", "Oui", "Oui", "—"],
-        "camps": ["—", "3 à 5 jours", "Non", "Oui", "Oui", "—"]
+      "adult": {
+        "label": "Adultes & séniors",
+        "age": "18 ans et +",
+        "single": {
+          "id": "adultes-seance",
+          "eyebrow": "Découverte",
+          "title": "Séance découverte",
+          "price": "50 CHF",
+          "unit": "/ séance",
+          "description": "Une séance à l'unité pour tester nos entraînements adultes, sans engagement.",
+          "bullets": [
+            "Sans engagement",
+            "Tout le matériel fourni",
+            "Idéale pour un premier essai"
+          ],
+          "cta": "Réserver une séance"
+        },
+        "tour": {
+          "id": "adultes-tour",
+          "eyebrow": "Demi-saison",
+          "title": "Tour",
+          "price": "48 CHF",
+          "unit": "/ séance",
+          "description": "Un engagement sur une demi-saison : 16 séances au Tour 1, 18 au Tour 2.",
+          "bullets": [
+            "Tour 1 : 16 séances · Tour 2 : 18 séances",
+            "De 770 à 865 CHF selon le tour",
+            "Engagement demi-saison"
+          ],
+          "cta": "Choisir le Tour"
+        },
+        "season": {
+          "id": "adultes-saison",
+          "eyebrow": "Le plus avantageux",
+          "title": "Saison complète",
+          "price": "44 CHF",
+          "unit": "/ séance",
+          "description": "Toute la saison sur 34 séances, pour le meilleur rapport qualité/prix.",
+          "bullets": [
+            "34 séances",
+            "−12 % vs séance à l’unité",
+            "Suivi sur toute la saison"
+          ],
+          "cta": "Inscrire pour la saison"
+        }
       }
-    },
-    "annual": {
-      "id": "annuel",
-      "eyebrow": "Formule phare",
-      "title": "Annuel",
-      "price": "0 CHF / an",
-      "description": "1 séance hebdomadaire de septembre à juin, suivi individuel et matériel inclus.",
-      "bullets": [
-        "30 séances garanties sur la saison",
-        "Bilan technique trimestriel",
-        "Maillot et gants fournis",
-        "Accès aux séances de rattrapage",
-        "−10 % vs paiement mensuel"
-      ],
-      "cta": "Demander l'inscription"
-    },
-    "monthly": {
-      "id": "mensuel",
-      "eyebrow": "Sans engagement long",
-      "title": "Mensuel",
-      "price": "0 CHF / mois",
-      "description": "Pour découvrir l'académie ou compléter une saison de club, mois par mois.",
-      "bullets": [
-        "Résiliation chaque mois",
-        "Mêmes coachs que l'annuel",
-        "Matériel fourni",
-        "Idéal pour tester avant l'annuel"
-      ],
-      "cta": "Voir les disponibilités"
-    },
-    "private": {
-      "id": "cours-particuliers",
-      "eyebrow": "Coaching individuel",
-      "title": "Cours particuliers",
-      "price": "0 CHF / heure",
-      "description": "Un coach pour un gardien (ou deux maximum). Objectif fixé ensemble, vidéo et plan d'action.",
-      "bullets": [
-        "1 à 2 gardiens maximum",
-        "Analyse vidéo systématique",
-        "Plan personnalisé envoyé après séance",
-        "Idéal en pré-saison ou post-blessure"
-      ],
-      "cta": "Réserver un créneau"
-    },
-    "camps": {
-      "id": "stages",
-      "eyebrow": "Vacances scolaires",
-      "title": "Stages",
-      "price": "0 CHF / stage",
-      "description": "Camps intensifs pendant les vacances. Demi-journée ou journée complète, par tranche d'âge.",
-      "bullets": [
-        "Pâques, été, automne",
-        "Groupes par âge (U8 à U18)",
-        "Repas inclus en journée",
-        "Goûter et matériel fournis"
-      ],
-      "cta": "Voir le calendrier"
     },
     "club": {
       "id": "clubs",
-      "eyebrow": "B2B",
-      "title": "Contrat club",
+      "eyebrow": "Clubs & associations",
+      "title": "Votre demande est plus spécifique ?",
       "price": "Sur devis",
-      "description": "Nous intervenons dans votre club pour former tous vos gardiens, toutes équipes confondues.",
-      "bullets": [
-        "Plan annuel sur mesure",
-        "Coach dédié à votre structure",
-        "Reporting mensuel à la direction technique",
-        "Tarif dégressif selon le nombre de gardiens"
-      ],
-      "cta": "Demander un devis"
+      "description": "Contactez-nous pour un devis, selon le nombre de gardiens et la fréquence souhaitée.",
+      "cta": "Nous contacter"
+    },
+    "compare": {
+      "eyebrow": "Comparatif",
+      "title": "Séance, Tour ou Saison ?",
+      "headers": {
+        "feature": "",
+        "single": "Séance",
+        "tour": "Tour",
+        "season": "Saison"
+      },
+      "rows": {
+        "sessions": "Nombre de séances",
+        "commitment": "Engagement",
+        "youthPrice": "Prix jeunes (10–18 ans)",
+        "adultPrice": "Prix adultes (18+)",
+        "perSession": "Prix indicatif / séance",
+        "discount": "Économie vs séance"
+      },
+      "values": {
+        "single": ["1", "Aucun", "45 CHF", "50 CHF", "45–50 CHF", "Aucune"],
+        "tour": [
+          "16 ou 18",
+          "Demi-saison (un Tour)",
+          "690 à 775 CHF",
+          "770 à 865 CHF",
+          "≈ 43–48 CHF",
+          "≈ 4 %"
+        ],
+        "season": [
+          "34",
+          "Saison complète",
+          "1 360 CHF",
+          "1 496 CHF",
+          "≈ 40–44 CHF",
+          "−11 à −12 %"
+        ]
+      }
     },
     "faq": {
       "eyebrow": "FAQ tarifs",
       "title": "Vos questions sur les formules",
       "items": {
         "trial": {
-          "question": "Y a-t-il une séance d'essai gratuite ?",
-          "answer": "Oui. Toute première séance est offerte, sans engagement. Il suffit de nous contacter pour réserver un créneau adapté à l'âge de votre gardien."
+          "question": "Puis-je essayer avant de m'engager ?",
+          "answer": "Oui. La séance découverte (45 CHF pour les jeunes, 50 CHF pour les adultes) permet de tester une séance complète sans aucun engagement."
         },
         "siblings": {
           "question": "Existe-t-il une remise frères et sœurs ?",
-          "answer": "Oui, nous appliquons −10 % à partir du deuxième enfant inscrit dans la formule annuelle ou mensuelle."
+          "answer": "Oui, une remise est automatique à partir du deuxième enfant inscrit sur une formule Tour ou Saison."
         },
         "payment": {
           "question": "Quels moyens de paiement acceptez-vous ?",
           "answer": "Carte bancaire et TWINT en ligne via notre plateforme, ou QR-facture suisse pour un règlement par virement."
         },
         "cancel": {
-          "question": "Comment résilier la formule mensuelle ?",
-          "answer": "Un simple email avant le 25 du mois suffit, sans frais. La résiliation prend effet à la fin du mois en cours."
+          "question": "Comment fonctionne l'engagement ?",
+          "answer": "L'engagement se fait par Tour (une demi-saison de 16 ou 18 séances) ou par saison complète (34 séances). À la fin d'un Tour, vous êtes libre de continuer ou non. La séance découverte, elle, est sans aucun engagement."
         },
         "club": {
           "question": "Comment fonctionne le contrat club ?",
-          "answer": "Nous discutons d'abord de vos besoins (nombre de gardiens, fréquence, lieu) puis nous établissons un devis personnalisé. La prestation peut commencer dès le mois suivant."
+          "answer": "Nos formules Tour et Saison sont déjà adaptées aux clubs et associations : il suffit d'inscrire vos gardiens. Un rabais volume, calculé automatiquement selon le nombre de gardiens inscrits, s'applique. Pour un besoin plus spécifique, contactez-nous pour un devis sur mesure."
         }
       }
+    },
+    "banner": {
+      "eyebrow": "Inscriptions saison",
+      "text": "Clubs, associations et parents peuvent déjà choisir leur pack pour la saison. Un rabais volume est calculé automatiquement selon le nombre de gardiens inscrits."
     }
   },
   "AcademyPage": {
     "metaTitle": "L'académie",
-    "metaDescription": "Découvrez Goalkeeper Academy : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais valaisan.",
+    "metaDescription": "Découvrez Goalkeeper Academy : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais.",
     "hero": {
       "eyebrow": "L'académie",
       "title": "Spécialistes du gardien depuis la base",
-      "subtitle": "Une structure indépendante, pensée par et pour les gardiens, au cœur du Chablais valaisan.",
+      "subtitle": "Une structure indépendante, pensée par et pour les gardiens, au cœur du Chablais.",
       "imageAlt": "Vue des Dents du Midi depuis le Chablais"
     },
     "mission": {
@@ -1041,9 +1362,18 @@
       "title": "Donner à chaque gardien les outils pour s'exprimer",
       "intro": "Goalkeeper Academy est née d'un constat simple : dans la majorité des clubs, les gardiens reçoivent peu ou pas de formation spécifique. Nous comblons ce vide avec une pédagogie structurée, des coachs spécialisés et un suivi dans la durée.",
       "stats": {
-        "keepers": { "value": "60+", "label": "Gardiens formés" },
-        "years": { "value": "8 ans", "label": "D'expérience" },
-        "clubs": { "value": "12", "label": "Clubs partenaires" }
+        "keepers": {
+          "value": "60+",
+          "label": "Gardiens formés"
+        },
+        "years": {
+          "value": "8 ans",
+          "label": "D'expérience"
+        },
+        "clubs": {
+          "value": "12",
+          "label": "Clubs partenaires"
+        }
       }
     },
     "team": {
@@ -1052,14 +1382,14 @@
       "subtitle": "Tous nos entraîneurs ont joué au poste à un niveau compétitif et possèdent une certification fédérale.",
       "members": {
         "head": {
-          "name": "Antoine R.",
-          "role": "Coach principal & fondateur",
-          "bio": "Ancien gardien semi-pro, diplômé Brevet C+ Gardien. 12 ans d'expérience en formation des jeunes."
+          "name": "Gianluca Giannarelli",
+          "role": "Co-fondateur & coach",
+          "bio": "Le poste de gardien a toujours été sa passion. Formé au Martigny-Sport, il atteint la 1ère équipe et y passe 5 ans en LNB. Après une blessure et la relégation du club, il défend ensuite les cages du FC Leytron, du FC La Combe puis du FC Fully. Il obtient son diplôme d'entraîneur de niveau 2 à Macolin. Il a aussi créé le tournoi Giana Stop & Shoot, afin de mettre en avant les gardiens lors d'un évènement qui leur est spécifiquement dédié."
         },
         "youth": {
-          "name": "Maxime L.",
-          "role": "Coach U6–U10",
-          "bio": "Spécialiste de l'éveil moteur et de l'apprentissage par le jeu pour les plus jeunes."
+          "name": "Arthur Chazelle",
+          "role": "Co-fondateur & coach",
+          "bio": "Gardien de but depuis son plus jeune âge, il accélère sa formation en intégrant le Dijon FCO à 16 ans. Il y évolue plus de quatre ans et découvre le groupe professionnel, en Ligue 2 puis en Ligue 1. Il a également défendu les cages du FC Monthey, du FC Aigle et de l'Azzuri en première ligue. La transmission fait partie de son ADN."
         },
         "perf": {
           "name": "Julien V.",
@@ -1092,16 +1422,12 @@
     },
     "facilities": {
       "eyebrow": "Infrastructures",
-      "title": "Des terrains pensés pour les gardiens",
-      "subtitle": "Nous nous entraînons sur plusieurs sites du Chablais selon la saison et le groupe d'âge.",
+      "title": "Notre lieu d’entraînement",
+      "subtitle": "En partenariat avec le FC Aigle, un site central et facile d’accès dans le Chablais.",
       "items": {
         "outdoor": {
-          "title": "Terrains extérieurs",
-          "description": "Pelouse naturelle et synthétique homologuées, à Monthey et Vouvry."
-        },
-        "indoor": {
-          "title": "Salles couvertes",
-          "description": "Sols sportifs en hiver pour garder l'intensité quel que soit le temps."
+          "title": "Terrain de la Mêlée",
+          "description": "En partenariat avec le FC Aigle, les entraînements de la saison 2026-2027 ont lieu sur le terrain de la Mêlée, juste à côté de la sortie d'autoroute. Un point central du Chablais, pour que l'organisation se passe au mieux. Un vestiaire et des douches sont à disposition, pour un plus grand confort après l'entraînement."
         },
         "gear": {
           "title": "Matériel pro",
@@ -1126,6 +1452,152 @@
           "description": "Aimer le poste de gardien, c'est la base. On entretient cette flamme à chaque séance."
         }
       }
+    },
+    "recruit": {
+      "eyebrow": "Rejoindre l'équipe",
+      "title": "On recherche des coachs de gardiens",
+      "subtitle": "Tu es passionné·e par le poste et tu veux transmettre ? Écris-nous, on serait ravis d'échanger avec toi.",
+      "cta": "Nous contacter"
+    }
+  },
+  "Inscription": {
+    "metaTitle": "Réserver votre saison",
+    "metaDescription": "Configurez votre inscription en quelques étapes : profil, formule, gardiens et coordonnées.",
+    "eyebrow": "Inscription",
+    "title": "Réservez votre saison",
+    "subtitle": "En quelques étapes, configurez et enregistrez votre inscription. Vous la retrouvez ensuite dans votre espace.",
+    "steps": {
+      "profile": "Profil",
+      "formula": "Gardiens",
+      "details": "Coordonnées",
+      "summary": "Récapitulatif"
+    },
+    "step1": {
+      "title": "Vous êtes…"
+    },
+    "step2": {
+      "title": "Votre formule",
+      "audienceLabel": "Pour qui ?",
+      "formulaLabel": "Quelle formule ?",
+      "privateTitle": "Vos gardiens & formules",
+      "orgTitle": "Vos groupes",
+      "subtitle": "Choisissez une formule par gardien. Ajoutez-en autant que nécessaire.",
+      "addGroup": "Ajouter un groupe",
+      "removeGroup": "Retirer le groupe"
+    },
+    "step3": {
+      "title": "Détails de l'inscription",
+      "keepersTitle": "Vos gardiens",
+      "addKeeper": "Ajouter un gardien",
+      "removeKeeper": "Retirer",
+      "contactTitle": "Vos coordonnées",
+      "orgTitle": "Le club & le contact",
+      "contactPerson": "Personne de contact"
+    },
+    "step4": {
+      "title": "Récapitulatif"
+    },
+    "profiles": {
+      "private": {
+        "label": "Parent / Gardien",
+        "desc": "Une inscription individuelle ou pour vos enfants."
+      },
+      "club": {
+        "label": "Club ou association",
+        "desc": "Pour un club, une association ou une structure."
+      }
+    },
+    "audiences": {
+      "youth": "Jeunes (10–18 ans)",
+      "adult": "Adultes & séniors"
+    },
+    "formulas": {
+      "single": {
+        "label": "Séance découverte",
+        "hint": "Une séance, sans engagement",
+        "totalHint": "la séance"
+      },
+      "tour1": {
+        "label": "Tour 1",
+        "hint": "Demi-saison · 16 séances",
+        "totalHint": "le Tour 1 (16 séances)"
+      },
+      "tour2": {
+        "label": "Tour 2",
+        "hint": "Demi-saison · 18 séances",
+        "totalHint": "le Tour 2 (18 séances)"
+      },
+      "season": {
+        "label": "Saison complète",
+        "hint": "34 séances sur la saison",
+        "totalHint": "la saison (34 séances)"
+      }
+    },
+    "categories": {
+      "U10": "U10",
+      "U13": "U13",
+      "U15": "U15",
+      "U18": "U18",
+      "adult": "Adulte / Sénior"
+    },
+    "fields": {
+      "org": "Nom du club / de l'association",
+      "count": "Nombre de gardiens",
+      "notes": "Demande spécifique",
+      "optional": "facultatif",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "birthYear": "Année de naissance",
+      "category": "Catégorie",
+      "email": "Email",
+      "phone": "Téléphone",
+      "keeper": "Gardien",
+      "formula": "Formule"
+    },
+    "recap": {
+      "profile": "Profil",
+      "formula": "Formule",
+      "keepers": "Gardiens",
+      "discount": "Rabais volume",
+      "estimate": "Prix indicatif",
+      "contact": "Contact",
+      "note": "Prix indicatif, hors rabais spécifiques. Nous confirmons le montant final et les modalités de paiement après réception de votre demande.",
+      "group": "Groupe",
+      "total": "Total"
+    },
+    "perSession": "séance",
+    "nav": {
+      "back": "Retour",
+      "next": "Continuer",
+      "send": "Envoyer la demande",
+      "pay": "Procéder au paiement",
+      "confirm": "Confirmer l inscription"
+    },
+    "success": {
+      "title": "Inscription enregistrée !",
+      "body": "Merci ! Votre inscription est bien enregistrée. Vous la retrouvez dans votre espace, rubrique Mes factures. Le règlement vous sera communiqué (ou se fera en ligne dès que le paiement sera activé).",
+      "backHome": "Retour à l'accueil",
+      "invoiceRef": "Référence de facture :",
+      "viewInvoices": "Voir mes factures"
+    },
+    "mail": {
+      "subject": "Demande d'inscription Goalkeeper Academy"
+    },
+    "from": "dès",
+    "paid": {
+      "title": "Paiement reçu !",
+      "body": "Merci ! Votre inscription est confirmée. Vous recevez un email de confirmation. À très vite sur le terrain !"
+    },
+    "auth": {
+      "title": "Connexion requise pour finaliser",
+      "body": "Pour enregistrer votre inscription et la suivre dans votre espace, connectez-vous ou créez un compte. Vos saisies restent ici le temps de vous connecter dans un autre onglet.",
+      "signIn": "Se connecter",
+      "signUp": "Créer un compte",
+      "required": "Vous devez être connecté pour finaliser l inscription.",
+      "bodyShort": "Un compte est nécessaire pour finaliser une inscription."
+    },
+    "errors": {
+      "generic": "Une erreur est survenue. Réessayez."
     }
   }
 }

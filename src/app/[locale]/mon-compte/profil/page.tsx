@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/forms/profile-form";
+import { ChangePasswordForm } from "@/components/forms/change-password-form";
 import { Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
@@ -27,6 +28,7 @@ export default async function ProfilePage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Account.profile");
+  const tp = await getTranslations("Account.password");
 
   const supabase = await createSupabaseServerClient();
   const {
@@ -35,13 +37,21 @@ export default async function ProfilePage({ params }: Props) {
 
   if (!user) notFound();
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", user.id)
-    .maybeSingle<Profile>();
+  const [{ data: profile }, { data: coach }] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle<Profile>(),
+    supabase
+      .from("coaches")
+      .select("id")
+      .eq("profile_id", user.id)
+      .maybeSingle(),
+  ]);
 
   if (!profile) notFound();
+  const isCoach = Boolean(coach);
 
   return (
     <>
@@ -61,13 +71,21 @@ export default async function ProfilePage({ params }: Props) {
       </section>
 
       <section className="bg-white py-12 lg:py-16">
-        <div className="container max-w-2xl">
+        <div className="container flex max-w-2xl flex-col gap-8">
           <div className="rounded-2xl border border-grey-100 bg-white p-6 shadow-sm sm:p-8">
             <p className="mb-6 text-sm text-grey-500">
               {t("emailLabel")}{" "}
               <strong className="text-navy">{user.email}</strong>
             </p>
-            <ProfileForm profile={profile} />
+            <ProfileForm profile={profile} isCoach={isCoach} />
+          </div>
+
+          <div className="rounded-2xl border border-grey-100 bg-white p-6 shadow-sm sm:p-8">
+            <h2 className="mb-1 font-anton text-xl uppercase text-navy">
+              {tp("title")}
+            </h2>
+            <p className="mb-6 text-sm text-grey-500">{tp("subtitle")}</p>
+            <ChangePasswordForm />
           </div>
         </div>
       </section>

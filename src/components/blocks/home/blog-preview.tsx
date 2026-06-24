@@ -66,7 +66,7 @@ export async function HomeBlogPreview() {
                 <h3 className="font-anton text-xl uppercase text-navy">
                   {t(`items.${key}.title`)}
                 </h3>
-                <p className="flex-1 text-sm text-grey-500">
+                <p className="flex-1 text-justify text-sm text-grey-500">
                   {t(`items.${key}.excerpt`)}
                 </p>
                 <Link

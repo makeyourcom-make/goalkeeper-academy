@@ -6,6 +6,10 @@ import {
   Baby,
   Receipt,
   CalendarDays,
+  CalendarRange,
+  Dumbbell,
+  Wallet,
+  Calculator,
 } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
@@ -49,16 +53,24 @@ export default async function AdminLayout({ children, params }: Props) {
       | "/admin"
       | "/admin/parents"
       | "/admin/enfants"
+      | "/admin/entraineurs"
+      | "/admin/planning"
       | "/admin/factures"
-      | "/admin/stages";
+      | "/admin/stages"
+      | "/admin/charges"
+      | "/admin/comptabilite";
     label: string;
     Icon: typeof LayoutDashboard;
   }[] = [
     { href: "/admin", label: t("dashboard"), Icon: LayoutDashboard },
     { href: "/admin/parents", label: t("parents"), Icon: Users },
     { href: "/admin/enfants", label: t("children"), Icon: Baby },
-    { href: "/admin/factures", label: t("invoices"), Icon: Receipt },
+    { href: "/admin/entraineurs", label: t("coaches"), Icon: Dumbbell },
+    { href: "/admin/planning", label: t("planning"), Icon: CalendarRange },
     { href: "/admin/stages", label: t("camps"), Icon: CalendarDays },
+    { href: "/admin/factures", label: t("invoices"), Icon: Receipt },
+    { href: "/admin/charges", label: t("expenses"), Icon: Wallet },
+    { href: "/admin/comptabilite", label: t("accounting"), Icon: Calculator },
   ];
 
   return (

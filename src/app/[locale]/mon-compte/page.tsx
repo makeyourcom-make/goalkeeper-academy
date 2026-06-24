@@ -51,14 +51,20 @@ export default async function AccountPage({ params }: Props) {
   } = await supabase.auth.getUser();
 
   let displayName = user?.email?.split("@")[0] ?? "";
+  let role = "parent";
   if (user) {
     const { data: profile } = await supabase
       .from("profiles")
-      .select("first_name")
+      .select("first_name, role")
       .eq("id", user.id)
       .maybeSingle();
     if (profile?.first_name) displayName = profile.first_name;
+    if (profile?.role) role = profile.role;
   }
+  // What to call the people managed by this account.
+  const memberKey =
+    role === "club" ? "players" : role === "parent" ? "children" : "keepers";
+  const members = t(`terms.${memberKey}`);
 
   // Counts (RLS-scoped)
   const [{ count: childrenCount }, { count: invoicesCount }] =
@@ -83,8 +89,8 @@ export default async function AccountPage({ params }: Props) {
           <h1 className="font-anton text-h1 uppercase leading-tight text-navy">
             {t("hero.greeting", { name: displayName })}
           </h1>
-          <p className="max-w-2xl text-lg text-grey-500">
-            {t("hero.subtitle")}
+          <p className="text-lg text-grey-500">
+            {t("hero.subtitle", { members })}
           </p>
           <div className="flex flex-wrap gap-3">
             <Button asChild variant="ghost">
@@ -120,7 +126,7 @@ export default async function AccountPage({ params }: Props) {
                   {t(`cards.${key}.title`)}
                 </h2>
                 <p className="text-sm text-grey-700">
-                  {t(`cards.${key}.description`)}
+                  {t(`cards.${key}.description`, { members })}
                 </p>
                 <p className="mt-2 text-xs text-grey-500">
                   {count > 0

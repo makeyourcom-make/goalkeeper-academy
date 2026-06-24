@@ -22,7 +22,23 @@ const PROFILE_SCHEMA = z.object({
     .transform((v) => (v && v.length > 0 ? v : null)),
   language: z.enum(["fr", "en"]),
   marketing_consent: z.preprocess((v) => v === "on" || v === true, z.boolean()),
+  iban: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .transform((v) => (v ? v.replace(/\s+/g, "").toUpperCase() : ""))
+    .refine((v) => v === "" || /^CH[0-9A-Z]{17,32}$/.test(v), {
+      message: "errorIban",
+    }),
 });
+
+const MAX_AVATAR_BYTES = 4 * 1024 * 1024; // 4 MB
+const AVATAR_EXT: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
 
 export async function updateProfile(
   _prev: ProfileActionState,
@@ -34,10 +50,14 @@ export async function updateProfile(
     phone: formData.get("phone") ?? "",
     language: formData.get("language"),
     marketing_consent: formData.get("marketing_consent"),
+    iban: formData.get("iban") ?? "",
   });
 
   if (!parsed.success) {
-    return { status: "error", message: "errorValidation" };
+    const issue = parsed.error.issues[0];
+    const message =
+      issue?.message === "errorIban" ? "errorIban" : "errorValidation";
+    return { status: "error", message };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -56,6 +76,40 @@ export async function updateProfile(
     language: parsed.data.language,
     marketing_consent: parsed.data.marketing_consent,
   };
+
+  // IBAN is only relevant for coaches (used to pay their sessions).
+  const { data: coach } = await supabase
+    .from("coaches")
+    .select("id")
+    .eq("profile_id", user.id)
+    .maybeSingle();
+  if (coach) {
+    update.iban = parsed.data.iban || null;
+  }
+
+  // Optional avatar upload to the public "avatars" bucket.
+  const avatar = formData.get("avatar");
+  if (avatar instanceof File && avatar.size > 0) {
+    if (avatar.size > MAX_AVATAR_BYTES) {
+      return { status: "error", message: "errorAvatarSize" };
+    }
+    const ext = AVATAR_EXT[avatar.type];
+    if (!ext) {
+      return { status: "error", message: "errorAvatarType" };
+    }
+    const path = `${user.id}/avatar.${ext}`;
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(path, avatar, { upsert: true, contentType: avatar.type });
+    if (uploadError) {
+      return { status: "error", message: "errorAvatarUpload" };
+    }
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("avatars").getPublicUrl(path);
+    // Cache-bust so a re-upload at the same path refreshes immediately.
+    update.avatar_url = `${publicUrl}?v=${Date.now()}`;
+  }
 
   const { error } = await supabase
     .from("profiles")

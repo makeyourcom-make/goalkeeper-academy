@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "Reservation" });
   return {
     title: camp
-      ? `${t("metaTitle")} — ${camp.title[locale === "en" ? "en" : "fr"]}`
+      ? `${t("metaTitle")} : ${camp.title[locale === "en" ? "en" : "fr"]}`
       : t("metaTitle"),
     robots: { index: false, follow: false },
   };

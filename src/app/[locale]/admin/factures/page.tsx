@@ -25,6 +25,10 @@ type InvoiceRow = {
     last_name: string | null;
     email: string;
   } | null;
+  registrations: {
+    formula: string;
+    children: { first_name: string; last_name: string } | null;
+  }[];
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -50,7 +54,7 @@ export default async function AdminInvoicesPage({ params }: Props) {
   const { data: invoices } = await supabase
     .from("invoices")
     .select(
-      "id, invoice_number, type, amount_cents, currency, status, issued_at, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email)",
+      "id, invoice_number, type, amount_cents, currency, status, issued_at, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name))",
     )
     .order("issued_at", { ascending: false })
     .returns<InvoiceRow[]>();
@@ -114,10 +118,22 @@ export default async function AdminInvoicesPage({ params }: Props) {
                       {invoice.invoice_number}
                     </td>
                     <td className="px-4 py-3 text-grey-700">
-                      {invoice.profile
-                        ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
-                          invoice.profile.email
-                        : "—"}
+                      <div>
+                        {invoice.profile
+                          ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
+                            invoice.profile.email
+                          : "—"}
+                      </div>
+                      {invoice.registrations?.length > 0 && (
+                        <div className="mt-0.5 text-xs text-grey-500">
+                          {invoice.registrations
+                            .map((r) =>
+                              `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
+                            )
+                            .filter(Boolean)
+                            .join(", ")}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-grey-700">
                       {t(`types.${invoice.type}`)}

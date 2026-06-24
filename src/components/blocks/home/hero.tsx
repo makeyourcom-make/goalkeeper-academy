@@ -33,8 +33,10 @@ export async function HomeHero() {
         </h1>
         <p className="max-w-2xl text-lg text-white/80">{t("subtitle")}</p>
         <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
-          <Button asChild size="lg">
-            <Link href="/contact">
+          <Button asChild size="lg" className="px-10">
+            <Link
+              href={{ pathname: "/reserver", query: { formule: "season" } }}
+            >
               {t("ctaPrimary")} <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

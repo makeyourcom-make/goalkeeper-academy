@@ -6,7 +6,6 @@ import {
   Brain,
   Target,
   Eye,
-  Building2,
   Trees,
   Wrench,
   Heart,
@@ -16,6 +15,8 @@ import {
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -40,9 +41,8 @@ const PILLARS: {
   { key: "mental", Icon: Brain },
 ];
 
-const FACILITIES: { key: "outdoor" | "indoor" | "gear"; Icon: LucideIcon }[] = [
+const FACILITIES: { key: "outdoor" | "gear"; Icon: LucideIcon }[] = [
   { key: "outdoor", Icon: Trees },
-  { key: "indoor", Icon: Building2 },
   { key: "gear", Icon: Wrench },
 ];
 
@@ -55,15 +55,13 @@ const VALUES: {
   { key: "passion", Icon: Heart },
 ];
 
-const TEAM = ["head", "youth", "perf"] as const;
+const TEAM = ["head", "youth"] as const;
 
 const STATS = ["keepers", "years", "clubs"] as const;
 
 const COACH_IMAGES: Record<(typeof TEAM)[number], string> = {
-  head: "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=800&q=80",
-  youth:
-    "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?w=800&q=80",
-  perf: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=800&q=80",
+  head: "/team/gianluca-giannarelli.jpeg",
+  youth: "/team/arthur-chazelle.jpg",
 };
 
 export default async function AcademiePage({ params }: Props) {
@@ -108,7 +106,7 @@ export default async function AcademiePage({ params }: Props) {
             <h2 className="font-anton text-h2 uppercase text-navy">
               {t("mission.title")}
             </h2>
-            <p className="text-grey-700">{t("mission.intro")}</p>
+            <p className="text-justify text-grey-700">{t("mission.intro")}</p>
             <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-grey-100 pt-6">
               {STATS.map((key) => (
                 <div key={key} className="flex flex-col">
@@ -142,18 +140,17 @@ export default async function AcademiePage({ params }: Props) {
             <h2 className="font-anton text-h2 uppercase text-navy">
               {t("team.title")}
             </h2>
-            <p className="text-grey-500">{t("team.subtitle")}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
             {TEAM.map((key) => (
               <article
                 key={key}
                 className="flex flex-col overflow-hidden rounded-xl bg-white shadow-md"
               >
-                <div className="relative aspect-[4/3]">
+                <div className="relative aspect-square">
                   <Image
                     src={COACH_IMAGES[key]}
-                    alt=""
+                    alt={t(`team.members.${key}.name`)}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
@@ -166,13 +163,27 @@ export default async function AcademiePage({ params }: Props) {
                   <p className="text-sm font-semibold text-orange">
                     {t(`team.members.${key}.role`)}
                   </p>
-                  <p className="text-sm text-grey-700">
+                  <p className="text-justify text-sm text-grey-700">
                     {t(`team.members.${key}.bio`)}
                   </p>
                 </div>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Recruitment */}
+      <section className="bg-navy py-16 text-white lg:py-20">
+        <div className="container flex flex-col items-center gap-5 text-center">
+          <Badge variant="orange">{t("recruit.eyebrow")}</Badge>
+          <h2 className="max-w-2xl text-balance font-anton text-h2 uppercase text-white">
+            {t("recruit.title")}
+          </h2>
+          <p className="max-w-2xl text-white/80">{t("recruit.subtitle")}</p>
+          <Button asChild size="lg">
+            <Link href="/contact">{t("recruit.cta")}</Link>
+          </Button>
         </div>
       </section>
 
@@ -197,7 +208,7 @@ export default async function AcademiePage({ params }: Props) {
                 <h3 className="font-anton text-xl uppercase text-navy">
                   {t(`method.pillars.${key}.title`)}
                 </h3>
-                <p className="text-sm text-grey-700">
+                <p className="text-justify text-sm text-grey-700">
                   {t(`method.pillars.${key}.description`)}
                 </p>
               </div>
@@ -216,23 +227,34 @@ export default async function AcademiePage({ params }: Props) {
             </h2>
             <p className="text-grey-500">{t("facilities.subtitle")}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {FACILITIES.map(({ key, Icon }) => (
-              <div
-                key={key}
-                className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-navy/5 text-navy">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h3 className="font-anton text-xl uppercase text-navy">
-                  {t(`facilities.items.${key}.title`)}
-                </h3>
-                <p className="text-sm text-grey-700">
-                  {t(`facilities.items.${key}.description`)}
-                </p>
-              </div>
-            ))}
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-md">
+              <Image
+                src="/venue/terrain-melee.png"
+                alt={t("facilities.items.outdoor.title")}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex flex-col gap-6">
+              {FACILITIES.map(({ key, Icon }) => (
+                <div
+                  key={key}
+                  className="flex flex-col gap-3 rounded-xl bg-white p-6 shadow-md"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-navy/5 text-navy">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <h3 className="font-anton text-xl uppercase text-navy">
+                    {t(`facilities.items.${key}.title`)}
+                  </h3>
+                  <p className="text-justify text-sm text-grey-700">
+                    {t(`facilities.items.${key}.description`)}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -258,7 +280,7 @@ export default async function AcademiePage({ params }: Props) {
                 <h3 className="font-anton text-xl uppercase text-navy">
                   {t(`values.items.${key}.title`)}
                 </h3>
-                <p className="text-grey-700">
+                <p className="text-justify text-grey-700">
                   {t(`values.items.${key}.description`)}
                 </p>
               </div>

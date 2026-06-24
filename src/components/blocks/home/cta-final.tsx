@@ -15,7 +15,11 @@ export async function HomeCtaFinal() {
         <p className="max-w-2xl text-lg text-white/80">{t("subtitle")}</p>
         <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
           <Button asChild size="lg">
-            <Link href="/contact">{t("ctaPrimary")}</Link>
+            <Link
+              href={{ pathname: "/reserver", query: { formule: "season" } }}
+            >
+              {t("ctaPrimary")}
+            </Link>
           </Button>
           <Button
             asChild

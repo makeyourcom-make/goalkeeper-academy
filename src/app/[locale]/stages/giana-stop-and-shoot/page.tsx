@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
-  CalendarDays,
-  MapPin,
-  Trophy,
-  Users,
   Heart,
   GraduationCap,
   Search,
@@ -15,7 +11,6 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -39,16 +34,6 @@ const COMMITMENTS: {
   { key: "values", Icon: Heart },
   { key: "coaching", Icon: GraduationCap },
   { key: "spotting", Icon: Search },
-];
-
-const INFO_ITEMS: {
-  key: "date" | "location" | "ages" | "registration";
-  Icon: LucideIcon;
-}[] = [
-  { key: "date", Icon: CalendarDays },
-  { key: "location", Icon: MapPin },
-  { key: "ages", Icon: Users },
-  { key: "registration", Icon: Trophy },
 ];
 
 export default async function GianaPage({ params }: Props) {
@@ -94,7 +79,7 @@ export default async function GianaPage({ params }: Props) {
             <h2 className="font-anton text-h2 uppercase text-navy">
               {t("about.title")}
             </h2>
-            <p className="text-grey-700">{t("about.intro")}</p>
+            <p className="text-justify text-grey-700">{t("about.intro")}</p>
             <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-grey-100 pt-6">
               {STATS.map((key) => (
                 <div key={key} className="flex flex-col">
@@ -141,7 +126,7 @@ export default async function GianaPage({ params }: Props) {
                 <h3 className="font-anton text-xl uppercase text-navy">
                   {t(`partnership.items.${key}.title`)}
                 </h3>
-                <p className="text-sm text-grey-700">
+                <p className="text-justify text-sm text-grey-700">
                   {t(`partnership.items.${key}.description`)}
                 </p>
               </div>
@@ -150,72 +135,19 @@ export default async function GianaPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Practical info */}
+      {/* Official site */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="container max-w-4xl">
-          <div className="mb-10 flex flex-col items-center gap-3 text-center">
-            <Badge variant="muted">{t("info.eyebrow")}</Badge>
-            <h2 className="font-anton text-h2 uppercase text-navy">
-              {t("info.title")}
-            </h2>
-          </div>
-          <dl className="grid gap-4 sm:grid-cols-2">
-            {INFO_ITEMS.map(({ key, Icon }) => (
-              <div
-                key={key}
-                className="flex items-start gap-4 rounded-xl border border-grey-100 bg-white p-6 shadow-sm"
-              >
-                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-orange/10 text-orange">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <dt className="text-sm text-grey-500">
-                    {t(`info.items.${key}.label`)}
-                  </dt>
-                  <dd className="font-semibold text-navy">
-                    {t(`info.items.${key}.value`)}
-                  </dd>
-                </div>
-              </div>
-            ))}
-          </dl>
-          <div className="mt-8 flex justify-center">
-            <a
-              href={externalUrl}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-orange hover:text-orange-600"
-            >
-              {t("info.external.label")}
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-navy py-20 text-white lg:py-24">
-        <div className="container flex flex-col items-center gap-6 text-center">
-          <h2 className="max-w-3xl text-balance font-anton text-h2 uppercase text-white lg:text-h1">
-            {t("cta.title")}
+        <div className="container flex max-w-3xl flex-col items-center gap-4 text-center">
+          <Badge variant="muted">{t("info.eyebrow")}</Badge>
+          <h2 className="font-anton text-h2 uppercase text-navy">
+            {t("info.title")}
           </h2>
-          <p className="max-w-2xl text-lg text-white/80">{t("cta.subtitle")}</p>
-          <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
-            <Button asChild size="lg">
-              <a href={externalUrl} target="_blank" rel="noreferrer noopener">
-                {t("cta.ctaPrimary")}
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href="/contact">{t("cta.ctaSecondary")}</Link>
-            </Button>
-          </div>
+          <Button asChild className="mt-2">
+            <a href={externalUrl} target="_blank" rel="noreferrer noopener">
+              {t("info.external.label")}
+              <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
         </div>
       </section>
     </>

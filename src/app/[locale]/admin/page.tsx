@@ -30,7 +30,7 @@ async function fetchCounts() {
     supabase
       .from("profiles")
       .select("id", { count: "exact", head: true })
-      .eq("role", "parent"),
+      .in("role", ["parent", "club"]),
     supabase.from("children").select("id", { count: "exact", head: true }),
     supabase.from("invoices").select("id", { count: "exact", head: true }),
     supabase

@@ -17,6 +17,8 @@ export type Profile = {
   role: ProfileRole;
   language: ProfileLanguage;
   marketing_consent: boolean;
+  iban: string | null;
+  avatar_url: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -24,7 +26,13 @@ export type Profile = {
 export type ProfileUpdate = Partial<
   Pick<
     Profile,
-    "first_name" | "last_name" | "phone" | "marketing_consent" | "language"
+    | "first_name"
+    | "last_name"
+    | "phone"
+    | "marketing_consent"
+    | "language"
+    | "iban"
+    | "avatar_url"
   >
 >;
 
@@ -48,6 +56,7 @@ export type Child = {
   dominant_hand: DominantHand | null;
   medical_notes: string | null;
   photo_consent: boolean;
+  photo_url: string | null;
   registration_type: RegistrationType | null;
   subscription_status: SubscriptionStatus;
   registered_at: string;
@@ -70,6 +79,7 @@ export type ChildUpdate = Partial<
     | "dominant_hand"
     | "medical_notes"
     | "photo_consent"
+    | "photo_url"
     | "registration_type"
   >
 >;

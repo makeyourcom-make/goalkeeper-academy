@@ -116,7 +116,7 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                         {post.title}
                       </Link>
                     </h2>
-                    <p className="flex-1 text-sm text-grey-700">
+                    <p className="flex-1 text-justify text-sm text-grey-700">
                       {post.excerpt}
                     </p>
                     <Link

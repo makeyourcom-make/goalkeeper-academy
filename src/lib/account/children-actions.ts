@@ -5,11 +5,45 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type ChildActionState = {
   status: "idle" | "success" | "error";
   message: string;
 };
+
+const MAX_PHOTO_BYTES = 4 * 1024 * 1024; // 4 MB
+const PHOTO_EXT: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+};
+
+// Uploads a keeper photo into the public "avatars" bucket under the parent's
+// own folder, then returns its public URL. Returns an error message key on
+// failure, or null when there is simply no file to upload.
+async function uploadChildPhoto(
+  supabase: SupabaseClient,
+  userId: string,
+  childId: string,
+  file: FormDataEntryValue | null,
+): Promise<{ url?: string; error?: string }> {
+  if (!(file instanceof File) || file.size === 0) return {};
+  if (file.size > MAX_PHOTO_BYTES) return { error: "errorPhotoSize" };
+  const ext = PHOTO_EXT[file.type];
+  if (!ext) return { error: "errorPhotoType" };
+
+  const path = `${userId}/children/${childId}.${ext}`;
+  const { error } = await supabase.storage
+    .from("avatars")
+    .upload(path, file, { upsert: true, contentType: file.type });
+  if (error) return { error: "errorPhotoUpload" };
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage.from("avatars").getPublicUrl(path);
+  return { url: `${publicUrl}?v=${Date.now()}` };
+}
 
 const CHILD_LEVELS = [
   "debutant",
@@ -75,15 +109,35 @@ export async function createChild(
   } = await supabase.auth.getUser();
   if (!user) return { status: "error", message: "errorUnauthenticated" };
 
-  const { error } = await supabase.from("children").insert({
-    parent_id: user.id,
-    club_id: null,
-    registration_type: null,
-    ...parsed.data,
-  });
+  const { data: created, error } = await supabase
+    .from("children")
+    .insert({
+      parent_id: user.id,
+      club_id: null,
+      registration_type: null,
+      ...parsed.data,
+    })
+    .select("id")
+    .single();
 
-  if (error) {
+  if (error || !created) {
     return { status: "error", message: "errorGeneric" };
+  }
+
+  const photo = await uploadChildPhoto(
+    supabase,
+    user.id,
+    created.id,
+    formData.get("photo"),
+  );
+  if (photo.error) {
+    return { status: "error", message: photo.error };
+  }
+  if (photo.url) {
+    await supabase
+      .from("children")
+      .update({ photo_url: photo.url })
+      .eq("id", created.id);
   }
 
   const locale = String(formData.get("locale") ?? "fr");
@@ -109,9 +163,19 @@ export async function updateChild(
   } = await supabase.auth.getUser();
   if (!user) return { status: "error", message: "errorUnauthenticated" };
 
+  const photo = await uploadChildPhoto(
+    supabase,
+    user.id,
+    id,
+    formData.get("photo"),
+  );
+  if (photo.error) {
+    return { status: "error", message: photo.error };
+  }
+
   const { error } = await supabase
     .from("children")
-    .update(parsed.data)
+    .update(photo.url ? { ...parsed.data, photo_url: photo.url } : parsed.data)
     .eq("id", id);
 
   if (error) {

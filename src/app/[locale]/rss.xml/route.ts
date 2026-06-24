@@ -28,7 +28,7 @@ export async function GET(
   const posts = getAllPosts(locale);
 
   const channelTitle =
-    locale === "en" ? "Goalkeeper Academy — Blog" : "Goalkeeper Academy — Blog";
+    locale === "en" ? "Goalkeeper Academy Blog" : "Blog Goalkeeper Academy";
   const channelDescription =
     locale === "en"
       ? "Tips, analysis and behind-the-scenes goalkeeper training stories from Goalkeeper Academy."

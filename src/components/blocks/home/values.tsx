@@ -18,9 +18,9 @@ export async function HomeValues() {
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="container">
-        <div className="mx-auto mb-14 flex max-w-2xl flex-col items-center gap-3 text-center">
+        <div className="mx-auto mb-14 flex max-w-5xl flex-col items-center gap-3 text-center">
           <Badge variant="muted">{t("eyebrow")}</Badge>
-          <h2 className="font-anton text-h2 uppercase text-navy">
+          <h2 className="font-anton text-h2 uppercase text-navy lg:whitespace-nowrap">
             {t("title")}
           </h2>
         </div>
@@ -37,7 +37,9 @@ export async function HomeValues() {
               <h3 className="font-anton text-h3 uppercase text-navy">
                 {t(`items.${key}.title`)}
               </h3>
-              <p className="text-grey-700">{t(`items.${key}.description`)}</p>
+              <p className="text-justify text-grey-700">
+                {t(`items.${key}.description`)}
+              </p>
             </div>
           ))}
         </div>

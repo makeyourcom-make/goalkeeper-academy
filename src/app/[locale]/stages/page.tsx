@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CalendarDays, MapPin, Users, Clock } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import campsData from "@/data/camps.json";
-
-type Camp = (typeof campsData)[number];
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -23,40 +19,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function formatDateRange(start: string, end: string, locale: string) {
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-  const sameMonth =
-    startDate.getMonth() === endDate.getMonth() &&
-    startDate.getFullYear() === endDate.getFullYear();
-
-  if (sameMonth) {
-    const dayFmt = new Intl.DateTimeFormat(locale, { day: "numeric" });
-    const fullFmt = new Intl.DateTimeFormat(locale, {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-    return `${dayFmt.format(startDate)} – ${fullFmt.format(endDate)}`;
-  }
-
-  const fmt = new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-  return `${fmt.format(startDate)} – ${fmt.format(endDate)}`;
-}
-
 export default async function StagesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("CampsPage");
-  const localeKey = locale === "en" ? "en" : "fr";
-
-  const camps = [...campsData].sort((a, b) =>
-    a.startDate.localeCompare(b.startDate),
-  ) as Camp[];
 
   return (
     <>
@@ -73,96 +39,22 @@ export default async function StagesPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Camps list */}
+      {/* Coming soon */}
       <section className="bg-white py-16 lg:py-20">
         <div className="container">
-          {camps.length === 0 ? (
-            <p className="text-center text-grey-500">{t("list.empty")}</p>
-          ) : (
-            <div className="grid gap-6 md:grid-cols-2">
-              {camps.map((camp) => {
-                const dateRange = formatDateRange(
-                  camp.startDate,
-                  camp.endDate,
-                  locale,
-                );
-                const ageRange = t("list.ageRange", {
-                  min: camp.ageMin,
-                  max: camp.ageMax,
-                });
-                const isFull = camp.spotsLeft === 0;
-                return (
-                  <article
-                    key={camp.slug}
-                    className="flex flex-col overflow-hidden rounded-xl border border-grey-100 bg-white shadow-md transition-shadow hover:shadow-lg"
-                  >
-                    <div className="relative aspect-[16/9]">
-                      <Image
-                        src={camp.image}
-                        alt=""
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
-                      />
-                      <div className="absolute left-4 top-4">
-                        <Badge variant={isFull ? "muted" : "orange"}>
-                          {t("list.spotsLeft", { count: camp.spotsLeft })}
-                        </Badge>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-1 flex-col gap-4 p-6">
-                      <h2 className="font-anton text-h3 uppercase text-navy">
-                        {camp.title[localeKey]}
-                      </h2>
-
-                      <ul className="grid grid-cols-2 gap-3 text-sm text-grey-700">
-                        <li className="flex items-center gap-2">
-                          <CalendarDays className="h-4 w-4 text-orange" />
-                          <span>{dateRange}</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <MapPin className="h-4 w-4 text-orange" />
-                          <span>{camp.location}</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-orange" />
-                          <span>{ageRange}</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <Clock className="h-4 w-4 text-orange" />
-                          <span>{t(`list.format.${camp.format}`)}</span>
-                        </li>
-                      </ul>
-
-                      <p className="text-sm text-grey-700">
-                        {camp.description[localeKey]}
-                      </p>
-
-                      <div className="mt-auto flex items-center justify-between gap-3 pt-2">
-                        <span className="font-anton text-xl text-navy">
-                          {new Intl.NumberFormat(
-                            locale === "en" ? "en-CH" : "fr-CH",
-                            { style: "currency", currency: "CHF" },
-                          ).format(camp.price)}
-                        </span>
-                        <Button asChild variant="primary" size="sm">
-                          <Link
-                            href={{
-                              pathname: "/stages/[slug]",
-                              params: { slug: camp.slug },
-                            }}
-                          >
-                            {t("list.viewDetails")}
-                          </Link>
-                        </Button>
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          )}
+          <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 rounded-2xl border border-grey-100 bg-grey-100/40 px-6 py-16 text-center shadow-sm">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-orange/10 text-orange">
+              <CalendarDays className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <Badge variant="orange">{t("comingSoon.badge")}</Badge>
+            <h2 className="font-anton text-h2 uppercase text-navy">
+              {t("comingSoon.title")}
+            </h2>
+            <p className="text-grey-700">{t("comingSoon.description")}</p>
+            <Button asChild variant="primary">
+              <Link href="/contact">{t("comingSoon.cta")}</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -175,7 +67,9 @@ export default async function StagesPage({ params }: Props) {
               <h2 className="font-anton text-h2 uppercase text-navy">
                 {t("partner.title")}
               </h2>
-              <p className="text-grey-700">{t("partner.description")}</p>
+              <p className="text-justify text-grey-700">
+                {t("partner.description")}
+              </p>
             </div>
             <div className="md:justify-self-end">
               <Button asChild>

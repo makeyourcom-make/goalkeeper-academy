@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
 
 const ITEMS = [
-  { key: "annual", featured: true, href: "/offres" as const },
-  { key: "monthly", featured: false, href: "/offres" as const },
+  { key: "tour", featured: false, href: "/offres" as const },
+  { key: "season", featured: true, href: "/offres" as const },
   { key: "camps", featured: false, href: "/stages" as const },
 ] as const;
 
@@ -48,7 +48,7 @@ export async function HomeOffers() {
                 <p className="mt-2 text-2xl font-semibold text-navy">
                   {t(`items.${key}.price`)}
                 </p>
-                <p className="mt-3 text-sm text-grey-500">
+                <p className="mt-3 text-justify text-sm text-grey-500">
                   {t(`items.${key}.description`)}
                 </p>
                 <ul className="mt-6 flex flex-col gap-2 text-sm text-grey-700">

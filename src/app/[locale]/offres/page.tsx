@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,33 +20,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const PROGRAMS = [
-  { ns: "annual" as const, featured: true },
-  { ns: "monthly" as const, featured: false },
-  { ns: "private" as const, featured: false },
-  { ns: "camps" as const, featured: false },
-  { ns: "club" as const, featured: false },
-];
+const AUDIENCES = ["youth", "adult"] as const;
+
+const FORMULAS = [
+  { key: "single", featured: false },
+  { key: "tour", featured: false },
+  { key: "season", featured: true },
+] as const;
 
 const COMPARE_ROWS = [
   "sessions",
-  "duration",
-  "review",
-  "gear",
-  "video",
+  "commitment",
+  "youthPrice",
+  "adultPrice",
+  "perSession",
   "discount",
 ] as const;
 
-const COMPARE_COLS = ["annual", "monthly", "private", "camps"] as const;
+const COMPARE_COLS = ["single", "tour", "season"] as const;
 
 const FAQ_KEYS = ["trial", "siblings", "payment", "cancel", "club"] as const;
-
-function isYesNo(value: string) {
-  const normalized = value.toLowerCase();
-  if (["oui", "yes"].includes(normalized)) return "yes";
-  if (["non", "no"].includes(normalized)) return "no";
-  return null;
-}
 
 export default async function OffresPage({ params }: Props) {
   const { locale } = await params;
@@ -68,55 +61,106 @@ export default async function OffresPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Programs */}
+      {/* Pricing by audience */}
       <section className="bg-white py-16 lg:py-20">
-        <div className="container grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {PROGRAMS.map(({ ns, featured }) => {
-            const id = t(`${ns}.id`);
-            const bullets = t.raw(`${ns}.bullets`) as string[];
-            return (
-              <article
-                key={ns}
-                id={id}
-                className={cn(
-                  "flex scroll-mt-20 flex-col rounded-xl border bg-white p-8 shadow-md transition-shadow hover:shadow-lg",
-                  featured
-                    ? "border-orange ring-2 ring-orange/20"
-                    : "border-grey-100",
-                )}
-              >
-                <Badge variant={featured ? "orange" : "muted"}>
-                  {t(`${ns}.eyebrow`)}
-                </Badge>
-                <h2 className="mt-4 font-anton text-h3 uppercase text-navy">
-                  {t(`${ns}.title`)}
+        <div className="container flex flex-col gap-16">
+          {/* Season / volume-discount banner */}
+          <div className="flex flex-col items-center gap-3 rounded-2xl border border-orange/30 bg-orange/5 px-6 py-6 text-center">
+            <Badge variant="orange">{t("banner.eyebrow")}</Badge>
+            <p className="max-w-3xl text-sm text-navy md:text-base">
+              {t("banner.text")}
+            </p>
+          </div>
+
+          {AUDIENCES.map((aud) => (
+            <div key={aud} className="flex flex-col gap-8">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-grey-100 pb-4">
+                <h2 className="font-anton text-h2 uppercase text-navy">
+                  {t(`audiences.${aud}.label`)}
                 </h2>
-                <p className="mt-2 text-2xl font-semibold text-navy">
-                  {t(`${ns}.price`)}
-                </p>
-                <p className="mt-3 text-sm text-grey-500">
-                  {t(`${ns}.description`)}
-                </p>
-                <ul className="mt-6 flex flex-1 flex-col gap-2 text-sm text-grey-700">
-                  {bullets.map((bullet) => (
-                    <li key={bullet} className="flex items-start gap-2">
-                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange" />
-                      <span>{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-6">
-                  <Button
-                    asChild
-                    variant={featured ? "primary" : "outline"}
-                    className="w-full"
-                  >
-                    <Link href="/contact">{t(`${ns}.cta`)}</Link>
-                  </Button>
-                </div>
-              </article>
-            );
-          })}
+                <span className="text-sm font-medium uppercase tracking-wide text-orange">
+                  {t(`audiences.${aud}.age`)}
+                </span>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-3">
+                {FORMULAS.map(({ key, featured }) => {
+                  const base = `audiences.${aud}.${key}`;
+                  const bullets = t.raw(`${base}.bullets`) as string[];
+                  return (
+                    <article
+                      key={key}
+                      id={t(`${base}.id`)}
+                      className={cn(
+                        "flex scroll-mt-20 flex-col rounded-xl border bg-white p-8 shadow-md transition-shadow hover:shadow-lg",
+                        featured
+                          ? "border-orange ring-2 ring-orange/20"
+                          : "border-grey-100",
+                      )}
+                    >
+                      <Badge variant={featured ? "orange" : "muted"}>
+                        {t(`${base}.eyebrow`)}
+                      </Badge>
+                      <h3 className="mt-4 font-anton text-h3 uppercase text-navy">
+                        {t(`${base}.title`)}
+                      </h3>
+                      <p className="mt-2 flex items-baseline gap-2">
+                        <span className="text-3xl font-semibold text-navy">
+                          {t(`${base}.price`)}
+                        </span>
+                        <span className="text-sm text-grey-500">
+                          {t(`${base}.unit`)}
+                        </span>
+                      </p>
+                      <p className="mt-3 text-justify text-sm text-grey-500">
+                        {t(`${base}.description`)}
+                      </p>
+                      <ul className="mt-6 flex flex-1 flex-col gap-2 text-sm text-grey-700">
+                        {bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-start gap-2">
+                            <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange" />
+                            <span>{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6">
+                        <Button
+                          asChild
+                          variant={featured ? "primary" : "outline"}
+                          className="w-full"
+                        >
+                          <Link
+                            href={{
+                              pathname: "/reserver",
+                              query: { formule: key, public: aud },
+                            }}
+                          >
+                            {t(`${base}.cta`)}
+                          </Link>
+                        </Button>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+
+          {/* Club band */}
+          <div
+            id={t("club.id")}
+            className="flex scroll-mt-20 flex-col gap-6 rounded-xl border border-navy/15 bg-navy/5 p-8 md:flex-row md:items-center md:justify-between"
+          >
+            <div className="flex flex-col gap-1">
+              <p className="text-lg font-semibold text-navy">
+                {t("club.title")}
+              </p>
+              <p className="max-w-2xl text-grey-700">{t("club.description")}</p>
+            </div>
+            <Button asChild variant="primary" className="flex-shrink-0">
+              <Link href="/contact">{t("club.cta")}</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -162,25 +206,12 @@ export default async function OffresPage({ params }: Props) {
                     {COMPARE_COLS.map((col) => {
                       const values = t.raw(`compare.values.${col}`) as string[];
                       const value = values[rowIdx] ?? "—";
-                      const yn = isYesNo(value);
                       return (
                         <td
                           key={col}
                           className="px-6 py-4 text-center text-grey-700"
                         >
-                          {yn === "yes" ? (
-                            <Check
-                              className="mx-auto h-5 w-5 text-orange"
-                              aria-label={value}
-                            />
-                          ) : yn === "no" ? (
-                            <X
-                              className="mx-auto h-5 w-5 text-grey-300"
-                              aria-label={value}
-                            />
-                          ) : (
-                            value
-                          )}
+                          {value}
                         </td>
                       );
                     })}
@@ -217,7 +248,7 @@ export default async function OffresPage({ params }: Props) {
                     +
                   </span>
                 </summary>
-                <p className="mt-4 text-grey-700">
+                <p className="mt-4 text-justify text-grey-700">
                   {t(`faq.items.${key}.answer`)}
                 </p>
               </details>

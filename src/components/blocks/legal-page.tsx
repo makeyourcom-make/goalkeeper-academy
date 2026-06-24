@@ -40,7 +40,9 @@ export async function LegalPage({ namespace, locale }: Props) {
 
       <section className="bg-white py-16 lg:py-20">
         <div className="container max-w-3xl">
-          <p className="mb-10 text-lg text-grey-700">{t("intro")}</p>
+          <p className="mb-10 text-justify text-lg text-grey-700">
+            {t("intro")}
+          </p>
 
           <div className="flex flex-col gap-8">
             {sections.map((section) => (
@@ -48,14 +50,10 @@ export async function LegalPage({ namespace, locale }: Props) {
                 <h2 className="font-anton text-h3 uppercase text-navy">
                   {section.heading}
                 </h2>
-                <p className="text-grey-700">{section.body}</p>
+                <p className="text-justify text-grey-700">{section.body}</p>
               </article>
             ))}
           </div>
-
-          <p className="mt-12 rounded-xl border border-grey-300 bg-grey-100 p-5 text-sm text-grey-700">
-            {tCommon("placeholderNotice")}
-          </p>
         </div>
       </section>
     </>

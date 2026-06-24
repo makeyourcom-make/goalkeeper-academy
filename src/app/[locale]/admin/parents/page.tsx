@@ -24,6 +24,7 @@ export default async function AdminParentsPage({ params }: Props) {
   const { data: profiles } = await supabase
     .from("profiles")
     .select("*")
+    .in("role", ["parent", "club"])
     .order("created_at", { ascending: false })
     .returns<Profile[]>();
 

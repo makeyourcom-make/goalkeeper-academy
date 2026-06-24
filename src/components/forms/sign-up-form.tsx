@@ -8,7 +8,7 @@ import { CheckCircle2, Users, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { signUpWithMagicLink, type AuthActionState } from "@/lib/auth/actions";
+import { signUp, type AuthActionState } from "@/lib/auth/actions";
 
 const INITIAL_STATE: AuthActionState = { status: "idle", message: "" };
 
@@ -31,7 +31,7 @@ export function SignUpForm() {
   const t = useTranslations("Auth.signUp");
   const locale = useLocale();
   const [role, setRole] = React.useState<"parent" | "club">("parent");
-  const [state, formAction] = useFormState(signUpWithMagicLink, INITIAL_STATE);
+  const [state, formAction] = useFormState(signUp, INITIAL_STATE);
 
   if (state.status === "success") {
     return (
@@ -40,7 +40,7 @@ export function SignUpForm() {
         className="flex flex-col items-start gap-3 rounded-xl border border-success/30 bg-success/5 p-6"
       >
         <CheckCircle2 className="h-8 w-8 text-success" />
-        <p className="text-grey-700">{t("success")}</p>
+        <p className="text-grey-700">{t(state.message)}</p>
       </div>
     );
   }
@@ -116,6 +116,24 @@ export function SignUpForm() {
           autoComplete="email"
           required
           placeholder={t("emailPlaceholder")}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <label
+          htmlFor="signup-password"
+          className="text-sm font-semibold text-navy"
+        >
+          {t("passwordLabel")}
+        </label>
+        <Input
+          id="signup-password"
+          name="password"
+          type="password"
+          autoComplete="new-password"
+          required
+          minLength={8}
+          placeholder={t("passwordPlaceholder")}
         />
       </div>
 

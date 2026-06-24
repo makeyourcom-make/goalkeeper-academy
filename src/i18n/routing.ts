@@ -14,6 +14,10 @@ export const routing = defineRouting({
       fr: "/offres",
       en: "/offers",
     },
+    "/reserver": {
+      fr: "/reserver",
+      en: "/book",
+    },
     "/stages": {
       fr: "/stages",
       en: "/camps",
@@ -45,6 +49,14 @@ export const routing = defineRouting({
       fr: "/inscription",
       en: "/sign-up",
     },
+    "/mot-de-passe-oublie": {
+      fr: "/mot-de-passe-oublie",
+      en: "/forgot-password",
+    },
+    "/mot-de-passe-nouveau": {
+      fr: "/mot-de-passe-nouveau",
+      en: "/reset-password",
+    },
     "/mon-compte": {
       fr: "/mon-compte",
       en: "/account",
@@ -74,6 +86,23 @@ export const routing = defineRouting({
       en: "/account/invoices",
     },
     "/admin": "/admin",
+    "/admin/planning": {
+      fr: "/admin/planning",
+      en: "/admin/schedule",
+    },
+    "/admin/planning/[id]": {
+      fr: "/admin/planning/[id]",
+      en: "/admin/schedule/[id]",
+    },
+    "/admin/entraineurs": {
+      fr: "/admin/entraineurs",
+      en: "/admin/coaches",
+    },
+    "/admin/charges": "/admin/charges",
+    "/admin/comptabilite": {
+      fr: "/admin/comptabilite",
+      en: "/admin/accounting",
+    },
     "/admin/parents": "/admin/parents",
     "/admin/enfants": {
       fr: "/admin/enfants",
