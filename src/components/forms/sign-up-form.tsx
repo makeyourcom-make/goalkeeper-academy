@@ -7,6 +7,7 @@ import { CheckCircle2, Users, Building2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Turnstile } from "@/components/security/turnstile";
 import { cn } from "@/lib/utils";
 import { signUp, type AuthActionState } from "@/lib/auth/actions";
 
@@ -146,6 +147,8 @@ export function SignUpForm() {
         />
         <span>{t("consentLabel")}</span>
       </label>
+
+      <Turnstile />
 
       {state.status === "error" && state.message && (
         <p className="text-sm text-error">{t(state.message)}</p>

@@ -31,15 +31,15 @@ function SubmitButton({
 export function ProfileForm({
   profile,
   isCoach = false,
+  initialAvatarUrl = null,
 }: {
   profile: Profile;
   isCoach?: boolean;
+  initialAvatarUrl?: string | null;
 }) {
   const t = useTranslations("Account.profile");
   const [state, formAction] = useFormState(updateProfile, INITIAL_STATE);
-  const [preview, setPreview] = React.useState<string | null>(
-    profile.avatar_url,
-  );
+  const [preview, setPreview] = React.useState<string | null>(initialAvatarUrl);
 
   function onAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];

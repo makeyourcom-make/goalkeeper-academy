@@ -38,17 +38,17 @@ function SubmitButton({
 export function ChildForm({
   mode,
   child,
+  initialPhotoUrl = null,
 }: {
   mode: "create" | "edit";
   child?: Child;
+  initialPhotoUrl?: string | null;
 }) {
   const t = useTranslations("Account.children");
   const locale = useLocale();
   const action = mode === "create" ? createChild : updateChild;
   const [state, formAction] = useFormState(action, INITIAL_STATE);
-  const [preview, setPreview] = React.useState<string | null>(
-    child?.photo_url ?? null,
-  );
+  const [preview, setPreview] = React.useState<string | null>(initialPhotoUrl);
 
   function onPhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];

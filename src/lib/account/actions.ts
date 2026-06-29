@@ -87,7 +87,8 @@ export async function updateProfile(
     update.iban = parsed.data.iban || null;
   }
 
-  // Optional avatar upload to the public "avatars" bucket.
+  // Optional avatar upload to the private "avatars" bucket. We store the object
+  // PATH (not a public URL); it is served via short-lived signed URLs.
   const avatar = formData.get("avatar");
   if (avatar instanceof File && avatar.size > 0) {
     if (avatar.size > MAX_AVATAR_BYTES) {
@@ -104,11 +105,7 @@ export async function updateProfile(
     if (uploadError) {
       return { status: "error", message: "errorAvatarUpload" };
     }
-    const {
-      data: { publicUrl },
-    } = supabase.storage.from("avatars").getPublicUrl(path);
-    // Cache-bust so a re-upload at the same path refreshes immediately.
-    update.avatar_url = `${publicUrl}?v=${Date.now()}`;
+    update.avatar_url = path;
   }
 
   const { error } = await supabase

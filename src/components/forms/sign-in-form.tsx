@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Turnstile } from "@/components/security/turnstile";
 import { signIn, type AuthActionState } from "@/lib/auth/actions";
 
 const INITIAL_STATE: AuthActionState = { status: "idle", message: "" };
@@ -66,6 +67,8 @@ export function SignInForm() {
           placeholder={t("passwordPlaceholder")}
         />
       </div>
+
+      <Turnstile />
 
       {state.status === "error" && state.message && (
         <p className="text-sm text-error">{t(state.message)}</p>

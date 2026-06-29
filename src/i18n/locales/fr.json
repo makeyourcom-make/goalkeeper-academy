@@ -822,7 +822,8 @@
       "passwordLabel": "Mot de passe",
       "passwordPlaceholder": "••••••••",
       "errorCredentials": "Email ou mot de passe incorrect.",
-      "forgotPassword": "Mot de passe oublié ?"
+      "forgotPassword": "Mot de passe oublié ?",
+      "errorCaptcha": "Vérification anti-robot échouée. Réessayez."
     },
     "signUp": {
       "metaTitle": "Inscription",
@@ -850,7 +851,8 @@
       "passwordLabel": "Mot de passe",
       "passwordPlaceholder": "Au moins 8 caractères",
       "errorPassword": "Le mot de passe doit faire au moins 8 caractères.",
-      "successConfirm": "Compte créé ! Vérifiez votre email pour confirmer votre adresse, puis connectez-vous."
+      "successConfirm": "Compte créé ! Vérifiez votre email pour confirmer votre adresse, puis connectez-vous.",
+      "errorCaptcha": "Vérification anti-robot échouée. Réessayez."
     },
     "callback": {
       "errorTitle": "Lien invalide ou expiré",
@@ -869,7 +871,8 @@
       "submitting": "Envoi…",
       "successReset": "Si un compte existe avec cet e-mail, un lien de réinitialisation vient d être envoyé. Pensez à vérifier vos spams.",
       "errorEmail": "Adresse e-mail invalide.",
-      "backToSignIn": "← Retour à la connexion"
+      "backToSignIn": "← Retour à la connexion",
+      "errorCaptcha": "Vérification anti-robot échouée. Réessayez."
     },
     "resetPassword": {
       "metaTitle": "Nouveau mot de passe",

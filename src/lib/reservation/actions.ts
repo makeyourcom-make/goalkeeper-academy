@@ -52,7 +52,8 @@ export async function simulateCheckout(formData: FormData): Promise<void> {
     {
       path: "/",
       maxAge: 60 * 30, // 30 minutes — demo session
-      httpOnly: false,
+      httpOnly: true,
+      secure: true,
       sameSite: "lax",
     },
   );

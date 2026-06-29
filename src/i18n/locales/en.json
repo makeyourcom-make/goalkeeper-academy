@@ -822,7 +822,8 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "••••••••",
       "errorCredentials": "Incorrect email or password.",
-      "forgotPassword": "Forgot your password?"
+      "forgotPassword": "Forgot your password?",
+      "errorCaptcha": "Anti-bot check failed. Please try again."
     },
     "signUp": {
       "metaTitle": "Sign up",
@@ -850,7 +851,8 @@
       "passwordLabel": "Password",
       "passwordPlaceholder": "At least 8 characters",
       "errorPassword": "Password must be at least 8 characters.",
-      "successConfirm": "Account created! Check your email to confirm your address, then sign in."
+      "successConfirm": "Account created! Check your email to confirm your address, then sign in.",
+      "errorCaptcha": "Anti-bot check failed. Please try again."
     },
     "callback": {
       "errorTitle": "Invalid or expired link",
@@ -869,7 +871,8 @@
       "submitting": "Sending…",
       "successReset": "If an account exists for this email, a reset link has just been sent. Check your spam folder too.",
       "errorEmail": "Invalid email address.",
-      "backToSignIn": "← Back to sign in"
+      "backToSignIn": "← Back to sign in",
+      "errorCaptcha": "Anti-bot check failed. Please try again."
     },
     "resetPassword": {
       "metaTitle": "New password",

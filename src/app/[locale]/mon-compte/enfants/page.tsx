@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { signedAvatarUrls } from "@/lib/storage/signed";
 import type { Child } from "@/types/database";
 
 type Props = {
@@ -45,6 +46,11 @@ export default async function ChildrenPage({ params }: Props) {
     .returns<Child[]>();
 
   const list = children ?? [];
+  const signed = await signedAvatarUrls(
+    supabase,
+    list.map((c) => c.photo_url),
+  );
+  const photoById = new Map(list.map((c, i) => [c.id, signed[i]]));
 
   return (
     <>
@@ -87,9 +93,9 @@ export default async function ChildrenPage({ params }: Props) {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-3">
                       <span className="border-grey-200 text-grey-400 relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-grey-100">
-                        {child.photo_url ? (
+                        {photoById.get(child.id) ? (
                           <Image
-                            src={child.photo_url}
+                            src={photoById.get(child.id) as string}
                             alt={`${child.first_name} ${child.last_name}`}
                             fill
                             sizes="48px"

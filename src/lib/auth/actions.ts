@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { verifyTurnstile } from "@/lib/security/turnstile";
 
 export type AuthActionState = {
   status: "idle" | "success" | "error";
@@ -30,6 +31,10 @@ export async function signIn(
 ): Promise<AuthActionState> {
   if (!isSupabaseConfigured()) {
     return { status: "error", message: "errorNotConfigured" };
+  }
+
+  if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) {
+    return { status: "error", message: "errorCaptcha" };
   }
 
   const parsed = SIGN_IN_SCHEMA.safeParse({
@@ -62,6 +67,10 @@ export async function signUp(
 ): Promise<AuthActionState> {
   if (!isSupabaseConfigured()) {
     return { status: "error", message: "errorGeneric" };
+  }
+
+  if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) {
+    return { status: "error", message: "errorCaptcha" };
   }
 
   const parsed = SIGN_UP_SCHEMA.safeParse({
@@ -186,6 +195,10 @@ export async function requestPasswordReset(
   _prev: AuthActionState,
   formData: FormData,
 ): Promise<AuthActionState> {
+  if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) {
+    return { status: "error", message: "errorCaptcha" };
+  }
+
   const parsed = REQUEST_RESET_SCHEMA.safeParse({
     email: formData.get("email"),
   });

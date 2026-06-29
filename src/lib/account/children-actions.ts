@@ -33,16 +33,14 @@ async function uploadChildPhoto(
   const ext = PHOTO_EXT[file.type];
   if (!ext) return { error: "errorPhotoType" };
 
+  // Private bucket: store the object PATH; served later via signed URLs.
   const path = `${userId}/children/${childId}.${ext}`;
   const { error } = await supabase.storage
     .from("avatars")
     .upload(path, file, { upsert: true, contentType: file.type });
   if (error) return { error: "errorPhotoUpload" };
 
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("avatars").getPublicUrl(path);
-  return { url: `${publicUrl}?v=${Date.now()}` };
+  return { url: path };
 }
 
 const CHILD_LEVELS = [

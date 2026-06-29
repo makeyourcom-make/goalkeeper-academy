@@ -9,6 +9,7 @@ import { ChildForm } from "@/components/forms/child-form";
 import { Link } from "@/i18n/navigation";
 import { deleteChild } from "@/lib/account/children-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { signedAvatarUrl } from "@/lib/storage/signed";
 import type { Child } from "@/types/database";
 
 type Props = {
@@ -37,6 +38,7 @@ export default async function EditChildPage({ params }: Props) {
     .maybeSingle<Child>();
 
   if (!child) notFound();
+  const photoUrl = await signedAvatarUrl(supabase, child.photo_url);
 
   return (
     <>
@@ -58,7 +60,7 @@ export default async function EditChildPage({ params }: Props) {
       <section className="bg-white py-12 lg:py-16">
         <div className="container max-w-2xl">
           <div className="rounded-2xl border border-grey-100 bg-white p-6 shadow-sm sm:p-8">
-            <ChildForm mode="edit" child={child} />
+            <ChildForm mode="edit" child={child} initialPhotoUrl={photoUrl} />
           </div>
 
           <div className="mt-8 rounded-2xl border border-error/20 bg-error/5 p-6">

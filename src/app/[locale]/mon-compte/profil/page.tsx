@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/forms/profile-form";
 import { ChangePasswordForm } from "@/components/forms/change-password-form";
+import { signedAvatarUrl } from "@/lib/storage/signed";
 import { Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
@@ -52,6 +53,7 @@ export default async function ProfilePage({ params }: Props) {
 
   if (!profile) notFound();
   const isCoach = Boolean(coach);
+  const avatarUrl = await signedAvatarUrl(supabase, profile.avatar_url);
 
   return (
     <>
@@ -77,7 +79,11 @@ export default async function ProfilePage({ params }: Props) {
               {t("emailLabel")}{" "}
               <strong className="text-navy">{user.email}</strong>
             </p>
-            <ProfileForm profile={profile} isCoach={isCoach} />
+            <ProfileForm
+              profile={profile}
+              isCoach={isCoach}
+              initialAvatarUrl={avatarUrl}
+            />
           </div>
 
           <div className="rounded-2xl border border-grey-100 bg-white p-6 shadow-sm sm:p-8">
