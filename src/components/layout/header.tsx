@@ -144,7 +144,7 @@ export function Header({
 
         <nav
           aria-label={t("primaryNav")}
-          className="hidden items-center gap-8 lg:flex"
+          className="hidden items-center gap-8 xl:flex"
         >
           {NAV_ITEMS.map((item) => (
             <Link
@@ -157,7 +157,7 @@ export function Header({
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           {renderLocaleSwitch()}
           <Button asChild variant="primary" size="sm">
             {isAuthed ? (
@@ -174,7 +174,7 @@ export function Header({
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           onClick={() => setMobileOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-navy hover:bg-grey-100 lg:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-navy hover:bg-grey-100 xl:hidden"
         >
           {mobileOpen ? (
             <X className="h-6 w-6" />
@@ -187,7 +187,7 @@ export function Header({
       {mobileOpen && (
         <div
           id="mobile-nav"
-          className="border-t border-grey-100 bg-white lg:hidden"
+          className="border-t border-grey-100 bg-white xl:hidden"
         >
           <div className="container flex flex-col gap-1 py-4">
             {NAV_ITEMS.map((item) => (
