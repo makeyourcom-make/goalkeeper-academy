@@ -63,14 +63,13 @@ export function Footer() {
                 height={116}
                 className="h-12 w-auto"
               />
-              <span className="flex flex-col leading-none">
-                <span className="font-anton text-xl uppercase tracking-wide">
-                  The Last Line
-                </span>
-                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
-                  Goalkeeper Academy · by Giana &amp; Arthur
-                </span>
-              </span>
+              <Image
+                src="/logos/wordmark-white.png"
+                alt="The Last Line — Goalkeeper Academy"
+                width={1660}
+                height={181}
+                className="h-9 w-auto"
+              />
             </Link>
             <p className="max-w-sm text-sm text-white/70">{t("tagline")}</p>
             <div className="space-y-1.5 text-sm text-white/70">

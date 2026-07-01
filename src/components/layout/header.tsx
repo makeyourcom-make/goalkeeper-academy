@@ -132,14 +132,14 @@ export function Header({
             priority
             className="h-11 w-auto lg:h-14"
           />
-          <span className="hidden flex-col leading-none sm:flex">
-            <span className="font-anton text-lg uppercase tracking-wide text-navy">
-              The Last Line
-            </span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-grey-500">
-              Goalkeeper Academy
-            </span>
-          </span>
+          <Image
+            src="/logos/wordmark.png"
+            alt="The Last Line — Goalkeeper Academy"
+            width={1670}
+            height={181}
+            priority
+            className="hidden h-8 w-auto sm:block lg:h-9"
+          />
         </Link>
 
         <nav
