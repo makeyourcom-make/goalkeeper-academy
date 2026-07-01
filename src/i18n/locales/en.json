@@ -1137,7 +1137,7 @@
       },
       "submit": "Send message",
       "submitting": "Sending…",
-      "success": "Your email app opens with the message pre-filled to contact@thelastline.ch — just hit send. If nothing opens, write to us directly at contact@thelastline.ch.",
+      "success": "Thanks! Your message has been sent. We reply within 48 business hours.",
       "errors": {
         "name": "Please enter your name.",
         "email": "Invalid email address.",
@@ -1145,7 +1145,8 @@
         "message": "Your message must contain at least 20 characters.",
         "consent": "You must agree before submitting."
       },
-      "note": "Your messages reach us directly by email."
+      "note": "Your messages reach us directly by email.",
+      "successMailto": "Your email app opens with the message pre-filled to contact@thelastline.ch — just hit send."
     },
     "info": {
       "title": "Direct information",

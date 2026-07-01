@@ -9,6 +9,7 @@ import { CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Turnstile } from "@/components/security/turnstile";
 import { cn } from "@/lib/utils";
 
 const SUBJECT_KEYS = ["trial", "annual", "camp", "club", "other"] as const;
@@ -26,7 +27,10 @@ type ContactFormValues = {
 
 export function ContactForm() {
   const t = useTranslations("ContactPage.form");
-  const [isSuccess, setIsSuccess] = React.useState(false);
+  const [successKind, setSuccessKind] = React.useState<
+    null | "sent" | "mailto"
+  >(null);
+  const formRef = React.useRef<HTMLFormElement>(null);
 
   const schema = React.useMemo(
     () =>
@@ -73,9 +77,7 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = handleSubmit(async (data) => {
-    // Until a backend mailer (SMTP/Resend) is wired, deliver the message by
-    // opening the visitor's mail client pre-addressed to contact@thelastline.ch.
+  function openMailto(data: ContactFormValues) {
     const subjectLabel = t(`fields.subject.options.${data.subject}`);
     const mailSubject = `[Contact — ${subjectLabel}] ${data.name}`;
     const mailBody = [
@@ -88,22 +90,51 @@ export function ContactForm() {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
       mailSubject,
     )}&body=${encodeURIComponent(mailBody)}`;
-    setIsSuccess(true);
-    reset();
+  }
+
+  const onSubmit = handleSubmit(async (data) => {
+    const token =
+      formRef.current?.querySelector<HTMLInputElement>(
+        '[name="cf-turnstile-response"]',
+      )?.value ?? "";
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, token }),
+      });
+      const json = (await res.json()) as { ok?: boolean; configured?: boolean };
+      if (json.ok) {
+        setSuccessKind("sent");
+        reset();
+        return;
+      }
+      // Not configured (or a server error): open the mail client instead so the
+      // message still reaches contact@thelastline.ch.
+      openMailto(data);
+      setSuccessKind("mailto");
+      reset();
+    } catch {
+      openMailto(data);
+      setSuccessKind("mailto");
+      reset();
+    }
   });
 
-  if (isSuccess) {
+  if (successKind) {
     return (
       <div
         role="status"
         className="flex flex-col items-start gap-3 rounded-xl border border-success/30 bg-success/5 p-6"
       >
         <CheckCircle2 className="h-8 w-8 text-success" />
-        <p className="text-grey-700">{t("success")}</p>
+        <p className="text-grey-700">
+          {successKind === "sent" ? t("success") : t("successMailto")}
+        </p>
         <Button
           type="button"
           variant="ghost"
-          onClick={() => setIsSuccess(false)}
+          onClick={() => setSuccessKind(null)}
         >
           {t("submit")}
         </Button>
@@ -112,7 +143,12 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      noValidate
+      className="flex flex-col gap-5"
+    >
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-name"
@@ -218,6 +254,8 @@ export function ContactForm() {
           <p className="text-sm text-error">{errors.consent.message}</p>
         )}
       </div>
+
+      <Turnstile />
 
       <Button type="submit" disabled={isSubmitting} className="self-start">
         {isSubmitting ? t("submitting") : t("submit")}
