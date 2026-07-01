@@ -1,8 +1,8 @@
 {
   "Metadata": {
-    "title": "The Last Line - Goalkeeper Academy",
+    "title": "The Last Line — Académie de gardiens de but",
     "titleTemplate": "%s | The Last Line",
-    "description": "Académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors."
+    "description": "Académie de gardiens de but du Chablais (Aigle, VD). Formation spécialisée pour gardiennes et gardiens, de 10 ans aux seniors : cours, stages et coaching."
   },
   "Header": {
     "skipToContent": "Aller au contenu",
@@ -193,8 +193,8 @@
     }
   },
   "CampsPage": {
-    "metaTitle": "Stages & événements",
-    "metaDescription": "Stages de gardiens pendant les vacances scolaires : Pâques, été, automne. Tous les camps de The Last Line en un coup d'œil.",
+    "metaTitle": "Stages gardien de but — vacances",
+    "metaDescription": "Stages intensifs de gardien de but pendant les vacances scolaires, dans le Chablais (Aigle, VD). Groupes par âge, dès 10 ans. Encadrement par des coachs spécialisés.",
     "hero": {
       "eyebrow": "Stages & événements",
       "title": "Vacances intensives, progression durable",
@@ -1165,7 +1165,7 @@
     "cta": "Retour à l'accueil"
   },
   "ContactPage": {
-    "metaTitle": "Contact",
+    "metaTitle": "Contact & séance d'essai",
     "metaDescription": "Contactez The Last Line pour réserver une séance d'essai, demander un devis club ou poser vos questions sur nos formules.",
     "hero": {
       "eyebrow": "Contact",
@@ -1241,7 +1241,7 @@
     }
   },
   "OffersPage": {
-    "metaTitle": "Offres & tarifs",
+    "metaTitle": "Tarifs & entraînements gardien",
     "metaDescription": "Tarifs des entraînements spécifiques gardiens dans le Chablais : séance découverte, Tour (demi-saison) et saison complète, pour les jeunes (dès 10 ans) et les adultes (18+). Formules club sur devis.",
     "hero": {
       "eyebrow": "Offres & tarifs",
@@ -1419,7 +1419,7 @@
     }
   },
   "AcademyPage": {
-    "metaTitle": "L'académie",
+    "metaTitle": "Notre académie de gardiens de but",
     "metaDescription": "Découvrez The Last Line : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais.",
     "hero": {
       "eyebrow": "L'académie",

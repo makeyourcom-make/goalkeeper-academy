@@ -1,8 +1,8 @@
 {
   "Metadata": {
-    "title": "The Last Line - Goalkeeper Academy",
+    "title": "The Last Line — Goalkeeper Academy",
     "titleTemplate": "%s | The Last Line",
-    "description": "Goalkeeper academy in the Chablais region. Specialized training for goalkeepers, from age 10 to senior."
+    "description": "Specialist goalkeeper academy in the Chablais (Aigle, Switzerland). Training, camps and coaching for keepers, from age 10 to seniors."
   },
   "Header": {
     "skipToContent": "Skip to content",
@@ -193,8 +193,8 @@
     }
   },
   "CampsPage": {
-    "metaTitle": "Camps & events",
-    "metaDescription": "Goalkeeper camps during school holidays: Easter, summer, autumn. All The Last Line camps at a glance.",
+    "metaTitle": "Goalkeeper camps — holidays",
+    "metaDescription": "Intensive goalkeeper camps during the school holidays in the Chablais (Aigle, Switzerland). Age groups from 10, led by specialist coaches.",
     "hero": {
       "eyebrow": "Camps & events",
       "title": "Intensive holidays, lasting progress",
@@ -1165,7 +1165,7 @@
     "cta": "Back to home"
   },
   "ContactPage": {
-    "metaTitle": "Contact",
+    "metaTitle": "Contact & trial session",
     "metaDescription": "Contact The Last Line to book a trial session, request a club quote or ask any question about our programs.",
     "hero": {
       "eyebrow": "Contact",
@@ -1241,7 +1241,7 @@
     }
   },
   "OffersPage": {
-    "metaTitle": "Offers & pricing",
+    "metaTitle": "Pricing & goalkeeper training",
     "metaDescription": "Goalkeeper-specific training prices in the Chablais: discovery session, half-season (Tour) and full season, for youth (from age 10) and adults (18+). Club packages on quote.",
     "hero": {
       "eyebrow": "Offers & pricing",
@@ -1419,7 +1419,7 @@
     }
   },
   "AcademyPage": {
-    "metaTitle": "The academy",
+    "metaTitle": "Our goalkeeper academy",
     "metaDescription": "Discover The Last Line: our mission, our coaching team, our pedagogical method and our facilities in the Chablais region.",
     "hero": {
       "eyebrow": "The academy",
