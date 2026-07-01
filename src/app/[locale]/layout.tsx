@@ -13,12 +13,12 @@ import { routing } from "@/i18n/routing";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-// Titles use Incompleeta Regular, body text uses Darwin Pro Light.
+// The whole site uses Darwin Pro Light — for both titles and body text.
 // We keep the existing CSS variable names (--font-anton / --font-inter) so the
 // Tailwind tokens (font-anton, font-sans) and every component keep working.
 const anton = localFont({
-  src: "../../fonts/incompleeta-regular.woff2",
-  weight: "400",
+  src: "../../fonts/darwin-pro-light.woff2",
+  weight: "300",
   variable: "--font-anton",
   display: "swap",
 });
