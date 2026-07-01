@@ -18,7 +18,7 @@
       "academy": "Academy",
       "offers": "Offers & pricing",
       "camps": "Camps",
-      "blog": "Blog",
+      "blog": "News",
       "contact": "Contact"
     }
   },
@@ -44,7 +44,7 @@
       },
       "resources": {
         "title": "Resources",
-        "blog": "Blog",
+        "blog": "News",
         "giana": "Giana Stop & Shoot",
         "members": "Members area"
       },
@@ -162,7 +162,7 @@
       "subtitle": "Partner club in the Chablais and the leading goalkeeper event in French-speaking Switzerland."
     },
     "blogPreview": {
-      "eyebrow": "The journal",
+      "eyebrow": "News",
       "title": "Tips, analysis and behind the scenes",
       "cta": "Read article",
       "viewAll": "All articles",
@@ -1139,10 +1139,10 @@
     }
   },
   "BlogPage": {
-    "metaTitle": "Blog",
+    "metaTitle": "News",
     "metaDescription": "Tips, analysis and behind-the-scenes goalkeeper training stories from The Last Line.",
     "hero": {
-      "eyebrow": "Blog",
+      "eyebrow": "News",
       "title": "The academy journal",
       "subtitle": "Technical tips, camp recaps and behind-the-scenes of the goalkeeper craft."
     },

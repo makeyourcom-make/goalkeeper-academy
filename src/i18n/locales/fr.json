@@ -18,7 +18,7 @@
       "academy": "Académie",
       "offers": "Offres & tarifs",
       "camps": "Stages",
-      "blog": "Blog",
+      "blog": "Actualités",
       "contact": "Contact"
     }
   },
@@ -44,7 +44,7 @@
       },
       "resources": {
         "title": "Ressources",
-        "blog": "Blog",
+        "blog": "Actualités",
         "giana": "Giana Stop & Shoot",
         "members": "Espace membre"
       },
@@ -162,7 +162,7 @@
       "subtitle": "Club partenaire du Chablais et événement de référence pour les gardiens en Suisse romande."
     },
     "blogPreview": {
-      "eyebrow": "Le journal",
+      "eyebrow": "Actualités",
       "title": "Conseils, analyses et coulisses",
       "cta": "Lire l'article",
       "viewAll": "Tous les articles",
@@ -1139,10 +1139,10 @@
     }
   },
   "BlogPage": {
-    "metaTitle": "Blog",
+    "metaTitle": "Actualités",
     "metaDescription": "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés The Last Line.",
     "hero": {
-      "eyebrow": "Blog",
+      "eyebrow": "Actualités",
       "title": "Le journal de l'académie",
       "subtitle": "Conseils techniques, retours de stage et coulisses du métier de gardien."
     },
