@@ -43,4 +43,15 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* On narrow mobile columns, justified text left big word gaps ("rivers").
+     Enable automatic hyphenation there so justified paragraphs read smoothly.
+     Relies on the <html lang> attribute for the correct hyphenation rules. */
+  @media (max-width: 640px) {
+    .text-justify {
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      overflow-wrap: break-word;
+    }
+  }
 }
