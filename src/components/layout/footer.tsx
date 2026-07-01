@@ -57,11 +57,11 @@ export function Footer() {
               aria-label="The Last Line"
             >
               <Image
-                src="/logos/Logo-transparent.png"
+                src="/logos/logo-icon-white.png"
                 alt="The Last Line"
-                width={56}
-                height={56}
-                className="h-14 w-auto"
+                width={236}
+                height={116}
+                className="h-12 w-auto"
               />
               <span className="flex flex-col leading-none">
                 <span className="font-anton text-xl uppercase tracking-wide">

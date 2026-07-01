@@ -125,12 +125,12 @@ export function Header({
           onClick={() => setMobileOpen(false)}
         >
           <Image
-            src="/logos/Logo-transparent.png"
+            src="/logos/logo-icon.png"
             alt="The Last Line"
-            width={160}
-            height={160}
+            width={236}
+            height={116}
             priority
-            className="h-14 w-auto lg:h-20"
+            className="h-11 w-auto lg:h-14"
           />
           <span className="hidden flex-col leading-none sm:flex">
             <span className="font-anton text-lg uppercase tracking-wide text-navy">
