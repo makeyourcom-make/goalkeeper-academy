@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Anton } from "next/font/google";
+import { Aldrich } from "next/font/google";
 import localFont from "next/font/local";
 
 import "../globals.css";
@@ -14,10 +14,11 @@ import { routing } from "@/i18n/routing";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-// Titles use Anton (bold, condensed); body text uses Darwin Pro Light.
-// We keep the existing CSS variable names (--font-anton / --font-inter) so the
-// Tailwind tokens (font-anton, font-sans) and every component keep working.
-const anton = Anton({
+// Titles use Aldrich (geometric techno, closest free match to the logo
+// lettering); body text uses Darwin Pro Light. We keep the existing CSS
+// variable names (--font-anton / --font-inter) so the Tailwind tokens
+// (font-anton, font-sans) and every component keep working.
+const anton = Aldrich({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-anton",
