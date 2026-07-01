@@ -34,7 +34,7 @@ export async function HomeValues() {
               <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange/10 text-orange">
                 <Icon className="h-6 w-6" />
               </span>
-              <h3 className="font-anton text-h3 uppercase text-navy">
+              <h3 className="font-anton text-2xl uppercase leading-tight text-navy [text-wrap:balance]">
                 {t(`items.${key}.title`)}
               </h3>
               <p className="text-justify text-grey-700">
