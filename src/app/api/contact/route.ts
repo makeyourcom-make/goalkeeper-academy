@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
 
   const ok = await sendMail({
     to: CONTACT_TO,
-    subject: `[Contact — ${d.subject}] ${d.name}`,
+    subject: `[Contact - ${d.subject}] ${d.name}`,
     text: `Nom : ${d.name}\nEmail : ${d.email}\nSujet : ${d.subject}\n\n${d.message}`,
     replyTo: d.email,
   });

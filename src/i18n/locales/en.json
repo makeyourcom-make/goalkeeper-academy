@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "The Last Line — Goalkeeper Academy",
+    "title": "The Last Line - Goalkeeper Academy",
     "titleTemplate": "%s | The Last Line",
     "description": "Goalkeeper academy in the Chablais region. Specialized training for goalkeepers, from age 10 to senior."
   },
@@ -199,7 +199,7 @@
       "subtitle": "3 to 5 days to make a real jump between two seasons. Small groups, by age, lunch included."
     },
     "list": {
-      "ageRange": "U{min}–U{max}",
+      "ageRange": "U{min}-U{max}",
       "spotsLeft": "{count, plural, =0 {Sold out} =1 {1 spot} other {{count} spots}}",
       "format": {
         "halfDay": "Half-day",
@@ -225,7 +225,7 @@
   },
   "CampDetail": {
     "backToList": "Back to camps",
-    "ageRange": "U{min} – U{max}",
+    "ageRange": "U{min} - U{max}",
     "spotsLeft": "{count, plural, =0 {Sold out} =1 {1 spot left} other {{count} spots left}}",
     "format": {
       "halfDay": "Half-day",
@@ -623,7 +623,7 @@
         "endTime": "End",
         "location": "Location",
         "coach": "Coach",
-        "coachNone": "— None —",
+        "coachNone": "None",
         "keepers": "Convened goalkeepers",
         "keepersEmpty": "No goalkeepers registered yet.",
         "submit": "Create session",
@@ -727,7 +727,7 @@
       "sections": [
         {
           "heading": "Scope",
-          "body": "These general terms of sale (GTS) govern any registration for the services offered by the non-profit sports association The Last Line via thelastline.ch. By registering, the customer — parent or legal guardian, adult goalkeeper, club or association — accepts them without reservation. They prevail over any conflicting terms of the customer."
+          "body": "These general terms of sale (GTS) govern any registration for the services offered by the non-profit sports association The Last Line via thelastline.ch. By registering, the customer (parent or legal guardian, adult goalkeeper, club or association) accepts them without reservation. They prevail over any conflicting terms of the customer."
         },
         {
           "heading": "Services and plans",
@@ -1210,7 +1210,7 @@
         "consent": "You must agree before submitting."
       },
       "note": "Your messages reach us directly by email.",
-      "successMailto": "Your email app opens with the message pre-filled to contact@thelastline.ch — just hit send."
+      "successMailto": "Your email app opens with the message pre-filled to contact@thelastline.ch, just hit send."
     },
     "info": {
       "title": "Direct information",
@@ -1229,7 +1229,7 @@
         },
         "hours": {
           "label": "Availability",
-          "value": "Monday–Friday · 9am–6pm"
+          "value": "Monday-Friday · 9am-6pm"
         }
       }
     },
@@ -1249,7 +1249,7 @@
     "audiences": {
       "youth": {
         "label": "Youth",
-        "age": "Ages 10–18",
+        "age": "Ages 10-18",
         "single": {
           "id": "youth-single",
           "eyebrow": "Discovery",
@@ -1360,19 +1360,19 @@
       "rows": {
         "sessions": "Number of sessions",
         "commitment": "Commitment",
-        "youthPrice": "Youth price (10–18)",
+        "youthPrice": "Youth price (10-18)",
         "adultPrice": "Adult price (18+)",
         "perSession": "Indicative price / session",
         "discount": "Saving vs single"
       },
       "values": {
-        "single": ["1", "None", "CHF 45", "CHF 50", "CHF 45–50", "None"],
+        "single": ["1", "None", "CHF 45", "CHF 50", "CHF 45-50", "None"],
         "tour": [
           "18",
           "Half-season (one Tour)",
           "CHF 774",
           "CHF 864",
-          "≈ CHF 43–48",
+          "≈ CHF 43-48",
           "≈ 4%"
         ],
         "season": [
@@ -1380,7 +1380,7 @@
           "Full season",
           "CHF 1,440",
           "CHF 1,584",
-          "≈ CHF 40–44",
+          "≈ CHF 40-44",
           "−11 to −12%"
         ]
       }
@@ -1461,7 +1461,7 @@
         },
         "perf": {
           "name": "Julien V.",
-          "role": "U13–U18 coach",
+          "role": "U13-U18 coach",
           "bio": "Physical and mental preparation for goalkeepers in the performance pathway."
         }
       }
@@ -1576,7 +1576,7 @@
       }
     },
     "audiences": {
-      "youth": "Youth (10–18)",
+      "youth": "Youth (10-18)",
       "adult": "Adults & seniors"
     },
     "formulas": {

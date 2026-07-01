@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
             currency: "chf",
             unit_amount: total * 100,
             product_data: {
-              name: `The Last Line — inscription (${keepers.length} gardien${keepers.length > 1 ? "s" : ""})`,
+              name: `The Last Line - inscription (${keepers.length} gardien${keepers.length > 1 ? "s" : ""})`,
             },
           },
         },

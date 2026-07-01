@@ -79,7 +79,7 @@ export function ContactForm() {
 
   function openMailto(data: ContactFormValues) {
     const subjectLabel = t(`fields.subject.options.${data.subject}`);
-    const mailSubject = `[Contact — ${subjectLabel}] ${data.name}`;
+    const mailSubject = `[Contact - ${subjectLabel}] ${data.name}`;
     const mailBody = [
       `${t("fields.name.label")}: ${data.name}`,
       `${t("fields.email.label")}: ${data.email}`,

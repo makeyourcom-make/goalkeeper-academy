@@ -1,6 +1,6 @@
 {
   "Metadata": {
-    "title": "The Last Line — Goalkeeper Academy",
+    "title": "The Last Line - Goalkeeper Academy",
     "titleTemplate": "%s | The Last Line",
     "description": "Académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors."
   },
@@ -199,7 +199,7 @@
       "subtitle": "3 à 5 jours pour faire un vrai bond entre deux saisons. Petits groupes, par tranche d'âge, repas inclus."
     },
     "list": {
-      "ageRange": "U{min}–U{max}",
+      "ageRange": "U{min}-U{max}",
       "spotsLeft": "{count, plural, =0 {Complet} =1 {1 place} other {{count} places}}",
       "format": {
         "halfDay": "Demi-journée",
@@ -225,7 +225,7 @@
   },
   "CampDetail": {
     "backToList": "Retour aux stages",
-    "ageRange": "U{min} – U{max}",
+    "ageRange": "U{min} - U{max}",
     "spotsLeft": "{count, plural, =0 {Complet} =1 {1 place restante} other {{count} places restantes}}",
     "format": {
       "halfDay": "Demi-journée",
@@ -623,7 +623,7 @@
         "endTime": "Fin",
         "location": "Lieu",
         "coach": "Coach",
-        "coachNone": "— Aucun —",
+        "coachNone": "Aucun",
         "keepers": "Gardiens convoqués",
         "keepersEmpty": "Aucun gardien enregistré pour le moment.",
         "submit": "Créer la séance",
@@ -727,7 +727,7 @@
       "sections": [
         {
           "heading": "Champ d'application",
-          "body": "Les présentes conditions générales de vente (CGV) régissent toute inscription aux prestations proposées par l'association sportive à but non lucratif The Last Line via le site thelastline.ch. En s'inscrivant, le client — parent ou représentant légal, gardien majeur, club ou association — les accepte sans réserve. Elles priment sur toute condition contraire du client."
+          "body": "Les présentes conditions générales de vente (CGV) régissent toute inscription aux prestations proposées par l'association sportive à but non lucratif The Last Line via le site thelastline.ch. En s'inscrivant, le client (parent ou représentant légal, gardien majeur, club ou association) les accepte sans réserve. Elles priment sur toute condition contraire du client."
         },
         {
           "heading": "Prestations et formules",
@@ -1210,7 +1210,7 @@
         "consent": "Vous devez accepter pour envoyer le formulaire."
       },
       "note": "Vos messages nous parviennent directement par email.",
-      "successMailto": "Votre messagerie s'ouvre avec le message pré-rempli vers contact@thelastline.ch — il ne vous reste qu'à l'envoyer."
+      "successMailto": "Votre messagerie s'ouvre avec le message pré-rempli vers contact@thelastline.ch, il ne vous reste qu'à l'envoyer."
     },
     "info": {
       "title": "Informations directes",
@@ -1229,7 +1229,7 @@
         },
         "hours": {
           "label": "Disponibilités",
-          "value": "Lundi–vendredi · 9h–18h"
+          "value": "Lundi-vendredi · 9h-18h"
         }
       }
     },
@@ -1249,7 +1249,7 @@
     "audiences": {
       "youth": {
         "label": "Jeunes",
-        "age": "10–18 ans",
+        "age": "10-18 ans",
         "single": {
           "id": "jeunes-seance",
           "eyebrow": "Découverte",
@@ -1360,19 +1360,19 @@
       "rows": {
         "sessions": "Nombre de séances",
         "commitment": "Engagement",
-        "youthPrice": "Prix jeunes (10–18 ans)",
+        "youthPrice": "Prix jeunes (10-18 ans)",
         "adultPrice": "Prix adultes (18+)",
         "perSession": "Prix indicatif / séance",
         "discount": "Économie vs séance"
       },
       "values": {
-        "single": ["1", "Aucun", "45 CHF", "50 CHF", "45–50 CHF", "Aucune"],
+        "single": ["1", "Aucun", "45 CHF", "50 CHF", "45-50 CHF", "Aucune"],
         "tour": [
           "18",
           "Demi-saison (un Tour)",
           "774 CHF",
           "864 CHF",
-          "≈ 43–48 CHF",
+          "≈ 43-48 CHF",
           "≈ 4 %"
         ],
         "season": [
@@ -1380,7 +1380,7 @@
           "Saison complète",
           "1 440 CHF",
           "1 584 CHF",
-          "≈ 40–44 CHF",
+          "≈ 40-44 CHF",
           "−11 à −12 %"
         ]
       }
@@ -1461,7 +1461,7 @@
         },
         "perf": {
           "name": "Julien V.",
-          "role": "Coach U13–U18",
+          "role": "Coach U13-U18",
           "bio": "Préparation physique et mentale pour les gardiens en filière performance."
         }
       }
@@ -1576,7 +1576,7 @@
       }
     },
     "audiences": {
-      "youth": "Jeunes (10–18 ans)",
+      "youth": "Jeunes (10-18 ans)",
       "adult": "Adultes & séniors"
     },
     "formulas": {
