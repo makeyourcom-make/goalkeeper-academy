@@ -45,10 +45,7 @@ export function ForgotPasswordForm() {
       <input type="hidden" name="locale" value={locale} />
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="forgot-email"
-          className="text-sm font-semibold text-navy"
-        >
+        <label htmlFor="forgot-email" className="text-sm font-medium text-navy">
           {t("emailLabel")}
         </label>
         <Input

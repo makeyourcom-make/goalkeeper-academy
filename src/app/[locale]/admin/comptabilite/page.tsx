@@ -120,15 +120,13 @@ export default async function AdminAccountingPage({ params }: Props) {
             <table className="w-full text-sm">
               <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">{t("table.date")}</th>
-                  <th className="px-4 py-3 font-semibold">{t("table.type")}</th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">{t("table.date")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table.type")}</th>
+                  <th className="px-4 py-3 font-medium">
                     {t("table.category")}
                   </th>
-                  <th className="px-4 py-3 font-semibold">
-                    {t("table.label")}
-                  </th>
-                  <th className="px-4 py-3 text-right font-semibold">
+                  <th className="px-4 py-3 font-medium">{t("table.label")}</th>
+                  <th className="px-4 py-3 text-right font-medium">
                     {t("table.amount")}
                   </th>
                   <th className="px-4 py-3" />
@@ -154,8 +152,8 @@ export default async function AdminAccountingPage({ params }: Props) {
                         <span
                           className={
                             x.kind === "income"
-                              ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-semibold text-success"
-                              : "inline-flex rounded-full bg-error/10 px-2 py-0.5 text-xs font-semibold text-error"
+                              ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                              : "inline-flex rounded-full bg-error/10 px-2 py-0.5 text-xs font-medium text-error"
                           }
                         >
                           {t(`kind.${x.kind}`)}
@@ -164,7 +162,7 @@ export default async function AdminAccountingPage({ params }: Props) {
                       <td className="px-4 py-3 text-grey-700">{x.category}</td>
                       <td className="px-4 py-3 text-navy">{x.label}</td>
                       <td
-                        className={`px-4 py-3 text-right font-semibold ${x.kind === "income" ? "text-success" : "text-navy"}`}
+                        className={`px-4 py-3 text-right font-medium ${x.kind === "income" ? "text-success" : "text-navy"}`}
                       >
                         {x.kind === "income" ? "+" : "−"}
                         {chf.format(Number(x.amount))}

@@ -67,7 +67,7 @@ export function ProfileForm({
         <div className="flex flex-col gap-1">
           <label
             htmlFor="avatar"
-            className="inline-flex cursor-pointer items-center gap-2 self-start rounded-lg border border-grey-300 px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-grey-100"
+            className="inline-flex cursor-pointer items-center gap-2 self-start rounded-lg border border-grey-300 px-4 py-2 text-sm font-medium text-navy transition-colors hover:bg-grey-100"
           >
             <Upload className="h-4 w-4" />
             {t("avatarUpload")}
@@ -86,10 +86,7 @@ export function ProfileForm({
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="first_name"
-            className="text-sm font-semibold text-navy"
-          >
+          <label htmlFor="first_name" className="text-sm font-medium text-navy">
             {t("firstName")}
           </label>
           <Input
@@ -103,10 +100,7 @@ export function ProfileForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="last_name"
-            className="text-sm font-semibold text-navy"
-          >
+          <label htmlFor="last_name" className="text-sm font-medium text-navy">
             {t("lastName")}
           </label>
           <Input
@@ -121,7 +115,7 @@ export function ProfileForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="phone" className="text-sm font-semibold text-navy">
+        <label htmlFor="phone" className="text-sm font-medium text-navy">
           {t("phone")}
         </label>
         <Input
@@ -135,7 +129,7 @@ export function ProfileForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="language" className="text-sm font-semibold text-navy">
+        <label htmlFor="language" className="text-sm font-medium text-navy">
           {t("language")}
         </label>
         <select
@@ -151,7 +145,7 @@ export function ProfileForm({
 
       {isCoach && (
         <div className="flex flex-col gap-2 rounded-lg border border-orange/30 bg-orange/5 p-4">
-          <label htmlFor="iban" className="text-sm font-semibold text-navy">
+          <label htmlFor="iban" className="text-sm font-medium text-navy">
             {t("iban")}
           </label>
           <Input

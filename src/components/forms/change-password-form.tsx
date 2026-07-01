@@ -34,7 +34,7 @@ export function ChangePasswordForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="currentPassword"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("current")}
         </label>
@@ -51,7 +51,7 @@ export function ChangePasswordForm() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="new-password"
-            className="text-sm font-semibold text-navy"
+            className="text-sm font-medium text-navy"
           >
             {t("new")}
           </label>
@@ -67,7 +67,7 @@ export function ChangePasswordForm() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="confirm-password"
-            className="text-sm font-semibold text-navy"
+            className="text-sm font-medium text-navy"
           >
             {t("confirm")}
           </label>

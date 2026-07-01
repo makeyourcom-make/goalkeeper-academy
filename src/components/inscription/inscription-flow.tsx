@@ -192,7 +192,7 @@ export function InscriptionFlow({
         {invoiceRef && (
           <p className="rounded-lg bg-grey-100 px-4 py-2 text-sm text-grey-700">
             {t("success.invoiceRef")}{" "}
-            <span className="font-mono font-semibold text-navy">
+            <span className="font-mono font-medium text-navy">
               {invoiceRef}
             </span>
           </p>
@@ -218,7 +218,7 @@ export function InscriptionFlow({
       {!isAuthed && (
         <div className="flex flex-col gap-3 rounded-xl border border-orange/30 bg-orange/5 p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-col gap-0.5">
-            <span className="text-sm font-semibold text-navy">
+            <span className="text-sm font-medium text-navy">
               {t("auth.title")}
             </span>
             <span className="text-sm text-grey-700">{t("auth.bodyShort")}</span>
@@ -251,7 +251,7 @@ export function InscriptionFlow({
               >
                 <span
                   className={cn(
-                    "flex h-7 w-7 items-center justify-center rounded-full border-2 text-xs font-bold",
+                    "flex h-7 w-7 items-center justify-center rounded-full border-2 text-xs font-semibold",
                     active && "border-navy bg-navy text-white",
                     done && "border-orange bg-orange text-white",
                     !active && !done && "border-grey-300 text-grey-500",
@@ -259,7 +259,7 @@ export function InscriptionFlow({
                 >
                   {done ? <Check className="h-4 w-4" /> : i + 1}
                 </span>
-                <span className="hidden font-semibold sm:inline">{label}</span>
+                <span className="hidden font-medium sm:inline">{label}</span>
               </li>
               {i < STEPS.length - 1 && (
                 <span
@@ -381,7 +381,7 @@ export function InscriptionFlow({
 
                   {/* Audience */}
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                    <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
                       {t("step2.audienceLabel")}
                     </span>
                     <div className="grid gap-2 sm:grid-cols-2">
@@ -391,7 +391,7 @@ export function InscriptionFlow({
                           type="button"
                           onClick={() => updateKeeper(i, { audience: a })}
                           className={cn(
-                            "rounded-lg border px-4 py-2 text-left text-sm font-semibold uppercase transition-colors",
+                            "rounded-lg border px-4 py-2 text-left text-sm font-medium uppercase transition-colors",
                             k.audience === a
                               ? "border-orange text-navy ring-1 ring-orange/30"
                               : "border-grey-200 text-grey-500 hover:border-grey-300",
@@ -405,7 +405,7 @@ export function InscriptionFlow({
 
                   {/* Formula */}
                   <div className="flex flex-col gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                    <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
                       {t("step2.formulaLabel")}
                     </span>
                     <div className="grid gap-2 sm:grid-cols-2">
@@ -424,7 +424,7 @@ export function InscriptionFlow({
                           <span className="font-anton text-sm uppercase text-navy">
                             {t(`formulas.${f}.label`)}
                           </span>
-                          <span className="text-base font-semibold text-navy">
+                          <span className="text-base font-medium text-navy">
                             {PRICING[k.audience][f]} CHF
                             <span className="text-xs font-normal text-grey-500">
                               {" "}
@@ -447,7 +447,7 @@ export function InscriptionFlow({
               <button
                 type="button"
                 onClick={() => setKeepers((prev) => [...prev, blankKeeper()])}
-                className="inline-flex items-center gap-2 self-start text-sm font-semibold text-orange hover:text-orange-600"
+                className="inline-flex items-center gap-2 self-start text-sm font-medium text-orange hover:text-orange-600"
               >
                 <Plus className="h-4 w-4" /> {t("step3.addKeeper")}
               </button>
@@ -465,7 +465,7 @@ export function InscriptionFlow({
             {isOrg && (
               <div className="flex flex-col gap-4 border-b border-grey-100 pb-5">
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-navy">
+                  <label className="text-sm font-medium text-navy">
                     {t("fields.org")}
                   </label>
                   <input
@@ -477,7 +477,7 @@ export function InscriptionFlow({
                   />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <label className="text-sm font-semibold text-navy">
+                  <label className="text-sm font-medium text-navy">
                     {t("fields.notes")}{" "}
                     <span className="font-normal text-grey-500">
                       ({t("fields.optional")})
@@ -497,7 +497,7 @@ export function InscriptionFlow({
 
             <div className="flex flex-col gap-3">
               {isOrg && (
-                <span className="text-sm font-semibold text-navy">
+                <span className="text-sm font-medium text-navy">
                   {t("step3.contactPerson")}
                 </span>
               )}
@@ -554,7 +554,7 @@ export function InscriptionFlow({
                     {k.firstName} {k.lastName} ·{" "}
                     {t(`formulas.${k.formula}.label`)}
                   </span>
-                  <span className="font-semibold text-navy">
+                  <span className="font-medium text-navy">
                     {priceFor(k.audience, k.formula)} CHF
                   </span>
                 </li>
@@ -564,13 +564,13 @@ export function InscriptionFlow({
               {discount > 0 && (
                 <div className="flex justify-between">
                   <dt className="text-grey-500">{t("recap.discount")}</dt>
-                  <dd className="font-semibold text-orange">
+                  <dd className="font-medium text-orange">
                     −{Math.round(discount * 100)}%
                   </dd>
                 </div>
               )}
               <div className="flex items-baseline justify-between pt-1">
-                <dt className="font-semibold text-navy">{t("recap.total")}</dt>
+                <dt className="font-medium text-navy">{t("recap.total")}</dt>
                 <dd className="font-anton text-2xl text-navy">{total} CHF</dd>
               </div>
             </dl>
@@ -580,7 +580,7 @@ export function InscriptionFlow({
 
             {!isAuthed && (
               <div className="flex flex-col gap-3 rounded-xl border border-orange/30 bg-orange/5 p-4">
-                <p className="text-sm font-semibold text-navy">
+                <p className="text-sm font-medium text-navy">
                   {t("auth.title")}
                 </p>
                 <p className="text-sm text-grey-700">{t("auth.body")}</p>

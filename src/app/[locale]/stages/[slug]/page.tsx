@@ -149,7 +149,7 @@ export default async function CampDetailPage({ params }: Props) {
                     </span>
                     <div>
                       <dt className="text-sm text-grey-500">{label}</dt>
-                      <dd className="font-semibold text-navy">{value}</dd>
+                      <dd className="font-medium text-navy">{value}</dd>
                     </div>
                   </div>
                 ))}
@@ -185,7 +185,7 @@ export default async function CampDetailPage({ params }: Props) {
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="flex flex-col gap-5 rounded-2xl border border-grey-100 bg-white p-6 shadow-lg">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                <p className="text-xs font-medium uppercase tracking-wide text-grey-500">
                   {t("price.label")}
                 </p>
                 <p className="font-anton text-h1 text-navy">

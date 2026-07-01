@@ -86,7 +86,7 @@ export default async function AdminLayout({ children, params }: Props) {
               <Link
                 key={href}
                 href={href}
-                className="flex items-center gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/10 hover:text-white"
+                className="flex items-center gap-3 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-white/80 transition hover:bg-white/10 hover:text-white"
               >
                 <Icon className="h-4 w-4" />
                 {label}

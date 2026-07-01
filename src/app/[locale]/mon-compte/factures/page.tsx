@@ -80,7 +80,7 @@ export default async function InvoicesPage({ params }: Props) {
                   className="flex items-center justify-between gap-4 rounded-xl border border-grey-100 bg-white p-4 shadow-sm"
                 >
                   <div>
-                    <p className="font-semibold text-navy">
+                    <p className="font-medium text-navy">
                       {invoice.invoice_number}
                     </p>
                     <p className="text-xs text-grey-500">
@@ -101,7 +101,7 @@ export default async function InvoicesPage({ params }: Props) {
                         href={invoice.pdf_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-semibold text-orange hover:underline"
+                        className="text-xs font-medium text-orange hover:underline"
                       >
                         {t("download")}
                       </a>

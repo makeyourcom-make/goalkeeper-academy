@@ -45,7 +45,7 @@ export async function HomeOffers() {
                 <h3 className="mt-4 font-anton text-h3 uppercase text-navy">
                   {t(`items.${key}.title`)}
                 </h3>
-                <p className="mt-2 text-2xl font-semibold text-navy">
+                <p className="mt-2 text-2xl font-medium text-navy">
                   {t(`items.${key}.price`)}
                 </p>
                 <p className="mt-3 text-justify text-sm text-grey-500">

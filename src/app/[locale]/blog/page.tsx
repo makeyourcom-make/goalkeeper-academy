@@ -124,7 +124,7 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                         pathname: "/blog/[slug]",
                         params: { slug: post.slug },
                       }}
-                      className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-orange hover:text-orange-600"
+                      className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-orange hover:text-orange-600"
                     >
                       {t("readMore")} <ArrowRight className="h-4 w-4" />
                     </Link>
@@ -148,13 +148,13 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                         ? undefined
                         : { page: String(currentPage - 1) },
                   }}
-                  className="inline-flex items-center gap-1 rounded-lg border border-grey-300 px-4 py-2 text-sm font-semibold text-navy hover:border-orange hover:text-orange"
+                  className="inline-flex items-center gap-1 rounded-lg border border-grey-300 px-4 py-2 text-sm font-medium text-navy hover:border-orange hover:text-orange"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   {t("previous")}
                 </Link>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-lg border border-grey-100 px-4 py-2 text-sm font-semibold text-grey-300">
+                <span className="inline-flex items-center gap-1 rounded-lg border border-grey-100 px-4 py-2 text-sm font-medium text-grey-300">
                   <ArrowLeft className="h-4 w-4" />
                   {t("previous")}
                 </span>
@@ -168,13 +168,13 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                     pathname: "/blog",
                     query: { page: String(currentPage + 1) },
                   }}
-                  className="inline-flex items-center gap-1 rounded-lg border border-grey-300 px-4 py-2 text-sm font-semibold text-navy hover:border-orange hover:text-orange"
+                  className="inline-flex items-center gap-1 rounded-lg border border-grey-300 px-4 py-2 text-sm font-medium text-navy hover:border-orange hover:text-orange"
                 >
                   {t("next")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-lg border border-grey-100 px-4 py-2 text-sm font-semibold text-grey-300">
+                <span className="inline-flex items-center gap-1 rounded-lg border border-grey-100 px-4 py-2 text-sm font-medium text-grey-300">
                   {t("next")}
                   <ArrowRight className="h-4 w-4" />
                 </span>

@@ -83,7 +83,7 @@ export function Header({
       role="group"
       aria-label={t("localeGroup")}
       className={cn(
-        "flex items-center rounded-full border border-grey-300 p-0.5 text-xs font-semibold",
+        "flex items-center rounded-full border border-grey-300 p-0.5 text-xs font-medium",
         isPending && "opacity-60",
         className,
       )}

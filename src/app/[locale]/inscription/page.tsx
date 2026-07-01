@@ -43,7 +43,7 @@ export default async function SignUpPage({ params }: Props) {
             {t("alreadyAccount")}{" "}
             <Link
               href="/connexion"
-              className="font-semibold text-orange hover:text-orange-600"
+              className="font-medium text-orange hover:text-orange-600"
             >
               {t("signInLink")}
             </Link>

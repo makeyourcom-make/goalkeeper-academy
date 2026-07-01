@@ -133,7 +133,7 @@ export default async function AccountPage({ params }: Props) {
                     ? t(`cards.${key}.count`, { count })
                     : t(`cards.${key}.empty`)}
                 </p>
-                <span className="mt-auto inline-flex w-fit rounded-full bg-grey-100 px-3 py-1 text-xs font-semibold text-grey-700 group-hover:bg-orange group-hover:text-white">
+                <span className="mt-auto inline-flex w-fit rounded-full bg-grey-100 px-3 py-1 text-xs font-medium text-grey-700 group-hover:bg-orange group-hover:text-white">
                   {t(`cards.${key}.cta`)}
                 </span>
               </Link>

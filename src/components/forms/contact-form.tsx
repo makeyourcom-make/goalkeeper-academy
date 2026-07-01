@@ -150,10 +150,7 @@ export function ContactForm() {
       className="flex flex-col gap-5"
     >
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="contact-name"
-          className="text-sm font-semibold text-navy"
-        >
+        <label htmlFor="contact-name" className="text-sm font-medium text-navy">
           {t("fields.name.label")}
         </label>
         <Input
@@ -172,7 +169,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-email"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("fields.email.label")}
         </label>
@@ -192,7 +189,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-subject"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("fields.subject.label")}
         </label>
@@ -222,7 +219,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="contact-message"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("fields.message.label")}
         </label>

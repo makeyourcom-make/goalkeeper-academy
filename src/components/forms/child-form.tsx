@@ -92,7 +92,7 @@ export function ChildForm({
         <div className="flex flex-col gap-1">
           <label
             htmlFor="photo"
-            className="inline-flex cursor-pointer items-center gap-2 self-start rounded-lg border border-grey-300 px-4 py-2 text-sm font-semibold text-navy transition-colors hover:bg-grey-100"
+            className="inline-flex cursor-pointer items-center gap-2 self-start rounded-lg border border-grey-300 px-4 py-2 text-sm font-medium text-navy transition-colors hover:bg-grey-100"
           >
             <Upload className="h-4 w-4" />
             {t("photoUpload")}
@@ -111,10 +111,7 @@ export function ChildForm({
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="first_name"
-            className="text-sm font-semibold text-navy"
-          >
+          <label htmlFor="first_name" className="text-sm font-medium text-navy">
             {t("firstName")}
           </label>
           <Input
@@ -125,10 +122,7 @@ export function ChildForm({
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="last_name"
-            className="text-sm font-semibold text-navy"
-          >
+          <label htmlFor="last_name" className="text-sm font-medium text-navy">
             {t("lastName")}
           </label>
           <Input
@@ -142,10 +136,7 @@ export function ChildForm({
 
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label
-            htmlFor="birth_date"
-            className="text-sm font-semibold text-navy"
-          >
+          <label htmlFor="birth_date" className="text-sm font-medium text-navy">
             {t("birthDate")}
           </label>
           <Input
@@ -160,7 +151,7 @@ export function ChildForm({
         <div className="flex flex-col gap-2">
           <label
             htmlFor="dominant_hand"
-            className="text-sm font-semibold text-navy"
+            className="text-sm font-medium text-navy"
           >
             {t("dominantHand")}
           </label>
@@ -181,7 +172,7 @@ export function ChildForm({
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="level" className="text-sm font-semibold text-navy">
+        <label htmlFor="level" className="text-sm font-medium text-navy">
           {t("level")}
         </label>
         <select
@@ -202,7 +193,7 @@ export function ChildForm({
       <div className="flex flex-col gap-2">
         <label
           htmlFor="medical_notes"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("medicalNotes")}
         </label>

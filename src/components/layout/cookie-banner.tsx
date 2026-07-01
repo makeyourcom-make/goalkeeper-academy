@@ -46,7 +46,7 @@ export function CookieBanner() {
           {t("message")}{" "}
           <Link
             href="/cookies"
-            className="font-semibold text-orange hover:underline"
+            className="font-medium text-orange hover:underline"
           >
             {t("learnMore")}
           </Link>

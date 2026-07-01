@@ -52,7 +52,7 @@ export function SignUpForm() {
       <input type="hidden" name="role" value={role} />
 
       <fieldset className="flex flex-col gap-3">
-        <legend className="mb-2 text-sm font-semibold text-navy">
+        <legend className="mb-2 text-sm font-medium text-navy">
           {t("roleLabel")}
         </legend>
         <div className="grid gap-3 md:grid-cols-2">
@@ -104,10 +104,7 @@ export function SignUpForm() {
       </fieldset>
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="signup-email"
-          className="text-sm font-semibold text-navy"
-        >
+        <label htmlFor="signup-email" className="text-sm font-medium text-navy">
           {t("emailLabel")}
         </label>
         <Input
@@ -123,7 +120,7 @@ export function SignUpForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="signup-password"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("passwordLabel")}
         </label>

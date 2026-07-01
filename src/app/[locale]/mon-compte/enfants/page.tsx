@@ -116,7 +116,7 @@ export default async function ChildrenPage({ params }: Props) {
                       </div>
                     </div>
                     {child.level && (
-                      <span className="rounded-full bg-orange/10 px-3 py-1 text-xs font-semibold text-orange">
+                      <span className="rounded-full bg-orange/10 px-3 py-1 text-xs font-medium text-orange">
                         {t(`levels.${child.level}`)}
                       </span>
                     )}

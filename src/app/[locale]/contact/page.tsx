@@ -81,7 +81,7 @@ export default async function ContactPage({ params }: Props) {
                     <p className="text-sm text-grey-500">
                       {t(`info.items.${key}.label`)}
                     </p>
-                    <p className="whitespace-pre-line font-semibold text-navy">
+                    <p className="whitespace-pre-line font-medium text-navy">
                       {t(`info.items.${key}.value`)}
                     </p>
                   </div>

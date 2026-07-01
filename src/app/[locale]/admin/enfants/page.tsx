@@ -72,10 +72,10 @@ export default async function AdminChildrenPage({ params }: Props) {
           <table className="w-full text-sm">
             <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
               <tr>
-                <th className="px-4 py-3 font-semibold">{t("table.name")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.age")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.level")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.parent")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.name")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.age")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.level")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.parent")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-grey-100">
@@ -91,7 +91,7 @@ export default async function AdminChildrenPage({ params }: Props) {
               ) : (
                 list.map((child) => (
                   <tr key={child.id} className="hover:bg-grey-100/40">
-                    <td className="px-4 py-3 font-semibold text-navy">
+                    <td className="px-4 py-3 font-medium text-navy">
                       {child.first_name} {child.last_name}
                     </td>
                     <td className="px-4 py-3 text-grey-700">

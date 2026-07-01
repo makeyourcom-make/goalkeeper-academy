@@ -185,11 +185,11 @@ export default async function AdminPlanningPage({
                       <p className="font-anton text-base uppercase text-navy">
                         {s.title}
                       </p>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-orange">
+                      <p className="text-xs font-medium uppercase tracking-wide text-orange">
                         {dateFmt.format(new Date(s.starts_at))}
                       </p>
                     </div>
-                    <span className="rounded-full bg-grey-100 px-2 py-0.5 text-xs font-semibold text-grey-700">
+                    <span className="rounded-full bg-grey-100 px-2 py-0.5 text-xs font-medium text-grey-700">
                       {t(`status.${s.status}`)}
                     </span>
                   </div>
@@ -222,7 +222,7 @@ export default async function AdminPlanningPage({
                   )}
                   <div className="mt-3 flex items-center gap-2 border-t border-grey-100 pt-3">
                     {s.series_id && (
-                      <span className="mr-auto inline-flex items-center gap-1 text-xs font-semibold text-grey-500">
+                      <span className="mr-auto inline-flex items-center gap-1 text-xs font-medium text-grey-500">
                         <Repeat className="h-3.5 w-3.5" />
                         {t("seriesBadge")}
                       </span>

@@ -105,7 +105,7 @@ export default async function OffresPage({ params }: Props) {
                         {t(`${base}.title`)}
                       </h3>
                       <p className="mt-2 flex items-baseline gap-2">
-                        <span className="text-3xl font-semibold text-navy">
+                        <span className="text-3xl font-medium text-navy">
                           {t(`${base}.price`)}
                         </span>
                         <span className="text-sm text-grey-500">
@@ -152,9 +152,7 @@ export default async function OffresPage({ params }: Props) {
             className="flex scroll-mt-20 flex-col gap-6 rounded-xl border border-navy/15 bg-navy/5 p-8 md:flex-row md:items-center md:justify-between"
           >
             <div className="flex flex-col gap-1">
-              <p className="text-lg font-semibold text-navy">
-                {t("club.title")}
-              </p>
+              <p className="text-lg font-medium text-navy">{t("club.title")}</p>
               <p className="max-w-2xl text-grey-700">{t("club.description")}</p>
             </div>
             <Button asChild variant="primary" className="flex-shrink-0">
@@ -239,7 +237,7 @@ export default async function OffresPage({ params }: Props) {
                 key={key}
                 className="group rounded-xl border border-grey-100 bg-white p-6 shadow-sm open:shadow-md"
               >
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-navy">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium text-navy">
                   <span>{t(`faq.items.${key}.question`)}</span>
                   <span
                     className="text-2xl leading-none text-orange transition-transform group-open:rotate-45"

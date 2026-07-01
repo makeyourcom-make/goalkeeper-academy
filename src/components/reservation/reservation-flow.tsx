@@ -125,7 +125,7 @@ export function ReservationFlow({
                 >
                   <span
                     className={cn(
-                      "flex h-7 w-7 items-center justify-center rounded-full border-2 text-xs font-bold",
+                      "flex h-7 w-7 items-center justify-center rounded-full border-2 text-xs font-semibold",
                       active && "border-navy bg-navy text-white",
                       done && "border-orange bg-orange text-white",
                       !active && !done && "border-grey-300 text-grey-500",
@@ -133,7 +133,7 @@ export function ReservationFlow({
                   >
                     {done ? <Check className="h-4 w-4" /> : i + 1}
                   </span>
-                  <span className="hidden font-semibold sm:inline">
+                  <span className="hidden font-medium sm:inline">
                     {s.label}
                   </span>
                 </li>
@@ -161,7 +161,7 @@ export function ReservationFlow({
 
               {isAuthenticated && childrenList.length > 0 ? (
                 <div className="flex flex-col gap-3">
-                  <p className="text-sm font-semibold text-navy">
+                  <p className="text-sm font-medium text-navy">
                     {t("step1.selectChild")}
                   </p>
                   <ul className="flex flex-col gap-2">
@@ -186,7 +186,7 @@ export function ReservationFlow({
                               className="h-4 w-4 accent-orange"
                             />
                             <div className="flex-1">
-                              <p className="font-semibold text-navy">
+                              <p className="font-medium text-navy">
                                 {child.first_name} {child.last_name}
                               </p>
                               <p className="text-xs text-grey-500">
@@ -213,7 +213,7 @@ export function ReservationFlow({
                 <div className="flex flex-col gap-2">
                   <label
                     htmlFor="guestName"
-                    className="text-sm font-semibold text-navy"
+                    className="text-sm font-medium text-navy"
                   >
                     {t("step1.guestNameLabel")}
                   </label>
@@ -234,7 +234,7 @@ export function ReservationFlow({
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="email"
-                  className="text-sm font-semibold text-navy"
+                  className="text-sm font-medium text-navy"
                 >
                   {t("step1.emailLabel")}
                 </label>
@@ -270,13 +270,13 @@ export function ReservationFlow({
               <dl className="flex flex-col divide-y divide-grey-100 rounded-xl border border-grey-100">
                 <div className="flex items-center justify-between gap-3 px-4 py-3">
                   <dt className="text-sm text-grey-500">{t("step2.camp")}</dt>
-                  <dd className="text-right font-semibold text-navy">
+                  <dd className="text-right font-medium text-navy">
                     {camp.title}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between gap-3 px-4 py-3">
                   <dt className="text-sm text-grey-500">{t("step2.dates")}</dt>
-                  <dd className="text-right font-semibold text-navy">
+                  <dd className="text-right font-medium text-navy">
                     {camp.dateRange}
                   </dd>
                 </div>
@@ -284,7 +284,7 @@ export function ReservationFlow({
                   <dt className="text-sm text-grey-500">
                     {t("step2.location")}
                   </dt>
-                  <dd className="text-right font-semibold text-navy">
+                  <dd className="text-right font-medium text-navy">
                     {camp.location}
                   </dd>
                 </div>
@@ -292,15 +292,13 @@ export function ReservationFlow({
                   <dt className="text-sm text-grey-500">
                     {t("step2.participant")}
                   </dt>
-                  <dd className="text-right font-semibold text-navy">
+                  <dd className="text-right font-medium text-navy">
                     {childName}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between gap-3 px-4 py-3">
                   <dt className="text-sm text-grey-500">{t("step2.email")}</dt>
-                  <dd className="text-right font-semibold text-navy">
-                    {email}
-                  </dd>
+                  <dd className="text-right font-medium text-navy">{email}</dd>
                 </div>
               </dl>
 
@@ -365,7 +363,7 @@ export function ReservationFlow({
                       aria-selected={active}
                       onClick={() => setPaymentMethod(key)}
                       className={cn(
-                        "flex flex-col items-center gap-2 rounded-xl border-2 p-4 text-sm font-semibold transition",
+                        "flex flex-col items-center gap-2 rounded-xl border-2 p-4 text-sm font-medium transition",
                         active
                           ? "border-navy bg-navy text-white"
                           : "border-grey-100 bg-white text-navy hover:border-grey-300",
@@ -382,7 +380,7 @@ export function ReservationFlow({
               {paymentMethod === "card" && (
                 <div className="flex flex-col gap-4 rounded-xl border border-grey-100 bg-white p-5">
                   <div className="flex flex-col gap-2">
-                    <label className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                    <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
                       {t("step3.card.number")}
                     </label>
                     <Input
@@ -393,7 +391,7 @@ export function ReservationFlow({
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                      <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
                         {t("step3.card.expiry")}
                       </label>
                       <Input
@@ -403,7 +401,7 @@ export function ReservationFlow({
                       />
                     </div>
                     <div className="flex flex-col gap-2">
-                      <label className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+                      <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
                         {t("step3.card.cvc")}
                       </label>
                       <Input
@@ -424,7 +422,7 @@ export function ReservationFlow({
                   <div className="grid h-32 w-32 place-items-center rounded-xl bg-navy text-white">
                     <Smartphone className="h-12 w-12" />
                   </div>
-                  <p className="font-semibold text-navy">
+                  <p className="font-medium text-navy">
                     {t("step3.twint.title")}
                   </p>
                   <p className="text-sm text-grey-700">
@@ -436,9 +434,7 @@ export function ReservationFlow({
               {paymentMethod === "qr_bill" && (
                 <div className="flex flex-col gap-3 rounded-xl border border-grey-100 bg-white p-6">
                   <FileText className="h-8 w-8 text-orange" />
-                  <p className="font-semibold text-navy">
-                    {t("step3.qr.title")}
-                  </p>
+                  <p className="font-medium text-navy">{t("step3.qr.title")}</p>
                   <p className="text-sm text-grey-700">{t("step3.qr.body")}</p>
                   <ul className="mt-2 flex flex-col gap-1 text-xs text-grey-500">
                     <li>{t("step3.qr.iban")} CH00 0000 0000 0000 0000 0</li>
@@ -467,7 +463,7 @@ export function ReservationFlow({
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="mt-1 inline-flex items-center gap-1 self-start text-xs font-semibold text-grey-500 hover:text-navy"
+                className="mt-1 inline-flex items-center gap-1 self-start text-xs font-medium text-grey-500 hover:text-navy"
               >
                 <ArrowLeft className="h-3 w-3" />
                 {t("back")}

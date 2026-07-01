@@ -78,7 +78,7 @@ export default async function AdminDashboardPage({ params }: Props) {
             className="flex flex-col gap-2 rounded-2xl border border-grey-100 bg-white p-6 shadow-sm"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wide text-grey-500">
+              <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
                 {t(`stats.${key}`)}
               </span>
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange/10 text-orange">

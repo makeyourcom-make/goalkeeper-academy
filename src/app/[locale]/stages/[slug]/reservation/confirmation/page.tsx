@@ -110,7 +110,7 @@ export default async function ConfirmationPage({ params }: Props) {
                 <p className="text-xs uppercase tracking-wide text-grey-500">
                   {t("invoice.label")}
                 </p>
-                <p className="font-mono text-sm font-bold text-navy">
+                <p className="font-mono text-sm font-semibold text-navy">
                   {data.invoiceNumber}
                 </p>
               </div>
@@ -132,7 +132,7 @@ export default async function ConfirmationPage({ params }: Props) {
                   <Calendar className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" />
                   <div>
                     <dt className="text-xs text-grey-500">{t("dates")}</dt>
-                    <dd className="text-sm font-semibold text-navy">
+                    <dd className="text-sm font-medium text-navy">
                       {dateRange}
                     </dd>
                   </div>
@@ -141,7 +141,7 @@ export default async function ConfirmationPage({ params }: Props) {
                   <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange" />
                   <div>
                     <dt className="text-xs text-grey-500">{t("location")}</dt>
-                    <dd className="text-sm font-semibold text-navy">
+                    <dd className="text-sm font-medium text-navy">
                       {camp.venue}
                     </dd>
                   </div>
@@ -153,17 +153,17 @@ export default async function ConfirmationPage({ params }: Props) {
               <dl className="flex flex-col gap-2 text-sm">
                 <div className="flex justify-between">
                   <dt className="text-grey-500">{t("participant")}</dt>
-                  <dd className="font-semibold text-navy">{data.childName}</dd>
+                  <dd className="font-medium text-navy">{data.childName}</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-grey-500">{t("paymentMethod")}</dt>
-                  <dd className="font-semibold text-navy">
+                  <dd className="font-medium text-navy">
                     {t(`methods.${data.paymentMethod}`)}
                   </dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-grey-500">{t("paidAt")}</dt>
-                  <dd className="font-semibold text-navy">{paidAt}</dd>
+                  <dd className="font-medium text-navy">{paidAt}</dd>
                 </div>
               </dl>
 

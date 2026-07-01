@@ -36,7 +36,7 @@ export function ResetPasswordForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="reset-password"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("passwordLabel")}
         </label>
@@ -53,7 +53,7 @@ export function ResetPasswordForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="reset-confirm"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("confirmLabel")}
         </label>

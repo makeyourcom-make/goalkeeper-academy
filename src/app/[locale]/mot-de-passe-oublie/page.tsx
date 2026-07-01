@@ -43,7 +43,7 @@ export default async function ForgotPasswordPage({ params }: Props) {
           <p className="mt-6 text-sm text-grey-500">
             <Link
               href="/connexion"
-              className="font-semibold text-orange hover:text-orange-600"
+              className="font-medium text-orange hover:text-orange-600"
             >
               {t("backToSignIn")}
             </Link>

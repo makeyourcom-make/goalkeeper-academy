@@ -35,10 +35,7 @@ export function SignInForm() {
       <input type="hidden" name="locale" value={locale} />
 
       <div className="flex flex-col gap-2">
-        <label
-          htmlFor="signin-email"
-          className="text-sm font-semibold text-navy"
-        >
+        <label htmlFor="signin-email" className="text-sm font-medium text-navy">
           {t("emailLabel")}
         </label>
         <Input
@@ -54,7 +51,7 @@ export function SignInForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="signin-password"
-          className="text-sm font-semibold text-navy"
+          className="text-sm font-medium text-navy"
         >
           {t("passwordLabel")}
         </label>

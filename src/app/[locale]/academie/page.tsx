@@ -160,7 +160,7 @@ export default async function AcademiePage({ params }: Props) {
                   <h3 className="font-anton text-xl uppercase text-navy">
                     {t(`team.members.${key}.name`)}
                   </h3>
-                  <p className="text-sm font-semibold text-orange">
+                  <p className="text-sm font-medium text-orange">
                     {t(`team.members.${key}.role`)}
                   </p>
                   <p className="text-justify text-sm text-grey-700">

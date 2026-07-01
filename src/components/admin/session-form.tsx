@@ -51,7 +51,7 @@ export function SessionForm({
     }
   }
 
-  const labelCls = "text-xs font-semibold text-grey-500";
+  const labelCls = "text-xs font-medium text-grey-500";
   const fieldCls = "flex flex-col gap-1";
   const selectCls =
     "w-full rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm text-navy outline-none focus:border-orange";

@@ -93,7 +93,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="container relative z-10 flex flex-col items-center gap-5 py-20 text-center lg:py-28">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-1 text-sm font-semibold text-white/80 hover:text-white"
+            className="inline-flex items-center gap-1 text-sm font-medium text-white/80 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             {t("backToList")}
@@ -126,7 +126,7 @@ export default async function BlogPostPage({ params }: Props) {
 
           {post.tags.length > 0 && (
             <div className="mt-12 flex flex-wrap items-center gap-2 border-t border-grey-100 pt-6">
-              <span className="text-sm font-semibold text-navy">
+              <span className="text-sm font-medium text-navy">
                 {t("tags")} :
               </span>
               {post.tags.map((tag) => (
@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: Props) {
                 }}
                 className="group flex flex-col gap-1 rounded-xl border border-grey-300 bg-white p-5 text-left transition-shadow hover:shadow-md"
               >
-                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-grey-500">
+                <span className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide text-grey-500">
                   <ArrowLeft className="h-3 w-3" />
                   {t("previous")}
                 </span>
@@ -170,7 +170,7 @@ export default async function BlogPostPage({ params }: Props) {
                 }}
                 className="group flex flex-col gap-1 rounded-xl border border-grey-300 bg-white p-5 text-right transition-shadow hover:shadow-md md:items-end"
               >
-                <span className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-grey-500">
+                <span className="inline-flex items-center gap-1 text-xs font-medium uppercase tracking-wide text-grey-500">
                   {t("next")}
                   <ArrowRight className="h-3 w-3" />
                 </span>

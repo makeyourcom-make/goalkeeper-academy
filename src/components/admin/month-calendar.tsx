@@ -77,7 +77,7 @@ export function MonthCalendar({
         </Link>
       </div>
 
-      <div className="grid grid-cols-7 gap-1 text-center text-xs font-semibold uppercase tracking-wide text-grey-500">
+      <div className="grid grid-cols-7 gap-1 text-center text-xs font-medium uppercase tracking-wide text-grey-500">
         {weekdays.map((w) => (
           <div key={w} className="py-1">
             {w}
@@ -108,7 +108,7 @@ export function MonthCalendar({
                 <>
                   <span
                     className={cn(
-                      "inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-semibold",
+                      "inline-flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium",
                       isToday ? "bg-orange text-white" : "text-grey-500",
                     )}
                   >

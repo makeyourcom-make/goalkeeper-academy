@@ -107,13 +107,13 @@ export default async function AdminCoachesPage({ params }: Props) {
           <table className="w-full text-sm">
             <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
               <tr>
-                <th className="px-4 py-3 font-semibold">{t("table.name")}</th>
-                <th className="px-4 py-3 font-semibold">
+                <th className="px-4 py-3 font-medium">{t("table.name")}</th>
+                <th className="px-4 py-3 font-medium">
                   {t("table.speciality")}
                 </th>
-                <th className="px-4 py-3 font-semibold">{t("table.rate")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.iban")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.status")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.rate")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.iban")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.status")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-grey-100">
@@ -130,7 +130,7 @@ export default async function AdminCoachesPage({ params }: Props) {
                 coaches.map((c) => (
                   <tr key={c.id} className="hover:bg-grey-100/40">
                     <td className="px-4 py-3">
-                      <div className="font-semibold text-navy">{name(c)}</div>
+                      <div className="font-medium text-navy">{name(c)}</div>
                       <div className="text-xs text-grey-500">
                         {c.profiles?.email}
                       </div>
@@ -138,16 +138,16 @@ export default async function AdminCoachesPage({ params }: Props) {
                     <td className="px-4 py-3 text-grey-700">
                       {c.speciality || "—"}
                     </td>
-                    <td className="px-4 py-3 font-semibold text-navy">
+                    <td className="px-4 py-3 font-medium text-navy">
                       {chf.format(c.rate_per_session)}
                     </td>
                     <td className="px-4 py-3">
                       {c.profiles?.iban ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-semibold text-success">
+                        <span className="inline-flex items-center gap-1 text-xs font-medium text-success">
                           <Check className="h-4 w-4" /> {t("ibanOk")}
                         </span>
                       ) : (
-                        <span className="text-grey-400 inline-flex items-center gap-1 text-xs font-semibold">
+                        <span className="text-grey-400 inline-flex items-center gap-1 text-xs font-medium">
                           <X className="h-4 w-4" /> {t("ibanMissing")}
                         </span>
                       )}
@@ -156,8 +156,8 @@ export default async function AdminCoachesPage({ params }: Props) {
                       <span
                         className={
                           c.active
-                            ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-semibold text-success"
-                            : "inline-flex rounded-full bg-grey-100 px-2 py-0.5 text-xs font-semibold text-grey-500"
+                            ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                            : "inline-flex rounded-full bg-grey-100 px-2 py-0.5 text-xs font-medium text-grey-500"
                         }
                       >
                         {c.active ? t("active") : t("inactive")}
@@ -182,17 +182,17 @@ export default async function AdminCoachesPage({ params }: Props) {
             <table className="w-full text-sm">
               <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">{t("table.name")}</th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">{t("table.name")}</th>
+                  <th className="px-4 py-3 font-medium">
                     {t("payments.sessions")}
                   </th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">
                     {t("payments.rate")}
                   </th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">
                     {t("payments.amount")}
                   </th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">
                     {t("payments.statusCol")}
                   </th>
                   <th className="px-4 py-3" />
@@ -215,22 +215,22 @@ export default async function AdminCoachesPage({ params }: Props) {
                     const paid = paidStatus.get(c.id) === "paid";
                     return (
                       <tr key={c.id} className="hover:bg-grey-100/40">
-                        <td className="px-4 py-3 font-semibold text-navy">
+                        <td className="px-4 py-3 font-medium text-navy">
                           {name(c)}
                         </td>
                         <td className="px-4 py-3 text-grey-700">{count}</td>
                         <td className="px-4 py-3 text-grey-700">
                           {chf.format(c.rate_per_session)}
                         </td>
-                        <td className="px-4 py-3 font-semibold text-navy">
+                        <td className="px-4 py-3 font-medium text-navy">
                           {chf.format(amount)}
                         </td>
                         <td className="px-4 py-3">
                           <span
                             className={
                               paid
-                                ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-semibold text-success"
-                                : "inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-semibold text-orange"
+                                ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                : "inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange"
                             }
                           >
                             {paid ? t("payments.paid") : t("payments.pending")}

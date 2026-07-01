@@ -86,7 +86,7 @@ export default async function AdminCampsPage({ params }: Props) {
                     <Users className="h-3 w-3 text-orange" />
                     {filled} / {camp.spotsTotal}
                   </li>
-                  <li className="font-semibold text-navy">
+                  <li className="font-medium text-navy">
                     {moneyFmt(camp.price)}
                   </li>
                 </ul>
@@ -94,7 +94,7 @@ export default async function AdminCampsPage({ params }: Props) {
                 <div>
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-grey-500">{t("filling")}</span>
-                    <span className="font-semibold text-navy">{fillPct}%</span>
+                    <span className="font-medium text-navy">{fillPct}%</span>
                   </div>
                   <div className="mt-1 h-2 overflow-hidden rounded-full bg-grey-100">
                     <div

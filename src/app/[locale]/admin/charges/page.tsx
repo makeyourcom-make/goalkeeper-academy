@@ -83,14 +83,12 @@ export default async function AdminExpensesPage({ params }: Props) {
             <table className="w-full text-sm">
               <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
                 <tr>
-                  <th className="px-4 py-3 font-semibold">{t("table.date")}</th>
-                  <th className="px-4 py-3 font-semibold">
+                  <th className="px-4 py-3 font-medium">{t("table.date")}</th>
+                  <th className="px-4 py-3 font-medium">
                     {t("table.category")}
                   </th>
-                  <th className="px-4 py-3 font-semibold">
-                    {t("table.label")}
-                  </th>
-                  <th className="px-4 py-3 text-right font-semibold">
+                  <th className="px-4 py-3 font-medium">{t("table.label")}</th>
+                  <th className="px-4 py-3 text-right font-medium">
                     {t("table.amount")}
                   </th>
                   <th className="px-4 py-3" />
@@ -113,12 +111,12 @@ export default async function AdminExpensesPage({ params }: Props) {
                         {dateFmt.format(new Date(x.occurred_on))}
                       </td>
                       <td className="px-4 py-3">
-                        <span className="inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-semibold text-orange">
+                        <span className="inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange">
                           {x.category}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-navy">{x.label}</td>
-                      <td className="px-4 py-3 text-right font-semibold text-navy">
+                      <td className="px-4 py-3 text-right font-medium text-navy">
                         {chf.format(Number(x.amount))}
                       </td>
                       <td className="px-4 py-3 text-right">

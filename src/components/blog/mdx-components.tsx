@@ -97,10 +97,10 @@ export const mdxComponents = {
     <ol className="my-4 list-decimal space-y-2 pl-6 text-grey-700" {...props} />
   ),
   a: (props: ComponentProps<"a">) => (
-    <a className="font-semibold text-orange hover:text-orange-600" {...props} />
+    <a className="font-medium text-orange hover:text-orange-600" {...props} />
   ),
   strong: (props: ComponentProps<"strong">) => (
-    <strong className="font-semibold text-navy" {...props} />
+    <strong className="font-medium text-navy" {...props} />
   ),
   blockquote: (props: ComponentProps<"blockquote">) => (
     <blockquote

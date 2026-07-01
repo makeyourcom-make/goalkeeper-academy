@@ -181,7 +181,7 @@ export default async function PlanningPage({ params, searchParams }: Props) {
                       <p className="font-anton text-lg uppercase text-navy">
                         {s.title}
                       </p>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-orange">
+                      <p className="text-xs font-medium uppercase tracking-wide text-orange">
                         {dateFmt.format(new Date(s.starts_at))}
                       </p>
                       <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1 text-sm text-grey-700">
@@ -211,7 +211,7 @@ export default async function PlanningPage({ params, searchParams }: Props) {
                             key={r.child_id}
                             className="flex flex-wrap items-center justify-between gap-3"
                           >
-                            <span className="font-semibold text-navy">
+                            <span className="font-medium text-navy">
                               {r.children?.first_name} {r.children?.last_name}
                             </span>
                             <div className="flex items-center gap-2">
@@ -234,7 +234,7 @@ export default async function PlanningPage({ params, searchParams }: Props) {
                                 <button
                                   type="submit"
                                   className={cn(
-                                    "inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-semibold transition",
+                                    "inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-medium transition",
                                     present
                                       ? "border-success bg-success text-white"
                                       : "border-grey-200 text-grey-700 hover:border-success hover:text-success",
@@ -263,7 +263,7 @@ export default async function PlanningPage({ params, searchParams }: Props) {
                                 <button
                                   type="submit"
                                   className={cn(
-                                    "inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-semibold transition",
+                                    "inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-sm font-medium transition",
                                     absent
                                       ? "border-error bg-error text-white"
                                       : "border-grey-200 text-grey-700 hover:border-error hover:text-error",

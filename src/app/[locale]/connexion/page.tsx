@@ -42,7 +42,7 @@ export default async function SignInPage({ params }: Props) {
           <p className="mt-4 text-sm">
             <Link
               href="/mot-de-passe-oublie"
-              className="font-semibold text-grey-500 hover:text-navy"
+              className="font-medium text-grey-500 hover:text-navy"
             >
               {t("forgotPassword")}
             </Link>
@@ -52,7 +52,7 @@ export default async function SignInPage({ params }: Props) {
             {t("noAccount")}{" "}
             <Link
               href="/inscription"
-              className="font-semibold text-orange hover:text-orange-600"
+              className="font-medium text-orange hover:text-orange-600"
             >
               {t("createAccount")}
             </Link>

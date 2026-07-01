@@ -90,13 +90,13 @@ export default async function AdminInvoicesPage({ params }: Props) {
           <table className="w-full text-sm">
             <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
               <tr>
-                <th className="px-4 py-3 font-semibold">{t("table.number")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.client")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.type")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.amount")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.status")}</th>
-                <th className="px-4 py-3 font-semibold">{t("table.issued")}</th>
-                <th className="px-4 py-3 text-right font-semibold">
+                <th className="px-4 py-3 font-medium">{t("table.number")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.client")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.type")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.amount")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.status")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.issued")}</th>
+                <th className="px-4 py-3 text-right font-medium">
                   {t("table.actions")}
                 </th>
               </tr>
@@ -114,7 +114,7 @@ export default async function AdminInvoicesPage({ params }: Props) {
               ) : (
                 list.map((invoice) => (
                   <tr key={invoice.id} className="hover:bg-grey-100/40">
-                    <td className="px-4 py-3 font-mono text-xs font-semibold text-navy">
+                    <td className="px-4 py-3 font-mono text-xs font-medium text-navy">
                       {invoice.invoice_number}
                     </td>
                     <td className="px-4 py-3 text-grey-700">
@@ -138,12 +138,12 @@ export default async function AdminInvoicesPage({ params }: Props) {
                     <td className="px-4 py-3 text-grey-700">
                       {t(`types.${invoice.type}`)}
                     </td>
-                    <td className="px-4 py-3 font-semibold text-navy">
+                    <td className="px-4 py-3 font-medium text-navy">
                       {moneyFmt(invoice.amount_cents, invoice.currency)}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${STATUS_STYLES[invoice.status]}`}
+                        className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[invoice.status]}`}
                       >
                         {t(`statuses.${invoice.status}`)}
                       </span>
