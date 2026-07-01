@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
 
-const PARTNERS = ["FC Aigle", "FC Saint-Maurice", "Giana Stop & Shoot"];
+const PARTNERS = ["FC Aigle", "Giana Stop & Shoot"];
 
 export async function HomePartners() {
   const t = await getTranslations("HomePage.partners");
@@ -18,11 +18,11 @@ export async function HomePartners() {
           <p className="text-grey-500">{t("subtitle")}</p>
         </div>
 
-        <ul className="grid grid-cols-2 gap-6 md:grid-cols-5">
+        <ul className="flex flex-wrap justify-center gap-6">
           {PARTNERS.map((name) => (
             <li
               key={name}
-              className="flex h-20 items-center justify-center rounded-lg border border-grey-300 bg-white px-4 text-center font-anton text-sm uppercase tracking-wide text-navy lg:text-base"
+              className="flex h-20 w-full max-w-xs items-center justify-center rounded-lg border border-grey-300 bg-white px-4 text-center font-anton text-sm uppercase tracking-wide text-navy sm:w-64 lg:text-base"
             >
               {name}
             </li>
