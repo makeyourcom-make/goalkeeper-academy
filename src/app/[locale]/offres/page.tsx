@@ -101,7 +101,7 @@ export default async function OffresPage({ params }: Props) {
                       <Badge variant={featured ? "orange" : "muted"}>
                         {t(`${base}.eyebrow`)}
                       </Badge>
-                      <h3 className="mt-4 font-anton text-h3 uppercase text-navy">
+                      <h3 className="mt-4 font-anton text-h3 uppercase leading-tight text-navy [text-wrap:balance]">
                         {t(`${base}.title`)}
                       </h3>
                       <p className="mt-2 flex items-baseline gap-2">
@@ -123,7 +123,7 @@ export default async function OffresPage({ params }: Props) {
                           </li>
                         ))}
                       </ul>
-                      <div className="mt-6">
+                      <div className="mt-auto pt-6">
                         <Button
                           asChild
                           variant={featured ? "primary" : "outline"}

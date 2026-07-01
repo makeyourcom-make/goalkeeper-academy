@@ -60,6 +60,23 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    // The blog was renamed to "Actualités" (news). Keep old URLs working.
+    return [
+      { source: "/fr/blog", destination: "/fr/actualites", permanent: true },
+      {
+        source: "/fr/blog/:slug",
+        destination: "/fr/actualites/:slug",
+        permanent: true,
+      },
+      { source: "/en/blog", destination: "/en/news", permanent: true },
+      {
+        source: "/en/blog/:slug",
+        destination: "/en/news/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

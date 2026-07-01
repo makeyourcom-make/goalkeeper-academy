@@ -105,7 +105,7 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
                         })}
                       </span>
                     </div>
-                    <h2 className="font-anton text-xl uppercase text-navy">
+                    <h2 className="font-anton text-xl uppercase leading-tight text-navy [text-wrap:balance]">
                       <Link
                         href={{
                           pathname: "/blog/[slug]",

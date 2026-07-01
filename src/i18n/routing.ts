@@ -38,8 +38,14 @@ export const routing = defineRouting({
       fr: "/stages/[slug]/reservation/confirmation",
       en: "/camps/[slug]/booking/confirmation",
     },
-    "/blog": "/blog",
-    "/blog/[slug]": "/blog/[slug]",
+    "/blog": {
+      fr: "/actualites",
+      en: "/news",
+    },
+    "/blog/[slug]": {
+      fr: "/actualites/[slug]",
+      en: "/news/[slug]",
+    },
     "/contact": "/contact",
     "/connexion": {
       fr: "/connexion",
