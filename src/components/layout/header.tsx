@@ -150,7 +150,7 @@ export function Header({
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-semibold text-navy transition-colors hover:text-orange"
+              className="text-sm font-medium text-navy transition-colors hover:text-orange"
             >
               {t(`nav.${item.key}`)}
             </Link>
@@ -195,7 +195,7 @@ export function Header({
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-3 text-base font-semibold text-navy hover:bg-grey-100"
+                className="rounded-lg px-3 py-3 text-base font-medium text-navy hover:bg-grey-100"
               >
                 {t(`nav.${item.key}`)}
               </Link>

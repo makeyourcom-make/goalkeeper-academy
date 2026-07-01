@@ -205,7 +205,7 @@ export default async function AcademiePage({ params }: Props) {
                 <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange/10 text-orange">
                   <Icon className="h-6 w-6" />
                 </span>
-                <h3 className="font-anton text-xl uppercase text-navy">
+                <h3 className="font-anton text-xl uppercase leading-tight text-navy [text-wrap:balance] lg:min-h-[3.25rem]">
                   {t(`method.pillars.${key}.title`)}
                 </h3>
                 <p className="text-justify text-sm text-grey-700">

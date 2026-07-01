@@ -153,7 +153,8 @@
           "author": "Marc D.",
           "role": "Entraîneur FC Monthey"
         }
-      }
+      },
+      "comingSoon": "Les premiers avis de nos familles arriveront très bientôt."
     },
     "partners": {
       "eyebrow": "Partenaires & clubs",
@@ -181,7 +182,8 @@
           "title": "Retour sur le stage de Pâques 2026",
           "excerpt": "Trois jours d'intensité, deux lieux, 24 gardiens. Le résumé en images et chiffres clés."
         }
-      }
+      },
+      "comingSoon": "Nos premiers articles arrivent très vite. Restez connectés !"
     },
     "ctaFinal": {
       "title": "Prêt à passer dans les buts ?",
@@ -1432,14 +1434,14 @@
       "stats": {
         "keepers": {
           "value": "60+",
-          "label": "Gardiens formés"
+          "label": "Diplômés"
         },
         "years": {
-          "value": "8 ans",
+          "value": "+20 ans",
           "label": "D'expérience"
         },
         "clubs": {
-          "value": "12",
+          "value": "1",
           "label": "Clubs partenaires"
         }
       }

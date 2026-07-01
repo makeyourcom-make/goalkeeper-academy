@@ -153,7 +153,8 @@
           "author": "Marc D.",
           "role": "Coach, FC Monthey"
         }
-      }
+      },
+      "comingSoon": "The first reviews from our families are coming very soon."
     },
     "partners": {
       "eyebrow": "Partners & clubs",
@@ -181,7 +182,8 @@
           "title": "Easter camp 2026 wrap-up",
           "excerpt": "Three days of intensity, two venues, 24 goalkeepers. The recap in pictures and key numbers."
         }
-      }
+      },
+      "comingSoon": "Our first articles are coming very soon. Stay tuned!"
     },
     "ctaFinal": {
       "title": "Ready to step between the posts?",
@@ -1432,14 +1434,14 @@
       "stats": {
         "keepers": {
           "value": "60+",
-          "label": "Goalkeepers trained"
+          "label": "Certified"
         },
         "years": {
-          "value": "8 years",
+          "value": "20+ yrs",
           "label": "Of experience"
         },
         "clubs": {
-          "value": "12",
+          "value": "1",
           "label": "Partner clubs"
         }
       }

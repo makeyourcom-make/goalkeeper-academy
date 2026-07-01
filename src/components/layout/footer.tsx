@@ -51,24 +51,13 @@ export function Footer() {
       <div className="container py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="flex flex-col gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-3"
-              aria-label="The Last Line"
-            >
-              <Image
-                src="/logos/logo-icon-white.png"
-                alt="The Last Line"
-                width={236}
-                height={116}
-                className="h-12 w-auto"
-              />
+            <Link href="/" aria-label="The Last Line" className="inline-block">
               <Image
                 src="/logos/wordmark-white.png"
                 alt="The Last Line — Goalkeeper Academy"
                 width={1660}
                 height={181}
-                className="h-9 w-auto"
+                className="h-8 w-auto max-w-full"
               />
             </Link>
             <p className="max-w-sm text-sm text-white/70">{t("tagline")}</p>
@@ -121,7 +110,7 @@ export function Footer() {
               href="https://makeyourcom.ch"
               target="_blank"
               rel="noreferrer noopener"
-              className="font-semibold text-white/80 transition-colors hover:text-orange"
+              className="font-normal text-white/80 transition-colors hover:text-orange"
             >
               @MakeYourCom
             </a>
