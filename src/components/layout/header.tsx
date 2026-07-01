@@ -126,14 +126,19 @@ export function Header({
         >
           <Image
             src="/logos/Logo-transparent.png"
-            alt="Goalkeeper Academy"
+            alt="The Last Line"
             width={160}
             height={160}
             priority
             className="h-14 w-auto lg:h-20"
           />
-          <span className="hidden font-anton text-lg uppercase tracking-wide text-navy sm:inline">
-            Goalkeeper Academy
+          <span className="hidden flex-col leading-none sm:flex">
+            <span className="font-anton text-lg uppercase tracking-wide text-navy">
+              The Last Line
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-grey-500">
+              Goalkeeper Academy
+            </span>
           </span>
         </Link>
 

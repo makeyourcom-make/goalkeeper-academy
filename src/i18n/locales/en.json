@@ -1,12 +1,12 @@
 {
   "Metadata": {
-    "title": "Goalkeeper Academy",
-    "titleTemplate": "%s | Goalkeeper Academy",
+    "title": "The Last Line — Goalkeeper Academy",
+    "titleTemplate": "%s | The Last Line",
     "description": "Goalkeeper academy in the Chablais region. Specialized training for goalkeepers, from age 10 to senior."
   },
   "Header": {
     "skipToContent": "Skip to content",
-    "homeAriaLabel": "Goalkeeper Academy home",
+    "homeAriaLabel": "The Last Line home",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "primaryNav": "Primary navigation",
@@ -25,8 +25,8 @@
   "Footer": {
     "tagline": "The goalkeeper academy of the Chablais region. Specialized training for goalkeepers, from age 10 to senior.",
     "location": "Chablais, Switzerland",
-    "email": "contact@goalkeeperacademy.ch",
-    "copyright": "© {year} Goalkeeper Academy. All rights reserved.",
+    "email": "contact@thelastline.ch",
+    "copyright": "© {year} The Last Line. All rights reserved.",
     "columns": {
       "academy": {
         "title": "The academy",
@@ -149,7 +149,7 @@
           "role": "U15 goalkeeper"
         },
         "club": {
-          "quote": "Goalkeeper Academy handles the specific training of our keepers, which frees up valuable time for our team work.",
+          "quote": "The Last Line handles the specific training of our keepers, which frees up valuable time for our team work.",
           "author": "Marc D.",
           "role": "Coach, FC Monthey"
         }
@@ -192,7 +192,7 @@
   },
   "CampsPage": {
     "metaTitle": "Camps & events",
-    "metaDescription": "Goalkeeper camps during school holidays: Easter, summer, autumn. All Goalkeeper Academy camps at a glance.",
+    "metaDescription": "Goalkeeper camps during school holidays: Easter, summer, autumn. All The Last Line camps at a glance.",
     "hero": {
       "eyebrow": "Camps & events",
       "title": "Intensive holidays, lasting progress",
@@ -243,7 +243,7 @@
     },
     "included": {
       "title": "Included in the price",
-      "body": "UEFA-certified coaching staff, lunch, snacks, Goalkeeper Academy t-shirt and bottle, individual technical report."
+      "body": "UEFA-certified coaching staff, lunch, snacks, The Last Line t-shirt and bottle, individual technical report."
     },
     "price": {
       "label": "Price",
@@ -282,7 +282,7 @@
       "location": "Location",
       "participant": "Participant",
       "email": "Email",
-      "terms": "By continuing you agree to Goalkeeper Academy's terms of sale and privacy policy.",
+      "terms": "By continuing you agree to The Last Line's terms of sale and privacy policy.",
       "continue": "Proceed to payment"
     },
     "step3": {
@@ -348,7 +348,7 @@
   },
   "GianaPage": {
     "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "The Giana Stop & Shoot, the French-speaking Swiss tournament entirely dedicated to goalkeepers, created by Gianluca Giannarelli, co-founder of Goalkeeper Academy.",
+    "metaDescription": "The Giana Stop & Shoot, the French-speaking Swiss tournament entirely dedicated to goalkeepers, created by Gianluca Giannarelli, co-founder of The Last Line.",
     "hero": {
       "eyebrow": "The end-of-season event",
       "title": "Giana Stop & Shoot",
@@ -691,18 +691,18 @@
     "placeholderNotice": "Template wording. It must be reviewed by your legal advisor before publishing. Factual elements (legal name, address, host) need to be filled in.",
     "imprint": {
       "metaTitle": "Legal notice",
-      "metaDescription": "Legal notice and editorial information for the Goalkeeper Academy website.",
+      "metaDescription": "Legal notice and editorial information for the The Last Line website.",
       "title": "Legal notice",
       "lastUpdated": "2026-04-10",
-      "intro": "This legal notice applies to goalkeeperacademy.ch and identifies the publisher, the host and the general terms of use.",
+      "intro": "This legal notice applies to thelastline.ch and identifies the publisher, the host and the general terms of use.",
       "sections": [
         {
           "heading": "Publisher",
-          "body": "Goalkeeper Academy, legal name to be confirmed. Headquarters: Chablais, Switzerland. Email: contact@goalkeeperacademy.ch. Swiss UID: to be confirmed."
+          "body": "The Last Line, legal name to be confirmed. Headquarters: Chablais, Switzerland. Email: contact@thelastline.ch. Swiss UID: to be confirmed."
         },
         {
           "heading": "Director of publication",
-          "body": "The director of publication is the legal representative of Goalkeeper Academy."
+          "body": "The director of publication is the legal representative of The Last Line."
         },
         {
           "heading": "Hosting",
@@ -714,16 +714,16 @@
         },
         {
           "heading": "Liability",
-          "body": "Goalkeeper Academy strives to ensure the accuracy of published information but cannot be held liable for errors, omissions or temporary unavailability of the website."
+          "body": "The Last Line strives to ensure the accuracy of published information but cannot be held liable for errors, omissions or temporary unavailability of the website."
         }
       ]
     },
     "terms": {
       "metaTitle": "Terms of sale",
-      "metaDescription": "General terms of sale applicable to Goalkeeper Academy services.",
+      "metaDescription": "General terms of sale applicable to The Last Line services.",
       "title": "Terms of sale",
       "lastUpdated": "2026-04-10",
-      "intro": "These terms apply to any service ordered from Goalkeeper Academy: annual and monthly programs, private lessons, camps and club contracts.",
+      "intro": "These terms apply to any service ordered from The Last Line: annual and monthly programs, private lessons, camps and club contracts.",
       "sections": [
         {
           "heading": "Purpose",
@@ -739,7 +739,7 @@
         },
         {
           "heading": "Liability",
-          "body": "Goalkeeper Academy carries professional liability insurance. The academy cannot be held liable in cases of force majeure or non-compliance with instructions by participants."
+          "body": "The Last Line carries professional liability insurance. The academy cannot be held liable in cases of force majeure or non-compliance with instructions by participants."
         },
         {
           "heading": "Governing law",
@@ -752,7 +752,7 @@
       "metaDescription": "Privacy policy compliant with the Swiss FADP and the European GDPR.",
       "title": "Privacy policy",
       "lastUpdated": "2026-04-10",
-      "intro": "Goalkeeper Academy takes the protection of your personal data very seriously, in line with the new Swiss Federal Act on Data Protection (FADP) and the European General Data Protection Regulation (GDPR).",
+      "intro": "The Last Line takes the protection of your personal data very seriously, in line with the new Swiss Federal Act on Data Protection (FADP) and the European General Data Protection Regulation (GDPR).",
       "sections": [
         {
           "heading": "Data collected",
@@ -768,7 +768,7 @@
         },
         {
           "heading": "Your rights",
-          "body": "You have the right to access, rectify, delete and port your data. To exercise these rights, write to contact@goalkeeperacademy.ch."
+          "body": "You have the right to access, rectify, delete and port your data. To exercise these rights, write to contact@thelastline.ch."
         },
         {
           "heading": "Security",
@@ -778,10 +778,10 @@
     },
     "cookies": {
       "metaTitle": "Cookie policy",
-      "metaDescription": "Cookie usage policy for the Goalkeeper Academy website.",
+      "metaDescription": "Cookie usage policy for the The Last Line website.",
       "title": "Cookie policy",
       "lastUpdated": "2026-04-10",
-      "intro": "This page describes how Goalkeeper Academy uses cookies and similar technologies on its website.",
+      "intro": "This page describes how The Last Line uses cookies and similar technologies on its website.",
       "sections": [
         {
           "heading": "What is a cookie?",
@@ -805,7 +805,7 @@
   "Auth": {
     "signIn": {
       "metaTitle": "Sign in",
-      "metaDescription": "Sign in to your Goalkeeper Academy account.",
+      "metaDescription": "Sign in to your The Last Line account.",
       "eyebrow": "Sign in",
       "title": "Access your account",
       "subtitle": "Sign in with your email and password.",
@@ -827,7 +827,7 @@
     },
     "signUp": {
       "metaTitle": "Sign up",
-      "metaDescription": "Create your Goalkeeper Academy account.",
+      "metaDescription": "Create your The Last Line account.",
       "eyebrow": "Sign up",
       "title": "Create your account",
       "subtitle": "Choose your profile and create your account.",
@@ -894,7 +894,7 @@
   },
   "Account": {
     "metaTitle": "My account",
-    "metaDescription": "Goalkeeper Academy parent dashboard.",
+    "metaDescription": "The Last Line parent dashboard.",
     "hero": {
       "eyebrow": "Member area",
       "greeting": "Hello {name}",
@@ -927,7 +927,7 @@
     "logout": "Sign out",
     "profile": {
       "metaTitle": "My profile",
-      "metaDescription": "Update your Goalkeeper Academy personal information.",
+      "metaDescription": "Update your The Last Line personal information.",
       "eyebrow": "My account",
       "title": "My information",
       "subtitle": "Update your contact details and communication preferences.",
@@ -940,7 +940,7 @@
       "language": "Preferred language",
       "languageFr": "Français",
       "languageEn": "English",
-      "marketingConsent": "I'd like to receive Goalkeeper Academy news and offers by email.",
+      "marketingConsent": "I'd like to receive The Last Line news and offers by email.",
       "submit": "Save",
       "submitting": "Saving…",
       "success": "Profile updated successfully.",
@@ -984,7 +984,7 @@
       "dominantHand": "Dominant hand",
       "medicalNotes": "Medical information",
       "medicalNotesPlaceholder": "Allergies, current treatment, contraindications…",
-      "photoConsent": "I allow Goalkeeper Academy to photograph/film my child during sessions and camps.",
+      "photoConsent": "I allow The Last Line to photograph/film my child during sessions and camps.",
       "notSpecified": "Not specified",
       "levels": {
         "debutant": "Beginner",
@@ -1028,7 +1028,7 @@
     },
     "invoices": {
       "metaTitle": "My invoices",
-      "metaDescription": "View and download your Goalkeeper Academy invoices.",
+      "metaDescription": "View and download your The Last Line invoices.",
       "eyebrow": "My account",
       "title": "My invoices",
       "subtitle": "Review your payment history and download your invoices as PDF.",
@@ -1074,7 +1074,7 @@
   },
   "BlogPage": {
     "metaTitle": "Blog",
-    "metaDescription": "Tips, analysis and behind-the-scenes goalkeeper training stories from Goalkeeper Academy.",
+    "metaDescription": "Tips, analysis and behind-the-scenes goalkeeper training stories from The Last Line.",
     "hero": {
       "eyebrow": "Blog",
       "title": "The academy journal",
@@ -1100,7 +1100,7 @@
   },
   "ContactPage": {
     "metaTitle": "Contact",
-    "metaDescription": "Contact Goalkeeper Academy to book a trial session, request a club quote or ask any question about our programs.",
+    "metaDescription": "Contact The Last Line to book a trial session, request a club quote or ask any question about our programs.",
     "hero": {
       "eyebrow": "Contact",
       "title": "Let's talk about your goalkeeper",
@@ -1152,7 +1152,7 @@
       "items": {
         "email": {
           "label": "Email",
-          "value": "contact@goalkeeperacademy.ch"
+          "value": "contact@thelastline.ch"
         },
         "phone": {
           "label": "Phone",
@@ -1353,7 +1353,7 @@
   },
   "AcademyPage": {
     "metaTitle": "The academy",
-    "metaDescription": "Discover Goalkeeper Academy: our mission, our coaching team, our pedagogical method and our facilities in the Chablais region.",
+    "metaDescription": "Discover The Last Line: our mission, our coaching team, our pedagogical method and our facilities in the Chablais region.",
     "hero": {
       "eyebrow": "The academy",
       "title": "Goalkeeper specialists, from the ground up",
@@ -1363,7 +1363,7 @@
     "mission": {
       "eyebrow": "Our mission",
       "title": "Give every goalkeeper the tools to express themselves",
-      "intro": "Goalkeeper Academy was born from a simple observation: in most clubs, goalkeepers receive little to no specific training. We fill that gap with a structured curriculum, specialized coaches and long-term follow-up.",
+      "intro": "The Last Line was born from a simple observation: in most clubs, goalkeepers receive little to no specific training. We fill that gap with a structured curriculum, specialized coaches and long-term follow-up.",
       "stats": {
         "keepers": {
           "value": "60+",
@@ -1584,7 +1584,7 @@
       "viewInvoices": "View my invoices"
     },
     "mail": {
-      "subject": "Registration request Goalkeeper Academy"
+      "subject": "Registration request The Last Line"
     },
     "from": "from",
     "paid": {

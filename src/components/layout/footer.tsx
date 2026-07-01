@@ -54,17 +54,22 @@ export function Footer() {
             <Link
               href="/"
               className="flex items-center gap-3"
-              aria-label="Goalkeeper Academy"
+              aria-label="The Last Line"
             >
               <Image
                 src="/logos/Logo-transparent.png"
-                alt="Goalkeeper Academy"
+                alt="The Last Line"
                 width={56}
                 height={56}
                 className="h-14 w-auto"
               />
-              <span className="font-anton text-xl uppercase tracking-wide">
-                Goalkeeper Academy
+              <span className="flex flex-col leading-none">
+                <span className="font-anton text-xl uppercase tracking-wide">
+                  The Last Line
+                </span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-white/60">
+                  Goalkeeper Academy · by Giana &amp; Arthur
+                </span>
               </span>
             </Link>
             <p className="max-w-sm text-sm text-white/70">{t("tagline")}</p>

@@ -28,11 +28,11 @@ export async function GET(
   const posts = getAllPosts(locale);
 
   const channelTitle =
-    locale === "en" ? "Goalkeeper Academy Blog" : "Blog Goalkeeper Academy";
+    locale === "en" ? "The Last Line Blog" : "Blog The Last Line";
   const channelDescription =
     locale === "en"
-      ? "Tips, analysis and behind-the-scenes goalkeeper training stories from Goalkeeper Academy."
-      : "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés Goalkeeper Academy.";
+      ? "Tips, analysis and behind-the-scenes goalkeeper training stories from The Last Line."
+      : "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés The Last Line.";
   const blogUrl = `${baseUrl}${getPathname({ href: "/blog", locale })}`;
 
   const items = posts

@@ -442,7 +442,7 @@ export function ReservationFlow({
                   <p className="text-sm text-grey-700">{t("step3.qr.body")}</p>
                   <ul className="mt-2 flex flex-col gap-1 text-xs text-grey-500">
                     <li>{t("step3.qr.iban")} CH00 0000 0000 0000 0000 0</li>
-                    <li>{t("step3.qr.beneficiary")} Goalkeeper Academy SA</li>
+                    <li>{t("step3.qr.beneficiary")} The Last Line SA</li>
                     <li>
                       {t("step3.qr.due")} 30 {t("step3.qr.days")}
                     </li>

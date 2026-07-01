@@ -1,12 +1,12 @@
 {
   "Metadata": {
-    "title": "Goalkeeper Academy",
-    "titleTemplate": "%s | Goalkeeper Academy",
+    "title": "The Last Line — Goalkeeper Academy",
+    "titleTemplate": "%s | The Last Line",
     "description": "Académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors."
   },
   "Header": {
     "skipToContent": "Aller au contenu",
-    "homeAriaLabel": "Accueil Goalkeeper Academy",
+    "homeAriaLabel": "Accueil The Last Line",
     "openMenu": "Ouvrir le menu",
     "closeMenu": "Fermer le menu",
     "primaryNav": "Navigation principale",
@@ -25,8 +25,8 @@
   "Footer": {
     "tagline": "L'académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors.",
     "location": "Chablais, Suisse",
-    "email": "contact@goalkeeperacademy.ch",
-    "copyright": "© {year} Goalkeeper Academy. Tous droits réservés.",
+    "email": "contact@thelastline.ch",
+    "copyright": "© {year} The Last Line. Tous droits réservés.",
     "columns": {
       "academy": {
         "title": "L'académie",
@@ -149,7 +149,7 @@
           "role": "Gardien U15"
         },
         "club": {
-          "quote": "Goalkeeper Academy s'occupe de la formation spécifique de nos gardiens, ça nous libère un temps précieux pour le travail collectif.",
+          "quote": "The Last Line s'occupe de la formation spécifique de nos gardiens, ça nous libère un temps précieux pour le travail collectif.",
           "author": "Marc D.",
           "role": "Entraîneur FC Monthey"
         }
@@ -192,7 +192,7 @@
   },
   "CampsPage": {
     "metaTitle": "Stages & événements",
-    "metaDescription": "Stages de gardiens pendant les vacances scolaires : Pâques, été, automne. Tous les camps de Goalkeeper Academy en un coup d'œil.",
+    "metaDescription": "Stages de gardiens pendant les vacances scolaires : Pâques, été, automne. Tous les camps de The Last Line en un coup d'œil.",
     "hero": {
       "eyebrow": "Stages & événements",
       "title": "Vacances intensives, progression durable",
@@ -243,7 +243,7 @@
     },
     "included": {
       "title": "Inclus dans le prix",
-      "body": "Encadrement par coachs diplômés UEFA, repas de midi, collations, t-shirt et gourde Goalkeeper Academy, bilan technique individualisé."
+      "body": "Encadrement par coachs diplômés UEFA, repas de midi, collations, t-shirt et gourde The Last Line, bilan technique individualisé."
     },
     "price": {
       "label": "Tarif",
@@ -282,7 +282,7 @@
       "location": "Lieu",
       "participant": "Participant",
       "email": "E-mail",
-      "terms": "En continuant, vous acceptez les conditions générales de vente de Goalkeeper Academy et notre politique de confidentialité.",
+      "terms": "En continuant, vous acceptez les conditions générales de vente de The Last Line et notre politique de confidentialité.",
       "continue": "Procéder au paiement"
     },
     "step3": {
@@ -348,7 +348,7 @@
   },
   "GianaPage": {
     "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "Le Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but, créé par Gianluca Giannarelli, co-fondateur de Goalkeeper Academy.",
+    "metaDescription": "Le Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but, créé par Gianluca Giannarelli, co-fondateur de The Last Line.",
     "hero": {
       "eyebrow": "L'évènement de la fin d'année",
       "title": "Giana Stop & Shoot",
@@ -691,18 +691,18 @@
     "placeholderNotice": "Texte type à valider par votre conseiller juridique avant publication. Les éléments factuels (raison sociale, adresse, hébergeur) doivent être complétés.",
     "imprint": {
       "metaTitle": "Mentions légales",
-      "metaDescription": "Mentions légales et informations éditoriales du site Goalkeeper Academy.",
+      "metaDescription": "Mentions légales et informations éditoriales du site The Last Line.",
       "title": "Mentions légales",
       "lastUpdated": "2026-04-10",
-      "intro": "Les présentes mentions légales s'appliquent au site goalkeeperacademy.ch et précisent l'identité de l'éditeur, l'hébergeur et les conditions générales d'utilisation.",
+      "intro": "Les présentes mentions légales s'appliquent au site thelastline.ch et précisent l'identité de l'éditeur, l'hébergeur et les conditions générales d'utilisation.",
       "sections": [
         {
           "heading": "Éditeur du site",
-          "body": "Goalkeeper Academy, raison sociale à compléter. Siège : Chablais, Suisse. Email : contact@goalkeeperacademy.ch. Numéro IDE : à compléter."
+          "body": "The Last Line, raison sociale à compléter. Siège : Chablais, Suisse. Email : contact@thelastline.ch. Numéro IDE : à compléter."
         },
         {
           "heading": "Directeur de la publication",
-          "body": "Le directeur de la publication est le représentant légal de Goalkeeper Academy."
+          "body": "Le directeur de la publication est le représentant légal de The Last Line."
         },
         {
           "heading": "Hébergement",
@@ -714,16 +714,16 @@
         },
         {
           "heading": "Responsabilité",
-          "body": "Goalkeeper Academy s'efforce d'assurer l'exactitude des informations publiées mais ne peut être tenue responsable des erreurs, omissions ou de l'indisponibilité temporaire du site."
+          "body": "The Last Line s'efforce d'assurer l'exactitude des informations publiées mais ne peut être tenue responsable des erreurs, omissions ou de l'indisponibilité temporaire du site."
         }
       ]
     },
     "terms": {
       "metaTitle": "Conditions générales de vente",
-      "metaDescription": "Conditions générales de vente applicables aux prestations de Goalkeeper Academy.",
+      "metaDescription": "Conditions générales de vente applicables aux prestations de The Last Line.",
       "title": "Conditions générales de vente",
       "lastUpdated": "2026-04-10",
-      "intro": "Les présentes conditions s'appliquent à toute commande de prestation auprès de Goalkeeper Academy : formules annuelles, mensuelles, cours particuliers, stages et contrats club.",
+      "intro": "Les présentes conditions s'appliquent à toute commande de prestation auprès de The Last Line : formules annuelles, mensuelles, cours particuliers, stages et contrats club.",
       "sections": [
         {
           "heading": "Objet",
@@ -739,7 +739,7 @@
         },
         {
           "heading": "Responsabilité",
-          "body": "Goalkeeper Academy souscrit une assurance responsabilité civile professionnelle. La responsabilité de l'académie ne saurait être engagée en cas de force majeure ou de non-respect des consignes par le participant."
+          "body": "The Last Line souscrit une assurance responsabilité civile professionnelle. La responsabilité de l'académie ne saurait être engagée en cas de force majeure ou de non-respect des consignes par le participant."
         },
         {
           "heading": "Droit applicable",
@@ -752,7 +752,7 @@
       "metaDescription": "Politique de confidentialité conforme à la nLPD suisse et au RGPD européen.",
       "title": "Politique de confidentialité",
       "lastUpdated": "2026-04-10",
-      "intro": "Goalkeeper Academy attache une importance particulière à la protection de vos données personnelles, conformément à la nouvelle Loi suisse sur la protection des données (nLPD) et au Règlement général sur la protection des données (RGPD).",
+      "intro": "The Last Line attache une importance particulière à la protection de vos données personnelles, conformément à la nouvelle Loi suisse sur la protection des données (nLPD) et au Règlement général sur la protection des données (RGPD).",
       "sections": [
         {
           "heading": "Données collectées",
@@ -768,7 +768,7 @@
         },
         {
           "heading": "Vos droits",
-          "body": "Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité. Pour exercer ces droits, écrivez à contact@goalkeeperacademy.ch."
+          "body": "Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité. Pour exercer ces droits, écrivez à contact@thelastline.ch."
         },
         {
           "heading": "Sécurité",
@@ -778,10 +778,10 @@
     },
     "cookies": {
       "metaTitle": "Politique cookies",
-      "metaDescription": "Politique d'utilisation des cookies sur le site Goalkeeper Academy.",
+      "metaDescription": "Politique d'utilisation des cookies sur le site The Last Line.",
       "title": "Politique cookies",
       "lastUpdated": "2026-04-10",
-      "intro": "Cette page décrit comment Goalkeeper Academy utilise les cookies et technologies similaires sur son site web.",
+      "intro": "Cette page décrit comment The Last Line utilise les cookies et technologies similaires sur son site web.",
       "sections": [
         {
           "heading": "Qu'est-ce qu'un cookie ?",
@@ -805,7 +805,7 @@
   "Auth": {
     "signIn": {
       "metaTitle": "Connexion",
-      "metaDescription": "Connectez-vous à votre compte Goalkeeper Academy.",
+      "metaDescription": "Connectez-vous à votre compte The Last Line.",
       "eyebrow": "Connexion",
       "title": "Accédez à votre espace",
       "subtitle": "Connectez-vous avec votre email et votre mot de passe.",
@@ -827,7 +827,7 @@
     },
     "signUp": {
       "metaTitle": "Inscription",
-      "metaDescription": "Créez votre compte Goalkeeper Academy.",
+      "metaDescription": "Créez votre compte The Last Line.",
       "eyebrow": "Inscription",
       "title": "Créez votre compte",
       "subtitle": "Choisissez votre profil et créez votre compte.",
@@ -894,7 +894,7 @@
   },
   "Account": {
     "metaTitle": "Mon compte",
-    "metaDescription": "Tableau de bord parent Goalkeeper Academy.",
+    "metaDescription": "Tableau de bord parent The Last Line.",
     "hero": {
       "eyebrow": "Espace membre",
       "greeting": "Bonjour {name}",
@@ -927,7 +927,7 @@
     "logout": "Se déconnecter",
     "profile": {
       "metaTitle": "Mon profil",
-      "metaDescription": "Modifiez vos informations personnelles Goalkeeper Academy.",
+      "metaDescription": "Modifiez vos informations personnelles The Last Line.",
       "eyebrow": "Mon compte",
       "title": "Mes informations",
       "subtitle": "Mettez à jour vos coordonnées et vos préférences de communication.",
@@ -940,7 +940,7 @@
       "language": "Langue préférée",
       "languageFr": "Français",
       "languageEn": "English",
-      "marketingConsent": "Je souhaite recevoir les actualités et offres de Goalkeeper Academy par e-mail.",
+      "marketingConsent": "Je souhaite recevoir les actualités et offres de The Last Line par e-mail.",
       "submit": "Enregistrer",
       "submitting": "Enregistrement…",
       "success": "Profil mis à jour avec succès.",
@@ -984,7 +984,7 @@
       "dominantHand": "Main dominante",
       "medicalNotes": "Informations médicales",
       "medicalNotesPlaceholder": "Allergies, traitement en cours, contre-indications…",
-      "photoConsent": "J'autorise Goalkeeper Academy à photographier/filmer mon enfant lors des séances et stages.",
+      "photoConsent": "J'autorise The Last Line à photographier/filmer mon enfant lors des séances et stages.",
       "notSpecified": "Non précisé",
       "levels": {
         "debutant": "Débutant",
@@ -1028,7 +1028,7 @@
     },
     "invoices": {
       "metaTitle": "Mes factures",
-      "metaDescription": "Consultez et téléchargez vos factures Goalkeeper Academy.",
+      "metaDescription": "Consultez et téléchargez vos factures The Last Line.",
       "eyebrow": "Mon compte",
       "title": "Mes factures",
       "subtitle": "Consultez l'historique de vos paiements et téléchargez vos factures au format PDF.",
@@ -1074,7 +1074,7 @@
   },
   "BlogPage": {
     "metaTitle": "Blog",
-    "metaDescription": "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés Goalkeeper Academy.",
+    "metaDescription": "Conseils, analyses et coulisses de la formation de gardien de but. Articles signés The Last Line.",
     "hero": {
       "eyebrow": "Blog",
       "title": "Le journal de l'académie",
@@ -1100,7 +1100,7 @@
   },
   "ContactPage": {
     "metaTitle": "Contact",
-    "metaDescription": "Contactez Goalkeeper Academy pour réserver une séance d'essai, demander un devis club ou poser vos questions sur nos formules.",
+    "metaDescription": "Contactez The Last Line pour réserver une séance d'essai, demander un devis club ou poser vos questions sur nos formules.",
     "hero": {
       "eyebrow": "Contact",
       "title": "Parlons de votre gardien",
@@ -1152,7 +1152,7 @@
       "items": {
         "email": {
           "label": "Email",
-          "value": "contact@goalkeeperacademy.ch"
+          "value": "contact@thelastline.ch"
         },
         "phone": {
           "label": "Téléphone",
@@ -1353,7 +1353,7 @@
   },
   "AcademyPage": {
     "metaTitle": "L'académie",
-    "metaDescription": "Découvrez Goalkeeper Academy : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais.",
+    "metaDescription": "Découvrez The Last Line : notre mission, notre équipe de coachs, notre méthode pédagogique et nos infrastructures dans le Chablais.",
     "hero": {
       "eyebrow": "L'académie",
       "title": "Spécialistes du gardien depuis la base",
@@ -1363,7 +1363,7 @@
     "mission": {
       "eyebrow": "Notre mission",
       "title": "Donner à chaque gardien les outils pour s'exprimer",
-      "intro": "Goalkeeper Academy est née d'un constat simple : dans la majorité des clubs, les gardiens reçoivent peu ou pas de formation spécifique. Nous comblons ce vide avec une pédagogie structurée, des coachs spécialisés et un suivi dans la durée.",
+      "intro": "The Last Line est née d'un constat simple : dans la majorité des clubs, les gardiens reçoivent peu ou pas de formation spécifique. Nous comblons ce vide avec une pédagogie structurée, des coachs spécialisés et un suivi dans la durée.",
       "stats": {
         "keepers": {
           "value": "60+",
@@ -1584,7 +1584,7 @@
       "viewInvoices": "Voir mes factures"
     },
     "mail": {
-      "subject": "Demande d'inscription Goalkeeper Academy"
+      "subject": "Demande d'inscription The Last Line"
     },
     "from": "dès",
     "paid": {
