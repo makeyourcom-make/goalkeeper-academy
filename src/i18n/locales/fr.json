@@ -731,7 +731,7 @@
         },
         {
           "heading": "Prestations et formules",
-          "body": "L'association propose des entraînements spécifiques de gardien de but sous forme de : séance découverte (à l'unité, sans engagement) ; Tour (18 séances) ; saison complète (36 séances) ; ainsi que des stages ponctuels. Le détail, le nombre de séances et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre et peuvent être adaptés pour des raisons d'organisation."
+          "body": "L'association propose des entraînements spécifiques de gardien de but à travers les formules suivantes :\nSéance découverte : à l'unité, sans engagement, pour essayer nos entraînements.\nTour : bloc de 18 séances.\nSaison complète : 36 séances réparties sur l'ensemble de la saison.\nStages : entraînements intensifs ponctuels.\nLe détail, le nombre de séances et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre et peuvent être adaptés pour des raisons d'organisation."
         },
         {
           "heading": "Inscription et compte",
@@ -743,7 +743,7 @@
         },
         {
           "heading": "Modalités de paiement",
-          "body": "La séance découverte et les séances à l'unité sont payables à 100 % avant la séance. Pour le Tour et la saison complète, le paiement peut être effectué en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu. Le paiement s'effectue par facture QR suisse ; les paiements par carte et TWINT (via Stripe) seront proposés prochainement. La place est définitivement confirmée à réception du premier paiement."
+          "body": "Séance découverte et séances à l'unité : payables à 100 % avant la séance.\nTour et saison complète : paiement en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu.\nLe paiement s'effectue par facture QR suisse ; les paiements par carte et TWINT (via Stripe) seront proposés prochainement.\nLa place est définitivement confirmée dès l'inscription et sa validation sur le site."
         },
         {
           "heading": "Retard de paiement et exclusion",
@@ -751,7 +751,7 @@
         },
         {
           "heading": "Engagement, annulation et remboursement",
-          "body": "Séance découverte et séances à l'unité : non remboursables ; elles peuvent uniquement être déplacées à une date ultérieure. Tour et saison complète : forfaits non remboursables, sauf blessure du gardien dûment attestée par certificat médical l'empêchant de participer à plus de 50 % des séances du forfait concerné ; dans ce cas, un remboursement de 50 % du montant du forfait peut être accordé. Aucun autre motif ne donne droit à remboursement. Les forfaits restent toutefois librement cessibles (voir ci-après)."
+          "body": "Séance découverte et séances à l'unité : non remboursables ; elles peuvent uniquement être déplacées à une date ultérieure.\nTour et saison complète : forfaits non remboursables, sauf blessure du gardien dûment attestée par certificat médical l'empêchant de participer à plus de 50 % des séances du forfait concerné ; dans ce cas, un remboursement de 50 % du montant du forfait peut être accordé.\nAucun autre motif ne donne droit à remboursement. Les forfaits restent toutefois librement cessibles (voir ci-après)."
         },
         {
           "heading": "Cession et revente",

@@ -50,7 +50,15 @@ export async function LegalPage({ namespace, locale }: Props) {
                 <h2 className="font-anton text-h3 uppercase text-navy">
                   {section.heading}
                 </h2>
-                <p className="text-justify text-grey-700">{section.body}</p>
+                {section.body
+                  .split("\n")
+                  .map((para) => para.trim())
+                  .filter(Boolean)
+                  .map((para, i) => (
+                    <p key={i} className="text-justify text-grey-700">
+                      {para}
+                    </p>
+                  ))}
               </article>
             ))}
           </div>

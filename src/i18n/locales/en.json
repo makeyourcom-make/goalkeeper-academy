@@ -731,7 +731,7 @@
         },
         {
           "heading": "Services and plans",
-          "body": "The association offers goalkeeper-specific training as: a discovery session (single, no commitment); a Tour (18 sessions); a full season (36 sessions); and occasional camps. Details, session counts and prices are on the Offers page. Times and locations are shared through the member area and may be adjusted for organisational reasons."
+          "body": "The association offers goalkeeper-specific training through the following plans:\nDiscovery session: single, no commitment, to try out our training.\nTour: a block of 18 sessions.\nFull season: 36 sessions spread across the whole season.\nCamps: occasional intensive training.\nDetails, session counts and prices are on the Offers page. Times and locations are shared through the member area and may be adjusted for organisational reasons."
         },
         {
           "heading": "Registration and account",
@@ -743,7 +743,7 @@
         },
         {
           "heading": "Payment terms",
-          "body": "Discovery and single sessions are payable in full (100%) before the session. For the Tour and the full season, payment may be made in one instalment (per tour or per season) or spread out (monthly or quarterly). Choosing a Tour or a season is a firm commitment for the entire package, regardless of the chosen payment method. Payment is by Swiss QR invoice; card and TWINT payments (via Stripe) will be offered soon. The place is definitively confirmed upon receipt of the first payment."
+          "body": "Discovery and single sessions: payable in full (100%) before the session.\nTour and full season: payment in one instalment (per tour or per season) or spread out (monthly or quarterly). Choosing a Tour or a season is a firm commitment for the entire package, regardless of the chosen payment method.\nPayment is by Swiss QR invoice; card and TWINT payments (via Stripe) will be offered soon.\nThe place is definitively confirmed upon registration and its validation on the website."
         },
         {
           "heading": "Late payment and exclusion",
@@ -751,7 +751,7 @@
         },
         {
           "heading": "Commitment, cancellation and refund",
-          "body": "Discovery and single sessions: non-refundable; they may only be rescheduled to a later date. Tour and full season: packages are non-refundable, except in the event of the goalkeeper's injury duly certified by a medical certificate preventing participation in more than 50% of the sessions of the package concerned; in that case, a refund of 50% of the package price may be granted. No other reason gives rise to a refund. Packages nevertheless remain freely transferable (see below)."
+          "body": "Discovery and single sessions: non-refundable; they may only be rescheduled to a later date.\nTour and full season: packages are non-refundable, except in the event of the goalkeeper's injury duly certified by a medical certificate preventing participation in more than 50% of the sessions of the package concerned; in that case, a refund of 50% of the package price may be granted.\nNo other reason gives rise to a refund. Packages nevertheless remain freely transferable (see below)."
         },
         {
           "heading": "Transfer and resale",
