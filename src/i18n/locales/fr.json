@@ -1603,5 +1603,12 @@
     "errors": {
       "generic": "Une erreur est survenue. Réessayez."
     }
+  },
+  "CookieBanner": {
+    "aria": "Bandeau cookies",
+    "message": "Nous utilisons uniquement des cookies essentiels au bon fonctionnement du site (connexion, sécurité). Aucun cookie de suivi ni de publicité.",
+    "learnMore": "En savoir plus",
+    "accept": "Accepter",
+    "refuse": "Refuser"
   }
 }

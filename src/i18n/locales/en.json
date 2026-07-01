@@ -1603,5 +1603,12 @@
     "errors": {
       "generic": "Something went wrong. Please try again."
     }
+  },
+  "CookieBanner": {
+    "aria": "Cookie banner",
+    "message": "We only use cookies that are strictly necessary for the site to work (login, security). No tracking or advertising cookies.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "refuse": "Decline"
   }
 }
