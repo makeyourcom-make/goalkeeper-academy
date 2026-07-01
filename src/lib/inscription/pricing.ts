@@ -17,9 +17,9 @@ export const PRICING: Record<Audience, Record<Formula, number>> = {
 // Number of sessions billed per formula.
 export const SESSIONS: Record<Formula, number> = {
   single: 1,
-  tour1: 16,
+  tour1: 18,
   tour2: 18,
-  season: 34,
+  season: 36,
 };
 
 export function priceFor(audience: Audience, formula: Formula): number {

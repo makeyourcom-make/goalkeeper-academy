@@ -100,9 +100,9 @@
           "badge": "Demi-saison",
           "title": "Le Tour",
           "price": "Dès 43 CHF / séance",
-          "description": "Un engagement sur une demi-saison de 16 séances, pour les jeunes comme pour les adultes.",
+          "description": "Un engagement sur une demi-saison de 18 séances, pour les jeunes comme pour les adultes.",
           "bullets": [
-            "Tour 1 : 16 séances · Tour 2 : 18 séances",
+            "18 séances par tour",
             "Séance de 4 gardiens maximum",
             "Sans réengagement"
           ],
@@ -112,9 +112,9 @@
           "badge": "Le plus populaire",
           "title": "Saison complète",
           "price": "Dès 40 CHF / séance",
-          "description": "Toute la saison sur 34 séances, le meilleur tarif à la séance.",
+          "description": "Toute la saison sur 36 séances, le meilleur tarif à la séance.",
           "bullets": [
-            "34 séances sur la saison",
+            "36 séances sur la saison",
             "Séance de 4 gardiens maximum",
             "−11 % vs séance à l’unité"
           ],
@@ -1179,7 +1179,7 @@
     "hero": {
       "eyebrow": "Offres & tarifs",
       "title": "Des tarifs clairs, pour chaque gardien",
-      "subtitle": "Notre saison se joue en 34 séances, réparties en deux Tours (16 séances au premier, 18 au second). Testez avec une séance découverte, engagez-vous sur un Tour, ou profitez du meilleur tarif sur la saison complète."
+      "subtitle": "Notre saison se joue en 36 séances, réparties en deux Tours de 18 séances chacun. Testez avec une séance découverte, engagez-vous sur un Tour, ou profitez du meilleur tarif sur la saison complète."
     },
     "audiences": {
       "youth": {
@@ -1205,10 +1205,10 @@
           "title": "Tour",
           "price": "43 CHF",
           "unit": "/ séance",
-          "description": "Un engagement sur une demi-saison : 16 séances au Tour 1, 18 au Tour 2.",
+          "description": "Un engagement sur une demi-saison : 18 séances par tour.",
           "bullets": [
-            "Tour 1 : 16 séances · Tour 2 : 18 séances",
-            "De 690 à 775 CHF selon le tour",
+            "18 séances par tour",
+            "774 CHF le tour",
             "Engagement demi-saison"
           ],
           "cta": "Choisir le Tour"
@@ -1219,9 +1219,9 @@
           "title": "Saison complète",
           "price": "40 CHF",
           "unit": "/ séance",
-          "description": "Toute la saison sur 34 séances, pour le meilleur rapport qualité/prix.",
+          "description": "Toute la saison sur 36 séances, pour le meilleur rapport qualité/prix.",
           "bullets": [
-            "34 séances",
+            "36 séances",
             "−11 % vs séance à l’unité",
             "Suivi sur toute la saison"
           ],
@@ -1251,10 +1251,10 @@
           "title": "Tour",
           "price": "48 CHF",
           "unit": "/ séance",
-          "description": "Un engagement sur une demi-saison : 16 séances au Tour 1, 18 au Tour 2.",
+          "description": "Un engagement sur une demi-saison : 18 séances par tour.",
           "bullets": [
-            "Tour 1 : 16 séances · Tour 2 : 18 séances",
-            "De 770 à 865 CHF selon le tour",
+            "18 séances par tour",
+            "864 CHF le tour",
             "Engagement demi-saison"
           ],
           "cta": "Choisir le Tour"
@@ -1265,9 +1265,9 @@
           "title": "Saison complète",
           "price": "44 CHF",
           "unit": "/ séance",
-          "description": "Toute la saison sur 34 séances, pour le meilleur rapport qualité/prix.",
+          "description": "Toute la saison sur 36 séances, pour le meilleur rapport qualité/prix.",
           "bullets": [
-            "34 séances",
+            "36 séances",
             "−12 % vs séance à l’unité",
             "Suivi sur toute la saison"
           ],
@@ -1303,18 +1303,18 @@
       "values": {
         "single": ["1", "Aucun", "45 CHF", "50 CHF", "45–50 CHF", "Aucune"],
         "tour": [
-          "16 ou 18",
+          "18",
           "Demi-saison (un Tour)",
-          "690 à 775 CHF",
-          "770 à 865 CHF",
+          "774 CHF",
+          "864 CHF",
           "≈ 43–48 CHF",
           "≈ 4 %"
         ],
         "season": [
-          "34",
+          "36",
           "Saison complète",
-          "1 360 CHF",
-          "1 496 CHF",
+          "1 440 CHF",
+          "1 584 CHF",
           "≈ 40–44 CHF",
           "−11 à −12 %"
         ]
@@ -1338,7 +1338,7 @@
         },
         "cancel": {
           "question": "Comment fonctionne l'engagement ?",
-          "answer": "L'engagement se fait par Tour (une demi-saison de 16 ou 18 séances) ou par saison complète (34 séances). À la fin d'un Tour, vous êtes libre de continuer ou non. La séance découverte, elle, est sans aucun engagement."
+          "answer": "L'engagement se fait par Tour (une demi-saison de 18 séances) ou par saison complète (36 séances). À la fin d'un Tour, vous êtes libre de continuer ou non. La séance découverte, elle, est sans aucun engagement."
         },
         "club": {
           "question": "Comment fonctionne le contrat club ?",
@@ -1522,8 +1522,8 @@
       },
       "tour1": {
         "label": "Tour 1",
-        "hint": "Demi-saison · 16 séances",
-        "totalHint": "le Tour 1 (16 séances)"
+        "hint": "Demi-saison · 18 séances",
+        "totalHint": "le Tour 1 (18 séances)"
       },
       "tour2": {
         "label": "Tour 2",
@@ -1532,8 +1532,8 @@
       },
       "season": {
         "label": "Saison complète",
-        "hint": "34 séances sur la saison",
-        "totalHint": "la saison (34 séances)"
+        "hint": "36 séances sur la saison",
+        "totalHint": "la saison (36 séances)"
       }
     },
     "categories": {

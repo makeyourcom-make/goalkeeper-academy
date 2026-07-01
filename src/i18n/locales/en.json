@@ -100,9 +100,9 @@
           "badge": "Half-season",
           "title": "The Tour",
           "price": "From CHF 43 / session",
-          "description": "A commitment over a half-season of 16 sessions, for youth and adults alike.",
+          "description": "A commitment over a half-season of 18 sessions, for youth and adults alike.",
           "bullets": [
-            "Tour 1: 16 sessions · Tour 2: 18 sessions",
+            "18 sessions per Tour",
             "Sessions of 4 goalkeepers max",
             "No re-commitment"
           ],
@@ -112,9 +112,9 @@
           "badge": "Most popular",
           "title": "Full season",
           "price": "From CHF 40 / session",
-          "description": "The whole season over 34 sessions, the best per-session rate.",
+          "description": "The whole season over 36 sessions, the best per-session rate.",
           "bullets": [
-            "34 sessions over the season",
+            "36 sessions over the season",
             "Sessions of 4 goalkeepers max",
             "−11% vs single session"
           ],
@@ -1179,7 +1179,7 @@
     "hero": {
       "eyebrow": "Offers & pricing",
       "title": "Clear pricing, for every keeper",
-      "subtitle": "Our season runs over 34 sessions, split into two Tours (16 sessions in the first, 18 in the second). Try a discovery session, commit to a Tour, or get the best rate with the full season."
+      "subtitle": "Our season runs over 36 sessions, split into two Tours of 18 sessions each. Try a discovery session, commit to a Tour, or get the best rate with the full season."
     },
     "audiences": {
       "youth": {
@@ -1205,10 +1205,10 @@
           "title": "Tour",
           "price": "CHF 43",
           "unit": "/ session",
-          "description": "A commitment over a half-season: 16 sessions in Tour 1, 18 in Tour 2.",
+          "description": "A commitment over a half-season: 18 sessions per Tour.",
           "bullets": [
-            "Tour 1: 16 sessions · Tour 2: 18 sessions",
-            "CHF 690 to 775 depending on the Tour",
+            "18 sessions per Tour",
+            "CHF 774 per Tour",
             "Half-season commitment"
           ],
           "cta": "Choose the Tour"
@@ -1219,9 +1219,9 @@
           "title": "Full season",
           "price": "CHF 40",
           "unit": "/ session",
-          "description": "The whole season over 34 sessions, best value for money.",
+          "description": "The whole season over 36 sessions, best value for money.",
           "bullets": [
-            "34 sessions",
+            "36 sessions",
             "−11% vs single session",
             "Follow-up all season long"
           ],
@@ -1251,10 +1251,10 @@
           "title": "Tour",
           "price": "CHF 48",
           "unit": "/ session",
-          "description": "A commitment over a half-season: 16 sessions in Tour 1, 18 in Tour 2.",
+          "description": "A commitment over a half-season: 18 sessions per Tour.",
           "bullets": [
-            "Tour 1: 16 sessions · Tour 2: 18 sessions",
-            "CHF 770 to 865 depending on the Tour",
+            "18 sessions per Tour",
+            "CHF 864 per Tour",
             "Half-season commitment"
           ],
           "cta": "Choose the Tour"
@@ -1265,9 +1265,9 @@
           "title": "Full season",
           "price": "CHF 44",
           "unit": "/ session",
-          "description": "The whole season over 34 sessions, best value for money.",
+          "description": "The whole season over 36 sessions, best value for money.",
           "bullets": [
-            "34 sessions",
+            "36 sessions",
             "−12% vs single session",
             "Follow-up all season long"
           ],
@@ -1303,18 +1303,18 @@
       "values": {
         "single": ["1", "None", "CHF 45", "CHF 50", "CHF 45–50", "None"],
         "tour": [
-          "16 or 18",
+          "18",
           "Half-season (one Tour)",
-          "CHF 690–775",
-          "CHF 770–865",
+          "CHF 774",
+          "CHF 864",
           "≈ CHF 43–48",
           "≈ 4%"
         ],
         "season": [
-          "34",
+          "36",
           "Full season",
-          "CHF 1,360",
-          "CHF 1,496",
+          "CHF 1,440",
+          "CHF 1,584",
           "≈ CHF 40–44",
           "−11 to −12%"
         ]
@@ -1338,7 +1338,7 @@
         },
         "cancel": {
           "question": "How does the commitment work?",
-          "answer": "You commit by Tour (a half-season of 16 or 18 sessions) or by full season (34 sessions). At the end of a Tour, you're free to continue or not. The discovery session has no commitment at all."
+          "answer": "You commit by Tour (a half-season of 18 sessions) or by full season (36 sessions). At the end of a Tour, you're free to continue or not. The discovery session has no commitment at all."
         },
         "club": {
           "question": "How does the club contract work?",
@@ -1522,8 +1522,8 @@
       },
       "tour1": {
         "label": "Tour 1",
-        "hint": "Half-season · 16 sessions",
-        "totalHint": "for Tour 1 (16 sessions)"
+        "hint": "Half-season · 18 sessions",
+        "totalHint": "for Tour 1 (18 sessions)"
       },
       "tour2": {
         "label": "Tour 2",
@@ -1532,8 +1532,8 @@
       },
       "season": {
         "label": "Full season",
-        "hint": "34 sessions over the season",
-        "totalHint": "for the season (34 sessions)"
+        "hint": "36 sessions over the season",
+        "totalHint": "for the season (36 sessions)"
       }
     },
     "categories": {
