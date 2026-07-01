@@ -10,7 +10,9 @@ import "../globals.css";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { JsonLd } from "@/components/seo/json-ld";
 import { routing } from "@/i18n/routing";
+import { siteGraph } from "@/lib/seo";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -69,16 +71,28 @@ export async function generateMetadata({
       url: `/${locale}`,
       locale: locale === "en" ? "en_US" : "fr_CH",
       alternateLocale: locale === "en" ? "fr_CH" : "en_US",
+      images: [
+        {
+          url: "/og/og-thumbnail.png",
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
+      images: ["/og/og-thumbnail.png"],
     },
     robots: {
       index: true,
       follow: true,
     },
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : undefined,
     icons: {
       icon: [
         { url: "/favicons/favicon.ico", sizes: "any" },
@@ -129,6 +143,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${anton.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col bg-white font-sans text-grey-700 antialiased">
+        <JsonLd data={siteGraph(locale)} />
         <NextIntlClientProvider>
           <Header initialIsAuthed={isAuthed} />
           <main className="flex-1">{children}</main>

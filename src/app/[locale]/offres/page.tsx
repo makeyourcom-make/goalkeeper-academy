@@ -4,7 +4,9 @@ import { Check } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
 import { cn } from "@/lib/utils";
+import { faqGraph } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 
 type Props = {
@@ -48,6 +50,14 @@ export default async function OffresPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={faqGraph(
+          FAQ_KEYS.map((key) => ({
+            question: t(`faq.items.${key}.question`),
+            answer: t(`faq.items.${key}.answer`),
+          })),
+        )}
+      />
       {/* Hero */}
       <section className="bg-gradient-to-b from-white to-grey-100">
         <div className="container flex flex-col items-center gap-5 py-20 text-center lg:py-28">

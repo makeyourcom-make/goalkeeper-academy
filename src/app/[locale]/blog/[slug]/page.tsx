@@ -7,9 +7,11 @@ import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { mdxComponents } from "@/components/blog/mdx-components";
-import { Link } from "@/i18n/navigation";
+import { JsonLd } from "@/components/seo/json-ld";
+import { getPathname, Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getAllPosts, getAllSlugs, getPostBySlug } from "@/lib/blog";
+import { articleGraph } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -74,6 +76,19 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <article>
+      <JsonLd
+        data={articleGraph({
+          title: post.title,
+          description: post.excerpt,
+          url: getPathname({
+            href: { pathname: "/blog/[slug]", params: { slug: post.slug } },
+            locale,
+          }),
+          image: post.cover,
+          datePublished: post.date,
+          locale,
+        })}
+      />
       {/* Cover */}
       <header className="relative overflow-hidden bg-navy text-white">
         <div className="absolute inset-0">
