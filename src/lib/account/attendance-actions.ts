@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { isViewingAs } from "@/lib/account/view-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const SCHEMA = z.object({
@@ -15,6 +16,7 @@ const SCHEMA = z.object({
 // RLS (attendees_update_own) guarantees the row belongs to one of their
 // children, so an out-of-scope update simply affects zero rows.
 export async function setAttendance(formData: FormData): Promise<void> {
+  if (await isViewingAs()) return;
   const supabase = await createSupabaseServerClient();
 
   const {

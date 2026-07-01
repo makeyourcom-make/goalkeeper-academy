@@ -467,14 +467,16 @@
         "email": "E-mail",
         "role": "Rôle",
         "language": "Langue",
-        "joined": "Inscrit le"
+        "joined": "Inscrit le",
+        "actions": "Aperçu"
       },
       "roles": {
         "parent": "Parent",
         "club": "Club",
         "coach": "Coach",
         "admin": "Admin"
-      }
+      },
+      "viewAs": "Voir en tant que"
     },
     "children": {
       "metaTitle": "Admin · Gardiens",
@@ -1021,7 +1023,8 @@
       "errorIban": "IBAN invalide. Format suisse attendu (CH…).",
       "errorAvatarSize": "Image trop lourde (4 Mo maximum).",
       "errorAvatarType": "Format non supporté (JPG, PNG ou WebP).",
-      "errorAvatarUpload": "Échec de l envoi de la photo. Réessayez."
+      "errorAvatarUpload": "Échec de l envoi de la photo. Réessayez.",
+      "errorReadOnly": "Action impossible en mode aperçu (lecture seule)."
     },
     "children": {
       "metaTitle": "Mes gardiens",
@@ -1075,7 +1078,8 @@
       "photoHint": "JPG, PNG ou WebP, 4 Mo maximum.",
       "errorPhotoSize": "Image trop lourde (4 Mo maximum).",
       "errorPhotoType": "Format non supporté (JPG, PNG ou WebP).",
-      "errorPhotoUpload": "Échec de l envoi de la photo. Réessayez."
+      "errorPhotoUpload": "Échec de l envoi de la photo. Réessayez.",
+      "errorReadOnly": "Action impossible en mode aperçu (lecture seule)."
     },
     "planning": {
       "metaTitle": "Mon planning",
@@ -1136,6 +1140,10 @@
       "errorCurrentPassword": "Mot de passe actuel incorrect.",
       "errorUnauthenticated": "Vous devez être connecté.",
       "errorGeneric": "Une erreur est survenue. Réessayez."
+    },
+    "viewAs": {
+      "banner": "Aperçu du compte de {name} — lecture seule.",
+      "exit": "Quitter l'aperçu"
     }
   },
   "BlogPage": {

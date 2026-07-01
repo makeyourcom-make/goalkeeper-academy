@@ -11,8 +11,10 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
+
+import { getAccountContext } from "@/lib/account/view-context";
 import { signOut } from "@/lib/auth/actions";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -45,32 +47,35 @@ export default async function AccountPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account");
 
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
 
-  let displayName = user?.email?.split("@")[0] ?? "";
+  let displayName = "";
   let role = "parent";
-  if (user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("first_name, role")
-      .eq("id", user.id)
-      .maybeSingle();
-    if (profile?.first_name) displayName = profile.first_name;
-    if (profile?.role) role = profile.role;
-  }
+  const { data: profile } = await ctx.db
+    .from("profiles")
+    .select("first_name, role")
+    .eq("id", ctx.userId)
+    .maybeSingle();
+  if (profile?.first_name) displayName = profile.first_name;
+  if (profile?.role) role = profile.role;
+
   // What to call the people managed by this account.
   const memberKey =
     role === "club" ? "players" : role === "parent" ? "children" : "keepers";
   const members = t(`terms.${memberKey}`);
 
-  // Counts (RLS-scoped)
+  // Counts (filtered explicitly by the effective account owner).
   const [{ count: childrenCount }, { count: invoicesCount }] =
     await Promise.all([
-      supabase.from("children").select("id", { count: "exact", head: true }),
-      supabase.from("invoices").select("id", { count: "exact", head: true }),
+      ctx.db
+        .from("children")
+        .select("id", { count: "exact", head: true })
+        .eq("parent_id", ctx.userId),
+      ctx.db
+        .from("invoices")
+        .select("id", { count: "exact", head: true })
+        .eq("profile_id", ctx.userId),
     ]);
 
   const counts: Record<CardKey, number> = {
@@ -92,20 +97,22 @@ export default async function AccountPage({ params }: Props) {
           <p className="text-lg text-grey-500">
             {t("hero.subtitle", { members })}
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild variant="ghost">
-              <Link href="/mon-compte/profil">
-                <UserCircle className="mr-2 h-4 w-4" />
-                {t("editProfile")}
-              </Link>
-            </Button>
-            <form action={signOut}>
-              <input type="hidden" name="locale" value={locale} />
-              <Button type="submit" variant="ghost">
-                {t("logout")}
+          {!ctx.isImpersonating && (
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="ghost">
+                <Link href="/mon-compte/profil">
+                  <UserCircle className="mr-2 h-4 w-4" />
+                  {t("editProfile")}
+                </Link>
               </Button>
-            </form>
-          </div>
+              <form action={signOut}>
+                <input type="hidden" name="locale" value={locale} />
+                <Button type="submit" variant="ghost">
+                  {t("logout")}
+                </Button>
+              </form>
+            </div>
+          )}
         </div>
       </section>
 

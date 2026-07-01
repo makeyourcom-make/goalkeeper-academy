@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/forms/profile-form";
 import { ChangePasswordForm } from "@/components/forms/change-password-form";
+import { isViewingAs } from "@/lib/account/view-context";
 import { signedAvatarUrl } from "@/lib/storage/signed";
 import { Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -30,6 +31,9 @@ export default async function ProfilePage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.profile");
   const tp = await getTranslations("Account.password");
+
+  // Profile editing / password are the admin's own — not previewable.
+  if (await isViewingAs()) redirect(`/${locale}/mon-compte`);
 
   const supabase = await createSupabaseServerClient();
   const {

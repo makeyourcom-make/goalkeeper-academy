@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Plus, Pencil, User } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import { signedAvatarUrls } from "@/lib/storage/signed";
 import type { Child } from "@/types/database";
 
@@ -38,16 +39,19 @@ export default async function ChildrenPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.children");
 
-  const supabase = await createSupabaseServerClient();
-  const { data: children } = await supabase
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
+
+  const { data: children } = await ctx.db
     .from("children")
     .select("*")
+    .eq("parent_id", ctx.userId)
     .order("registered_at", { ascending: true })
     .returns<Child[]>();
 
   const list = children ?? [];
   const signed = await signedAvatarUrls(
-    supabase,
+    ctx.db,
     list.map((c) => c.photo_url),
   );
   const photoById = new Map(list.map((c, i) => [c.id, signed[i]]));
@@ -64,12 +68,14 @@ export default async function ChildrenPage({ params }: Props) {
           </h1>
           <p className="max-w-2xl text-lg text-grey-500">{t("subtitle")}</p>
           <div className="flex flex-wrap gap-3">
-            <Button asChild variant="primary">
-              <Link href="/mon-compte/enfants/nouveau">
-                <Plus className="mr-2 h-4 w-4" />
-                {t("addChild")}
-              </Link>
-            </Button>
+            {!ctx.isImpersonating && (
+              <Button asChild variant="primary">
+                <Link href="/mon-compte/enfants/nouveau">
+                  <Plus className="mr-2 h-4 w-4" />
+                  {t("addChild")}
+                </Link>
+              </Button>
+            )}
             <Button asChild variant="ghost">
               <Link href="/mon-compte">{t("backToDashboard")}</Link>
             </Button>

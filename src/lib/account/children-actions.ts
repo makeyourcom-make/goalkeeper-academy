@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+import { isViewingAs } from "@/lib/account/view-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
@@ -96,6 +97,7 @@ export async function createChild(
   _prev: ChildActionState,
   formData: FormData,
 ): Promise<ChildActionState> {
+  if (await isViewingAs()) return { status: "error", message: "errorReadOnly" };
   const parsed = parseChildForm(formData);
   if (!parsed.success) {
     return { status: "error", message: "errorValidation" };
@@ -147,6 +149,7 @@ export async function updateChild(
   _prev: ChildActionState,
   formData: FormData,
 ): Promise<ChildActionState> {
+  if (await isViewingAs()) return { status: "error", message: "errorReadOnly" };
   const id = String(formData.get("id") ?? "");
   if (!id) return { status: "error", message: "errorValidation" };
 
@@ -186,6 +189,7 @@ export async function updateChild(
 }
 
 export async function deleteChild(formData: FormData): Promise<void> {
+  if (await isViewingAs()) return;
   const id = String(formData.get("id") ?? "");
   const locale = String(formData.get("locale") ?? "fr");
   if (!id) return;

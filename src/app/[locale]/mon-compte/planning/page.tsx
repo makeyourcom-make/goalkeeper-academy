@@ -5,9 +5,11 @@ import { Calendar, MapPin, Clock, Check, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { redirect } from "next/navigation";
+
 import { MonthCalendar } from "@/components/admin/month-calendar";
 import { setAttendance } from "@/lib/account/attendance-actions";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -58,12 +60,22 @@ export default async function PlanningPage({ params, searchParams }: Props) {
   const calYear = m ? Number(m[1]) : now.getFullYear();
   const calMonth = m ? Number(m[2]) - 1 : now.getMonth();
 
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
+
+  // Scope to the effective account's own keepers (required with service-role).
+  const { data: kids } = await ctx.db
+    .from("children")
+    .select("id")
+    .eq("parent_id", ctx.userId);
+  const childIds = (kids ?? []).map((k) => k.id as string);
+
+  const { data } = await ctx.db
     .from("session_attendees")
     .select(
       "attendance_status, child_id, children(first_name, last_name), sessions(id, title, location, meet_at, starts_at, ends_at, status)",
     )
+    .in("child_id", childIds)
     .returns<AttendeeRow[]>();
 
   const rows = (data ?? []).filter((r) => r.sessions);

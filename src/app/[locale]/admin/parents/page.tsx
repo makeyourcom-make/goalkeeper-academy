@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Eye } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { viewAsUser } from "@/lib/admin/impersonation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
 
@@ -59,13 +61,14 @@ export default async function AdminParentsPage({ params }: Props) {
                 <th className="px-4 py-3 font-medium">{t("table.role")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.language")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.joined")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.actions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-grey-100">
               {list.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={5}
+                    colSpan={6}
                     className="px-4 py-8 text-center text-grey-500"
                   >
                     {t("empty")}
@@ -90,6 +93,18 @@ export default async function AdminParentsPage({ params }: Props) {
                     </td>
                     <td className="px-4 py-3 text-grey-500">
                       {dateFmt.format(new Date(profile.created_at))}
+                    </td>
+                    <td className="px-4 py-3">
+                      <form action={viewAsUser}>
+                        <input type="hidden" name="userId" value={profile.id} />
+                        <input type="hidden" name="locale" value={locale} />
+                        <button
+                          type="submit"
+                          className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-grey-300 px-3 py-1 text-xs font-medium text-navy transition hover:border-orange hover:text-orange"
+                        >
+                          <Eye className="h-3.5 w-3.5" /> {t("viewAs")}
+                        </button>
+                      </form>
                     </td>
                   </tr>
                 ))

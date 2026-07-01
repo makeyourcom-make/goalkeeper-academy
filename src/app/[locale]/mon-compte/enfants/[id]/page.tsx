@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Trash2 } from "lucide-react";
 
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ChildForm } from "@/components/forms/child-form";
 import { Link } from "@/i18n/navigation";
 import { deleteChild } from "@/lib/account/children-actions";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import { signedAvatarUrl } from "@/lib/storage/signed";
 import type { Child } from "@/types/database";
 
@@ -30,15 +30,18 @@ export default async function EditChildPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.children");
 
-  const supabase = await createSupabaseServerClient();
-  const { data: child } = await supabase
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
+
+  const { data: child } = await ctx.db
     .from("children")
     .select("*")
     .eq("id", id)
+    .eq("parent_id", ctx.userId)
     .maybeSingle<Child>();
 
   if (!child) notFound();
-  const photoUrl = await signedAvatarUrl(supabase, child.photo_url);
+  const photoUrl = await signedAvatarUrl(ctx.db, child.photo_url);
 
   return (
     <>
@@ -63,20 +66,22 @@ export default async function EditChildPage({ params }: Props) {
             <ChildForm mode="edit" child={child} initialPhotoUrl={photoUrl} />
           </div>
 
-          <div className="mt-8 rounded-2xl border border-error/20 bg-error/5 p-6">
-            <h2 className="font-anton text-lg uppercase text-error">
-              {t("dangerZone")}
-            </h2>
-            <p className="mt-2 text-sm text-grey-700">{t("deleteWarning")}</p>
-            <form action={deleteChild} className="mt-4">
-              <input type="hidden" name="id" value={child.id} />
-              <input type="hidden" name="locale" value={locale} />
-              <Button type="submit" variant="ghost" className="text-error">
-                <Trash2 className="mr-2 h-4 w-4" />
-                {t("delete")}
-              </Button>
-            </form>
-          </div>
+          {!ctx.isImpersonating && (
+            <div className="mt-8 rounded-2xl border border-error/20 bg-error/5 p-6">
+              <h2 className="font-anton text-lg uppercase text-error">
+                {t("dangerZone")}
+              </h2>
+              <p className="mt-2 text-sm text-grey-700">{t("deleteWarning")}</p>
+              <form action={deleteChild} className="mt-4">
+                <input type="hidden" name="id" value={child.id} />
+                <input type="hidden" name="locale" value={locale} />
+                <Button type="submit" variant="ghost" className="text-error">
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  {t("delete")}
+                </Button>
+              </form>
+            </div>
+          )}
         </div>
       </section>
     </>

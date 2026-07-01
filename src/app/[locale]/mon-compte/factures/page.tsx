@@ -4,8 +4,10 @@ import { FileText } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+
 import { Link } from "@/i18n/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import type { Invoice } from "@/types/database";
 
 type Props = {
@@ -34,10 +36,13 @@ export default async function InvoicesPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.invoices");
 
-  const supabase = await createSupabaseServerClient();
-  const { data: invoices } = await supabase
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
+
+  const { data: invoices } = await ctx.db
     .from("invoices")
     .select("*")
+    .eq("profile_id", ctx.userId)
     .order("issued_at", { ascending: false })
     .returns<Invoice[]>();
 

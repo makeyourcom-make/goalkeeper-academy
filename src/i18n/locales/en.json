@@ -467,14 +467,16 @@
         "email": "Email",
         "role": "Role",
         "language": "Language",
-        "joined": "Joined"
+        "joined": "Joined",
+        "actions": "Preview"
       },
       "roles": {
         "parent": "Parent",
         "club": "Club",
         "coach": "Coach",
         "admin": "Admin"
-      }
+      },
+      "viewAs": "View as"
     },
     "children": {
       "metaTitle": "Admin · Goalkeepers",
@@ -1021,7 +1023,8 @@
       "errorIban": "Invalid IBAN. Swiss format expected (CH…).",
       "errorAvatarSize": "Image too large (4 MB max).",
       "errorAvatarType": "Unsupported format (JPG, PNG or WebP).",
-      "errorAvatarUpload": "Photo upload failed. Please try again."
+      "errorAvatarUpload": "Photo upload failed. Please try again.",
+      "errorReadOnly": "Not available in preview mode (read-only)."
     },
     "children": {
       "metaTitle": "My goalkeepers",
@@ -1075,7 +1078,8 @@
       "photoHint": "JPG, PNG or WebP, 4 MB max.",
       "errorPhotoSize": "Image too large (4 MB max).",
       "errorPhotoType": "Unsupported format (JPG, PNG or WebP).",
-      "errorPhotoUpload": "Photo upload failed. Please try again."
+      "errorPhotoUpload": "Photo upload failed. Please try again.",
+      "errorReadOnly": "Not available in preview mode (read-only)."
     },
     "planning": {
       "metaTitle": "My schedule",
@@ -1136,6 +1140,10 @@
       "errorCurrentPassword": "Current password is incorrect.",
       "errorUnauthenticated": "You must be signed in.",
       "errorGeneric": "Something went wrong. Please try again."
+    },
+    "viewAs": {
+      "banner": "Previewing {name}'s account — read-only.",
+      "exit": "Exit preview"
     }
   },
   "BlogPage": {

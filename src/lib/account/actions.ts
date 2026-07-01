@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { isViewingAs } from "@/lib/account/view-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { ProfileUpdate } from "@/types/database";
 
@@ -44,6 +45,7 @@ export async function updateProfile(
   _prev: ProfileActionState,
   formData: FormData,
 ): Promise<ProfileActionState> {
+  if (await isViewingAs()) return { status: "error", message: "errorReadOnly" };
   const parsed = PROFILE_SCHEMA.safeParse({
     first_name: formData.get("first_name"),
     last_name: formData.get("last_name"),
