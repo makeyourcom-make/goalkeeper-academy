@@ -693,28 +693,28 @@
       "metaTitle": "Legal notice",
       "metaDescription": "Legal notice and editorial information for the The Last Line website.",
       "title": "Legal notice",
-      "lastUpdated": "2026-04-10",
-      "intro": "This legal notice applies to thelastline.ch and identifies the publisher, the host and the general terms of use.",
+      "lastUpdated": "2026-07-01",
+      "intro": "This legal notice identifies the publisher of thelastline.ch, its host and the general terms of use.",
       "sections": [
         {
           "heading": "Publisher",
-          "body": "The Last Line, legal name to be confirmed. Headquarters: Chablais, Switzerland. Email: contact@thelastline.ch. Swiss UID: to be confirmed."
-        },
-        {
-          "heading": "Director of publication",
-          "body": "The director of publication is the legal representative of The Last Line."
+          "body": "thelastline.ch is published by the non-profit sports association “The Last Line”, governed by art. 60 ff. of the Swiss Civil Code and constituted on 1 July 2026. Its seat is in Torgon, municipality of Vionnaz (canton of Valais), Switzerland. The association pursues an idealistic purpose (training goalkeepers), with no profit motive. It is represented by its co-presidents, Arthur Chazelle and Gianluca Giannarelli. Contact: contact@thelastline.ch. Business ID (IDE/UID): to be confirmed."
         },
         {
           "heading": "Hosting",
-          "body": "The website is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA (vercel.com)."
+          "body": "The site is hosted by Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789 (USA). The database and authentication are provided by Supabase, with data stored in the European Union (Ireland). E-mail is delivered through the mail provider LWS."
         },
         {
           "heading": "Intellectual property",
-          "body": "All content on this website (texts, images, logos, code) is protected by copyright. Any reproduction without prior written authorization is forbidden."
+          "body": "All content on the site (text, logos, images, graphics) is protected by copyright. Any reproduction or use, in whole or in part, without the association's prior written consent is prohibited."
         },
         {
           "heading": "Liability",
-          "body": "The Last Line strives to ensure the accuracy of published information but cannot be held liable for errors, omissions or temporary unavailability of the website."
+          "body": "The association strives to keep the information accurate but cannot guarantee its completeness. The site may contain links to third-party sites for which the association is not responsible. Use of the site is at the user's sole risk."
+        },
+        {
+          "heading": "Governing law and jurisdiction",
+          "body": "This notice and the use of the site are governed by Swiss law. Exclusive jurisdiction lies at the association's seat, subject to mandatory consumer-protection provisions."
         }
       ]
     },
@@ -722,28 +722,40 @@
       "metaTitle": "Terms of sale",
       "metaDescription": "General terms of sale applicable to The Last Line services.",
       "title": "Terms of sale",
-      "lastUpdated": "2026-04-10",
-      "intro": "These terms apply to any service ordered from The Last Line: annual and monthly programs, private lessons, camps and club contracts.",
+      "lastUpdated": "2026-07-01",
+      "intro": "These general terms govern registrations and services offered by the non-profit sports association The Last Line through thelastline.ch.",
       "sections": [
         {
-          "heading": "Purpose",
-          "body": "These terms govern the provision of goalkeeper training services. Any enrollment implies full and unconditional acceptance of these terms."
+          "heading": "Scope",
+          "body": "These terms apply to any registration for our trainings, camps and plans. By registering, the user (parent, adult goalkeeper, club or association) accepts them."
         },
         {
-          "heading": "Enrollment and payment",
-          "body": "Enrollment is done via the website or by email. Payment is made by card, TWINT or Swiss QR-bill. Current prices are published on the Offers page."
+          "heading": "Services",
+          "body": "The association offers goalkeeper-specific training as a discovery session, a Tour (half-season) or a full season, as well as camps. Details and prices are on the Offers page. Times and locations are shared through the member area."
         },
         {
-          "heading": "Cancellation and refund",
-          "body": "Any cancellation must be notified in writing. Refund conditions vary depending on the program (annual, monthly, camp) and are detailed at enrollment."
+          "heading": "Registration",
+          "body": "Registration is done online and requires an account. The user warrants the accuracy of the information provided, in particular about the registered goalkeeper."
         },
         {
-          "heading": "Liability",
-          "body": "The Last Line carries professional liability insurance. The academy cannot be held liable in cases of force majeure or non-compliance with instructions by participants."
+          "heading": "Prices and payment",
+          "body": "Prices are shown in Swiss francs (CHF). An automatic volume discount applies from the second goalkeeper registered. Payment is made using the methods offered at registration (card, TWINT or invoice). Until online payment is enabled, the association communicates the payment terms after registration."
         },
         {
-          "heading": "Governing law",
-          "body": "These terms are governed by Swiss law. Any dispute shall fall under the jurisdiction of the courts of the Canton of Vaud."
+          "heading": "Cancellation and refunds",
+          "body": "Cancellation and any refund conditions are specified at registration or communicated by the association. A discovery session carries no commitment."
+        },
+        {
+          "heading": "Liability and insurance",
+          "body": "Participants take part at their own risk. Each participant must hold personal liability and accident insurance. The association declines all liability for accidents or damage, save for its gross negligence."
+        },
+        {
+          "heading": "Data protection",
+          "body": "The processing of personal data in connection with registrations is described in our privacy policy."
+        },
+        {
+          "heading": "Governing law and jurisdiction",
+          "body": "These terms are subject to Swiss law. Exclusive jurisdiction lies at the association's seat, subject to mandatory consumer-protection provisions."
         }
       ]
     },
@@ -751,28 +763,52 @@
       "metaTitle": "Privacy policy",
       "metaDescription": "Privacy policy compliant with the Swiss FADP and the European GDPR.",
       "title": "Privacy policy",
-      "lastUpdated": "2026-04-10",
-      "intro": "The Last Line takes the protection of your personal data very seriously, in line with the new Swiss Federal Act on Data Protection (FADP) and the European General Data Protection Regulation (GDPR).",
+      "lastUpdated": "2026-07-01",
+      "intro": "The non-profit sports association The Last Line takes the protection of your data seriously. This policy explains what data we process, why, on what basis and what your rights are, in accordance with the Swiss Federal Act on Data Protection (nFADP) and, where applicable, the General Data Protection Regulation (GDPR).",
       "sections": [
         {
-          "heading": "Data collected",
-          "body": "We collect strictly necessary data: first and last name, email, phone, information about the goalkeeper (age, club). No sensitive data is requested without justification."
+          "heading": "Data controller",
+          "body": "The data controller is the non-profit association The Last Line, whose seat is in Torgon (Vionnaz, VS). For any question about your data: contact@thelastline.ch."
+        },
+        {
+          "heading": "Data we process",
+          "body": "Account: name, e-mail, phone, language. Registered goalkeepers (often minors): name, year/date of birth, level, dominant hand, any medical notes and photo (only with consent). Registrations and billing: chosen plan, sessions, amounts, invoices. Messages sent via the contact form. Strictly necessary technical data (login session, security)."
         },
         {
           "heading": "Purposes",
-          "body": "Data is used to manage enrollments, communicate with families, issue invoices and improve our services. It is never sold."
+          "body": "Managing accounts and registrations, organising and following up sessions and camps, issuing invoices, communicating with you, keeping the site secure and preventing abuse. With your consent: sending news and using photos."
+        },
+        {
+          "heading": "Legal bases",
+          "body": "Performance of the contract (registrations, services), your consent (photos, marketing, non-essential cookies), our legitimate interest (security, running the association) and compliance with legal obligations (accounting)."
+        },
+        {
+          "heading": "Processors and hosting",
+          "body": "We use providers acting on our behalf: Supabase (database hosting and authentication, data in the EU), Vercel (site hosting), LWS (e-mail), Cloudflare (anti-bot “Turnstile”) and, where relevant, Stripe (payments). These providers are contractually bound to protect your data. Some may be located outside Switzerland/EU; such transfers are covered by appropriate safeguards."
         },
         {
           "heading": "Retention",
-          "body": "Data is kept for as long as necessary for the service and to meet legal obligations (10 years for accounting). It is then deleted."
-        },
-        {
-          "heading": "Your rights",
-          "body": "You have the right to access, rectify, delete and port your data. To exercise these rights, write to contact@thelastline.ch."
+          "body": "We keep your data for as long as necessary for the above purposes and to meet our legal obligations (in particular accounting records, kept for 10 years). After these periods, data is deleted or anonymised."
         },
         {
           "heading": "Security",
-          "body": "Data is stored on European servers (Supabase, Frankfurt hosting) and protected by encryption in transit and at rest."
+          "body": "We apply appropriate technical and organisational measures: encrypted connections (HTTPS), per-user access isolation (row level security), private storage of photos, restricted admin access and strong passwords."
+        },
+        {
+          "heading": "Minors' data",
+          "body": "Minor goalkeepers are registered under the responsibility of their parent or legal guardian, who owns the account. No photo of a minor is used without the guardian's consent, which can be withdrawn at any time."
+        },
+        {
+          "heading": "Your rights",
+          "body": "You have the right to access, rectify, erase, restrict, object to and port your data, and to withdraw consent at any time. To exercise these rights: contact@thelastline.ch. You may also contact the competent supervisory authority: in Switzerland, the Federal Data Protection and Information Commissioner (FDPIC); in the EU, your national data-protection authority."
+        },
+        {
+          "heading": "Cookies",
+          "body": "The site uses only strictly necessary cookies and stores your consent choice. See our cookie policy for details."
+        },
+        {
+          "heading": "Changes",
+          "body": "This policy may be updated. The last-updated date is shown at the top of this page."
         }
       ]
     },
@@ -780,24 +816,24 @@
       "metaTitle": "Cookie policy",
       "metaDescription": "Cookie usage policy for the The Last Line website.",
       "title": "Cookie policy",
-      "lastUpdated": "2026-04-10",
-      "intro": "This page describes how The Last Line uses cookies and similar technologies on its website.",
+      "lastUpdated": "2026-07-01",
+      "intro": "The site thelastline.ch is published by the non-profit association The Last Line. This page explains which cookies the site uses. We use very few, and none for advertising or tracking.",
       "sections": [
         {
           "heading": "What is a cookie?",
-          "body": "A cookie is a small text file stored on your device when visiting a website. It allows the site to recognize you on subsequent visits."
+          "body": "A cookie is a small file placed on your device by a website to make it work properly or to remember preferences."
         },
         {
           "heading": "Cookies we use",
-          "body": "Our website only uses strictly necessary cookies (language, session). No advertising or third-party tracking cookies are placed without your consent."
+          "body": "Strictly necessary cookies: login session (via Supabase) that keeps you signed in and secures your area; storage of your cookie-consent choice; a temporary cookie for the booking flow. A technical cookie may also be set by Cloudflare Turnstile, used to tell humans from bots on our forms. These cookies are essential and are not used to track you."
         },
         {
-          "heading": "Analytics",
-          "body": "We plan to use a privacy-friendly analytics solution (Plausible or equivalent) without persistent cookies or data sharing with third parties."
+          "heading": "No tracking or advertising cookies",
+          "body": "We use no Google Analytics, no advertising pixel and no third-party tracking tool. No data is sold or shared for advertising."
         },
         {
           "heading": "Managing cookies",
-          "body": "You can configure your browser to block cookies. This may affect some features of the website."
+          "body": "You can accept or decline via the banner shown on your first visit, and you can delete or block cookies at any time in your browser settings. Blocking strictly necessary cookies may prevent you from signing in."
         }
       ]
     }

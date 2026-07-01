@@ -693,28 +693,28 @@
       "metaTitle": "Mentions légales",
       "metaDescription": "Mentions légales et informations éditoriales du site The Last Line.",
       "title": "Mentions légales",
-      "lastUpdated": "2026-04-10",
-      "intro": "Les présentes mentions légales s'appliquent au site thelastline.ch et précisent l'identité de l'éditeur, l'hébergeur et les conditions générales d'utilisation.",
+      "lastUpdated": "2026-07-01",
+      "intro": "Les présentes mentions légales identifient l'éditeur du site thelastline.ch, son hébergeur et les conditions générales d'utilisation.",
       "sections": [
         {
-          "heading": "Éditeur du site",
-          "body": "The Last Line, raison sociale à compléter. Siège : Chablais, Suisse. Email : contact@thelastline.ch. Numéro IDE : à compléter."
-        },
-        {
-          "heading": "Directeur de la publication",
-          "body": "Le directeur de la publication est le représentant légal de The Last Line."
+          "heading": "Éditeur",
+          "body": "Le site thelastline.ch est édité par l'association sportive à but non lucratif « The Last Line », régie par les articles 60 et suivants du Code civil suisse et constituée le 1er juillet 2026. Son siège est à Torgon, commune de Vionnaz (canton du Valais), Suisse. L'association poursuit un but idéal (formation des gardiennes et gardiens de but), sans aucune recherche de profit. Elle est représentée par ses co-présidents, Arthur Chazelle et Gianluca Giannarelli. Contact : contact@thelastline.ch. Numéro IDE : à compléter."
         },
         {
           "heading": "Hébergement",
-          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA (vercel.com)."
+          "body": "Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789 (États-Unis). La base de données et l'authentification sont assurées par Supabase, avec hébergement des données dans l'Union européenne (Irlande). Les e-mails sont acheminés via le prestataire de messagerie LWS."
         },
         {
           "heading": "Propriété intellectuelle",
-          "body": "L'ensemble des contenus du site (textes, images, logos, code) est protégé par le droit d'auteur. Toute reproduction sans autorisation écrite préalable est interdite."
+          "body": "L'ensemble des contenus du site (textes, logos, images, éléments graphiques) est protégé par le droit d'auteur. Toute reproduction ou utilisation, totale ou partielle, sans autorisation écrite préalable de l'association est interdite."
         },
         {
           "heading": "Responsabilité",
-          "body": "The Last Line s'efforce d'assurer l'exactitude des informations publiées mais ne peut être tenue responsable des erreurs, omissions ou de l'indisponibilité temporaire du site."
+          "body": "L'association s'efforce d'assurer l'exactitude des informations publiées mais ne saurait en garantir l'exhaustivité. Le site peut contenir des liens vers des sites tiers dont l'association n'assume pas le contenu. L'utilisation du site se fait sous la seule responsabilité de l'utilisateur."
+        },
+        {
+          "heading": "Droit applicable et for",
+          "body": "Les présentes mentions et l'utilisation du site sont régies par le droit suisse. Le for exclusif est au siège de l'association, sous réserve des dispositions impératives protégeant les consommateurs."
         }
       ]
     },
@@ -722,28 +722,40 @@
       "metaTitle": "Conditions générales de vente",
       "metaDescription": "Conditions générales de vente applicables aux prestations de The Last Line.",
       "title": "Conditions générales de vente",
-      "lastUpdated": "2026-04-10",
-      "intro": "Les présentes conditions s'appliquent à toute commande de prestation auprès de The Last Line : formules annuelles, mensuelles, cours particuliers, stages et contrats club.",
+      "lastUpdated": "2026-07-01",
+      "intro": "Les présentes conditions générales (CGV) régissent les inscriptions et prestations proposées par l'association sportive à but non lucratif The Last Line via le site thelastline.ch.",
       "sections": [
         {
-          "heading": "Objet",
-          "body": "Les CGV régissent la fourniture de prestations de formation au poste de gardien de but. Toute inscription implique l'acceptation pleine et entière des présentes conditions."
+          "heading": "Champ d'application",
+          "body": "Ces conditions s'appliquent à toute inscription à nos entraînements, stages et formules. En s'inscrivant, l'utilisateur (parent, gardien majeur, club ou association) les accepte."
         },
         {
-          "heading": "Inscription et paiement",
-          "body": "L'inscription se fait via le site ou par email. Le paiement s'effectue par carte, TWINT ou QR-facture. Les tarifs en vigueur sont publiés sur la page Offres."
+          "heading": "Prestations",
+          "body": "L'association propose des entraînements spécifiques de gardien de but sous forme de séance découverte, de Tour (demi-saison) ou de saison complète, ainsi que des stages. Le détail et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre."
+        },
+        {
+          "heading": "Inscription",
+          "body": "L'inscription se fait en ligne et nécessite un compte. L'utilisateur garantit l'exactitude des informations fournies, notamment concernant le gardien inscrit."
+        },
+        {
+          "heading": "Prix et paiement",
+          "body": "Les prix sont indiqués en francs suisses (CHF). Une remise volume automatique s'applique dès le deuxième gardien inscrit. Le paiement s'effectue selon les moyens proposés lors de l'inscription (carte, TWINT ou facture). Tant que le paiement en ligne n'est pas activé, l'association communique les modalités de règlement après l'inscription."
         },
         {
           "heading": "Annulation et remboursement",
-          "body": "Toute annulation doit être notifiée par écrit. Les conditions de remboursement varient selon la formule (annuelle, mensuelle, stage) et sont précisées au moment de l'inscription."
+          "body": "Les conditions d'annulation et d'éventuel remboursement sont précisées au moment de l'inscription ou communiquées par l'association. Une séance découverte est sans engagement."
         },
         {
-          "heading": "Responsabilité",
-          "body": "The Last Line souscrit une assurance responsabilité civile professionnelle. La responsabilité de l'académie ne saurait être engagée en cas de force majeure ou de non-respect des consignes par le participant."
+          "heading": "Responsabilité et assurance",
+          "body": "Les participants prennent part aux activités sous leur propre responsabilité. Chaque participant doit être couvert par une assurance responsabilité civile et accident personnelle. L'association décline toute responsabilité en cas d'accident ou de dommage, sous réserve de sa faute grave."
         },
         {
-          "heading": "Droit applicable",
-          "body": "Les présentes CGV sont soumises au droit suisse. Tout litige sera de la compétence des tribunaux du canton de Vaud."
+          "heading": "Protection des données",
+          "body": "Le traitement des données personnelles dans le cadre des inscriptions est décrit dans notre politique de confidentialité."
+        },
+        {
+          "heading": "Droit applicable et for",
+          "body": "Les présentes conditions sont soumises au droit suisse. Le for exclusif est au siège de l'association, sous réserve des dispositions impératives protégeant les consommateurs."
         }
       ]
     },
@@ -751,28 +763,52 @@
       "metaTitle": "Politique de confidentialité",
       "metaDescription": "Politique de confidentialité conforme à la nLPD suisse et au RGPD européen.",
       "title": "Politique de confidentialité",
-      "lastUpdated": "2026-04-10",
-      "intro": "The Last Line attache une importance particulière à la protection de vos données personnelles, conformément à la nouvelle Loi suisse sur la protection des données (nLPD) et au Règlement général sur la protection des données (RGPD).",
+      "lastUpdated": "2026-07-01",
+      "intro": "L'association sportive à but non lucratif The Last Line accorde une grande importance à la protection de vos données. La présente politique explique quelles données nous traitons, pourquoi, sur quelle base et quels sont vos droits, conformément à la loi fédérale suisse sur la protection des données (nLPD) et, lorsqu'il s'applique, au Règlement général sur la protection des données (RGPD).",
       "sections": [
         {
-          "heading": "Données collectées",
-          "body": "Nous collectons les données strictement nécessaires : nom, prénom, email, téléphone, informations relatives au gardien (âge, club). Aucune donnée sensible n'est demandée sans motif."
+          "heading": "Responsable du traitement",
+          "body": "Le responsable du traitement est l'association à but non lucratif The Last Line, dont le siège est à Torgon (Vionnaz, VS). Pour toute question relative à vos données : contact@thelastline.ch."
+        },
+        {
+          "heading": "Données que nous traitons",
+          "body": "Compte : nom, prénom, adresse e-mail, téléphone, langue. Gardiens inscrits (souvent mineurs) : nom, prénom, année/date de naissance, niveau, main dominante, éventuelles notes médicales et photo (uniquement avec consentement). Inscriptions et facturation : formule choisie, séances, montants, factures. Messages envoyés via le formulaire de contact. Données techniques strictement nécessaires (session de connexion, sécurité)."
         },
         {
           "heading": "Finalités",
-          "body": "Les données servent à gérer les inscriptions, communiquer avec les familles, émettre les factures et améliorer nos prestations. Elles ne sont jamais revendues."
+          "body": "Gérer les comptes et les inscriptions, organiser et suivre les séances et stages, établir les factures, communiquer avec vous, assurer la sécurité du site et prévenir les abus. Avec votre consentement : envoi d'actualités et utilisation de photos."
         },
         {
-          "heading": "Conservation",
-          "body": "Les données sont conservées le temps nécessaire à la prestation et aux obligations légales (10 ans pour la comptabilité). Elles sont ensuite supprimées."
+          "heading": "Bases légales",
+          "body": "L'exécution du contrat (inscriptions, prestations), votre consentement (photos, communications marketing, cookies non essentiels), notre intérêt légitime (sécurité, gestion de l'association) et le respect d'obligations légales (comptabilité)."
         },
         {
-          "heading": "Vos droits",
-          "body": "Vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité. Pour exercer ces droits, écrivez à contact@thelastline.ch."
+          "heading": "Sous-traitants et hébergement",
+          "body": "Nous recourons à des prestataires agissant pour notre compte : Supabase (hébergement de la base de données et authentification, données dans l'UE), Vercel (hébergement du site), LWS (messagerie e-mail), Cloudflare (protection anti-robots « Turnstile »), et, le cas échéant, Stripe (paiement). Ces prestataires sont tenus contractuellement de protéger vos données. Certains peuvent être situés hors de Suisse/UE ; les transferts sont alors encadrés par des garanties appropriées."
+        },
+        {
+          "heading": "Durée de conservation",
+          "body": "Nous conservons vos données aussi longtemps que nécessaire aux finalités ci-dessus et au respect de nos obligations légales (notamment les pièces comptables, conservées 10 ans). Passé ces délais, les données sont supprimées ou anonymisées."
         },
         {
           "heading": "Sécurité",
-          "body": "Les données sont stockées sur des serveurs européens (Supabase, hébergement Frankfurt) et protégées par chiffrement en transit et au repos."
+          "body": "Nous mettons en œuvre des mesures techniques et organisationnelles adaptées : chiffrement des échanges (HTTPS), cloisonnement des accès par utilisateur (row level security), stockage privé des photos, accès restreint aux administrateurs et mots de passe robustes."
+        },
+        {
+          "heading": "Données des mineurs",
+          "body": "Les gardiens mineurs sont inscrits sous la responsabilité de leur parent ou représentant légal, titulaire du compte. Aucune photo d'un mineur n'est utilisée sans le consentement du représentant légal, révocable à tout moment."
+        },
+        {
+          "heading": "Vos droits",
+          "body": "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité, ainsi que du droit de retirer votre consentement à tout moment. Pour exercer ces droits : contact@thelastline.ch. Vous pouvez également saisir l'autorité de contrôle compétente : en Suisse, le Préposé fédéral à la protection des données et à la transparence (PFPDT) ; dans l'UE, votre autorité nationale de protection des données."
+        },
+        {
+          "heading": "Cookies",
+          "body": "Le site n'utilise que des cookies strictement nécessaires et enregistre votre choix de consentement. Pour le détail, consultez notre politique relative aux cookies."
+        },
+        {
+          "heading": "Modifications",
+          "body": "La présente politique peut être mise à jour. La date de dernière mise à jour figure en haut de cette page."
         }
       ]
     },
@@ -780,24 +816,24 @@
       "metaTitle": "Politique cookies",
       "metaDescription": "Politique d'utilisation des cookies sur le site The Last Line.",
       "title": "Politique cookies",
-      "lastUpdated": "2026-04-10",
-      "intro": "Cette page décrit comment The Last Line utilise les cookies et technologies similaires sur son site web.",
+      "lastUpdated": "2026-07-01",
+      "intro": "Le site thelastline.ch est édité par l'association à but non lucratif The Last Line. Cette page explique quels cookies le site utilise. Nous en utilisons très peu et aucun à des fins publicitaires ou de suivi.",
       "sections": [
         {
           "heading": "Qu'est-ce qu'un cookie ?",
-          "body": "Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site web. Il permet au site de vous reconnaître lors de visites ultérieures."
+          "body": "Un cookie est un petit fichier déposé sur votre appareil par un site web afin de permettre son bon fonctionnement ou de mémoriser des préférences."
         },
         {
-          "heading": "Cookies utilisés",
-          "body": "Notre site utilise uniquement des cookies strictement nécessaires (langue, session). Aucun cookie publicitaire ou de suivi tiers n'est déposé sans votre consentement."
+          "heading": "Cookies que nous utilisons",
+          "body": "Cookies strictement nécessaires : session de connexion (via Supabase) permettant de vous garder connecté et de sécuriser votre espace ; mémorisation de votre choix de consentement aux cookies ; cookie temporaire lié au parcours de réservation. Un cookie technique peut aussi être posé par Cloudflare Turnstile, utilisé pour distinguer les humains des robots sur nos formulaires. Ces cookies sont indispensables et ne servent pas à vous suivre."
         },
         {
-          "heading": "Mesure d'audience",
-          "body": "Nous prévoyons d'utiliser une solution d'analyse respectueuse de la vie privée (Plausible ou équivalent) sans cookie persistant ni partage de données avec des tiers."
+          "heading": "Aucun cookie de suivi ni de publicité",
+          "body": "Nous n'utilisons ni Google Analytics, ni pixel publicitaire, ni outil de traçage tiers. Aucune donnée n'est vendue ni partagée à des fins publicitaires."
         },
         {
-          "heading": "Gestion des cookies",
-          "body": "Vous pouvez configurer votre navigateur pour bloquer les cookies. Cela peut altérer certaines fonctionnalités du site."
+          "heading": "Gérer les cookies",
+          "body": "Vous pouvez accepter ou refuser via le bandeau affiché lors de votre première visite, et à tout moment supprimer ou bloquer les cookies dans les réglages de votre navigateur. Le blocage des cookies strictement nécessaires peut empêcher la connexion à votre espace."
         }
       ]
     }
