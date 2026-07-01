@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Anton } from "next/font/google";
 import localFont from "next/font/local";
 
 import "../globals.css";
@@ -13,12 +14,12 @@ import { routing } from "@/i18n/routing";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-// The whole site uses Darwin Pro Light — for both titles and body text.
+// Titles use Anton (bold, condensed); body text uses Darwin Pro Light.
 // We keep the existing CSS variable names (--font-anton / --font-inter) so the
 // Tailwind tokens (font-anton, font-sans) and every component keep working.
-const anton = localFont({
-  src: "../../fonts/darwin-pro-light.woff2",
-  weight: "300",
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
   variable: "--font-anton",
   display: "swap",
 });
