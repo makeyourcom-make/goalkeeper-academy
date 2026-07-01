@@ -546,7 +546,8 @@
         "speciality": "Spécialité",
         "rate": "Tarif / séance",
         "iban": "IBAN",
-        "status": "Statut"
+        "status": "Statut",
+        "actions": "Aperçu"
       },
       "ibanOk": "Renseigné",
       "ibanMissing": "Manquant",
@@ -563,7 +564,8 @@
         "pending": "En attente",
         "markPaid": "Marquer payé",
         "markUnpaid": "Annuler"
-      }
+      },
+      "viewAs": "Voir en tant que"
     },
     "expenses": {
       "metaTitle": "Charges",

@@ -546,7 +546,8 @@
         "speciality": "Speciality",
         "rate": "Rate / session",
         "iban": "IBAN",
-        "status": "Status"
+        "status": "Status",
+        "actions": "Preview"
       },
       "ibanOk": "Provided",
       "ibanMissing": "Missing",
@@ -563,7 +564,8 @@
         "pending": "Pending",
         "markPaid": "Mark paid",
         "markUnpaid": "Undo"
-      }
+      },
+      "viewAs": "View as"
     },
     "expenses": {
       "metaTitle": "Expenses",
