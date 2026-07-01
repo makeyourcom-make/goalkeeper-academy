@@ -1137,7 +1137,7 @@
       },
       "submit": "Send message",
       "submitting": "Sending…",
-      "success": "Thanks! Your message has been sent. We reply within 48 business hours.",
+      "success": "Your email app opens with the message pre-filled to contact@thelastline.ch — just hit send. If nothing opens, write to us directly at contact@thelastline.ch.",
       "errors": {
         "name": "Please enter your name.",
         "email": "Invalid email address.",

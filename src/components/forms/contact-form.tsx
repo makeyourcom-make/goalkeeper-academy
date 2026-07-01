@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils";
 const SUBJECT_KEYS = ["trial", "annual", "camp", "club", "other"] as const;
 type SubjectKey = (typeof SUBJECT_KEYS)[number];
 
+const CONTACT_EMAIL = "contact@thelastline.ch";
+
 type ContactFormValues = {
   name: string;
   email: string;
@@ -71,9 +73,21 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = handleSubmit(async () => {
-    // TODO Phase 5: send to /api/contact backed by Resend
-    await new Promise((resolve) => setTimeout(resolve, 600));
+  const onSubmit = handleSubmit(async (data) => {
+    // Until a backend mailer (SMTP/Resend) is wired, deliver the message by
+    // opening the visitor's mail client pre-addressed to contact@thelastline.ch.
+    const subjectLabel = t(`fields.subject.options.${data.subject}`);
+    const mailSubject = `[Contact — ${subjectLabel}] ${data.name}`;
+    const mailBody = [
+      `${t("fields.name.label")}: ${data.name}`,
+      `${t("fields.email.label")}: ${data.email}`,
+      `${t("fields.subject.label")}: ${subjectLabel}`,
+      "",
+      data.message,
+    ].join("\n");
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      mailSubject,
+    )}&body=${encodeURIComponent(mailBody)}`;
     setIsSuccess(true);
     reset();
   });

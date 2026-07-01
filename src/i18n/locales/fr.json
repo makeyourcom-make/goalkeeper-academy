@@ -1137,7 +1137,7 @@
       },
       "submit": "Envoyer le message",
       "submitting": "Envoi en cours…",
-      "success": "Merci ! Votre message a bien été envoyé. Nous vous répondons sous 48 h ouvrées.",
+      "success": "Votre messagerie s'ouvre avec le message pré-rempli vers contact@thelastline.ch — il ne vous reste qu'à l'envoyer. Si rien ne s'ouvre, écrivez-nous directement à contact@thelastline.ch.",
       "errors": {
         "name": "Merci d'indiquer votre nom.",
         "email": "Adresse email invalide.",
