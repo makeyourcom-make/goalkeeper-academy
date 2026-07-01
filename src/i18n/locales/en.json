@@ -727,35 +727,63 @@
       "sections": [
         {
           "heading": "Scope",
-          "body": "These terms apply to any registration for our trainings, camps and plans. By registering, the user (parent, adult goalkeeper, club or association) accepts them."
+          "body": "These general terms of sale (GTS) govern any registration for the services offered by the non-profit sports association The Last Line via thelastline.ch. By registering, the customer — parent or legal guardian, adult goalkeeper, club or association — accepts them without reservation. They prevail over any conflicting terms of the customer."
         },
         {
-          "heading": "Services",
-          "body": "The association offers goalkeeper-specific training as a discovery session, a Tour (half-season) or a full season, as well as camps. Details and prices are on the Offers page. Times and locations are shared through the member area."
+          "heading": "Services and plans",
+          "body": "The association offers goalkeeper-specific training as: a discovery session (single, no commitment); a Tour (18 sessions); a full season (36 sessions); and occasional camps. Details, session counts and prices are on the Offers page. Times and locations are shared through the member area and may be adjusted for organisational reasons."
         },
         {
-          "heading": "Registration",
-          "body": "Registration is done online and requires an account. The user warrants the accuracy of the information provided, in particular about the registered goalkeeper."
+          "heading": "Registration and account",
+          "body": "Registration is done online and requires creating an account. The customer warrants the accuracy of the information provided, in particular the identity, age and health of the registered goalkeeper. A minor is registered under the responsibility of their legal guardian."
         },
         {
-          "heading": "Prices and payment",
-          "body": "Prices are shown in Swiss francs (CHF). An automatic volume discount applies from the second goalkeeper registered. Payment is made using the methods offered at registration (card, TWINT or invoice). Until online payment is enabled, the association communicates the payment terms after registration."
+          "heading": "Prices",
+          "body": "Prices are shown in Swiss francs (CHF) and are net. An automatic volume discount applies from the second goalkeeper registered in the same household. The association is not liable for VAT (turnover below the legal threshold): no VAT is added."
         },
         {
-          "heading": "Cancellation and refunds",
-          "body": "Cancellation and any refund conditions are specified at registration or communicated by the association. A discovery session carries no commitment."
+          "heading": "Payment terms",
+          "body": "Discovery and single sessions are payable in full (100%) before the session. For the Tour and the full season, payment may be made in one instalment (per tour or per season) or spread out (monthly or quarterly). Choosing a Tour or a season is a firm commitment for the entire package, regardless of the chosen payment method. Payment is by Swiss QR invoice; card and TWINT payments (via Stripe) will be offered soon. The place is definitively confirmed upon receipt of the first payment."
         },
         {
-          "heading": "Liability and insurance",
-          "body": "Participants take part at their own risk. Each participant must hold personal liability and accident insurance. The association declines all liability for accidents or damage, save for its gross negligence."
+          "heading": "Late payment and exclusion",
+          "body": "In the event of late payment, a reminder fee of CHF 10 is due from the 20th day after the due date. Failing settlement within 30 days of the due date, the association may exclude the goalkeeper, without refund: the total amount of the committed package (Tour or season) remains fully due. Default interest of 5% per year may be charged from default (art. 104 CO)."
+        },
+        {
+          "heading": "Commitment, cancellation and refund",
+          "body": "Discovery and single sessions: non-refundable; they may only be rescheduled to a later date. Tour and full season: packages are non-refundable, except in the event of the goalkeeper's injury duly certified by a medical certificate preventing participation in more than 50% of the sessions of the package concerned; in that case, a refund of 50% of the package price may be granted. No other reason gives rise to a refund. Packages nevertheless remain freely transferable (see below)."
+        },
+        {
+          "heading": "Transfer and resale",
+          "body": "All plans (discovery session, Tour, full season) are freely transferable free of charge and resalable to a third party. A customer who cannot continue may thus transfer or resell their package to another goalkeeper. The transfer must be announced to the association beforehand; the beneficiary must meet the admission conditions (in particular age) and hold an account. The association charges no transfer fee."
+        },
+        {
+          "heading": "Participant absences",
+          "body": "A session missed through the goalkeeper's own doing is neither refunded nor owed in addition. A make-up on another slot may be offered subject to availability, as a goodwill gesture and without guarantee or acquired right."
+        },
+        {
+          "heading": "Sessions cancelled by the association, weather and force majeure",
+          "body": "The association controls neither weather conditions, nor the opening or closing of pitches, nor cases of force majeure. When a session cannot take place, the association endeavours to postpone or make it up. If a make-up proves impossible, the association is not liable and the amount provided remains due, without refund."
+        },
+        {
+          "heading": "No right of withdrawal",
+          "body": "Under Swiss law, online registrations do not benefit from a legal right of withdrawal. The discovery session, with no commitment, lets you try our services before subscribing to a Tour or a season."
+        },
+        {
+          "heading": "Insurance and liability",
+          "body": "Each participant takes part at their own risk and must hold personal liability and accident insurance. The association declines all liability for accidents, injury, loss or theft, save for its gross negligence. Instructions from the coaching staff must be followed."
         },
         {
           "heading": "Data protection",
-          "body": "The processing of personal data in connection with registrations is described in our privacy policy."
+          "body": "Personal data processed in connection with registrations is described in our privacy policy, compliant with the nFADP and GDPR."
+        },
+        {
+          "heading": "Changes to the GTS",
+          "body": "The association may amend these GTS. The applicable version is the one in force on the day of registration. The last-updated date is shown at the top of this page."
         },
         {
           "heading": "Governing law and jurisdiction",
-          "body": "These terms are subject to Swiss law. Exclusive jurisdiction lies at the association's seat, subject to mandatory consumer-protection provisions."
+          "body": "These GTS are subject to Swiss law. Exclusive jurisdiction lies at the association's seat, in Torgon (Vionnaz, VS), subject to mandatory consumer-protection provisions."
         }
       ]
     },

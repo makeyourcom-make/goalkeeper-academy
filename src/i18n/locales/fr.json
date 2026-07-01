@@ -727,35 +727,63 @@
       "sections": [
         {
           "heading": "Champ d'application",
-          "body": "Ces conditions s'appliquent à toute inscription à nos entraînements, stages et formules. En s'inscrivant, l'utilisateur (parent, gardien majeur, club ou association) les accepte."
+          "body": "Les présentes conditions générales de vente (CGV) régissent toute inscription aux prestations proposées par l'association sportive à but non lucratif The Last Line via le site thelastline.ch. En s'inscrivant, le client — parent ou représentant légal, gardien majeur, club ou association — les accepte sans réserve. Elles priment sur toute condition contraire du client."
         },
         {
-          "heading": "Prestations",
-          "body": "L'association propose des entraînements spécifiques de gardien de but sous forme de séance découverte, de Tour (demi-saison) ou de saison complète, ainsi que des stages. Le détail et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre."
+          "heading": "Prestations et formules",
+          "body": "L'association propose des entraînements spécifiques de gardien de but sous forme de : séance découverte (à l'unité, sans engagement) ; Tour (18 séances) ; saison complète (36 séances) ; ainsi que des stages ponctuels. Le détail, le nombre de séances et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre et peuvent être adaptés pour des raisons d'organisation."
         },
         {
-          "heading": "Inscription",
-          "body": "L'inscription se fait en ligne et nécessite un compte. L'utilisateur garantit l'exactitude des informations fournies, notamment concernant le gardien inscrit."
+          "heading": "Inscription et compte",
+          "body": "L'inscription se fait en ligne et nécessite la création d'un compte. Le client garantit l'exactitude des informations fournies, en particulier l'identité, l'âge et l'état de santé du gardien inscrit. L'inscription d'un mineur est effectuée sous la responsabilité de son représentant légal."
         },
         {
-          "heading": "Prix et paiement",
-          "body": "Les prix sont indiqués en francs suisses (CHF). Une remise volume automatique s'applique dès le deuxième gardien inscrit. Le paiement s'effectue selon les moyens proposés lors de l'inscription (carte, TWINT ou facture). Tant que le paiement en ligne n'est pas activé, l'association communique les modalités de règlement après l'inscription."
+          "heading": "Prix",
+          "body": "Les prix sont indiqués en francs suisses (CHF) et s'entendent nets. Une remise volume automatique s'applique dès le deuxième gardien inscrit au sein du même foyer. L'association n'est pas assujettie à la TVA (chiffre d'affaires inférieur au seuil légal) : aucun montant de TVA n'est ajouté."
         },
         {
-          "heading": "Annulation et remboursement",
-          "body": "Les conditions d'annulation et d'éventuel remboursement sont précisées au moment de l'inscription ou communiquées par l'association. Une séance découverte est sans engagement."
+          "heading": "Modalités de paiement",
+          "body": "La séance découverte et les séances à l'unité sont payables à 100 % avant la séance. Pour le Tour et la saison complète, le paiement peut être effectué en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu. Le paiement s'effectue par facture QR suisse ; les paiements par carte et TWINT (via Stripe) seront proposés prochainement. La place est définitivement confirmée à réception du premier paiement."
         },
         {
-          "heading": "Responsabilité et assurance",
-          "body": "Les participants prennent part aux activités sous leur propre responsabilité. Chaque participant doit être couvert par une assurance responsabilité civile et accident personnelle. L'association décline toute responsabilité en cas d'accident ou de dommage, sous réserve de sa faute grave."
+          "heading": "Retard de paiement et exclusion",
+          "body": "En cas de retard de paiement, des frais de rappel de 10 CHF sont dus dès le 20e jour suivant l'échéance. À défaut de régularisation dans les 30 jours suivant l'échéance, l'association peut prononcer l'exclusion du gardien, sans remboursement : le montant total du forfait engagé (Tour ou saison) reste intégralement dû. Un intérêt moratoire de 5 % l'an peut être perçu dès la demeure (art. 104 CO)."
+        },
+        {
+          "heading": "Engagement, annulation et remboursement",
+          "body": "Séance découverte et séances à l'unité : non remboursables ; elles peuvent uniquement être déplacées à une date ultérieure. Tour et saison complète : forfaits non remboursables, sauf blessure du gardien dûment attestée par certificat médical l'empêchant de participer à plus de 50 % des séances du forfait concerné ; dans ce cas, un remboursement de 50 % du montant du forfait peut être accordé. Aucun autre motif ne donne droit à remboursement. Les forfaits restent toutefois librement cessibles (voir ci-après)."
+        },
+        {
+          "heading": "Cession et revente",
+          "body": "Toutes les formules (séance découverte, Tour, saison complète) sont librement transmissibles à titre gratuit et revendables à un tiers. Le client qui ne peut poursuivre peut ainsi céder ou revendre son forfait à un autre gardien. La cession doit être annoncée préalablement à l'association ; le bénéficiaire doit remplir les conditions d'admission (notamment d'âge) et disposer d'un compte. L'association ne prélève aucun frais de transfert."
+        },
+        {
+          "heading": "Absences du participant",
+          "body": "Une séance manquée du fait du gardien n'est ni remboursée ni due en supplément. Un rattrapage sur un autre créneau peut être proposé selon les places disponibles, à titre de bienveillance et sans garantie ni droit acquis."
+        },
+        {
+          "heading": "Séances annulées par l'association, météo et force majeure",
+          "body": "L'association ne maîtrise ni les conditions météorologiques, ni l'ouverture ou la fermeture des terrains, ni les cas de force majeure. Lorsqu'une séance ne peut avoir lieu, l'association s'efforce de la reporter ou de la rattraper. Si le rattrapage s'avère impossible, l'association n'en est pas responsable et le montant prévu reste dû, sans remboursement."
+        },
+        {
+          "heading": "Absence de droit de rétractation",
+          "body": "Conformément au droit suisse, les inscriptions en ligne ne bénéficient pas d'un droit de rétractation légal. La séance découverte, sans engagement, permet d'essayer nos prestations avant de souscrire un Tour ou une saison."
+        },
+        {
+          "heading": "Assurance et responsabilité",
+          "body": "Chaque participant prend part aux activités sous sa propre responsabilité et doit être couvert par une assurance responsabilité civile et accident personnelle. L'association décline toute responsabilité en cas d'accident, de blessure, de perte ou de vol, sous réserve de sa faute grave. Les consignes de l'encadrement doivent être respectées."
         },
         {
           "heading": "Protection des données",
-          "body": "Le traitement des données personnelles dans le cadre des inscriptions est décrit dans notre politique de confidentialité."
+          "body": "Les données personnelles traitées dans le cadre des inscriptions sont décrites dans notre politique de confidentialité, conforme à la nLPD et au RGPD."
+        },
+        {
+          "heading": "Modification des CGV",
+          "body": "L'association peut modifier les présentes CGV. La version applicable est celle en vigueur au jour de l'inscription. La date de dernière mise à jour figure en haut de cette page."
         },
         {
           "heading": "Droit applicable et for",
-          "body": "Les présentes conditions sont soumises au droit suisse. Le for exclusif est au siège de l'association, sous réserve des dispositions impératives protégeant les consommateurs."
+          "body": "Les présentes CGV sont soumises au droit suisse. Le for exclusif est au siège de l'association, à Torgon (Vionnaz, VS), sous réserve des dispositions impératives protégeant les consommateurs."
         }
       ]
     },
