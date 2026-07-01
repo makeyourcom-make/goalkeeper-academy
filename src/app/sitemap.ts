@@ -22,22 +22,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
   const lastModified = new Date();
 
-  const staticEntries: MetadataRoute.Sitemap = PUBLIC_PATHS.map((href) => {
-    const languages = Object.fromEntries(
-      routing.locales.map((locale) => [
-        locale,
-        `${baseUrl}${getPathname({ href, locale })}`,
-      ]),
-    );
+  // One <url> entry per locale (fr AND en), each carrying the full set of
+  // hreflang alternates so both languages are explicit in the sitemap.
+  const staticEntries: MetadataRoute.Sitemap = routing.locales.flatMap(
+    (locale) =>
+      PUBLIC_PATHS.map((href) => {
+        const languages = Object.fromEntries(
+          routing.locales.map((l) => [
+            l,
+            `${baseUrl}${getPathname({ href, locale: l })}`,
+          ]),
+        );
 
-    return {
-      url: `${baseUrl}${getPathname({ href, locale: routing.defaultLocale })}`,
-      lastModified,
-      changeFrequency: "monthly" as const,
-      priority: href === "/" ? 1 : 0.7,
-      alternates: { languages },
-    };
-  });
+        return {
+          url: `${baseUrl}${getPathname({ href, locale })}`,
+          lastModified,
+          changeFrequency: "monthly" as const,
+          priority: href === "/" ? 1 : 0.7,
+          alternates: { languages },
+        };
+      }),
+  );
 
   const blogEntries: MetadataRoute.Sitemap = routing.locales.flatMap(
     (locale: Locale) =>
