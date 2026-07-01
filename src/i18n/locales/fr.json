@@ -71,7 +71,7 @@
       "subtitle": "Cours hebdomadaires, stages vacances et coaching individuel pour les gardiennes et gardiens, de 10 ans jusqu'aux séniors, dans le Chablais.",
       "ctaPrimary": "Réserver votre saison",
       "ctaSecondary": "Voir les offres",
-      "imageAlt": "Jeune gardien de but en plein plongeon lors d'un entraînement"
+      "imageAlt": "Jeune gardien de but en plein plongeon lors d'un entraînement dans le Chablais"
     },
     "values": {
       "eyebrow": "Pourquoi nous choisir",
@@ -1394,6 +1394,10 @@
         "trial": {
           "question": "Puis-je essayer avant de m'engager ?",
           "answer": "Oui. La séance découverte (45 CHF pour les jeunes, 50 CHF pour les adultes) permet de tester une séance complète sans aucun engagement."
+        },
+        "location": {
+          "question": "Où ont lieu les entraînements ?",
+          "answer": "Au Terrain de la Mêlée à Aigle, en plein cœur du Chablais (canton de Vaud), juste à la sortie d'autoroute — un point central et facile d'accès depuis tout le Chablais et le Valais. Vestiaires et douches à disposition."
         },
         "siblings": {
           "question": "Existe-t-il une remise frères et sœurs ?",

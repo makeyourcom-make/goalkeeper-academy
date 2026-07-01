@@ -41,7 +41,14 @@ const COMPARE_ROWS = [
 
 const COMPARE_COLS = ["single", "tour", "season"] as const;
 
-const FAQ_KEYS = ["trial", "siblings", "payment", "cancel", "club"] as const;
+const FAQ_KEYS = [
+  "trial",
+  "location",
+  "siblings",
+  "payment",
+  "cancel",
+  "club",
+] as const;
 
 export default async function OffresPage({ params }: Props) {
   const { locale } = await params;

@@ -71,7 +71,7 @@
       "subtitle": "Weekly sessions, holiday camps and private coaching for goalkeepers, from age 10 to senior, in the Chablais region.",
       "ctaPrimary": "Book your season",
       "ctaSecondary": "See the offers",
-      "imageAlt": "Young goalkeeper diving during a training session"
+      "imageAlt": "Young goalkeeper diving during a training session in the Chablais"
     },
     "values": {
       "eyebrow": "Why choose us",
@@ -1394,6 +1394,10 @@
         "trial": {
           "question": "Can I try before committing?",
           "answer": "Yes. The discovery session (CHF 45 youth, CHF 50 adults) lets you try a full session with no commitment."
+        },
+        "location": {
+          "question": "Where do the sessions take place?",
+          "answer": "At the Terrain de la Mêlée in Aigle, in the heart of the Chablais (canton of Vaud), right by the motorway exit — central and easy to reach from across the Chablais and Valais. Changing rooms and showers available."
         },
         "siblings": {
           "question": "Is there a sibling discount?",
