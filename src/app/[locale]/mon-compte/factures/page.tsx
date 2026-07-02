@@ -8,7 +8,8 @@ import { redirect } from "next/navigation";
 
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
-import type { Invoice } from "@/types/database";
+import { payInstallment } from "@/lib/inscription/pay-actions";
+import type { Invoice, PaymentPlan } from "@/types/database";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -31,6 +32,14 @@ function formatAmount(cents: number, currency: string, locale: string) {
   }).format(cents / 100);
 }
 
+function formatDate(iso: string, locale: string) {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-CH" : "fr-CH", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(new Date(iso));
+}
+
 export default async function InvoicesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -39,14 +48,22 @@ export default async function InvoicesPage({ params }: Props) {
   const ctx = await getAccountContext();
   if (!ctx) redirect(`/${locale}/connexion`);
 
-  const { data: invoices } = await ctx.db
-    .from("invoices")
-    .select("*")
-    .eq("profile_id", ctx.userId)
-    .order("issued_at", { ascending: false })
-    .returns<Invoice[]>();
+  const [{ data: invoices }, { data: plans }] = await Promise.all([
+    ctx.db
+      .from("invoices")
+      .select("*")
+      .eq("profile_id", ctx.userId)
+      .order("issued_at", { ascending: false })
+      .returns<Invoice[]>(),
+    ctx.db
+      .from("payment_plans")
+      .select("*")
+      .eq("profile_id", ctx.userId)
+      .returns<PaymentPlan[]>(),
+  ]);
 
   const list = invoices ?? [];
+  const planById = new Map((plans ?? []).map((p) => [p.id, p]));
 
   return (
     <>
@@ -79,41 +96,110 @@ export default async function InvoicesPage({ params }: Props) {
             </div>
           ) : (
             <ul className="flex flex-col gap-3">
-              {list.map((invoice) => (
-                <li
-                  key={invoice.id}
-                  className="flex items-center justify-between gap-4 rounded-xl border border-grey-100 bg-white p-4 shadow-sm"
-                >
-                  <div>
-                    <p className="font-medium text-navy">
-                      {invoice.invoice_number}
-                    </p>
-                    <p className="text-xs text-grey-500">
-                      {t(`type.${invoice.type}`)} ·{" "}
-                      {t(`status.${invoice.status}`)}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-anton text-lg text-navy">
-                      {formatAmount(
-                        invoice.amount_cents,
-                        invoice.currency,
-                        locale,
+              {list.map((invoice) => {
+                const plan = invoice.payment_plan_id
+                  ? planById.get(invoice.payment_plan_id)
+                  : undefined;
+                const isPending = invoice.status === "pending";
+                const isManualPay =
+                  !!plan &&
+                  (plan.method === "twint" ||
+                    (plan.method === "card" && plan.installments_total === 1));
+                const isAutoCard =
+                  !!plan &&
+                  plan.method === "card" &&
+                  plan.installments_total > 1;
+
+                return (
+                  <li
+                    key={invoice.id}
+                    className="flex items-center justify-between gap-4 rounded-xl border border-grey-100 bg-white p-4 shadow-sm"
+                  >
+                    <div className="flex flex-col gap-0.5">
+                      <p className="font-medium text-navy">
+                        {invoice.invoice_number}
+                      </p>
+                      <p className="text-xs text-grey-500">
+                        {t(`type.${invoice.type}`)} ·{" "}
+                        {t(`status.${invoice.status}`)}
+                        {plan && plan.installments_total > 1 && (
+                          <>
+                            {" · "}
+                            {t("installment", {
+                              n: invoice.installment_number ?? 1,
+                              total: plan.installments_total,
+                            })}
+                          </>
+                        )}
+                      </p>
+                      {isPending && invoice.due_date && (
+                        <p className="text-xs text-grey-500">
+                          {t("due", {
+                            date: formatDate(invoice.due_date, locale),
+                          })}
+                        </p>
                       )}
-                    </p>
-                    {invoice.pdf_url && (
-                      <a
-                        href={invoice.pdf_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-medium text-orange hover:underline"
-                      >
-                        {t("download")}
-                      </a>
-                    )}
-                  </div>
-                </li>
-              ))}
+                    </div>
+                    <div className="flex flex-col items-end gap-1">
+                      <p className="font-anton text-lg text-navy">
+                        {formatAmount(
+                          invoice.amount_cents,
+                          invoice.currency,
+                          locale,
+                        )}
+                      </p>
+                      {invoice.pdf_url && (
+                        <a
+                          href={invoice.pdf_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-medium text-orange hover:underline"
+                        >
+                          {t("download")}
+                        </a>
+                      )}
+                      {isPending && !ctx.isImpersonating && (
+                        <>
+                          {plan?.method === "qr_bill" && (
+                            <Button asChild size="sm" variant="outline">
+                              <Link
+                                href={{
+                                  pathname: "/mon-compte/factures/[id]/qr",
+                                  params: { id: invoice.id },
+                                }}
+                              >
+                                {t("qrBill")}
+                              </Link>
+                            </Button>
+                          )}
+                          {isManualPay && (
+                            <form action={payInstallment}>
+                              <input
+                                type="hidden"
+                                name="invoiceId"
+                                value={invoice.id}
+                              />
+                              <input
+                                type="hidden"
+                                name="locale"
+                                value={locale}
+                              />
+                              <Button type="submit" size="sm">
+                                {t("pay")}
+                              </Button>
+                            </form>
+                          )}
+                          {isAutoCard && (
+                            <span className="text-grey-400 text-xs">
+                              {t("autoDebit")}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>

@@ -30,6 +30,7 @@
     "react-hook-form": "^7.72.1",
     "reading-time": "^1.5.0",
     "stripe": "^17.7.0",
+    "swissqrbill": "^4.3.0",
     "tailwind-merge": "^3.5.0",
     "zod": "^4.3.6"
   },

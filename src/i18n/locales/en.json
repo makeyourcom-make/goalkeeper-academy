@@ -1120,7 +1120,17 @@
         "overdue": "Overdue",
         "cancelled": "Cancelled",
         "refunded": "Refunded"
-      }
+      },
+      "pay": "Pay",
+      "qrBill": "QR-invoice",
+      "autoDebit": "Automatic charge",
+      "installment": "Instalment {n}/{total}",
+      "due": "Due {date}",
+      "qrTitle": "QR-invoice",
+      "qrIntro": "Scan this QR code with your banking app (e-banking), or print this payment slip.",
+      "qrUnavailable": "The QR-invoice is not available right now. Contact us at contact@thelastline.ch.",
+      "print": "Print",
+      "backToInvoices": "← Back to my invoices"
     },
     "terms": {
       "children": "children",

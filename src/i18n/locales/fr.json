@@ -1120,7 +1120,17 @@
         "overdue": "En retard",
         "cancelled": "Annulée",
         "refunded": "Remboursée"
-      }
+      },
+      "pay": "Payer",
+      "qrBill": "QR-facture",
+      "autoDebit": "Prélèvement automatique",
+      "installment": "Versement {n}/{total}",
+      "due": "Échéance {date}",
+      "qrTitle": "QR-facture",
+      "qrIntro": "Scannez ce QR-code avec votre application bancaire (e-banking), ou imprimez ce bulletin de versement.",
+      "qrUnavailable": "La QR-facture n’est pas disponible pour le moment. Contactez-nous à contact@thelastline.ch.",
+      "print": "Imprimer",
+      "backToInvoices": "← Retour à mes factures"
     },
     "terms": {
       "children": "enfants",
