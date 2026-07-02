@@ -565,7 +565,16 @@
         "markPaid": "Mark paid",
         "markUnpaid": "Undo"
       },
-      "viewAs": "View as"
+      "viewAs": "View as",
+      "promote": {
+        "title": "Add a coach",
+        "subtitle": "Pick an account already registered on the site to promote to coach.",
+        "select": "Account to promote",
+        "placeholder": "— Choose an account",
+        "button": "Promote to coach",
+        "empty": "No account to promote. The person must first create an account on the site (Sign in → Create account)."
+      },
+      "demote": "Remove role"
     },
     "expenses": {
       "metaTitle": "Expenses",

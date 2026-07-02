@@ -19,6 +19,7 @@ export async function getCoachOptions(
   const { data } = await supabase
     .from("coaches")
     .select("id, profiles(first_name, last_name, email)")
+    .eq("active", true)
     .order("created_at", { ascending: true })
     .returns<CoachRow[]>();
 

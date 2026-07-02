@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, X, Eye } from "lucide-react";
+import { Check, X, Eye, UserPlus, UserMinus } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { setCoachPayment } from "@/lib/admin/coach-payment-actions";
+import { promoteToCoach, demoteCoach } from "@/lib/admin/coach-admin-actions";
 import { viewAsUser } from "@/lib/admin/impersonation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -26,6 +27,12 @@ type CoachRow = {
   } | null;
 };
 type PaymentRow = { coach_id: string; status: string };
+type EligibleRow = {
+  id: string;
+  first_name: string | null;
+  last_name: string | null;
+  email: string;
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -45,29 +52,40 @@ export default async function AdminCoachesPage({ params }: Props) {
   const periodEnd = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-01`;
 
   const supabase = await createSupabaseServerClient();
-  const [coachesRes, sessionsRes, paymentsRes] = await Promise.all([
-    supabase
-      .from("coaches")
-      .select(
-        "id, profile_id, rate_per_session, speciality, active, profiles(first_name, last_name, email, iban)",
-      )
-      .order("created_at", { ascending: true })
-      .returns<CoachRow[]>(),
-    supabase
-      .from("sessions")
-      .select("id, coach_id")
-      .gte("starts_at", periodStart)
-      .lt("starts_at", periodEnd)
-      .neq("status", "cancelled")
-      .returns<{ id: string; coach_id: string | null }[]>(),
-    supabase
-      .from("coach_payments")
-      .select("coach_id, status")
-      .eq("period", period)
-      .returns<PaymentRow[]>(),
-  ]);
+  const [coachesRes, sessionsRes, paymentsRes, eligibleRes] = await Promise.all(
+    [
+      supabase
+        .from("coaches")
+        .select(
+          "id, profile_id, rate_per_session, speciality, active, profiles(first_name, last_name, email, iban)",
+        )
+        .order("created_at", { ascending: true })
+        .returns<CoachRow[]>(),
+      supabase
+        .from("sessions")
+        .select("id, coach_id")
+        .gte("starts_at", periodStart)
+        .lt("starts_at", periodEnd)
+        .neq("status", "cancelled")
+        .returns<{ id: string; coach_id: string | null }[]>(),
+      supabase
+        .from("coach_payments")
+        .select("coach_id, status")
+        .eq("period", period)
+        .returns<PaymentRow[]>(),
+      supabase
+        .from("profiles")
+        .select("id, first_name, last_name, email")
+        .in("role", ["parent", "club"])
+        .order("created_at", { ascending: true })
+        .returns<EligibleRow[]>(),
+    ],
+  );
 
   const coaches = coachesRes.data ?? [];
+  const eligible = eligibleRes.data ?? [];
+  const eligibleName = (p: EligibleRow) =>
+    `${p.first_name ?? ""} ${p.last_name ?? ""}`.trim() || p.email;
   const sessionCount = new Map<string, number>();
   for (const s of sessionsRes.data ?? []) {
     if (s.coach_id)
@@ -101,6 +119,46 @@ export default async function AdminCoachesPage({ params }: Props) {
         <p className="max-w-2xl text-grey-700">
           {t("count", { count: coaches.length })}
         </p>
+      </div>
+
+      {/* Promote an existing (parent/club) account to coach */}
+      <div className="mt-6 rounded-2xl border border-grey-100 bg-white p-5 shadow-sm">
+        <h2 className="font-anton text-lg uppercase text-navy">
+          {t("promote.title")}
+        </h2>
+        <p className="mt-1 text-sm text-grey-500">{t("promote.subtitle")}</p>
+        {eligible.length === 0 ? (
+          <p className="mt-3 text-sm text-grey-500">{t("promote.empty")}</p>
+        ) : (
+          <form
+            action={promoteToCoach}
+            className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end"
+          >
+            <div className="flex flex-1 flex-col gap-1">
+              <label className="text-xs font-medium text-grey-500">
+                {t("promote.select")}
+              </label>
+              <select
+                name="profileId"
+                required
+                defaultValue=""
+                className="rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm text-navy outline-none focus:border-orange"
+              >
+                <option value="" disabled>
+                  {t("promote.placeholder")}
+                </option>
+                {eligible.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {eligibleName(p)} · {p.email}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <Button type="submit">
+              <UserPlus className="mr-1 h-4 w-4" /> {t("promote.button")}
+            </Button>
+          </form>
+        )}
       </div>
 
       {/* Coaches */}
@@ -167,20 +225,35 @@ export default async function AdminCoachesPage({ params }: Props) {
                       </span>
                     </td>
                     <td className="px-4 py-3">
-                      <form action={viewAsUser}>
-                        <input
-                          type="hidden"
-                          name="userId"
-                          value={c.profile_id}
-                        />
-                        <input type="hidden" name="locale" value={locale} />
-                        <button
-                          type="submit"
-                          className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-grey-300 px-3 py-1 text-xs font-medium text-navy transition hover:border-orange hover:text-orange"
-                        >
-                          <Eye className="h-3.5 w-3.5" /> {t("viewAs")}
-                        </button>
-                      </form>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <form action={viewAsUser}>
+                          <input
+                            type="hidden"
+                            name="userId"
+                            value={c.profile_id}
+                          />
+                          <input type="hidden" name="locale" value={locale} />
+                          <button
+                            type="submit"
+                            className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-grey-300 px-3 py-1 text-xs font-medium text-navy transition hover:border-orange hover:text-orange"
+                          >
+                            <Eye className="h-3.5 w-3.5" /> {t("viewAs")}
+                          </button>
+                        </form>
+                        <form action={demoteCoach}>
+                          <input
+                            type="hidden"
+                            name="profileId"
+                            value={c.profile_id}
+                          />
+                          <button
+                            type="submit"
+                            className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-grey-300 px-3 py-1 text-xs font-medium text-grey-500 transition hover:border-error hover:text-error"
+                          >
+                            <UserMinus className="h-3.5 w-3.5" /> {t("demote")}
+                          </button>
+                        </form>
+                      </div>
                     </td>
                   </tr>
                 ))

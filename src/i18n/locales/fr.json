@@ -565,7 +565,16 @@
         "markPaid": "Marquer payé",
         "markUnpaid": "Annuler"
       },
-      "viewAs": "Voir en tant que"
+      "viewAs": "Voir en tant que",
+      "promote": {
+        "title": "Ajouter un entraîneur",
+        "subtitle": "Choisissez un compte déjà inscrit sur le site à promouvoir en entraîneur.",
+        "select": "Compte à promouvoir",
+        "placeholder": "— Choisir un compte",
+        "button": "Promouvoir en entraîneur",
+        "empty": "Aucun compte à promouvoir. La personne doit d’abord créer son compte sur le site (Connexion → Créer un compte)."
+      },
+      "demote": "Retirer le rôle"
     },
     "expenses": {
       "metaTitle": "Charges",
