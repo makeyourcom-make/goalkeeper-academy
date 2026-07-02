@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Newspaper } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
@@ -69,7 +69,13 @@ export default async function BlogIndexPage({ params, searchParams }: Props) {
       <section className="bg-white py-16 lg:py-20">
         <div className="container">
           {posts.length === 0 ? (
-            <p className="text-center text-grey-500">{t("empty")}</p>
+            <div className="mx-auto flex max-w-xl flex-col items-center gap-4 rounded-2xl border border-dashed border-grey-300 bg-grey-100/40 px-8 py-16 text-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-orange/10 text-orange">
+                <Newspaper className="h-7 w-7" aria-hidden="true" />
+              </span>
+              <Badge variant="orange">{t("comingSoonBadge")}</Badge>
+              <p className="text-lg text-grey-700">{t("empty")}</p>
+            </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (

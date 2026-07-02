@@ -140,12 +140,12 @@
       "title": "Ce qu'en disent les familles",
       "items": {
         "parent": {
-          "quote": "En six mois, le jeu au pied de notre fils a complètement changé. L'équipe est exigeante mais bienveillante, c'est exactement ce qu'on cherchait.",
+          "quote": "En six mois, le jeu au pied de notre fils a complètement changé. L'équipe est exigeante mais bienveillante, c'est exactement ce que nous cherchions.",
           "author": "Sandrine M.",
           "role": "Maman d'un U13"
         },
         "keeper": {
-          "quote": "J'apprends des trucs que je n'avais jamais vus en club. Et en plus on rigole bien à l'entraînement.",
+          "quote": "J'apprends des trucs que je n'avais jamais vus en club. Et en plus nous rigolons bien à l'entraînement.",
           "author": "Léo, 14 ans",
           "role": "Gardien U15"
         },
@@ -1290,7 +1290,8 @@
     },
     "readingTime": "{minutes} min de lecture",
     "readMore": "Lire l'article",
-    "empty": "Aucun article pour le moment. Revenez bientôt !",
+    "empty": "Nos premiers articles arrivent bientôt. Revenez vite !",
+    "comingSoonBadge": "À venir",
     "previous": "Précédent",
     "next": "Suivant",
     "page": "Page {current} sur {total}",
@@ -1647,7 +1648,7 @@
         },
         "gear": {
           "title": "Matériel pro",
-          "description": "Buts mobiles, mannequins, élastiques, vidéo. Tout l'équipement spécifique est fourni."
+          "description": "Buts mobiles, mannequins, élastiques, vidéos. Tout l'équipement spécifique est fourni."
         }
       }
     },
@@ -1657,7 +1658,7 @@
       "items": {
         "excellence": {
           "title": "Exigence bienveillante",
-          "description": "On pousse haut, on n'humilie jamais. Chaque gardien progresse à son rythme."
+          "description": "Nous poussons haut, nous n'humilions jamais. Chaque gardien progresse à son rythme."
         },
         "respect": {
           "title": "Respect & fair-play",
@@ -1665,14 +1666,14 @@
         },
         "passion": {
           "title": "Plaisir du poste",
-          "description": "Aimer le poste de gardien, c'est la base. On entretient cette flamme à chaque séance."
+          "description": "Aimer le poste de gardien, c'est la base. Nous entretenons cette flamme à chaque séance."
         }
       }
     },
     "recruit": {
       "eyebrow": "Rejoindre l'équipe",
-      "title": "On recherche des coachs de gardiens",
-      "subtitle": "Tu es passionné·e par le poste et tu veux transmettre ? Écris-nous, on serait ravis d'échanger avec toi.",
+      "title": "Nous recherchons des coachs de gardiens",
+      "subtitle": "Tu es passionné·e par le poste et tu veux transmettre ? Écris-nous, nous serions ravis d'échanger avec toi.",
       "cta": "Nous contacter"
     }
   },
