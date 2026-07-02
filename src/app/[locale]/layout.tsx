@@ -12,6 +12,7 @@ import { CookieBanner } from "@/components/layout/cookie-banner";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/seo/json-ld";
+import { RegisterSW } from "@/components/pwa/register-sw";
 import { routing } from "@/i18n/routing";
 import { siteGraph } from "@/lib/seo";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -42,6 +43,7 @@ export function generateStaticParams() {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#0B2545",
 };
 
 export async function generateMetadata({
@@ -63,6 +65,11 @@ export async function generateMetadata({
     },
     description: t("description"),
     applicationName: t("title"),
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: "The Last Line",
+    },
     alternates: {
       canonical: `/${locale}`,
       languages: {
@@ -170,6 +177,8 @@ export default async function LocaleLayout({
         {/* Cookieless, privacy-friendly audience measurement (Vercel). Sends
             data only when Web Analytics is enabled in the Vercel dashboard. */}
         <Analytics />
+        {/* PWA: install to home screen + offline fallback (prod only). */}
+        <RegisterSW />
       </body>
     </html>
   );
