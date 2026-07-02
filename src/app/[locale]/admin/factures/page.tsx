@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check } from "lucide-react";
+import { Check, Undo2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { markInvoicePaid } from "@/lib/admin/actions";
+import {
+  markInvoicePaid,
+  refundInvoice,
+  cancelInvoice,
+} from "@/lib/admin/actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -151,16 +155,78 @@ export default async function AdminInvoicesPage({ params }: Props) {
                     <td className="px-4 py-3 text-grey-500">
                       {dateFmt.format(new Date(invoice.issued_at))}
                     </td>
-                    <td className="px-4 py-3 text-right">
-                      {invoice.status === "pending" && (
-                        <form action={markInvoicePaid}>
-                          <input type="hidden" name="id" value={invoice.id} />
-                          <Button type="submit" variant="ghost" size="sm">
-                            <Check className="mr-1 h-4 w-4" />
-                            {t("markPaid")}
-                          </Button>
-                        </form>
-                      )}
+                    <td className="px-4 py-3">
+                      <div className="flex flex-wrap items-center justify-end gap-1">
+                        {(invoice.status === "pending" ||
+                          invoice.status === "overdue") && (
+                          <>
+                            <form action={markInvoicePaid}>
+                              <input
+                                type="hidden"
+                                name="id"
+                                value={invoice.id}
+                              />
+                              <Button type="submit" variant="ghost" size="sm">
+                                <Check className="mr-1 h-4 w-4" />
+                                {t("markPaid")}
+                              </Button>
+                            </form>
+                            <form action={cancelInvoice}>
+                              <input
+                                type="hidden"
+                                name="id"
+                                value={invoice.id}
+                              />
+                              <Button
+                                type="submit"
+                                variant="ghost"
+                                size="sm"
+                                className="text-grey-500"
+                              >
+                                <X className="mr-1 h-4 w-4" />
+                                {t("cancel")}
+                              </Button>
+                            </form>
+                          </>
+                        )}
+                        {invoice.status === "paid" && (
+                          <>
+                            <form action={refundInvoice}>
+                              <input
+                                type="hidden"
+                                name="id"
+                                value={invoice.id}
+                              />
+                              <input type="hidden" name="percent" value="50" />
+                              <Button
+                                type="submit"
+                                variant="ghost"
+                                size="sm"
+                                className="text-grey-500"
+                              >
+                                {t("refundHalf")}
+                              </Button>
+                            </form>
+                            <form action={refundInvoice}>
+                              <input
+                                type="hidden"
+                                name="id"
+                                value={invoice.id}
+                              />
+                              <input type="hidden" name="percent" value="100" />
+                              <Button
+                                type="submit"
+                                variant="ghost"
+                                size="sm"
+                                className="text-error"
+                              >
+                                <Undo2 className="mr-1 h-4 w-4" />
+                                {t("refund")}
+                              </Button>
+                            </form>
+                          </>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))

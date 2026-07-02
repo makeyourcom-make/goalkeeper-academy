@@ -527,7 +527,10 @@
         "overdue": "Overdue",
         "cancelled": "Cancelled",
         "refunded": "Refunded"
-      }
+      },
+      "refund": "Refund",
+      "refundHalf": "Refund 50%",
+      "cancel": "Cancel"
     },
     "camps": {
       "metaTitle": "Admin · Camps",

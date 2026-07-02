@@ -527,7 +527,10 @@
         "overdue": "En retard",
         "cancelled": "Annulée",
         "refunded": "Remboursée"
-      }
+      },
+      "refund": "Rembourser",
+      "refundHalf": "Rembourser 50%",
+      "cancel": "Annuler"
     },
     "camps": {
       "metaTitle": "Admin · Stages",
