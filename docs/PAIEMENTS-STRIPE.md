@@ -42,11 +42,13 @@ Sans cette étape, le formulaire d'inscription renverra une erreur.
 Vercel → Projet `goalkeeper-academy` → Settings → Environment Variables
 (Production **et** Preview) :
 
-| Variable                            | Valeur                          |
-| ----------------------------------- | ------------------------------- |
-| `STRIPE_SECRET_KEY`                 | `sk_test_...` puis `sk_live_...`|
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`| `pk_test_...` puis `pk_live_...`|
-| `STRIPE_WEBHOOK_SECRET`             | `whsec_...` (étape 2.3)         |
+| Variable                | Valeur                           |
+| ----------------------- | -------------------------------- |
+| `STRIPE_SECRET_KEY`     | `sk_live_...` (ou `sk_test_...`) |
+| `STRIPE_WEBHOOK_SECRET` | `whsec_...` (étape 2.3)          |
+
+> La clé publiable (`pk_...`) n'est pas nécessaire : le paiement passe par
+> Stripe Checkout en redirection (aucun SDK Stripe côté navigateur).
 
 Pour la QR-facture, renseigne aussi l'émetteur (créancier) :
 
