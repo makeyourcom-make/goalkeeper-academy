@@ -74,6 +74,16 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
     await confirmRegistrations(admin, planId);
   }
 
+  // Camp reservation: confirm the registration (place secured).
+  const campRegId = session.metadata?.campRegistrationId ?? "";
+  if (campRegId) {
+    await admin
+      .from("camp_registrations")
+      .update({ status: "confirmed", stripe_session_id: session.id })
+      .eq("id", campRegId)
+      .eq("status", "pending");
+  }
+
   if (newlyPaid && invoiceId) {
     await sendPaymentConfirmation(admin, invoiceId);
     await notifyAdminPayment(admin, invoiceId);

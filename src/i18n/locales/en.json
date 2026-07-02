@@ -277,6 +277,15 @@
       "notLoggedIn": "Tip: create a parent account to find your goalkeepers and invoices in your member area.",
       "emailLabel": "Parent email address"
     },
+    "gate": {
+      "loginTitle": "Sign in to book",
+      "loginBody": "To register your goalkeeper for a camp, sign in to your parent account or create one. Your registrations and invoices will be grouped in your member area.",
+      "loginCta": "Sign in",
+      "signupCta": "Create an account",
+      "childTitle": "Add a goalkeeper first",
+      "childBody": "Your account doesn't have any goalkeeper yet. Add one (name, date of birth) so you can register them for the camp.",
+      "childCta": "Add a goalkeeper"
+    },
     "step2": {
       "title": "Review",
       "subtitle": "Double-check the details before proceeding to payment.",
@@ -291,21 +300,19 @@
     "step3": {
       "title": "Secure payment",
       "subtitle": "Choose your preferred payment method.",
-      "demoBadge": "Demo mode",
+      "secureBadge": "Secure payment",
       "methods": {
         "card": "Card",
         "twint": "TWINT",
         "qr_bill": "QR-bill"
       },
       "card": {
-        "number": "Card number",
-        "expiry": "Expiry",
-        "cvc": "CVC",
-        "demoNote": "Demo mode: no real payment will be processed. The fields are pre-filled with a test card."
+        "title": "Credit card",
+        "body": "You'll be redirected to our secure payment page (Stripe) to pay by card."
       },
       "twint": {
-        "title": "Scan with TWINT",
-        "body": "Open the TWINT app on your phone and scan the code to complete the payment."
+        "title": "TWINT payment",
+        "body": "You'll be redirected to TWINT (via Stripe) to complete the payment on your phone."
       },
       "qr": {
         "title": "Receive a QR-bill",
@@ -321,13 +328,17 @@
     },
     "summary": {
       "total": "Total",
-      "secure": "Encrypted payment · demo"
+      "secure": "Encrypted, secure payment"
     },
     "confirmation": {
       "metaTitle": "Booking confirmed",
       "eyebrow": "Registration confirmed",
       "title": "Thanks, you're all set!",
-      "subtitle": "{name}'s registration is recorded. You'll receive a recap by email in a few minutes.",
+      "subtitle": "{name}'s registration is recorded and paid. You'll receive a recap by email in a few minutes.",
+      "pendingEyebrow": "Booking recorded",
+      "pendingTitle": "Almost done!",
+      "pendingSubtitle": "{name}'s booking is recorded. Their spot will be confirmed as soon as we receive your payment.",
+      "pendingNote": "Please settle the invoice from \"My invoices\". Your spot is held and will be fully confirmed once payment is received.",
       "invoice": {
         "label": "Invoice number"
       },
@@ -338,15 +349,17 @@
       "paymentMethod": "Payment method",
       "paidAt": "Paid on",
       "totalPaid": "Total paid",
+      "totalDue": "Amount due",
       "methods": {
         "card": "Credit card",
         "twint": "TWINT",
-        "qr_bill": "QR-bill (to be paid)"
+        "qr_bill": "QR-bill (to be paid)",
+        "stripe": "Credit card"
       },
       "emailSent": "A confirmation email has been sent to {email}.",
+      "ctaInvoices": "View my invoices",
       "ctaAccount": "Go to my account",
-      "ctaBrowse": "Browse other camps",
-      "demoNote": "This is a demo. No real payment was processed and no data was sent to a payment provider."
+      "ctaBrowse": "Browse other camps"
     }
   },
   "GianaPage": {

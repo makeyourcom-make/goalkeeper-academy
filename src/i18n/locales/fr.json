@@ -277,6 +277,15 @@
       "notLoggedIn": "Astuce : créez un compte parent pour retrouver vos gardiens et factures dans votre espace membre.",
       "emailLabel": "Adresse e-mail du parent"
     },
+    "gate": {
+      "loginTitle": "Connectez-vous pour réserver",
+      "loginBody": "Pour inscrire votre gardien à un stage, connectez-vous à votre compte parent ou créez-en un. Vos inscriptions et factures seront regroupées dans votre espace membre.",
+      "loginCta": "Se connecter",
+      "signupCta": "Créer un compte",
+      "childTitle": "Ajoutez d'abord un gardien",
+      "childBody": "Votre compte ne contient encore aucun gardien. Ajoutez-en un (nom, date de naissance) pour pouvoir l'inscrire au stage.",
+      "childCta": "Ajouter un gardien"
+    },
     "step2": {
       "title": "Récapitulatif",
       "subtitle": "Vérifiez les informations avant de procéder au paiement.",
@@ -291,21 +300,19 @@
     "step3": {
       "title": "Paiement sécurisé",
       "subtitle": "Choisissez votre moyen de paiement préféré.",
-      "demoBadge": "Mode démo",
+      "secureBadge": "Paiement sécurisé",
       "methods": {
         "card": "Carte",
         "twint": "TWINT",
         "qr_bill": "QR-facture"
       },
       "card": {
-        "number": "Numéro de carte",
-        "expiry": "Expiration",
-        "cvc": "CVC",
-        "demoNote": "Mode démo : aucun paiement réel ne sera effectué. Les champs sont pré-remplis avec une carte de test."
+        "title": "Carte bancaire",
+        "body": "Vous serez redirigé vers notre page de paiement sécurisée (Stripe) pour régler par carte."
       },
       "twint": {
-        "title": "Scannez avec TWINT",
-        "body": "Ouvrez l'application TWINT sur votre téléphone et scannez le code pour finaliser le paiement."
+        "title": "Paiement TWINT",
+        "body": "Vous serez redirigé vers TWINT (via Stripe) pour finaliser le paiement sur votre téléphone."
       },
       "qr": {
         "title": "Recevoir une QR-facture",
@@ -321,13 +328,17 @@
     },
     "summary": {
       "total": "Total",
-      "secure": "Paiement chiffré · démo"
+      "secure": "Paiement chiffré et sécurisé"
     },
     "confirmation": {
       "metaTitle": "Réservation confirmée",
       "eyebrow": "Inscription confirmée",
       "title": "Merci, c'est validé !",
-      "subtitle": "L'inscription de {name} est enregistrée. Vous recevrez un récapitulatif par e-mail dans quelques minutes.",
+      "subtitle": "L'inscription de {name} est enregistrée et payée. Vous recevrez un récapitulatif par e-mail dans quelques minutes.",
+      "pendingEyebrow": "Réservation enregistrée",
+      "pendingTitle": "Presque terminé !",
+      "pendingSubtitle": "La réservation de {name} est enregistrée. Sa place sera confirmée dès réception du paiement.",
+      "pendingNote": "Réglez la facture depuis « Mes factures ». Votre place est réservée et sera définitivement confirmée dès réception du paiement.",
       "invoice": {
         "label": "Numéro de facture"
       },
@@ -338,15 +349,17 @@
       "paymentMethod": "Moyen de paiement",
       "paidAt": "Payé le",
       "totalPaid": "Total payé",
+      "totalDue": "Montant à payer",
       "methods": {
         "card": "Carte bancaire",
         "twint": "TWINT",
-        "qr_bill": "QR-facture (à payer)"
+        "qr_bill": "QR-facture (à payer)",
+        "stripe": "Carte bancaire"
       },
       "emailSent": "Un e-mail de confirmation a été envoyé à {email}.",
+      "ctaInvoices": "Voir mes factures",
       "ctaAccount": "Voir mon compte",
-      "ctaBrowse": "Découvrir d'autres stages",
-      "demoNote": "Ceci est une démonstration. Aucun paiement réel n'a été effectué et aucune donnée n'a été transmise à un prestataire de paiement."
+      "ctaBrowse": "Découvrir d'autres stages"
     }
   },
   "GianaPage": {

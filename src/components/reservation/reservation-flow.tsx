@@ -17,7 +17,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { simulateCheckout } from "@/lib/reservation/actions";
+import { Link } from "@/i18n/navigation";
+import { startCampCheckout } from "@/lib/reservation/checkout";
 import { cn } from "@/lib/utils";
 
 type ChildOption = {
@@ -103,6 +104,47 @@ export function ReservationFlow({
     { key: "review", label: t("steps.review") },
     { key: "payment", label: t("steps.payment") },
   ] as const;
+
+  const backHref = `/stages/${camp.slug}/reservation`;
+
+  // A camp reservation records a real registration + invoice, so the parent
+  // must be signed in and choose one of their registered goalkeepers.
+  if (!isAuthenticated) {
+    return (
+      <div className="mx-auto max-w-xl rounded-2xl border border-grey-100 bg-white p-8 text-center shadow-sm">
+        <h2 className="font-anton text-2xl uppercase text-navy">
+          {t("gate.loginTitle")}
+        </h2>
+        <p className="mt-3 text-sm text-grey-700">{t("gate.loginBody")}</p>
+        <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+          <Button asChild>
+            <Link href={{ pathname: "/connexion", query: { next: backHref } }}>
+              {t("gate.loginCta")}
+            </Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link href="/inscription">{t("gate.signupCta")}</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (childrenList.length === 0) {
+    return (
+      <div className="mx-auto max-w-xl rounded-2xl border border-grey-100 bg-white p-8 text-center shadow-sm">
+        <h2 className="font-anton text-2xl uppercase text-navy">
+          {t("gate.childTitle")}
+        </h2>
+        <p className="mt-3 text-sm text-grey-700">{t("gate.childBody")}</p>
+        <div className="mt-6 flex justify-center">
+          <Button asChild>
+            <Link href="/mon-compte/enfants/nouveau">{t("gate.childCta")}</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_360px]">
@@ -324,12 +366,10 @@ export function ReservationFlow({
           )}
 
           {step === 2 && (
-            <form action={simulateCheckout} className="flex flex-col gap-5">
+            <form action={startCampCheckout} className="flex flex-col gap-5">
               <input type="hidden" name="slug" value={camp.slug} />
               <input type="hidden" name="locale" value={locale} />
-              <input type="hidden" name="childName" value={childName} />
-              <input type="hidden" name="parentEmail" value={email} />
-              <input type="hidden" name="amount" value={camp.price} />
+              <input type="hidden" name="childId" value={selectedChildId} />
               <input type="hidden" name="paymentMethod" value={paymentMethod} />
 
               <div className="flex items-start justify-between gap-3">
@@ -341,7 +381,7 @@ export function ReservationFlow({
                 </div>
                 <Badge variant="muted" className="mt-1">
                   <Lock className="mr-1 h-3 w-3" />
-                  {t("step3.demoBadge")}
+                  {t("step3.secureBadge")}
                 </Badge>
               </div>
 
@@ -378,49 +418,21 @@ export function ReservationFlow({
 
               {/* Method body */}
               {paymentMethod === "card" && (
-                <div className="flex flex-col gap-4 rounded-xl border border-grey-100 bg-white p-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
-                      {t("step3.card.number")}
-                    </label>
-                    <Input
-                      defaultValue="4242 4242 4242 4242"
-                      readOnly
-                      className="font-mono"
-                    />
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-2">
-                      <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
-                        {t("step3.card.expiry")}
-                      </label>
-                      <Input
-                        defaultValue="12 / 28"
-                        readOnly
-                        className="font-mono"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <label className="text-xs font-medium uppercase tracking-wide text-grey-500">
-                        {t("step3.card.cvc")}
-                      </label>
-                      <Input
-                        defaultValue="123"
-                        readOnly
-                        className="font-mono"
-                      />
-                    </div>
-                  </div>
-                  <p className="text-xs text-grey-500">
-                    {t("step3.card.demoNote")}
+                <div className="flex flex-col items-center gap-3 rounded-xl border border-grey-100 bg-white p-6 text-center">
+                  <CreditCard className="h-8 w-8 text-orange" />
+                  <p className="font-medium text-navy">
+                    {t("step3.card.title")}
+                  </p>
+                  <p className="text-sm text-grey-700">
+                    {t("step3.card.body")}
                   </p>
                 </div>
               )}
 
               {paymentMethod === "twint" && (
                 <div className="flex flex-col items-center gap-4 rounded-xl border border-grey-100 bg-white p-8 text-center">
-                  <div className="grid h-32 w-32 place-items-center rounded-xl bg-navy text-white">
-                    <Smartphone className="h-12 w-12" />
+                  <div className="grid h-16 w-16 place-items-center rounded-xl bg-navy text-white">
+                    <Smartphone className="h-8 w-8" />
                   </div>
                   <p className="font-medium text-navy">
                     {t("step3.twint.title")}
