@@ -1744,15 +1744,18 @@
       "methods": {
         "card": {
           "label": "Carte bancaire",
-          "desc": "Prélèvement automatique à chaque échéance."
+          "desc": "Prélèvement automatique à chaque échéance.",
+          "descOnce": "Paiement par carte, en une fois."
         },
         "twint": {
           "label": "TWINT",
-          "desc": "Vous réglez chaque échéance via TWINT."
+          "desc": "Vous réglez chaque échéance via TWINT.",
+          "descOnce": "Paiement via TWINT."
         },
         "qr_bill": {
           "label": "QR-facture",
-          "desc": "Virement bancaire via QR-facture suisse."
+          "desc": "Virement bancaire via QR-facture suisse.",
+          "descOnce": "Virement bancaire via QR-facture suisse."
         }
       },
       "cadences": {

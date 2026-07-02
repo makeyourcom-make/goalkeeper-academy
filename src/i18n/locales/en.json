@@ -1744,15 +1744,18 @@
       "methods": {
         "card": {
           "label": "Credit card",
-          "desc": "Automatic charge on each instalment."
+          "desc": "Automatic charge on each instalment.",
+          "descOnce": "One-off card payment."
         },
         "twint": {
           "label": "TWINT",
-          "desc": "You pay each instalment via TWINT."
+          "desc": "You pay each instalment via TWINT.",
+          "descOnce": "Pay via TWINT."
         },
         "qr_bill": {
           "label": "QR-invoice",
-          "desc": "Bank transfer via Swiss QR-invoice."
+          "desc": "Bank transfer via Swiss QR-invoice.",
+          "descOnce": "Bank transfer via Swiss QR-invoice."
         }
       },
       "cadences": {

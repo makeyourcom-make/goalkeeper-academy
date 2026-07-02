@@ -86,6 +86,7 @@ export function InscriptionFlow({
   const [method, setMethod] = React.useState<PaymentMethod>("card");
   const [cadence, setCadence] = React.useState<Cadence>("annual");
   const [paidMethod, setPaidMethod] = React.useState<PaymentMethod>("card");
+  const [accountCreated, setAccountCreated] = React.useState(false);
 
   const isOrg = profile === "club";
   const keeperCount = keepers.length;
@@ -152,7 +153,8 @@ export function InscriptionFlow({
     };
 
     // 0. Not signed in yet → create the account from the entered details.
-    if (!isAuthed) {
+    //    Skip on a retry once the account already exists (session is set).
+    if (!isAuthed && !accountCreated) {
       const token =
         (
           document.querySelector(
@@ -183,6 +185,7 @@ export function InscriptionFlow({
           );
           return;
         }
+        setAccountCreated(true);
       } catch {
         setSubmitting(false);
         setError("generic");
@@ -624,7 +627,6 @@ export function InscriptionFlow({
                     setContact((c) => ({ ...c, password: e.target.value }))
                   }
                 />
-                <Turnstile />
               </div>
             )}
           </div>
@@ -690,7 +692,9 @@ export function InscriptionFlow({
                         {t(`payment.methods.${m}.label`)}
                       </span>
                       <span className="text-xs text-grey-500">
-                        {t(`payment.methods.${m}.desc`)}
+                        {allowInstallments
+                          ? t(`payment.methods.${m}.desc`)
+                          : t(`payment.methods.${m}.descOnce`)}
                       </span>
                     </button>
                   ))}
@@ -753,6 +757,12 @@ export function InscriptionFlow({
                       : t("payment.qrHint")}
               </p>
             </div>
+
+            {!isAuthed && (
+              <div className="flex flex-col gap-2">
+                <Turnstile />
+              </div>
+            )}
 
             {error === "accountExists" && (
               <p className="text-sm text-error">
