@@ -87,6 +87,14 @@ export const routing = defineRouting({
       fr: "/mon-compte/planning",
       en: "/account/schedule",
     },
+    "/mon-compte/coaching": {
+      fr: "/mon-compte/coaching",
+      en: "/account/coaching",
+    },
+    "/mon-compte/remunerations": {
+      fr: "/mon-compte/remunerations",
+      en: "/account/pay",
+    },
     "/mon-compte/factures": {
       fr: "/mon-compte/factures",
       en: "/account/invoices",

@@ -6,6 +6,8 @@ import {
   FileText,
   UserCircle,
   LayoutDashboard,
+  CalendarRange,
+  Wallet,
   type LucideIcon,
 } from "lucide-react";
 
@@ -40,6 +42,19 @@ const CARDS: {
 }[] = [
   { key: "children", Icon: Users, href: "/mon-compte/enfants" },
   { key: "planning", Icon: Calendar, href: "/mon-compte/planning" },
+  { key: "invoices", Icon: FileText, href: "/mon-compte/factures" },
+];
+
+const COACH_CARDS: {
+  key: "coaching" | "remunerations" | "invoices";
+  Icon: LucideIcon;
+  href:
+    | "/mon-compte/coaching"
+    | "/mon-compte/remunerations"
+    | "/mon-compte/factures";
+}[] = [
+  { key: "coaching", Icon: CalendarRange, href: "/mon-compte/coaching" },
+  { key: "remunerations", Icon: Wallet, href: "/mon-compte/remunerations" },
   { key: "invoices", Icon: FileText, href: "/mon-compte/factures" },
 ];
 
@@ -127,34 +142,38 @@ export default async function AccountPage({ params }: Props) {
 
       <section className="bg-white py-12 lg:py-16">
         <div className="container grid gap-6 md:grid-cols-3">
-          {CARDS.map(({ key, Icon, href }) => {
-            const count = counts[key];
-            return (
-              <Link
-                key={key}
-                href={href}
-                className="group flex flex-col gap-3 rounded-xl border border-grey-100 bg-white p-6 shadow-sm transition hover:border-orange/40 hover:shadow-md"
-              >
-                <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange/10 text-orange">
-                  <Icon className="h-6 w-6" />
-                </span>
-                <h2 className="font-anton text-xl uppercase text-navy">
-                  {t(`cards.${key}.title`)}
-                </h2>
-                <p className="text-sm text-grey-700">
-                  {t(`cards.${key}.description`, { members })}
-                </p>
-                <p className="mt-2 text-xs text-grey-500">
-                  {count > 0
-                    ? t(`cards.${key}.count`, { count })
-                    : t(`cards.${key}.empty`)}
-                </p>
-                <span className="mt-auto inline-flex w-fit rounded-full bg-grey-100 px-3 py-1 text-xs font-medium text-grey-700 group-hover:bg-orange group-hover:text-white">
-                  {t(`cards.${key}.cta`)}
-                </span>
-              </Link>
-            );
-          })}
+          {(role === "coach" ? COACH_CARDS : CARDS).map(
+            ({ key, Icon, href }) => {
+              const count = role === "coach" ? null : counts[key as CardKey];
+              return (
+                <Link
+                  key={key}
+                  href={href}
+                  className="group flex flex-col gap-3 rounded-xl border border-grey-100 bg-white p-6 shadow-sm transition hover:border-orange/40 hover:shadow-md"
+                >
+                  <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange/10 text-orange">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                  <h2 className="font-anton text-xl uppercase text-navy">
+                    {t(`cards.${key}.title`)}
+                  </h2>
+                  <p className="text-sm text-grey-700">
+                    {t(`cards.${key}.description`, { members })}
+                  </p>
+                  {count !== null && (
+                    <p className="mt-2 text-xs text-grey-500">
+                      {count > 0
+                        ? t(`cards.${key}.count`, { count })
+                        : t(`cards.${key}.empty`)}
+                    </p>
+                  )}
+                  <span className="mt-auto inline-flex w-fit rounded-full bg-grey-100 px-3 py-1 text-xs font-medium text-grey-700 group-hover:bg-orange group-hover:text-white">
+                    {t(`cards.${key}.cta`)}
+                  </span>
+                </Link>
+              );
+            },
+          )}
         </div>
       </section>
     </>

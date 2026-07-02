@@ -1032,6 +1032,20 @@
         "empty": "Aucune facture.",
         "count": "{count, plural, one {# facture} other {# factures}}",
         "cta": "Consulter"
+      },
+      "coaching": {
+        "title": "Mes séances",
+        "description": "Les entraînements où vous êtes l’entraîneur.",
+        "cta": "Voir",
+        "count": "{count} séance(s) à venir",
+        "empty": "Aucune séance à venir."
+      },
+      "remunerations": {
+        "title": "Mes rémunérations",
+        "description": "Vos récapitulatifs de paiement mensuels.",
+        "cta": "Voir",
+        "count": "{count} période(s)",
+        "empty": "Aucun récapitulatif."
       }
     },
     "editProfile": "Modifier mon profil",
@@ -1198,7 +1212,34 @@
       "banner": "Aperçu du compte de {name} — lecture seule.",
       "exit": "Quitter l'aperçu"
     },
-    "adminConsole": "Console admin"
+    "adminConsole": "Console admin",
+    "coaching": {
+      "metaTitle": "Mes séances",
+      "eyebrow": "Entraîneur",
+      "title": "Mes séances",
+      "subtitle": "Les entraînements où vous êtes désigné·e comme entraîneur.",
+      "backToDashboard": "← Retour au tableau de bord",
+      "empty": "Aucune séance à venir pour le moment.",
+      "meet": "Convocation",
+      "keepers": "Gardiens",
+      "noKeepers": "Aucun gardien convoqué"
+    },
+    "pay": {
+      "metaTitle": "Mes rémunérations",
+      "eyebrow": "Entraîneur",
+      "title": "Mes rémunérations",
+      "subtitle": "Vos récapitulatifs mensuels : séances effectuées et montant.",
+      "backToDashboard": "← Retour au tableau de bord",
+      "empty": "Aucun récapitulatif pour le moment.",
+      "period": "Période",
+      "sessions": "Séances",
+      "rate": "Tarif/séance",
+      "amount": "Montant",
+      "status": "Statut",
+      "paid": "Payé",
+      "pending": "En attente",
+      "ibanNote": "Renseignez votre IBAN dans votre profil pour être payé·e."
+    }
   },
   "BlogPage": {
     "metaTitle": "Actualités",

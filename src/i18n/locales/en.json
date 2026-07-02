@@ -1032,6 +1032,20 @@
         "empty": "No invoices.",
         "count": "{count, plural, one {# invoice} other {# invoices}}",
         "cta": "Open"
+      },
+      "coaching": {
+        "title": "My sessions",
+        "description": "Trainings where you are the coach.",
+        "cta": "View",
+        "count": "{count} upcoming session(s)",
+        "empty": "No upcoming session."
+      },
+      "remunerations": {
+        "title": "My pay",
+        "description": "Your monthly payment summaries.",
+        "cta": "View",
+        "count": "{count} period(s)",
+        "empty": "No summary."
       }
     },
     "editProfile": "Edit my profile",
@@ -1198,7 +1212,34 @@
       "banner": "Previewing {name}'s account — read-only.",
       "exit": "Exit preview"
     },
-    "adminConsole": "Admin console"
+    "adminConsole": "Admin console",
+    "coaching": {
+      "metaTitle": "My sessions",
+      "eyebrow": "Coach",
+      "title": "My sessions",
+      "subtitle": "Trainings where you are assigned as coach.",
+      "backToDashboard": "← Back to dashboard",
+      "empty": "No upcoming session yet.",
+      "meet": "Call time",
+      "keepers": "Goalkeepers",
+      "noKeepers": "No goalkeeper convened"
+    },
+    "pay": {
+      "metaTitle": "My pay",
+      "eyebrow": "Coach",
+      "title": "My pay",
+      "subtitle": "Your monthly summaries: sessions done and amount.",
+      "backToDashboard": "← Back to dashboard",
+      "empty": "No summary yet.",
+      "period": "Period",
+      "sessions": "Sessions",
+      "rate": "Rate/session",
+      "amount": "Amount",
+      "status": "Status",
+      "paid": "Paid",
+      "pending": "Pending",
+      "ibanNote": "Add your IBAN in your profile to get paid."
+    }
   },
   "BlogPage": {
     "metaTitle": "News",
