@@ -1768,7 +1768,9 @@
       "breakdown": "{count} × {amount} CHF",
       "cardRecurringHint": "Your card will be charged automatically on each instalment.",
       "twintHint": "The 1st instalment is paid now via TWINT; the rest appear in My invoices.",
-      "qrHint": "One QR-invoice per instalment will be available in My invoices. You pay at your bank."
+      "qrHint": "One QR-invoice per instalment will be available in My invoices. You pay at your bank.",
+      "oneTime": "One-off payment",
+      "oneTimeHint": "Discovery session: a single payment, no instalments."
     }
   },
   "CookieBanner": {

@@ -93,6 +93,13 @@ export function InscriptionFlow({
   const discount = volumeDiscount(keeperCount);
   const total = Math.round(subtotal * (1 - discount));
 
+  // A "séance découverte" (single) is always paid once — no installments. Only
+  // season/tour formulas can be split into installments.
+  const allowInstallments = keepers.some((k) => k.formula !== "single");
+  React.useEffect(() => {
+    if (!allowInstallments) setCadence("annual");
+  }, [allowInstallments]);
+
   const STEPS = [
     t("steps.profile"),
     t("steps.formula"),
@@ -631,49 +638,60 @@ export function InscriptionFlow({
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
-                  {t("payment.cadenceLabel")}
-                </span>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {CADENCES.map((c) => {
-                    const cents = installmentCents(total, c);
-                    const amount = (cents / 100).toFixed(
-                      cents % 100 === 0 ? 0 : 2,
-                    );
-                    return (
-                      <button
-                        key={c}
-                        type="button"
-                        onClick={() => setCadence(c)}
-                        className={cn(
-                          "flex items-center justify-between gap-2 rounded-lg border px-4 py-2 text-left transition-colors",
-                          cadence === c
-                            ? "border-orange ring-1 ring-orange/30"
-                            : "border-grey-200 hover:border-grey-300",
-                        )}
-                      >
-                        <span className="text-sm font-medium text-navy">
-                          {t(`payment.cadences.${c}`)}
-                        </span>
-                        <span className="text-xs text-grey-500">
-                          {t("payment.breakdown", {
-                            count: INSTALLMENTS[c],
-                            amount,
-                          })}
-                        </span>
-                      </button>
-                    );
-                  })}
+              {allowInstallments ? (
+                <div className="flex flex-col gap-2">
+                  <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
+                    {t("payment.cadenceLabel")}
+                  </span>
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {CADENCES.map((c) => {
+                      const cents = installmentCents(total, c);
+                      const amount = (cents / 100).toFixed(
+                        cents % 100 === 0 ? 0 : 2,
+                      );
+                      return (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setCadence(c)}
+                          className={cn(
+                            "flex items-center justify-between gap-2 rounded-lg border px-4 py-2 text-left transition-colors",
+                            cadence === c
+                              ? "border-orange ring-1 ring-orange/30"
+                              : "border-grey-200 hover:border-grey-300",
+                          )}
+                        >
+                          <span className="text-sm font-medium text-navy">
+                            {t(`payment.cadences.${c}`)}
+                          </span>
+                          <span className="text-xs text-grey-500">
+                            {t("payment.breakdown", {
+                              count: INSTALLMENTS[c],
+                              amount,
+                            })}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="border-grey-200 flex items-center justify-between rounded-lg border px-4 py-2">
+                  <span className="text-sm font-medium text-navy">
+                    {t("payment.oneTime")}
+                  </span>
+                  <span className="text-sm text-grey-500">{total} CHF</span>
+                </div>
+              )}
 
               <p className="rounded-xl bg-navy/5 p-3 text-xs text-grey-700">
-                {method === "card"
-                  ? t("payment.cardRecurringHint")
-                  : method === "twint"
-                    ? t("payment.twintHint")
-                    : t("payment.qrHint")}
+                {!allowInstallments
+                  ? t("payment.oneTimeHint")
+                  : method === "card"
+                    ? t("payment.cardRecurringHint")
+                    : method === "twint"
+                      ? t("payment.twintHint")
+                      : t("payment.qrHint")}
               </p>
             </div>
 

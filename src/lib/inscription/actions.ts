@@ -77,7 +77,6 @@ export async function submitRegistration(
     return { status: "error" };
   }
   const method = input.method;
-  const cadence = input.cadence;
 
   const keepers = (input.keepers ?? []).filter(
     (k) =>
@@ -87,6 +86,11 @@ export async function submitRegistration(
       k.lastName.trim(),
   );
   if (keepers.length === 0) return { status: "error" };
+
+  // A "séance découverte" (single) is paid once — never split. Only season/tour
+  // orders may keep the chosen cadence. Enforced here (never trust the client).
+  const allowInstallments = keepers.some((k) => k.formula !== "single");
+  const cadence = allowInstallments ? input.cadence : "annual";
 
   const { total } = computeTotals(keepers);
   if (total <= 0) return { status: "error" };

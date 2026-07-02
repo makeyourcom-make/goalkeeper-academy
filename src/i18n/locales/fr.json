@@ -1768,7 +1768,9 @@
       "breakdown": "{count} × {amount} CHF",
       "cardRecurringHint": "Votre carte sera débitée automatiquement à chaque échéance.",
       "twintHint": "Le 1er versement se règle maintenant via TWINT ; les suivants apparaîtront dans Mes factures.",
-      "qrHint": "Une QR-facture par versement sera disponible dans Mes factures. Vous payez à votre banque."
+      "qrHint": "Une QR-facture par versement sera disponible dans Mes factures. Vous payez à votre banque.",
+      "oneTime": "Paiement unique",
+      "oneTimeHint": "Séance découverte : un seul paiement, sans échéances."
     }
   },
   "CookieBanner": {
