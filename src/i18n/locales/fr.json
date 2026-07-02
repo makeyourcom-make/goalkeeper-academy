@@ -848,7 +848,7 @@
       "metaTitle": "Politique de confidentialité",
       "metaDescription": "Politique de confidentialité conforme à la nLPD suisse et au RGPD européen.",
       "title": "Politique de confidentialité",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-07-02",
       "intro": "L'association sportive à but non lucratif The Last Line accorde une grande importance à la protection de vos données. La présente politique explique quelles données nous traitons, pourquoi, sur quelle base et quels sont vos droits, conformément à la loi fédérale suisse sur la protection des données (nLPD) et, lorsqu'il s'applique, au Règlement général sur la protection des données (RGPD).",
       "sections": [
         {
@@ -888,6 +888,10 @@
           "body": "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité, ainsi que du droit de retirer votre consentement à tout moment. Pour exercer ces droits : contact@thelastline.ch. Vous pouvez également saisir l'autorité de contrôle compétente : en Suisse, le Préposé fédéral à la protection des données et à la transparence (PFPDT) ; dans l'UE, votre autorité nationale de protection des données."
         },
         {
+          "heading": "Mesure d'audience",
+          "body": "Nous mesurons la fréquentation du site de manière anonyme et sans cookie, à l'aide de Vercel Web Analytics. Cet outil ne dépose aucun cookie, ne suit pas les visiteurs d'un site à l'autre et ne collecte aucune donnée permettant de vous identifier : il fournit uniquement des statistiques agrégées (pages vues, provenance) qui nous aident à améliorer le site. Aucune donnée n'est vendue ni utilisée à des fins publicitaires."
+        },
+        {
           "heading": "Cookies",
           "body": "Le site n'utilise que des cookies strictement nécessaires et enregistre votre choix de consentement. Pour le détail, consultez notre politique relative aux cookies."
         },
@@ -901,7 +905,7 @@
       "metaTitle": "Politique cookies",
       "metaDescription": "Politique d'utilisation des cookies sur le site The Last Line.",
       "title": "Politique cookies",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-07-02",
       "intro": "Le site thelastline.ch est édité par l'association à but non lucratif The Last Line. Cette page explique quels cookies le site utilise. Nous en utilisons très peu et aucun à des fins publicitaires ou de suivi.",
       "sections": [
         {
@@ -914,7 +918,7 @@
         },
         {
           "heading": "Aucun cookie de suivi ni de publicité",
-          "body": "Nous n'utilisons ni Google Analytics, ni pixel publicitaire, ni outil de traçage tiers. Aucune donnée n'est vendue ni partagée à des fins publicitaires."
+          "body": "Nous n'utilisons ni Google Analytics, ni pixel publicitaire, ni traceur tiers déposant des cookies. Notre mesure d'audience (Vercel Web Analytics) est anonyme et sans cookie. Aucune donnée n'est vendue ni partagée à des fins publicitaires."
         },
         {
           "heading": "Gérer les cookies",

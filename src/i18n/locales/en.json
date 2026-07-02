@@ -848,7 +848,7 @@
       "metaTitle": "Privacy policy",
       "metaDescription": "Privacy policy compliant with the Swiss FADP and the European GDPR.",
       "title": "Privacy policy",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-07-02",
       "intro": "The non-profit sports association The Last Line takes the protection of your data seriously. This policy explains what data we process, why, on what basis and what your rights are, in accordance with the Swiss Federal Act on Data Protection (nFADP) and, where applicable, the General Data Protection Regulation (GDPR).",
       "sections": [
         {
@@ -888,6 +888,10 @@
           "body": "You have the right to access, rectify, erase, restrict, object to and port your data, and to withdraw consent at any time. To exercise these rights: contact@thelastline.ch. You may also contact the competent supervisory authority: in Switzerland, the Federal Data Protection and Information Commissioner (FDPIC); in the EU, your national data-protection authority."
         },
         {
+          "heading": "Audience measurement",
+          "body": "We measure site traffic anonymously and without cookies, using Vercel Web Analytics. This tool sets no cookies, does not track visitors across sites and collects no data that could identify you: it only provides aggregate statistics (page views, referrers) that help us improve the site. No data is sold or used for advertising."
+        },
+        {
           "heading": "Cookies",
           "body": "The site uses only strictly necessary cookies and stores your consent choice. See our cookie policy for details."
         },
@@ -901,7 +905,7 @@
       "metaTitle": "Cookie policy",
       "metaDescription": "Cookie usage policy for the The Last Line website.",
       "title": "Cookie policy",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-07-02",
       "intro": "The site thelastline.ch is published by the non-profit association The Last Line. This page explains which cookies the site uses. We use very few, and none for advertising or tracking.",
       "sections": [
         {
@@ -914,7 +918,7 @@
         },
         {
           "heading": "No tracking or advertising cookies",
-          "body": "We use no Google Analytics, no advertising pixel and no third-party tracking tool. No data is sold or shared for advertising."
+          "body": "We use no Google Analytics, no advertising pixel and no third-party tracker that sets cookies. Our audience measurement (Vercel Web Analytics) is anonymous and cookieless. No data is sold or shared for advertising."
         },
         {
           "heading": "Managing cookies",
