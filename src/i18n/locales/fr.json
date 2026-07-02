@@ -1203,7 +1203,27 @@
       "qrIntro": "Scannez ce QR-code avec votre application bancaire (e-banking), ou imprimez ce bulletin de versement.",
       "qrUnavailable": "La QR-facture n’est pas disponible pour le moment. Contactez-nous à contact@thelastline.ch.",
       "print": "Imprimer",
-      "backToInvoices": "← Retour à mes factures"
+      "backToInvoices": "← Retour à mes factures",
+      "view": "Voir la facture",
+      "receiptTitle": "Facture",
+      "downloadPdf": "Télécharger / Imprimer (PDF)",
+      "billedTo": "Facturé à",
+      "issuedOn": "Émise le",
+      "descriptionCol": "Description",
+      "amountCol": "Montant",
+      "total": "Total",
+      "paymentMethod": "Moyen de paiement",
+      "paidOn": "Payée le",
+      "dueOn": "Échéance",
+      "installmentShort": "versement {n}",
+      "receiptFooter": "Merci pour votre confiance. Association The Last Line — Goalkeeper Academy. Pour toute question : contact@thelastline.ch",
+      "methods": {
+        "stripe": "Carte bancaire",
+        "twint": "TWINT",
+        "qr_bill": "QR-facture",
+        "bank_transfer": "Virement bancaire",
+        "cash": "Espèces"
+      }
     },
     "terms": {
       "children": "enfants",

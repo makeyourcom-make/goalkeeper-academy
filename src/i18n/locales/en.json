@@ -1203,7 +1203,27 @@
       "qrIntro": "Scan this QR code with your banking app (e-banking), or print this payment slip.",
       "qrUnavailable": "The QR-invoice is not available right now. Contact us at contact@thelastline.ch.",
       "print": "Print",
-      "backToInvoices": "← Back to my invoices"
+      "backToInvoices": "← Back to my invoices",
+      "view": "View invoice",
+      "receiptTitle": "Invoice",
+      "downloadPdf": "Download / Print (PDF)",
+      "billedTo": "Billed to",
+      "issuedOn": "Issued on",
+      "descriptionCol": "Description",
+      "amountCol": "Amount",
+      "total": "Total",
+      "paymentMethod": "Payment method",
+      "paidOn": "Paid on",
+      "dueOn": "Due",
+      "installmentShort": "instalment {n}",
+      "receiptFooter": "Thank you for your trust. The Last Line — Goalkeeper Academy. Any questions: contact@thelastline.ch",
+      "methods": {
+        "stripe": "Credit card",
+        "twint": "TWINT",
+        "qr_bill": "QR-invoice",
+        "bank_transfer": "Bank transfer",
+        "cash": "Cash"
+      }
     },
     "terms": {
       "children": "children",

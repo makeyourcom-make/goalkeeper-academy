@@ -153,7 +153,7 @@ export default async function InvoicesPage({ params }: Props) {
                           locale,
                         )}
                       </p>
-                      {invoice.pdf_url && (
+                      {invoice.pdf_url ? (
                         <a
                           href={invoice.pdf_url}
                           target="_blank"
@@ -162,6 +162,16 @@ export default async function InvoicesPage({ params }: Props) {
                         >
                           {t("download")}
                         </a>
+                      ) : (
+                        <Link
+                          href={{
+                            pathname: "/mon-compte/factures/[id]",
+                            params: { id: invoice.id },
+                          }}
+                          className="text-xs font-medium text-orange hover:underline"
+                        >
+                          {t("view")}
+                        </Link>
                       )}
                       {isPending && !ctx.isImpersonating && (
                         <>

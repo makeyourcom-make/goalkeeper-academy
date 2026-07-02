@@ -99,6 +99,10 @@ export const routing = defineRouting({
       fr: "/mon-compte/factures",
       en: "/account/invoices",
     },
+    "/mon-compte/factures/[id]": {
+      fr: "/mon-compte/factures/[id]",
+      en: "/account/invoices/[id]",
+    },
     "/mon-compte/factures/[id]/qr": {
       fr: "/mon-compte/factures/[id]/qr",
       en: "/account/invoices/[id]/qr",
