@@ -564,3 +564,12 @@ create policy "receipts_admin_all"
   using (bucket_id = 'receipts' and public.is_admin())
   with check (bucket_id = 'receipts' and public.is_admin());
 
+
+-- ============================================================================
+-- 0015 — Rappels de séance : marqueur anti-doublon sur session_attendees
+-- Idempotent : safe à relancer.
+-- ============================================================================
+
+alter table public.session_attendees
+  add column if not exists reminded_at timestamptz;
+

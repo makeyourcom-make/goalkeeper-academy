@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { sendConvocations } from "@/lib/email/session-emails";
 
 async function getAdminClient() {
   const supabase = await createSupabaseServerClient();
@@ -131,6 +132,18 @@ export async function createSession(
         })),
       ),
     );
+    // Convocation email to each convened keeper's parent.
+    await sendConvocations(supabase, {
+      childIds,
+      title: d.title,
+      location: d.location,
+      meetTime: d.meetTime,
+      startTime: d.startTime,
+      endTime: d.endTime,
+      firstDate: d.date,
+      seriesUntil: dates.length > 1 ? dates[dates.length - 1] : null,
+      seriesCount: dates.length,
+    });
   }
 
   revalidatePath("/", "layout");
@@ -191,6 +204,13 @@ export async function updateSession(
 
   // Replace the convened keepers with the new selection.
   const childIds = formData.getAll("childIds").map(String).filter(Boolean);
+  const { data: existing } = await supabase
+    .from("session_attendees")
+    .select("child_id")
+    .eq("session_id", d.id)
+    .returns<{ child_id: string }[]>();
+  const existingIds = new Set((existing ?? []).map((a) => a.child_id));
+
   await supabase.from("session_attendees").delete().eq("session_id", d.id);
   if (childIds.length > 0) {
     await supabase.from("session_attendees").insert(
@@ -200,6 +220,20 @@ export async function updateSession(
         attendance_status: "registered",
       })),
     );
+  }
+
+  // Convocation only for keepers newly added to this session.
+  const newIds = childIds.filter((id) => !existingIds.has(id));
+  if (newIds.length > 0) {
+    await sendConvocations(supabase, {
+      childIds: newIds,
+      title: d.title,
+      location: d.location,
+      meetTime: d.meetTime,
+      startTime: d.startTime,
+      endTime: d.endTime,
+      firstDate: d.date,
+    });
   }
 
   revalidatePath("/", "layout");
