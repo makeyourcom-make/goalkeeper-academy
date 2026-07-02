@@ -3,9 +3,34 @@
 import { revalidatePath } from "next/cache";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { stripe } from "@/lib/stripe/client";
 import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
 import { recordIncomeFromInvoice } from "@/lib/admin/record-income";
+
+type SupabaseAny = ReturnType<typeof createSupabaseAdminClient>;
+
+// Free the seat(s) tied to an invoice when it is refunded or cancelled: a camp
+// registration (via camp_registration_id) and/or season registrations (via the
+// shared payment_plan_id). Best-effort, service-role.
+async function releaseSeats(
+  admin: SupabaseAny,
+  inv: { camp_registration_id: string | null; payment_plan_id: string | null },
+  status: "refunded" | "cancelled",
+): Promise<void> {
+  if (inv.camp_registration_id) {
+    await admin
+      .from("camp_registrations")
+      .update({ status })
+      .eq("id", inv.camp_registration_id);
+  }
+  if (inv.payment_plan_id) {
+    await admin
+      .from("registrations")
+      .update({ status })
+      .eq("payment_plan_id", inv.payment_plan_id);
+  }
+}
 
 async function requireAdmin() {
   const supabase = await createSupabaseServerClient();
@@ -28,18 +53,39 @@ export async function markInvoicePaid(formData: FormData): Promise<void> {
   const supabase = await requireAdmin();
   if (!supabase) return;
 
-  // Only transition pending → paid; send the same confirmation email as the
-  // Stripe flow so QR / bank-transfer payers are notified too.
+  // Only transition pending/overdue → paid; send the same confirmation email as
+  // the Stripe flow so QR / bank-transfer payers are notified too.
   const { data: updated } = await supabase
     .from("invoices")
     .update({ status: "paid", paid_at: new Date().toISOString() })
     .eq("id", id)
-    .eq("status", "pending")
-    .select("id");
+    .in("status", ["pending", "overdue"])
+    .select("id, camp_registration_id, payment_plan_id")
+    .maybeSingle<{
+      id: string;
+      camp_registration_id: string | null;
+      payment_plan_id: string | null;
+    }>();
 
-  if ((updated?.length ?? 0) > 0) {
+  if (updated) {
     await sendPaymentConfirmation(supabase, id);
     await recordIncomeFromInvoice(supabase, id);
+    // Secure the seat, exactly like the Stripe webhook does on card/TWINT.
+    const admin = createSupabaseAdminClient();
+    if (updated.camp_registration_id) {
+      await admin
+        .from("camp_registrations")
+        .update({ status: "confirmed" })
+        .eq("id", updated.camp_registration_id)
+        .eq("status", "pending");
+    }
+    if (updated.payment_plan_id) {
+      await admin
+        .from("registrations")
+        .update({ status: "confirmed" })
+        .eq("payment_plan_id", updated.payment_plan_id)
+        .eq("status", "pending");
+    }
   }
 
   revalidatePath("/", "layout");
@@ -93,13 +139,18 @@ export async function refundInvoice(formData: FormData): Promise<void> {
 
   const { data: inv } = await supabase
     .from("invoices")
-    .select("stripe_session_id, payment_method, amount_cents, status")
+    .select(
+      "invoice_number, stripe_session_id, payment_method, amount_cents, status, camp_registration_id, payment_plan_id",
+    )
     .eq("id", id)
     .maybeSingle<{
+      invoice_number: string;
       stripe_session_id: string | null;
       payment_method: string | null;
       amount_cents: number;
       status: string;
+      camp_registration_id: string | null;
+      payment_plan_id: string | null;
     }>();
   if (!inv || inv.status !== "paid") return;
 
@@ -119,6 +170,20 @@ export async function refundInvoice(formData: FormData): Promise<void> {
   }
 
   await supabase.from("invoices").update({ status: "refunded" }).eq("id", id);
+
+  const admin = createSupabaseAdminClient();
+  // Free the seat and reverse the accounting entry. The reversal is a separate
+  // expense line (invoice_id left null so it doesn't clash with the income
+  // ledger's per-invoice unique index) for the refunded amount.
+  await releaseSeats(admin, inv, "refunded");
+  await admin.from("transactions").insert({
+    kind: "expense",
+    category: "remboursement",
+    label: `Remboursement ${inv.invoice_number}${percent === 50 ? " (50%)" : ""}`,
+    amount: Math.round((inv.amount_cents * percent) / 100) / 100,
+    occurred_on: new Date().toISOString().slice(0, 10),
+  });
+
   revalidatePath("/", "layout");
 }
 
@@ -129,10 +194,20 @@ export async function cancelInvoice(formData: FormData): Promise<void> {
   const id = String(formData.get("id") ?? "");
   if (!id) return;
 
-  await supabase
+  const { data: updated } = await supabase
     .from("invoices")
     .update({ status: "cancelled" })
     .eq("id", id)
-    .in("status", ["pending", "overdue"]);
+    .in("status", ["pending", "overdue"])
+    .select("camp_registration_id, payment_plan_id")
+    .maybeSingle<{
+      camp_registration_id: string | null;
+      payment_plan_id: string | null;
+    }>();
+
+  // Free the seat that was held while the invoice was awaiting payment.
+  if (updated) {
+    await releaseSeats(createSupabaseAdminClient(), updated, "cancelled");
+  }
   revalidatePath("/", "layout");
 }

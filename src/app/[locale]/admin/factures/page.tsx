@@ -33,6 +33,10 @@ type InvoiceRow = {
     formula: string;
     children: { first_name: string; last_name: string } | null;
   }[];
+  camp_registration: {
+    children: { first_name: string; last_name: string } | null;
+    camps: { title: string } | null;
+  } | null;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -58,7 +62,7 @@ export default async function AdminInvoicesPage({ params }: Props) {
   const { data: invoices } = await supabase
     .from("invoices")
     .select(
-      "id, invoice_number, type, amount_cents, currency, status, issued_at, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name))",
+      "id, invoice_number, type, amount_cents, currency, status, issued_at, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
     )
     .order("issued_at", { ascending: false })
     .returns<InvoiceRow[]>();
@@ -136,6 +140,14 @@ export default async function AdminInvoicesPage({ params }: Props) {
                             )
                             .filter(Boolean)
                             .join(", ")}
+                        </div>
+                      )}
+                      {invoice.camp_registration?.children && (
+                        <div className="mt-0.5 text-xs text-grey-500">
+                          {`${invoice.camp_registration.children.first_name ?? ""} ${invoice.camp_registration.children.last_name ?? ""}`.trim()}
+                          {invoice.camp_registration.camps?.title
+                            ? ` · ${invoice.camp_registration.camps.title}`
+                            : ""}
                         </div>
                       )}
                     </td>

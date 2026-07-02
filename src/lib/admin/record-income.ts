@@ -36,7 +36,9 @@ export async function recordIncomeFromInvoice(
         ? "stage"
         : inv.type === "club_contract"
           ? "club"
-          : "cotisation";
+          : inv.type === "particulier"
+            ? "particulier"
+            : "cotisation";
 
     await admin.from("transactions").insert({
       kind: "income",

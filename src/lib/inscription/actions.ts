@@ -123,6 +123,10 @@ export async function submitRegistration(
   //    (twint/qr) plans all share this uniform schedule — the webhook (or the
   //    admin, for qr) marks them paid one by one.
   const invoicePaymentMethod = method === "card" ? "stripe" : method;
+  // A pure "séance découverte" order is a one-off private session → bill it as
+  // `particulier` so the accounting ledger categorises it correctly (a real
+  // season/tour subscription stays `subscription`).
+  const invoiceType = allowInstallments ? "subscription" : "particulier";
   const now = new Date();
   let firstInvoiceId = "";
   let firstInvoiceNumber = "";
@@ -132,7 +136,7 @@ export async function submitRegistration(
       .from("invoices")
       .insert({
         profile_id: user.id,
-        type: "subscription",
+        type: invoiceType,
         amount_cents: perCents,
         currency: "CHF",
         status: "pending",

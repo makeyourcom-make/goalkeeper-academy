@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
-import { payInstallment } from "@/lib/inscription/pay-actions";
+import { payInstallment, payCampInvoice } from "@/lib/inscription/pay-actions";
 import type { Invoice, PaymentPlan } from "@/types/database";
 
 type Props = {
@@ -109,6 +109,11 @@ export default async function InvoicesPage({ params }: Props) {
                   !!plan &&
                   plan.method === "card" &&
                   plan.installments_total > 1;
+                // Camp (stage) invoices have no plan: they pay via their own
+                // action (card/TWINT) or the QR page (qr_bill).
+                const isCamp = !plan && !!invoice.camp_registration_id;
+                const isCampQr = isCamp && invoice.payment_method === "qr_bill";
+                const isCampOnline = isCamp && !isCampQr;
 
                 return (
                   <li
@@ -160,7 +165,7 @@ export default async function InvoicesPage({ params }: Props) {
                       )}
                       {isPending && !ctx.isImpersonating && (
                         <>
-                          {plan?.method === "qr_bill" && (
+                          {(plan?.method === "qr_bill" || isCampQr) && (
                             <Button asChild size="sm" variant="outline">
                               <Link
                                 href={{
@@ -174,6 +179,23 @@ export default async function InvoicesPage({ params }: Props) {
                           )}
                           {isManualPay && (
                             <form action={payInstallment}>
+                              <input
+                                type="hidden"
+                                name="invoiceId"
+                                value={invoice.id}
+                              />
+                              <input
+                                type="hidden"
+                                name="locale"
+                                value={locale}
+                              />
+                              <Button type="submit" size="sm">
+                                {t("pay")}
+                              </Button>
+                            </form>
+                          )}
+                          {isCampOnline && (
+                            <form action={payCampInvoice}>
                               <input
                                 type="hidden"
                                 name="invoiceId"

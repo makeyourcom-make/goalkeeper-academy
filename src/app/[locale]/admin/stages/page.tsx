@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CalendarDays, MapPin, Users } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import campsData from "@/data/camps.json";
 
 type Camp = (typeof campsData)[number];
@@ -27,6 +28,19 @@ export default async function AdminCampsPage({ params }: Props) {
   const camps = [...(campsData as Camp[])].sort((a, b) =>
     a.startDate.localeCompare(b.startDate),
   );
+
+  // Real confirmed registrations per camp (camps.json capacity is decorative).
+  const admin = createSupabaseAdminClient();
+  const { data: regs } = await admin
+    .from("camp_registrations")
+    .select("status, camps(slug)")
+    .eq("status", "confirmed")
+    .returns<{ status: string; camps: { slug: string } | null }[]>();
+  const confirmedBySlug = new Map<string, number>();
+  for (const r of regs ?? []) {
+    const slug = r.camps?.slug;
+    if (slug) confirmedBySlug.set(slug, (confirmedBySlug.get(slug) ?? 0) + 1);
+  }
 
   const dateFmt = new Intl.DateTimeFormat(locale, {
     day: "numeric",
@@ -53,8 +67,12 @@ export default async function AdminCampsPage({ params }: Props) {
 
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {camps.map((camp) => {
-          const filled = camp.spotsTotal - camp.spotsLeft;
-          const fillPct = Math.round((filled / camp.spotsTotal) * 100);
+          // Real paid/confirmed registrations from the DB, not the JSON counter.
+          const filled = confirmedBySlug.get(camp.slug) ?? 0;
+          const fillPct = Math.min(
+            100,
+            Math.round((filled / camp.spotsTotal) * 100),
+          );
           return (
             <article
               key={camp.slug}

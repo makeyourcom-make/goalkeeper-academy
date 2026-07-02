@@ -23,8 +23,9 @@ type InvoiceRow = {
 };
 
 export async function GET(req: NextRequest) {
+  // Fail closed: refuse unless the Bearer secret matches (never public).
   const secret = process.env.CRON_SECRET;
-  if (secret && req.headers.get("authorization") !== `Bearer ${secret}`) {
+  if (!secret || req.headers.get("authorization") !== `Bearer ${secret}`) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

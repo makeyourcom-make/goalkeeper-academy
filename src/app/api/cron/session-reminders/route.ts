@@ -30,10 +30,11 @@ type SessionRow = {
 };
 
 export async function GET(req: NextRequest) {
-  // Vercel Cron includes "Authorization: Bearer <CRON_SECRET>" when the env var
-  // is set — reject anything else so the endpoint can't be triggered publicly.
+  // Vercel Cron includes "Authorization: Bearer <CRON_SECRET>". Fail closed: if
+  // the secret is unset or the header doesn't match, refuse — the endpoint must
+  // never be publicly triggerable.
   const secret = process.env.CRON_SECRET;
-  if (secret && req.headers.get("authorization") !== `Bearer ${secret}`) {
+  if (!secret || req.headers.get("authorization") !== `Bearer ${secret}`) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
