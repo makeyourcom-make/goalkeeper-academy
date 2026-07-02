@@ -156,7 +156,7 @@ export function TransactionForm({
             name="amount"
             required
             min="0"
-            step="0.05"
+            step="0.01"
             placeholder="0.00"
           />
         </div>
