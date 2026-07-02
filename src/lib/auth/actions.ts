@@ -170,40 +170,48 @@ export async function createWizardAccount(
   const role = input.role === "club" ? "club" : "parent";
   const language = input.locale === "en" ? "en" : "fr";
 
-  const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password: input.password,
-    options: { data: { role, language } },
-  });
+  // Create an ALREADY-CONFIRMED account (no verification email) so the payment
+  // can proceed immediately — even when Supabase requires email confirmation
+  // for the normal sign-up flow. Bot protection is the Turnstile check above.
+  const admin = createSupabaseAdminClient();
+  const { data: created, error: createErr } = await admin.auth.admin.createUser(
+    {
+      email,
+      password: input.password,
+      email_confirm: true,
+      user_metadata: { role, language },
+    },
+  );
 
-  if (error) {
-    const msg = error.message?.toLowerCase() ?? "";
+  if (createErr || !created?.user) {
+    const msg = createErr?.message?.toLowerCase() ?? "";
     if (
       msg.includes("already") ||
       msg.includes("registered") ||
-      msg.includes("exists")
+      msg.includes("exist")
     ) {
       return { status: "exists" };
     }
     return { status: "error" };
   }
 
-  // Email confirmation ON → no session, so payment cannot proceed right away.
-  if (!data.session) return { status: "confirm" };
+  // Establish the browser session so registration + payment proceed in one flow.
+  const supabase = await createSupabaseServerClient();
+  const { error: signInErr } = await supabase.auth.signInWithPassword({
+    email,
+    password: input.password,
+  });
+  if (signInErr) return { status: "error" };
 
   // The trigger stored only role/language; save the name + phone on the profile.
-  if (data.user) {
-    const admin = createSupabaseAdminClient();
-    await admin
-      .from("profiles")
-      .update({
-        first_name: input.firstName.trim() || null,
-        last_name: input.lastName.trim() || null,
-        phone: input.phone.trim() || null,
-      })
-      .eq("id", data.user.id);
-  }
+  await admin
+    .from("profiles")
+    .update({
+      first_name: input.firstName.trim() || null,
+      last_name: input.lastName.trim() || null,
+      phone: input.phone.trim() || null,
+    })
+    .eq("id", created.user.id);
 
   return { status: "ok" };
 }
