@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import { useTranslations, useLocale } from "next-intl";
-import { CheckCircle2, Users, Building2 } from "lucide-react";
+import { CheckCircle2, Users, Building2, Dumbbell } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +31,7 @@ function SubmitButton({
 export function SignUpForm() {
   const t = useTranslations("Auth.signUp");
   const locale = useLocale();
-  const [role, setRole] = React.useState<"parent" | "club">("parent");
+  const [role, setRole] = React.useState<"parent" | "club" | "coach">("parent");
   const [state, formAction] = useFormState(signUp, INITIAL_STATE);
 
   if (state.status === "success") {
@@ -55,7 +55,7 @@ export function SignUpForm() {
         <legend className="mb-2 text-sm font-medium text-navy">
           {t("roleLabel")}
         </legend>
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid gap-3 md:grid-cols-3">
           {[
             {
               value: "parent" as const,
@@ -68,6 +68,12 @@ export function SignUpForm() {
               Icon: Building2,
               title: t("roleClub"),
               description: t("roleClubDescription"),
+            },
+            {
+              value: "coach" as const,
+              Icon: Dumbbell,
+              title: t("roleCoach"),
+              description: t("roleCoachDescription"),
             },
           ].map(({ value, Icon, title, description }) => (
             <button

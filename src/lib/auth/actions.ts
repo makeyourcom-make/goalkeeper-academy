@@ -21,7 +21,7 @@ const SIGN_IN_SCHEMA = z.object({
 const SIGN_UP_SCHEMA = z.object({
   email: z.string().trim().email(),
   password: z.string().min(8),
-  role: z.enum(["parent", "club"]),
+  role: z.enum(["parent", "club", "coach"]),
   consent: z.literal("on"),
 });
 
@@ -95,6 +95,11 @@ export async function signUp(
   const locale = String(formData.get("locale") ?? "fr");
   const base = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
+  // A coach signs up as a normal account and is validated by an admin later —
+  // the role is NEVER granted at signup (that would let anyone self-grant it).
+  const requestedCoach = parsed.data.role === "coach";
+  const accountRole = requestedCoach ? "parent" : parsed.data.role;
+
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
@@ -102,14 +107,21 @@ export async function signUp(
     options: {
       emailRedirectTo: `${base}/auth/callback?next=/${locale}/mon-compte`,
       data: {
-        role: parsed.data.role,
+        role: accountRole,
         language: locale === "en" ? "en" : "fr",
+        ...(requestedCoach ? { requested_role: "coach" } : {}),
       },
     },
   });
 
   if (error) {
     return { status: "error", message: "errorGeneric" };
+  }
+
+  // Coach requests always land on the "await validation" message, even when a
+  // session was returned (email confirmation off) — they must be promoted.
+  if (requestedCoach) {
+    return { status: "success", message: "successCoach" };
   }
 
   // Email confirmation OFF in Supabase → a session is returned and the user

@@ -572,7 +572,8 @@
         "select": "Account to promote",
         "placeholder": "— Choose an account",
         "button": "Promote to coach",
-        "empty": "No account to promote. The person must first create an account on the site (Sign in → Create account)."
+        "empty": "No account to promote. The person must first create an account on the site (Sign in → Create account).",
+        "requested": "✋ requested coach"
       },
       "demote": "Remove role"
     },
@@ -955,7 +956,10 @@
       "passwordPlaceholder": "At least 8 characters",
       "errorPassword": "Password must be at least 8 characters.",
       "successConfirm": "Account created! Check your email to confirm your address, then sign in.",
-      "errorCaptcha": "Anti-bot check failed. Please try again."
+      "errorCaptcha": "Anti-bot check failed. Please try again.",
+      "roleCoach": "A coach",
+      "roleCoachDescription": "Join the technical team (access on approval).",
+      "successCoach": "Your account has been created! Coach access must be approved by an association administrator. You will be notified once it is done."
     },
     "callback": {
       "errorTitle": "Invalid or expired link",

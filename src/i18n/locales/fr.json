@@ -572,7 +572,8 @@
         "select": "Compte à promouvoir",
         "placeholder": "— Choisir un compte",
         "button": "Promouvoir en entraîneur",
-        "empty": "Aucun compte à promouvoir. La personne doit d’abord créer son compte sur le site (Connexion → Créer un compte)."
+        "empty": "Aucun compte à promouvoir. La personne doit d’abord créer son compte sur le site (Connexion → Créer un compte).",
+        "requested": "✋ a demandé entraîneur"
       },
       "demote": "Retirer le rôle"
     },
@@ -955,7 +956,10 @@
       "passwordPlaceholder": "Au moins 8 caractères",
       "errorPassword": "Le mot de passe doit faire au moins 8 caractères.",
       "successConfirm": "Compte créé ! Vérifiez votre email pour confirmer votre adresse, puis connectez-vous.",
-      "errorCaptcha": "Vérification anti-robot échouée. Réessayez."
+      "errorCaptcha": "Vérification anti-robot échouée. Réessayez.",
+      "roleCoach": "Un entraîneur",
+      "roleCoachDescription": "Rejoignez l’équipe technique (accès sur validation).",
+      "successCoach": "Votre compte est créé ! L’accès entraîneur doit être validé par un administrateur de l’association. Vous serez averti dès que c’est fait."
     },
     "callback": {
       "errorTitle": "Lien invalide ou expiré",

@@ -8,6 +8,7 @@ import { setCoachPayment } from "@/lib/admin/coach-payment-actions";
 import { promoteToCoach, demoteCoach } from "@/lib/admin/coach-admin-actions";
 import { viewAsUser } from "@/lib/admin/impersonation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -86,6 +87,24 @@ export default async function AdminCoachesPage({ params }: Props) {
   const eligible = eligibleRes.data ?? [];
   const eligibleName = (p: EligibleRow) =>
     `${p.first_name ?? ""} ${p.last_name ?? ""}`.trim() || p.email;
+
+  // Accounts that asked to become a coach at signup (auth metadata) — surface
+  // them first so the admin knows who to validate.
+  const svc = createSupabaseAdminClient();
+  const { data: authList } = await svc.auth.admin.listUsers({ perPage: 1000 });
+  const requestedCoach = new Set(
+    (authList?.users ?? [])
+      .filter(
+        (u) =>
+          (u.user_metadata as { requested_role?: string })?.requested_role ===
+          "coach",
+      )
+      .map((u) => u.id),
+  );
+  eligible.sort(
+    (a, b) =>
+      (requestedCoach.has(a.id) ? 0 : 1) - (requestedCoach.has(b.id) ? 0 : 1),
+  );
   const sessionCount = new Map<string, number>();
   for (const s of sessionsRes.data ?? []) {
     if (s.coach_id)
@@ -150,6 +169,9 @@ export default async function AdminCoachesPage({ params }: Props) {
                 {eligible.map((p) => (
                   <option key={p.id} value={p.id}>
                     {eligibleName(p)} · {p.email}
+                    {requestedCoach.has(p.id)
+                      ? ` · ${t("promote.requested")}`
+                      : ""}
                   </option>
                 ))}
               </select>
