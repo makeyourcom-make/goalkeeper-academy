@@ -68,7 +68,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-navy text-white print:hidden">
       <div className="container py-16">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="flex flex-col gap-4">
@@ -84,24 +84,27 @@ export function Footer() {
             <p className="max-w-sm text-sm text-white/70">{t("tagline")}</p>
             <div className="space-y-1.5 text-sm text-white/70">
               <p className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-orange" /> {t("location")}
+                <MapPin className="h-4 w-4 shrink-0 text-orange" />{" "}
+                {t("location")}
               </p>
               <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-orange" />
+                <Mail className="h-4 w-4 shrink-0 text-orange" />
                 <a href={`mailto:${t("email")}`} className="hover:text-white">
                   {t("email")}
                 </a>
               </p>
+              <p className="flex items-center gap-2">
+                <InstagramIcon className="h-4 w-4 shrink-0 text-orange" />
+                <a
+                  href={BUSINESS.instagram.url}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="hover:text-white"
+                >
+                  @{BUSINESS.instagram.handle}
+                </a>
+              </p>
             </div>
-            <a
-              href={BUSINESS.instagram.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Instagram"
-              className="inline-flex w-fit items-center gap-2 text-sm text-white/70 transition-colors hover:text-orange"
-            >
-              <InstagramIcon className="h-5 w-5" />@{BUSINESS.instagram.handle}
-            </a>
           </div>
 
           {COLUMNS.map((col) => (

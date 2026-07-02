@@ -1215,6 +1215,7 @@
       "paymentMethod": "Moyen de paiement",
       "paidOn": "Payée le",
       "dueOn": "Échéance",
+      "seat": "Siège",
       "installmentShort": "versement {n}",
       "receiptFooter": "Merci pour votre confiance. Association The Last Line — Goalkeeper Academy. Pour toute question : contact@thelastline.ch",
       "methods": {

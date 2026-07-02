@@ -1215,6 +1215,7 @@
       "paymentMethod": "Payment method",
       "paidOn": "Paid on",
       "dueOn": "Due",
+      "seat": "Registered office",
       "installmentShort": "instalment {n}",
       "receiptFooter": "Thank you for your trust. The Last Line — Goalkeeper Academy. Any questions: contact@thelastline.ch",
       "methods": {

@@ -141,9 +141,12 @@ export default async function InvoiceDetailPage({ params }: Props) {
             <p className="font-anton text-2xl uppercase text-navy">
               {BUSINESS.name}
             </p>
+            <p className="text-sm text-grey-500">{BUSINESS.legal.entity}</p>
             <p className="text-sm text-grey-500">
-              {BUSINESS.address.streetAddress} · {BUSINESS.address.postalCode}{" "}
-              {BUSINESS.address.addressLocality} · {BUSINESS.email}
+              {t("seat")} : {BUSINESS.legal.seat}
+            </p>
+            <p className="text-sm text-grey-500">
+              IDE : {BUSINESS.legal.ide} · {BUSINESS.email}
             </p>
           </div>
 

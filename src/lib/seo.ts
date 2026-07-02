@@ -61,6 +61,12 @@ export const BUSINESS = {
     handle: "thelastline.goalkeeper",
     url: "https://www.instagram.com/thelastline.goalkeeper",
   },
+  // Legal issuer details (from the imprint) — used on invoices/receipts.
+  legal: {
+    entity: "Association The Last Line",
+    seat: "Torgon, commune de Vionnaz (VS), Suisse",
+    ide: "CHE-235.374.703",
+  },
 } as const;
 
 type Json = Record<string, unknown>;

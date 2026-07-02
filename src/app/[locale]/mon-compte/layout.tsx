@@ -31,7 +31,7 @@ export default async function AccountLayout({ children, params }: Props) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-orange px-4 py-2 text-sm text-white sm:px-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-orange px-4 py-2 text-sm text-white sm:px-6 print:hidden">
         <span className="inline-flex items-center gap-2 font-medium">
           <Eye className="h-4 w-4 shrink-0" />
           {t("banner", { name: ctx.targetName ?? "" })}
