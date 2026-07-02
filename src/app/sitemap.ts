@@ -12,6 +12,7 @@ const PUBLIC_PATHS = [
   "/stages/giana-stop-and-shoot",
   "/blog",
   "/contact",
+  "/rayon-d-action",
   "/mentions-legales",
   "/cgv",
   "/confidentialite",

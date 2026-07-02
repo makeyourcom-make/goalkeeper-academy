@@ -34,6 +34,7 @@
         "mission": "Our mission",
         "team": "The team",
         "method": "Our method",
+        "serviceArea": "Service area",
         "contact": "Contact"
       },
       "offers": {
@@ -360,6 +361,52 @@
       "ctaInvoices": "View my invoices",
       "ctaAccount": "Go to my account",
       "ctaBrowse": "Browse other camps"
+    }
+  },
+  "ServiceArea": {
+    "metaTitle": "Service area — Goalkeeper training in the Chablais",
+    "metaDescription": "The Last Line trains goalkeepers across the whole Chablais and Riviera, from Vevey to Martigny: Aigle, Monthey, Bex, Vouvry, Saint-Maurice and nearby. Training ground in Aigle.",
+    "hero": {
+      "eyebrow": "Where we operate",
+      "title": "Our service area",
+      "subtitle": "From Vevey to Martigny, we coach goalkeepers across the whole Chablais and Riviera."
+    },
+    "intro": "Our training ground is in Aigle (Terrain de la Mêlée), at the heart of the Chablais and easy to reach by train or via the A9 motorway. We welcome goalkeepers from all over the region, from the Upper Léman to the Lower Valais. Here are the main towns our keepers come from — if yours isn't listed but is nearby, get in touch and we'll be glad to talk.",
+    "zones": {
+      "riviera": {
+        "title": "Riviera & Upper Léman",
+        "description": "Along the lake, from Vevey to Villeneuve: a direct connection to the Aigle ground in a few minutes by train."
+      },
+      "chablaisVaud": {
+        "title": "Vaud Chablais",
+        "description": "Our core area, around Aigle: most of our keepers train here throughout the season."
+      },
+      "chablaisValais": {
+        "title": "Valais Chablais",
+        "description": "From Monthey to Martigny: the Lower Valais is minutes from the ground, by car or train."
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "question": "Where do your goalkeepers come from?",
+          "answer": "From all over the Chablais and Riviera, between Vevey and Martigny. Many come from Aigle, Monthey, Bex, Vouvry or Saint-Maurice, but we welcome keepers from across the region."
+        },
+        {
+          "question": "Do I need to live in Aigle to train?",
+          "answer": "No. Our ground is in Aigle, but our keepers come from all over: it's a quick trip by train or the A9 motorway from the Riviera and the Lower Valais alike."
+        },
+        {
+          "question": "Do you run sessions outside the Aigle ground?",
+          "answer": "Our regular sessions are held in Aigle. For a club or an established group, contact us: we're happy to look into coming to you."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to join the academy?",
+      "offers": "See our offers",
+      "contact": "Contact us"
     }
   },
   "GianaPage": {

@@ -47,6 +47,10 @@ export const routing = defineRouting({
       en: "/news/[slug]",
     },
     "/contact": "/contact",
+    "/rayon-d-action": {
+      fr: "/rayon-d-action",
+      en: "/service-area",
+    },
     "/connexion": {
       fr: "/connexion",
       en: "/sign-in",

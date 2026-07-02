@@ -34,6 +34,7 @@
         "mission": "Notre mission",
         "team": "L'équipe",
         "method": "Notre méthode",
+        "serviceArea": "Rayon d'action",
         "contact": "Contact"
       },
       "offers": {
@@ -360,6 +361,52 @@
       "ctaInvoices": "Voir mes factures",
       "ctaAccount": "Voir mon compte",
       "ctaBrowse": "Découvrir d'autres stages"
+    }
+  },
+  "ServiceArea": {
+    "metaTitle": "Rayon d'action — Entraînement de gardien de but dans le Chablais",
+    "metaDescription": "The Last Line forme les gardiennes et gardiens de but de tout le Chablais et de la Riviera, de Vevey à Martigny : Aigle, Monthey, Bex, Vouvry, Saint-Maurice et alentours. Terrain d'entraînement à Aigle.",
+    "hero": {
+      "eyebrow": "Zone desservie",
+      "title": "Notre rayon d'action",
+      "subtitle": "De Vevey à Martigny, nous accompagnons les gardiennes et gardiens de tout le Chablais et de la Riviera."
+    },
+    "intro": "Notre terrain d'entraînement se trouve à Aigle (Terrain de la Mêlée), au cœur du Chablais et facilement accessible en train comme par l'autoroute A9. Nous accueillons des gardiennes et gardiens de toute la région, du Haut-Léman au Bas-Valais. Voici les principales localités d'où viennent nos gardiens — si la vôtre n'y figure pas mais se situe dans le secteur, écrivez-nous, nous serons ravis d'en discuter.",
+    "zones": {
+      "riviera": {
+        "title": "Riviera & Haut-Léman",
+        "description": "Le long du lac, de Vevey à Villeneuve : un accès direct au terrain d'Aigle en quelques minutes de train."
+      },
+      "chablaisVaud": {
+        "title": "Chablais vaudois",
+        "description": "Notre cœur de zone, autour d'Aigle : la plupart de nos gardiens s'entraînent ici, tout au long de la saison."
+      },
+      "chablaisValais": {
+        "title": "Chablais valaisan",
+        "description": "De Monthey à Martigny : le Bas-Valais est à quelques minutes du terrain, en voiture comme en train."
+      }
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "question": "D'où viennent vos gardiens ?",
+          "answer": "De tout le Chablais et de la Riviera, entre Vevey et Martigny. Beaucoup viennent d'Aigle, Monthey, Bex, Vouvry ou Saint-Maurice, mais nous accueillons des gardiens de toute la région."
+        },
+        {
+          "question": "Faut-il habiter Aigle pour s'entraîner ?",
+          "answer": "Non. Notre terrain est à Aigle, mais nos gardiennes et gardiens viennent de toute la région : l'accès en train et par l'autoroute A9 est rapide depuis la Riviera comme depuis le Bas-Valais."
+        },
+        {
+          "question": "Proposez-vous des entraînements ailleurs que sur le terrain d'Aigle ?",
+          "answer": "Nos séances régulières ont lieu à Aigle. Pour un club ou un groupe constitué, contactez-nous : nous étudions volontiers une intervention sur place."
+        }
+      ]
+    },
+    "cta": {
+      "title": "Prêt·e à rejoindre l'académie ?",
+      "offers": "Voir les offres",
+      "contact": "Nous contacter"
     }
   },
   "GianaPage": {

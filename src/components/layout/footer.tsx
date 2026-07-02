@@ -32,6 +32,7 @@ const COLUMNS = [
       { href: "/academie", labelKey: "mission" },
       { href: "/academie", labelKey: "team", hash: "#equipe" },
       { href: "/academie", labelKey: "method", hash: "#methode" },
+      { href: "/rayon-d-action", labelKey: "serviceArea" },
       { href: "/contact", labelKey: "contact" },
     ],
   },
