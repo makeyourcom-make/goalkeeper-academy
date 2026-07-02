@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +9,7 @@ import { ChangePasswordForm } from "@/components/forms/change-password-form";
 import { isViewingAs } from "@/lib/account/view-context";
 import { signedAvatarUrl } from "@/lib/storage/signed";
 import { Link } from "@/i18n/navigation";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Profile } from "@/types/database";
 
@@ -40,9 +41,9 @@ export default async function ProfilePage({ params }: Props) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) notFound();
+  if (!user) redirect(`/${locale}/connexion`);
 
-  const [{ data: profile }, { data: coach }] = await Promise.all([
+  const [{ data: profileRow }, { data: coach }] = await Promise.all([
     supabase
       .from("profiles")
       .select("*")
@@ -55,7 +56,31 @@ export default async function ProfilePage({ params }: Props) {
       .maybeSingle(),
   ]);
 
-  if (!profile) notFound();
+  let profile = profileRow;
+  // Self-heal: some accounts predate the auto-create trigger and have no
+  // profile row — create it instead of 404-ing.
+  if (!profile) {
+    const admin = createSupabaseAdminClient();
+    await admin
+      .from("profiles")
+      .upsert(
+        {
+          id: user.id,
+          email: user.email ?? "",
+          role: "parent",
+          language: locale,
+        },
+        { onConflict: "id" },
+      );
+    const refetch = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .maybeSingle<Profile>();
+    profile = refetch.data;
+  }
+  if (!profile) redirect(`/${locale}/mon-compte`);
+
   const isCoach = Boolean(coach);
   const avatarUrl = await signedAvatarUrl(supabase, profile.avatar_url);
 
