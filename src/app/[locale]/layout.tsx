@@ -112,14 +112,24 @@ export async function generateMetadata({
       icon: [
         { url: "/favicons/favicon.ico", sizes: "any" },
         {
+          url: "/favicons/favicon-16x16.png",
+          type: "image/png",
+          sizes: "16x16",
+        },
+        {
           url: "/favicons/favicon-32x32.png",
           type: "image/png",
           sizes: "32x32",
         },
         {
-          url: "/favicons/favicon-16x16.png",
+          url: "/favicons/favicon-48x48.png",
           type: "image/png",
-          sizes: "16x16",
+          sizes: "48x48",
+        },
+        {
+          url: "/favicons/favicon-96x96.png",
+          type: "image/png",
+          sizes: "96x96",
         },
         {
           url: "/favicons/favicon-512x512.png",

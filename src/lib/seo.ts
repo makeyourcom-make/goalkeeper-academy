@@ -51,6 +51,7 @@ export const BUSINESS = {
   areaServed: [
     "Chablais",
     "Aigle",
+    "Monthey",
     "Canton de Vaud",
     "Valais",
     "Suisse romande",
