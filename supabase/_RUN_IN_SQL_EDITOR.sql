@@ -443,3 +443,43 @@ create policy "progress_admin_write"
   using (public.is_admin())
   with check (public.is_admin());
 
+
+-- ============================================================================
+-- FIX — profiles RLS recursion (migration 0003)  ⚠️ garder en DERNIER
+-- ----------------------------------------------------------------------------
+-- Les policies SELECT/UPDATE de profiles définies plus haut utilisent une
+-- sous-requête sur public.profiles *à l'intérieur* d'une policy SUR
+-- public.profiles → récursion infinie (Postgres 42P17). Résultat : la lecture
+-- de son propre profil renvoie NULL (dashboard sans prénom, page profil qui
+-- redirige, sauvegarde du profil qui échoue). On réécrit ces policies avec des
+-- helpers SECURITY DEFINER (is_admin / my_role) qui contournent la RLS.
+-- Idempotent : peut être relancé sans risque. À exécuter APRÈS tout le reste.
+-- ============================================================================
+
+-- Rôle de l'appelant, sans déclencher la RLS sur profiles.
+create or replace function public.my_role()
+returns text
+language sql
+security definer
+stable
+set search_path = public
+as $$
+  select role from public.profiles where id = auth.uid();
+$$;
+
+-- SELECT : un utilisateur lit son propre profil ; un admin lit tout.
+drop policy if exists "profiles_select_own" on public.profiles;
+create policy "profiles_select_own"
+  on public.profiles
+  for select
+  using (auth.uid() = id or public.is_admin());
+
+-- UPDATE : un utilisateur modifie son propre profil sans pouvoir changer son
+-- rôle (comparé via le helper SECURITY DEFINER, pas une sous-requête récursive).
+drop policy if exists "profiles_update_own" on public.profiles;
+create policy "profiles_update_own"
+  on public.profiles
+  for update
+  using (auth.uid() = id)
+  with check (auth.uid() = id and role = public.my_role());
+
