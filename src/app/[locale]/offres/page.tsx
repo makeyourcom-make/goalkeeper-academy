@@ -181,7 +181,7 @@ export default async function OffresPage({ params }: Props) {
       </section>
 
       {/* Compare */}
-      <section className="bg-grey-100 py-20 lg:py-28">
+      <section className="bg-white py-20 lg:py-28">
         <div className="container">
           <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-3 text-center">
             <Badge variant="muted">{t("compare.eyebrow")}</Badge>
