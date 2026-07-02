@@ -140,7 +140,7 @@ export function Header({
             width={236}
             height={116}
             priority
-            className="h-11 w-auto lg:h-14"
+            className="h-9 w-auto shrink-0 sm:h-11 lg:h-14"
           />
           <Image
             src="/logos/wordmark.png"
@@ -148,7 +148,7 @@ export function Header({
             width={1670}
             height={181}
             priority
-            className="hidden h-8 w-auto sm:block lg:h-9"
+            className="h-5 w-auto min-w-0 object-contain sm:h-8 lg:h-9"
           />
         </Link>
 

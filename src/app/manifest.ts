@@ -11,27 +11,27 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#ffffff",
+    // Navy so the launch/splash screen blends with the navy app icon (the full
+    // logo on navy) for a seamless branded start.
+    background_color: "#0B2545",
     theme_color: "#0B2545",
     lang: "fr",
     categories: ["sports", "education"],
     icons: [
       {
-        src: "/favicons/favicon-192x192.png",
+        src: "/icons/app-icon-192.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/favicons/favicon-512x512.png",
+        src: "/icons/app-icon-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any",
       },
-      // Android adaptive icon. If the crest looks cropped in the launcher, we
-      // can swap in a padded 512 asset later.
       {
-        src: "/favicons/favicon-512x512.png",
+        src: "/icons/app-icon-maskable-512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",

@@ -127,7 +127,7 @@ export async function generateMetadata({
           sizes: "512x512",
         },
       ],
-      apple: "/favicons/favicon-180x180.png",
+      apple: "/icons/apple-touch-180.png",
       shortcut: "/favicons/favicon.ico",
     },
   };
