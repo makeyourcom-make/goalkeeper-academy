@@ -82,21 +82,45 @@ export default async function AccountPage({ params }: Props) {
   const members = t(`terms.${memberKey}`);
 
   // Counts (filtered explicitly by the effective account owner).
-  const [{ count: childrenCount }, { count: invoicesCount }] =
-    await Promise.all([
-      ctx.db
-        .from("children")
-        .select("id", { count: "exact", head: true })
-        .eq("parent_id", ctx.userId),
-      ctx.db
-        .from("invoices")
-        .select("id", { count: "exact", head: true })
-        .eq("profile_id", ctx.userId),
-    ]);
+  const [{ data: kids }, { count: invoicesCount }] = await Promise.all([
+    ctx.db.from("children").select("id").eq("parent_id", ctx.userId),
+    ctx.db
+      .from("invoices")
+      .select("id", { count: "exact", head: true })
+      .eq("profile_id", ctx.userId),
+  ]);
+  const childIds = (kids ?? []).map((k) => k.id as string);
+
+  // Upcoming sessions for this account's keepers — same source as the planning
+  // page (session_attendees → sessions), deduped per session. Was hardcoded to
+  // 0, which contradicted the planning page whenever a session existed.
+  const now = new Date();
+  const todayIso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  let planningCount = 0;
+  if (childIds.length > 0) {
+    const { data: att } = await ctx.db
+      .from("session_attendees")
+      .select("session_id, sessions(starts_at)")
+      .in("child_id", childIds)
+      .returns<
+        { session_id: string; sessions: { starts_at: string } | null }[]
+      >();
+    const seen = new Set<string>();
+    for (const r of att ?? []) {
+      if (
+        r.sessions &&
+        new Date(r.sessions.starts_at) >= new Date(todayIso) &&
+        !seen.has(r.session_id)
+      ) {
+        seen.add(r.session_id);
+      }
+    }
+    planningCount = seen.size;
+  }
 
   const counts: Record<CardKey, number> = {
-    children: childrenCount ?? 0,
-    planning: 0,
+    children: childIds.length,
+    planning: planningCount,
     invoices: invoicesCount ?? 0,
   };
 
