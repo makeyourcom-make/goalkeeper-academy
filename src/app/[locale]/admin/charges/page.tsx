@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Trash2 } from "lucide-react";
+import { Trash2, Paperclip, Check, RotateCcw } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { TransactionForm } from "@/components/admin/transaction-form";
-import { deleteTransaction } from "@/lib/admin/finance-actions";
+import { deleteTransaction, setReimbursed } from "@/lib/admin/finance-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -18,6 +18,9 @@ type Transaction = {
   amount: number;
   occurred_on: string;
   notes: string | null;
+  paid_by: string | null;
+  reimbursed: boolean;
+  receipt_url: string | null;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -34,13 +37,32 @@ export default async function AdminExpensesPage({ params }: Props) {
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase
     .from("transactions")
-    .select("id, category, label, amount, occurred_on, notes")
+    .select(
+      "id, category, label, amount, occurred_on, notes, paid_by, reimbursed, receipt_url",
+    )
     .eq("kind", "expense")
     .order("occurred_on", { ascending: false })
     .returns<Transaction[]>();
 
   const list = data ?? [];
+
+  // Short-lived signed URLs for the private receipt files.
+  const receiptUrls = await Promise.all(
+    list.map((x) =>
+      x.receipt_url
+        ? supabase.storage
+            .from("receipts")
+            .createSignedUrl(x.receipt_url, 600)
+            .then((r) => r.data?.signedUrl ?? null)
+        : Promise.resolve(null),
+    ),
+  );
+
   const total = list.reduce((s, x) => s + Number(x.amount), 0);
+  const toReimburse = list.reduce(
+    (s, x) => (x.paid_by && !x.reimbursed ? s + Number(x.amount) : s),
+    0,
+  );
   const chf = new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
     style: "currency",
     currency: "CHF",
@@ -66,13 +88,25 @@ export default async function AdminExpensesPage({ params }: Props) {
         <p className="max-w-2xl text-grey-700">{t("subtitle")}</p>
       </div>
 
-      <div className="mt-6 inline-flex flex-col rounded-2xl border border-grey-100 bg-white p-5 shadow-sm">
-        <span className="text-xs uppercase tracking-wide text-grey-500">
-          {t("total")}
-        </span>
-        <span className="font-anton text-h2 text-navy">
-          {chf.format(total)}
-        </span>
+      <div className="mt-6 flex flex-wrap gap-4">
+        <div className="inline-flex flex-col rounded-2xl border border-grey-100 bg-white p-5 shadow-sm">
+          <span className="text-xs uppercase tracking-wide text-grey-500">
+            {t("total")}
+          </span>
+          <span className="font-anton text-h2 text-navy">
+            {chf.format(total)}
+          </span>
+        </div>
+        {toReimburse > 0 && (
+          <div className="inline-flex flex-col rounded-2xl border border-orange/30 bg-orange/5 p-5 shadow-sm">
+            <span className="text-xs uppercase tracking-wide text-orange">
+              {t("toReimburse")}
+            </span>
+            <span className="font-anton text-h2 text-orange">
+              {chf.format(toReimburse)}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
@@ -88,8 +122,12 @@ export default async function AdminExpensesPage({ params }: Props) {
                     {t("table.category")}
                   </th>
                   <th className="px-4 py-3 font-medium">{t("table.label")}</th>
+                  <th className="px-4 py-3 font-medium">{t("table.paidBy")}</th>
                   <th className="px-4 py-3 text-right font-medium">
                     {t("table.amount")}
+                  </th>
+                  <th className="px-4 py-3 font-medium">
+                    {t("table.reimbursed")}
                   </th>
                   <th className="px-4 py-3" />
                 </tr>
@@ -98,16 +136,16 @@ export default async function AdminExpensesPage({ params }: Props) {
                 {list.length === 0 ? (
                   <tr>
                     <td
-                      colSpan={5}
+                      colSpan={7}
                       className="px-4 py-8 text-center text-grey-500"
                     >
                       {t("empty")}
                     </td>
                   </tr>
                 ) : (
-                  list.map((x) => (
+                  list.map((x, i) => (
                     <tr key={x.id} className="hover:bg-grey-100/40">
-                      <td className="px-4 py-3 text-grey-500">
+                      <td className="whitespace-nowrap px-4 py-3 text-grey-500">
                         {dateFmt.format(new Date(x.occurred_on))}
                       </td>
                       <td className="px-4 py-3">
@@ -115,9 +153,71 @@ export default async function AdminExpensesPage({ params }: Props) {
                           {x.category}
                         </span>
                       </td>
-                      <td className="px-4 py-3 text-navy">{x.label}</td>
-                      <td className="px-4 py-3 text-right font-medium text-navy">
+                      <td className="px-4 py-3 text-navy">
+                        {x.label}
+                        {receiptUrls[i] && (
+                          <a
+                            href={receiptUrls[i] as string}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-0.5 flex items-center gap-1 text-xs font-medium text-orange hover:underline"
+                          >
+                            <Paperclip className="h-3 w-3" /> {t("viewReceipt")}
+                          </a>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {x.paid_by || t("noValue")}
+                      </td>
+                      <td className="whitespace-nowrap px-4 py-3 text-right font-medium text-navy">
                         {chf.format(Number(x.amount))}
+                      </td>
+                      <td className="px-4 py-3">
+                        {x.paid_by ? (
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={
+                                x.reimbursed
+                                  ? "inline-flex whitespace-nowrap rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                  : "inline-flex whitespace-nowrap rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange"
+                              }
+                            >
+                              {x.reimbursed
+                                ? t("reimburseDone")
+                                : t("reimbursePending")}
+                            </span>
+                            <form action={setReimbursed}>
+                              <input type="hidden" name="id" value={x.id} />
+                              <input
+                                type="hidden"
+                                name="reimbursed"
+                                value={x.reimbursed ? "false" : "true"}
+                              />
+                              <button
+                                type="submit"
+                                title={
+                                  x.reimbursed
+                                    ? t("unmarkReimbursed")
+                                    : t("markReimbursed")
+                                }
+                                aria-label={
+                                  x.reimbursed
+                                    ? t("unmarkReimbursed")
+                                    : t("markReimbursed")
+                                }
+                                className="text-grey-400 transition-colors hover:text-navy"
+                              >
+                                {x.reimbursed ? (
+                                  <RotateCcw className="h-4 w-4" />
+                                ) : (
+                                  <Check className="h-4 w-4" />
+                                )}
+                              </button>
+                            </form>
+                          </div>
+                        ) : (
+                          <span className="text-grey-400">{t("noValue")}</span>
+                        )}
                       </td>
                       <td className="px-4 py-3 text-right">
                         <form action={deleteTransaction}>

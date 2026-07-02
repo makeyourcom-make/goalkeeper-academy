@@ -160,7 +160,26 @@ export function TransactionForm({
             placeholder="0.00"
           />
         </div>
+        {activeKind === "expense" && (
+          <div className={fieldCls}>
+            <label className={labelCls}>{t("paidBy")}</label>
+            <Input name="paid_by" placeholder={t("paidByPlaceholder")} />
+          </div>
+        )}
       </div>
+
+      {activeKind === "expense" && (
+        <div className={fieldCls}>
+          <label className={labelCls}>{t("receipt")}</label>
+          <input
+            type="file"
+            name="receipt"
+            accept="image/jpeg,image/png,image/webp,application/pdf"
+            className="text-sm text-grey-700 file:mr-3 file:rounded-lg file:border-0 file:bg-navy file:px-3 file:py-1.5 file:text-xs file:font-medium file:text-white hover:file:bg-navy/90"
+          />
+          <span className="text-grey-400 text-xs">{t("receiptHint")}</span>
+        </div>
+      )}
 
       <div className={fieldCls}>
         <label className={labelCls}>{t("notes")}</label>

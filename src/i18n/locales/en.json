@@ -577,9 +577,18 @@
         "date": "Date",
         "category": "Category",
         "label": "Label",
-        "amount": "Amount"
+        "amount": "Amount",
+        "paidBy": "Paid by",
+        "reimbursed": "Reimbursement"
       },
-      "empty": "No expenses recorded."
+      "empty": "No expenses recorded.",
+      "toReimburse": "To reimburse",
+      "viewReceipt": "View receipt",
+      "noValue": "—",
+      "reimburseDone": "Reimbursed",
+      "reimbursePending": "To reimburse",
+      "markReimbursed": "Mark reimbursed",
+      "unmarkReimbursed": "Undo"
     },
     "accounting": {
       "metaTitle": "Accounting",
@@ -689,7 +698,14 @@
       "delete": "Delete",
       "errorAuth": "Unauthorized.",
       "errorValidation": "Check the fields (amount, label, category).",
-      "errorGeneric": "Something went wrong. Please try again."
+      "errorGeneric": "Something went wrong. Please try again.",
+      "paidBy": "Paid by",
+      "paidByPlaceholder": "Who advanced the money?",
+      "receipt": "Receipt",
+      "receiptHint": "Photo or PDF, 8 MB max (optional)",
+      "errorReceiptSize": "File too large (8 MB max).",
+      "errorReceiptType": "Unsupported format (JPG, PNG, WebP or PDF).",
+      "errorReceiptUpload": "File upload failed."
     }
   },
   "Legal": {

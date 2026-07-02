@@ -538,3 +538,29 @@ alter table public.registrations
   add column if not exists payment_plan_id uuid
     references public.payment_plans(id) on delete set null;
 
+
+-- ============================================================================
+-- 0014 — Charges : qui a payé (à rembourser) + ticket/justificatif
+-- Idempotent : safe à relancer.
+-- ============================================================================
+
+alter table public.transactions
+  add column if not exists paid_by text;
+alter table public.transactions
+  add column if not exists reimbursed boolean not null default false;
+alter table public.transactions
+  add column if not exists reimbursed_at timestamptz;
+alter table public.transactions
+  add column if not exists receipt_url text;
+
+insert into storage.buckets (id, name, public)
+  values ('receipts', 'receipts', false)
+  on conflict (id) do nothing;
+
+drop policy if exists "receipts_admin_all" on storage.objects;
+create policy "receipts_admin_all"
+  on storage.objects for all
+  to authenticated
+  using (bucket_id = 'receipts' and public.is_admin())
+  with check (bucket_id = 'receipts' and public.is_admin());
+

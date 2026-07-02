@@ -577,9 +577,18 @@
         "date": "Date",
         "category": "Catégorie",
         "label": "Libellé",
-        "amount": "Montant"
+        "amount": "Montant",
+        "paidBy": "Payé par",
+        "reimbursed": "Remboursement"
       },
-      "empty": "Aucune charge enregistrée."
+      "empty": "Aucune charge enregistrée.",
+      "toReimburse": "À rembourser",
+      "viewReceipt": "Voir le ticket",
+      "noValue": "—",
+      "reimburseDone": "Remboursé",
+      "reimbursePending": "À rembourser",
+      "markReimbursed": "Marquer remboursé",
+      "unmarkReimbursed": "Annuler"
     },
     "accounting": {
       "metaTitle": "Comptabilité",
@@ -689,7 +698,14 @@
       "delete": "Supprimer",
       "errorAuth": "Accès non autorisé.",
       "errorValidation": "Vérifiez les champs (montant, libellé, catégorie).",
-      "errorGeneric": "Une erreur est survenue. Réessayez."
+      "errorGeneric": "Une erreur est survenue. Réessayez.",
+      "paidBy": "Payé par",
+      "paidByPlaceholder": "Qui a avancé l’argent ?",
+      "receipt": "Ticket / justificatif",
+      "receiptHint": "Photo ou PDF, 8 Mo max (facultatif)",
+      "errorReceiptSize": "Le fichier est trop lourd (8 Mo max).",
+      "errorReceiptType": "Format non supporté (JPG, PNG, WebP ou PDF).",
+      "errorReceiptUpload": "Échec de l’envoi du fichier."
     }
   },
   "Legal": {
