@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
@@ -139,6 +140,53 @@ export async function setReimbursed(formData: FormData): Promise<void> {
     })
     .eq("id", id);
   revalidatePath("/", "layout");
+}
+
+// Edit an existing transaction. Redirects back to the charges list on success,
+// or back to the edit page with ?error=1 on a validation/upload failure.
+export async function updateTransaction(formData: FormData): Promise<void> {
+  const supabase = await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const locale = String(formData.get("locale") ?? "fr") === "en" ? "en" : "fr";
+  const back = `/${locale}/admin/charges`;
+  const editUrl = `/${locale}/admin/charges/${id}/edit`;
+  if (!supabase || !id) redirect(back);
+
+  const parsed = SCHEMA.safeParse({
+    kind: formData.get("kind"),
+    category: formData.get("category"),
+    label: formData.get("label"),
+    amount: formData.get("amount"),
+    occurred_on: formData.get("occurred_on"),
+    paid_by: formData.get("paid_by") ?? "",
+    notes: formData.get("notes") ?? "",
+  });
+  if (!parsed.success) redirect(`${editUrl}?error=1`);
+
+  // Replace the receipt only if a new file was uploaded (expenses only).
+  let receiptPatch: { receipt_url?: string } = {};
+  if (parsed.data.kind === "expense") {
+    const receipt = await uploadReceipt(supabase, formData.get("receipt"));
+    if (receipt.error) redirect(`${editUrl}?error=1`);
+    if (receipt.path) receiptPatch = { receipt_url: receipt.path };
+  }
+
+  const { error } = await supabase
+    .from("transactions")
+    .update({
+      category: parsed.data.category,
+      label: parsed.data.label,
+      amount: parsed.data.amount,
+      occurred_on: parsed.data.occurred_on,
+      notes: parsed.data.notes,
+      paid_by: parsed.data.kind === "expense" ? parsed.data.paid_by : null,
+      ...receiptPatch,
+    })
+    .eq("id", id);
+  if (error) redirect(`${editUrl}?error=1`);
+
+  revalidatePath("/", "layout");
+  redirect(back);
 }
 
 export async function deleteTransaction(formData: FormData): Promise<void> {

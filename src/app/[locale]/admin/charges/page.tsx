@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Trash2, Paperclip, Check, RotateCcw } from "lucide-react";
+import { Trash2, Paperclip, Check, RotateCcw, Pencil } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
+import { Link } from "@/i18n/navigation";
 import { TransactionForm } from "@/components/admin/transaction-form";
 import { deleteTransaction, setReimbursed } from "@/lib/admin/finance-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -219,18 +220,31 @@ export default async function AdminExpensesPage({ params }: Props) {
                           <span className="text-grey-400">{t("noValue")}</span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-right">
-                        <form action={deleteTransaction}>
-                          <input type="hidden" name="id" value={x.id} />
-                          <button
-                            type="submit"
-                            aria-label={tf("delete")}
-                            title={tf("delete")}
-                            className="text-grey-400 transition-colors hover:text-error"
+                      <td className="px-4 py-3">
+                        <div className="flex items-center justify-end gap-3">
+                          <Link
+                            href={{
+                              pathname: "/admin/charges/[id]/edit",
+                              params: { id: x.id },
+                            }}
+                            aria-label={t("edit")}
+                            title={t("edit")}
+                            className="text-grey-400 transition-colors hover:text-navy"
                           >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </form>
+                            <Pencil className="h-4 w-4" />
+                          </Link>
+                          <form action={deleteTransaction}>
+                            <input type="hidden" name="id" value={x.id} />
+                            <button
+                              type="submit"
+                              aria-label={tf("delete")}
+                              title={tf("delete")}
+                              className="text-grey-400 transition-colors hover:text-error"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </form>
+                        </div>
                       </td>
                     </tr>
                   ))

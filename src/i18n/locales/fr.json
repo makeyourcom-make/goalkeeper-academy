@@ -588,7 +588,14 @@
       "reimburseDone": "Remboursé",
       "reimbursePending": "À rembourser",
       "markReimbursed": "Marquer remboursé",
-      "unmarkReimbursed": "Annuler"
+      "unmarkReimbursed": "Annuler",
+      "edit": "Modifier",
+      "editTitle": "Modifier la charge",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "currentReceipt": "Ticket actuel",
+      "replaceReceipt": "Remplacer le ticket (facultatif)",
+      "editError": "Vérifiez les champs et réessayez."
     },
     "accounting": {
       "metaTitle": "Comptabilité",

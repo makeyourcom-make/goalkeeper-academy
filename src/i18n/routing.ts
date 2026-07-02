@@ -109,6 +109,7 @@ export const routing = defineRouting({
       en: "/admin/coaches",
     },
     "/admin/charges": "/admin/charges",
+    "/admin/charges/[id]/edit": "/admin/charges/[id]/edit",
     "/admin/comptabilite": {
       fr: "/admin/comptabilite",
       en: "/admin/accounting",

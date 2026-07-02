@@ -588,7 +588,14 @@
       "reimburseDone": "Reimbursed",
       "reimbursePending": "To reimburse",
       "markReimbursed": "Mark reimbursed",
-      "unmarkReimbursed": "Undo"
+      "unmarkReimbursed": "Undo",
+      "edit": "Edit",
+      "editTitle": "Edit expense",
+      "save": "Save",
+      "cancel": "Cancel",
+      "currentReceipt": "Current receipt",
+      "replaceReceipt": "Replace receipt (optional)",
+      "editError": "Check the fields and try again."
     },
     "accounting": {
       "metaTitle": "Accounting",
