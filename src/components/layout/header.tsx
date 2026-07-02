@@ -24,8 +24,10 @@ const NAV_ITEMS = [
 
 export function Header({
   initialIsAuthed = false,
+  initialIsAdmin = false,
 }: {
   initialIsAuthed?: boolean;
+  initialIsAdmin?: boolean;
 }) {
   const t = useTranslations("Header");
   const locale = useLocale() as Locale;
@@ -37,10 +39,15 @@ export function Header({
   // Initial value comes from the server (cookies are readable there); the
   // browser only listens for live sign-in / sign-out events afterwards.
   const [isAuthed, setIsAuthed] = React.useState(initialIsAuthed);
+  const [isAdmin, setIsAdmin] = React.useState(initialIsAdmin);
 
   React.useEffect(() => {
     setIsAuthed(initialIsAuthed);
   }, [initialIsAuthed]);
+
+  React.useEffect(() => {
+    setIsAdmin(initialIsAdmin);
+  }, [initialIsAdmin]);
 
   React.useEffect(() => {
     const supabase = createSupabaseBrowserClient();
@@ -48,7 +55,10 @@ export function Header({
     const { data: sub } = supabase.auth.onAuthStateChange(
       (event: AuthChangeEvent) => {
         if (event === "SIGNED_IN") setIsAuthed(true);
-        if (event === "SIGNED_OUT") setIsAuthed(false);
+        if (event === "SIGNED_OUT") {
+          setIsAuthed(false);
+          setIsAdmin(false);
+        }
       },
     );
     return () => sub.subscription.unsubscribe();
@@ -159,6 +169,14 @@ export function Header({
 
         <div className="hidden items-center gap-3 xl:flex">
           {renderLocaleSwitch()}
+          {isAuthed && isAdmin && (
+            <Link
+              href="/admin"
+              className="text-sm font-medium text-orange transition-colors hover:text-orange-600"
+            >
+              {t("admin")}
+            </Link>
+          )}
           <Button asChild variant="primary" size="sm">
             {isAuthed ? (
               <Link href="/mon-compte">{t("account")}</Link>
@@ -200,6 +218,15 @@ export function Header({
                 {t(`nav.${item.key}`)}
               </Link>
             ))}
+            {isAuthed && isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-3 py-3 text-base font-medium text-orange hover:bg-grey-100"
+              >
+                {t("admin")}
+              </Link>
+            )}
             <div className="mt-4 flex items-center justify-between gap-3 border-t border-grey-100 pt-4">
               {renderLocaleSwitch()}
               <Button asChild variant="primary" size="sm">

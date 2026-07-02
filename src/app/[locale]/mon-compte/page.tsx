@@ -5,6 +5,7 @@ import {
   Calendar,
   FileText,
   UserCircle,
+  LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
 
@@ -99,6 +100,14 @@ export default async function AccountPage({ params }: Props) {
           </p>
           {!ctx.isImpersonating && (
             <div className="flex flex-wrap gap-3">
+              {role === "admin" && (
+                <Button asChild variant="primary">
+                  <Link href="/admin">
+                    <LayoutDashboard className="mr-2 h-4 w-4" />
+                    {t("adminConsole")}
+                  </Link>
+                </Button>
+              )}
               <Button asChild variant="ghost">
                 <Link href="/mon-compte/profil">
                   <UserCircle className="mr-2 h-4 w-4" />

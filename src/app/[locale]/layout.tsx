@@ -132,12 +132,21 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   let isAuthed = false;
+  let isAdmin = false;
   if (isSupabaseConfigured()) {
     const supabase = await createSupabaseServerClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();
     isAuthed = Boolean(user);
+    if (user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+      isAdmin = profile?.role === "admin";
+    }
   }
 
   return (
@@ -145,7 +154,7 @@ export default async function LocaleLayout({
       <body className="flex min-h-screen flex-col bg-white font-sans text-grey-700 antialiased">
         <JsonLd data={siteGraph(locale)} />
         <NextIntlClientProvider>
-          <Header initialIsAuthed={isAuthed} />
+          <Header initialIsAuthed={isAuthed} initialIsAdmin={isAdmin} />
           <main className="flex-1">{children}</main>
           <Footer />
           <CookieBanner />

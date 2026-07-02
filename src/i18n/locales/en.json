@@ -20,7 +20,8 @@
       "camps": "Camps",
       "blog": "News",
       "contact": "Contact"
-    }
+    },
+    "admin": "Admin"
   },
   "Footer": {
     "tagline": "The goalkeeper academy of the Chablais region. Specialized training for goalkeepers, from age 10 to senior.",
@@ -1193,7 +1194,8 @@
     "viewAs": {
       "banner": "Previewing {name}'s account — read-only.",
       "exit": "Exit preview"
-    }
+    },
+    "adminConsole": "Admin console"
   },
   "BlogPage": {
     "metaTitle": "News",

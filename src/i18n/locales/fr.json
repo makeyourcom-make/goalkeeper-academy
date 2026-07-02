@@ -20,7 +20,8 @@
       "camps": "Stages",
       "blog": "Actualités",
       "contact": "Contact"
-    }
+    },
+    "admin": "Admin"
   },
   "Footer": {
     "tagline": "L'académie de gardiens de but du Chablais. Formation spécialisée pour gardiennes et gardiens, de 10 ans jusqu'aux séniors.",
@@ -1193,7 +1194,8 @@
     "viewAs": {
       "banner": "Aperçu du compte de {name} — lecture seule.",
       "exit": "Quitter l'aperçu"
-    }
+    },
+    "adminConsole": "Console admin"
   },
   "BlogPage": {
     "metaTitle": "Actualités",
