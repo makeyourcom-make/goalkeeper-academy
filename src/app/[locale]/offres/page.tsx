@@ -31,17 +31,6 @@ const FORMULAS = [
   { key: "season", featured: true },
 ] as const;
 
-const COMPARE_ROWS = [
-  "sessions",
-  "commitment",
-  "youthPrice",
-  "adultPrice",
-  "perSession",
-  "discount",
-] as const;
-
-const COMPARE_COLS = ["single", "tour", "season"] as const;
-
 const FAQ_KEYS = [
   "trial",
   "location",
@@ -176,65 +165,6 @@ export default async function OffresPage({ params }: Props) {
             <Button asChild variant="primary" className="flex-shrink-0">
               <Link href="/contact">{t("club.cta")}</Link>
             </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Compare */}
-      <section className="bg-white py-20 lg:py-28">
-        <div className="container">
-          <div className="mx-auto mb-10 flex max-w-2xl flex-col items-center gap-3 text-center">
-            <Badge variant="muted">{t("compare.eyebrow")}</Badge>
-            <h2 className="font-anton text-h2 uppercase text-navy">
-              {t("compare.title")}
-            </h2>
-          </div>
-
-          <div className="overflow-x-auto rounded-xl bg-white shadow-md">
-            <table className="min-w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-grey-100 bg-grey-100/50">
-                  <th className="px-6 py-4 font-anton text-base uppercase tracking-wide text-navy">
-                    {t("compare.headers.feature")}
-                  </th>
-                  {COMPARE_COLS.map((col) => (
-                    <th
-                      key={col}
-                      className="px-6 py-4 text-center font-anton text-base uppercase tracking-wide text-navy"
-                    >
-                      {t(`compare.headers.${col}`)}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE_ROWS.map((row, rowIdx) => (
-                  <tr
-                    key={row}
-                    className={cn(
-                      "border-b border-grey-100 last:border-b-0",
-                      rowIdx % 2 === 1 && "bg-grey-100/30",
-                    )}
-                  >
-                    <td className="px-6 py-4 font-medium text-navy">
-                      {t(`compare.rows.${row}`)}
-                    </td>
-                    {COMPARE_COLS.map((col) => {
-                      const values = t.raw(`compare.values.${col}`) as string[];
-                      const value = values[rowIdx] ?? "—";
-                      return (
-                        <td
-                          key={col}
-                          className="px-6 py-4 text-center text-grey-700"
-                        >
-                          {value}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </div>
         </div>
       </section>
