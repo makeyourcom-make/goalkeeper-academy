@@ -196,6 +196,64 @@ L'équipe The Last Line`;
   await sendMail({ to: email, subject, text: body });
 }
 
+// Reminder to the coach a few days before a session they run.
+export async function sendCoachReminder(
+  admin: SupabaseClient,
+  p: {
+    coachId: string;
+    title: string;
+    location: string;
+    meetTime: string;
+    startTime: string;
+    endTime: string;
+    date: string;
+    inDays: number;
+    keeperCount: number;
+  },
+): Promise<void> {
+  if (!isEmailConfigured() || !p.coachId) return;
+  const { data } = await admin
+    .from("coaches")
+    .select("profiles(email, language, first_name)")
+    .eq("id", p.coachId)
+    .maybeSingle<CoachRow>();
+  const email = data?.profiles?.email;
+  if (!email) return;
+
+  const en = data.profiles!.language === "en";
+  const name = data.profiles!.first_name ?? "";
+  const subject = en
+    ? `Reminder (coach) — ${p.title} in ${p.inDays} days`
+    : `Rappel (coach) — ${p.title} dans ${p.inDays} jours`;
+  const body = en
+    ? `Hello${name ? ` ${name}` : ""},
+
+Reminder: you coach a session in ${p.inDays} days.
+
+Date: ${frDate(p.date)}
+Call time: ${p.meetTime}
+Session: ${p.startTime}–${p.endTime}
+Place: ${p.location}
+Session: ${p.title}
+Convened goalkeepers: ${p.keeperCount}
+
+The Last Line team`
+    : `Bonjour${name ? ` ${name}` : ""},
+
+Rappel : vous encadrez un entraînement dans ${p.inDays} jours.
+
+Date : ${frDate(p.date)}
+Convocation : ${p.meetTime}
+Séance : ${p.startTime}–${p.endTime}
+Lieu : ${p.location}
+Intitulé : ${p.title}
+Gardiens convoqués : ${p.keeperCount}
+
+L'équipe The Last Line`;
+
+  await sendMail({ to: email, subject, text: body });
+}
+
 export type ReminderParams = {
   childIds: string[];
   title: string;

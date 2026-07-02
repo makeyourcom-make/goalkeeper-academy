@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { stripe } from "@/lib/stripe/client";
 import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
+import { recordIncomeFromInvoice } from "@/lib/admin/record-income";
 
 async function requireAdmin() {
   const supabase = await createSupabaseServerClient();
@@ -38,6 +39,7 @@ export async function markInvoicePaid(formData: FormData): Promise<void> {
 
   if ((updated?.length ?? 0) > 0) {
     await sendPaymentConfirmation(supabase, id);
+    await recordIncomeFromInvoice(supabase, id);
   }
 
   revalidatePath("/", "layout");

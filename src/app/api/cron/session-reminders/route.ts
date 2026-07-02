@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
-import { sendReminders } from "@/lib/email/session-emails";
+import { sendReminders, sendCoachReminder } from "@/lib/email/session-emails";
 
 // Runs daily (Vercel Cron) — reminds attendees a few days before a session.
 export const dynamic = "force-dynamic";
@@ -25,6 +25,8 @@ type SessionRow = {
   meet_at: string | null;
   starts_at: string;
   ends_at: string;
+  coach_id: string | null;
+  coach_reminded_at: string | null;
 };
 
 export async function GET(req: NextRequest) {
@@ -46,7 +48,9 @@ export async function GET(req: NextRequest) {
 
   const { data: sessions } = await admin
     .from("sessions")
-    .select("id, title, location, meet_at, starts_at, ends_at")
+    .select(
+      "id, title, location, meet_at, starts_at, ends_at, coach_id, coach_reminded_at",
+    )
     .gte("starts_at", dayStart)
     .lt("starts_at", dayEnd)
     .eq("status", "scheduled")
@@ -54,18 +58,8 @@ export async function GET(req: NextRequest) {
 
   let reminders = 0;
   for (const s of sessions ?? []) {
-    const { data: attendees } = await admin
-      .from("session_attendees")
-      .select("child_id")
-      .eq("session_id", s.id)
-      .is("reminded_at", null)
-      .returns<{ child_id: string }[]>();
-    const childIds = (attendees ?? []).map((a) => a.child_id);
-    if (childIds.length === 0) continue;
-
     const startTime = hhmm(s.starts_at);
-    await sendReminders(admin, {
-      childIds,
+    const details = {
       title: s.title,
       location: s.location ?? "",
       meetTime: hhmm(s.meet_at) || startTime,
@@ -73,16 +67,43 @@ export async function GET(req: NextRequest) {
       endTime: hhmm(s.ends_at),
       date: s.starts_at.slice(0, 10),
       inDays: LEAD_DAYS,
-    });
+    };
 
-    // Mark them reminded so a second daily run never double-sends.
-    await admin
+    const { data: attendees } = await admin
       .from("session_attendees")
-      .update({ reminded_at: new Date().toISOString() })
+      .select("child_id")
       .eq("session_id", s.id)
-      .is("reminded_at", null);
+      .is("reminded_at", null)
+      .returns<{ child_id: string }[]>();
+    const childIds = (attendees ?? []).map((a) => a.child_id);
 
-    reminders += childIds.length;
+    if (childIds.length > 0) {
+      await sendReminders(admin, { childIds, ...details });
+      // Mark them reminded so a second daily run never double-sends.
+      await admin
+        .from("session_attendees")
+        .update({ reminded_at: new Date().toISOString() })
+        .eq("session_id", s.id)
+        .is("reminded_at", null);
+      reminders += childIds.length;
+    }
+
+    // Coach reminder (once per session, via coach_reminded_at).
+    if (s.coach_id && !s.coach_reminded_at) {
+      const { count } = await admin
+        .from("session_attendees")
+        .select("child_id", { count: "exact", head: true })
+        .eq("session_id", s.id);
+      await sendCoachReminder(admin, {
+        coachId: s.coach_id,
+        ...details,
+        keeperCount: count ?? 0,
+      });
+      await admin
+        .from("sessions")
+        .update({ coach_reminded_at: new Date().toISOString() })
+        .eq("id", s.id);
+    }
   }
 
   return NextResponse.json({

@@ -573,3 +573,20 @@ create policy "receipts_admin_all"
 alter table public.session_attendees
   add column if not exists reminded_at timestamptz;
 
+
+-- ============================================================================
+-- 0016 — Revenus auto (compta ↔ factures) + rappel de séance au coach
+-- Idempotent : safe à relancer.
+-- ============================================================================
+
+alter table public.transactions
+  add column if not exists invoice_id uuid
+    references public.invoices(id) on delete set null;
+
+create unique index if not exists transactions_invoice_id_uidx
+  on public.transactions (invoice_id)
+  where invoice_id is not null;
+
+alter table public.sessions
+  add column if not exists coach_reminded_at timestamptz;
+
