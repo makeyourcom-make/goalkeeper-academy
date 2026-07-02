@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Link } from "@/i18n/navigation";
 import { updateTransaction } from "@/lib/admin/finance-actions";
+import { getCoachOptions } from "@/lib/admin/coach-options";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -50,6 +51,8 @@ export default async function EditExpensePage({ params, searchParams }: Props) {
     .maybeSingle<Transaction>();
 
   if (!tx) redirect(`/${locale}/admin/charges`);
+
+  const coaches = await getCoachOptions(supabase);
 
   const receiptUrl = tx.receipt_url
     ? ((
@@ -119,11 +122,21 @@ export default async function EditExpensePage({ params, searchParams }: Props) {
           {tx.kind === "expense" && (
             <div className={fieldCls}>
               <label className={labelCls}>{tf("paidBy")}</label>
-              <Input
+              <select
                 name="paid_by"
                 defaultValue={tx.paid_by ?? ""}
-                placeholder={tf("paidByPlaceholder")}
-              />
+                className="rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm text-navy outline-none focus:border-orange"
+              >
+                <option value="">{tf("paidByNone")}</option>
+                {coaches.map((c) => (
+                  <option key={c.id} value={c.name}>
+                    {c.name}
+                  </option>
+                ))}
+                {tx.paid_by && !coaches.some((c) => c.name === tx.paid_by) && (
+                  <option value={tx.paid_by}>{tx.paid_by}</option>
+                )}
+              </select>
             </div>
           )}
         </div>

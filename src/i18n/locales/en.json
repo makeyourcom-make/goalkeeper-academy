@@ -712,7 +712,8 @@
       "receiptHint": "Photo or PDF, 8 MB max (optional)",
       "errorReceiptSize": "File too large (8 MB max).",
       "errorReceiptType": "Unsupported format (JPG, PNG, WebP or PDF).",
-      "errorReceiptUpload": "File upload failed."
+      "errorReceiptUpload": "File upload failed.",
+      "paidByNone": "— None (association)"
     }
   },
   "Legal": {

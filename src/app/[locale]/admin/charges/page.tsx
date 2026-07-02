@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { TransactionForm } from "@/components/admin/transaction-form";
 import { deleteTransaction, setReimbursed } from "@/lib/admin/finance-actions";
+import { getCoachOptions } from "@/lib/admin/coach-options";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
@@ -76,6 +77,7 @@ export default async function AdminExpensesPage({ params }: Props) {
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
   const tf = await getTranslations("Admin.finance");
+  const coaches = await getCoachOptions(supabase);
 
   return (
     <div className="container py-12 lg:py-16">
@@ -111,7 +113,7 @@ export default async function AdminExpensesPage({ params }: Props) {
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-        <TransactionForm mode="expense" today={today} />
+        <TransactionForm mode="expense" today={today} coaches={coaches} />
 
         <div className="overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
           <div className="overflow-x-auto">

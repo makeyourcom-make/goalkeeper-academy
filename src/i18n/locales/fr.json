@@ -712,7 +712,8 @@
       "receiptHint": "Photo ou PDF, 8 Mo max (facultatif)",
       "errorReceiptSize": "Le fichier est trop lourd (8 Mo max).",
       "errorReceiptType": "Format non supporté (JPG, PNG, WebP ou PDF).",
-      "errorReceiptUpload": "Échec de l’envoi du fichier."
+      "errorReceiptUpload": "Échec de l’envoi du fichier.",
+      "paidByNone": "— Aucun (association)"
     }
   },
   "Legal": {

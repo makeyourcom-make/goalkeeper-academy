@@ -11,6 +11,7 @@ import {
   addTransaction,
   type FinanceFormState,
 } from "@/lib/admin/finance-actions";
+import type { CoachOption } from "@/lib/admin/coach-options";
 
 const INITIAL: FinanceFormState = { status: "idle", message: "" };
 
@@ -39,9 +40,11 @@ function SubmitButton({ label, pending }: { label: string; pending: string }) {
 export function TransactionForm({
   mode,
   today,
+  coaches = [],
 }: {
   mode: "expense" | "full";
   today: string;
+  coaches?: CoachOption[];
 }) {
   const t = useTranslations("Admin.finance");
   const [state, formAction] = useFormState(addTransaction, INITIAL);
@@ -163,7 +166,18 @@ export function TransactionForm({
         {activeKind === "expense" && (
           <div className={fieldCls}>
             <label className={labelCls}>{t("paidBy")}</label>
-            <Input name="paid_by" placeholder={t("paidByPlaceholder")} />
+            <select
+              name="paid_by"
+              defaultValue=""
+              className="rounded-lg border border-grey-300 bg-white px-3 py-2 text-sm text-navy outline-none focus:border-orange"
+            >
+              <option value="">{t("paidByNone")}</option>
+              {coaches.map((c) => (
+                <option key={c.id} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
           </div>
         )}
       </div>
