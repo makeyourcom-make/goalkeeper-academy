@@ -1655,14 +1655,16 @@
       "next": "Continuer",
       "send": "Envoyer la demande",
       "pay": "Procéder au paiement",
-      "confirm": "Confirmer l inscription"
+      "confirm": "Confirmer et payer"
     },
     "success": {
       "title": "Inscription enregistrée !",
       "body": "Merci ! Votre inscription est bien enregistrée. Vous la retrouvez dans votre espace, rubrique Mes factures. Le règlement vous sera communiqué (ou se fera en ligne dès que le paiement sera activé).",
       "backHome": "Retour à l'accueil",
       "invoiceRef": "Référence de facture :",
-      "viewInvoices": "Voir mes factures"
+      "viewInvoices": "Voir mes factures",
+      "bodyCard": "Merci ! Votre inscription est enregistrée. Le prélèvement se met en place ; vous suivez vos versements dans Mes factures.",
+      "bodyManual": "Merci ! Votre inscription est enregistrée. Réglez vos versements depuis Mes factures (TWINT ou QR-facture)."
     },
     "mail": {
       "subject": "Demande d'inscription The Last Line"
@@ -1682,6 +1684,42 @@
     },
     "errors": {
       "generic": "Une erreur est survenue. Réessayez."
+    },
+    "payment": {
+      "title": "Paiement",
+      "methodLabel": "Moyen de paiement",
+      "cadenceLabel": "Rythme de paiement",
+      "methods": {
+        "card": {
+          "label": "Carte bancaire",
+          "desc": "Prélèvement automatique à chaque échéance."
+        },
+        "twint": {
+          "label": "TWINT",
+          "desc": "Vous réglez chaque échéance via TWINT."
+        },
+        "qr_bill": {
+          "label": "QR-facture",
+          "desc": "Virement bancaire via QR-facture suisse."
+        }
+      },
+      "cadences": {
+        "annual": "Annuel",
+        "semiannual": "Semestriel",
+        "quarterly": "Trimestriel",
+        "monthly": "Mensuel"
+      },
+      "cadenceCount": {
+        "annual": "1 versement",
+        "semiannual": "2 versements",
+        "quarterly": "4 versements",
+        "monthly": "10 versements"
+      },
+      "perInstallment": "par versement",
+      "breakdown": "{count} × {amount} CHF",
+      "cardRecurringHint": "Votre carte sera débitée automatiquement à chaque échéance.",
+      "twintHint": "Le 1er versement se règle maintenant via TWINT ; les suivants apparaîtront dans Mes factures.",
+      "qrHint": "Une QR-facture par versement sera disponible dans Mes factures. Vous payez à votre banque."
     }
   },
   "CookieBanner": {

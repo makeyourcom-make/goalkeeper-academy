@@ -80,3 +80,60 @@ export function computeTotals(keepers: OrderKeeper[]): PricedOrder {
   const total = Math.round(subtotal * (1 - discountRate));
   return { subtotal, discountRate, total };
 }
+
+// ============================================================================
+// Payment methods + installment cadences
+// ============================================================================
+
+export type PaymentMethod = "card" | "twint" | "qr_bill";
+export const PAYMENT_METHODS: PaymentMethod[] = ["card", "twint", "qr_bill"];
+
+// annual = paid once; the others split the total into N installments.
+export type Cadence = "annual" | "semiannual" | "quarterly" | "monthly";
+export const CADENCES: Cadence[] = [
+  "annual",
+  "semiannual",
+  "quarterly",
+  "monthly",
+];
+
+// Number of installments per cadence. "monthly" = 10 (sports season Sep→Jun).
+export const INSTALLMENTS: Record<Cadence, number> = {
+  annual: 1,
+  semiannual: 2,
+  quarterly: 4,
+  monthly: 10,
+};
+
+// Recurring interval for card auto-charge (Stripe subscriptions). "annual" is a
+// one-time payment, so it has no recurring interval.
+export const CADENCE_INTERVAL: Record<
+  Exclude<Cadence, "annual">,
+  { interval: "month"; interval_count: number }
+> = {
+  semiannual: { interval: "month", interval_count: 6 },
+  quarterly: { interval: "month", interval_count: 3 },
+  monthly: { interval: "month", interval_count: 1 },
+};
+
+// Months between two installments (used to schedule due dates for twint/qr).
+export const CADENCE_MONTHS: Record<Cadence, number> = {
+  annual: 12,
+  semiannual: 6,
+  quarterly: 3,
+  monthly: 1,
+};
+
+export function isPaymentMethod(v: unknown): v is PaymentMethod {
+  return (PAYMENT_METHODS as readonly string[]).includes(v as string);
+}
+
+export function isCadence(v: unknown): v is Cadence {
+  return (CADENCES as readonly string[]).includes(v as string);
+}
+
+// Per-installment amount in cents. Totals are whole CHF and every installment
+// count (1/2/4/10) divides 100 cleanly, so this is always an exact integer.
+export function installmentCents(totalChf: number, cadence: Cadence): number {
+  return Math.round((totalChf * 100) / INSTALLMENTS[cadence]);
+}

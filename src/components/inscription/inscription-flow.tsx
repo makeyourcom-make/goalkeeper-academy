@@ -17,14 +17,20 @@ import { cn } from "@/lib/utils";
 import { submitRegistration } from "@/lib/inscription/actions";
 import {
   AUDIENCES,
+  CADENCES,
   FORMULAS,
+  INSTALLMENTS,
+  PAYMENT_METHODS,
   PRICING,
+  installmentCents,
   priceFor,
   volumeDiscount,
   type Audience,
+  type Cadence,
   type Formula,
   type Order,
   type OrderKeeper,
+  type PaymentMethod,
 } from "@/lib/inscription/pricing";
 
 type Profile = "private" | "club";
@@ -74,6 +80,9 @@ export function InscriptionFlow({
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
   const [invoiceRef, setInvoiceRef] = React.useState<string | null>(null);
+  const [method, setMethod] = React.useState<PaymentMethod>("card");
+  const [cadence, setCadence] = React.useState<Cadence>("annual");
+  const [paidMethod, setPaidMethod] = React.useState<PaymentMethod>("card");
 
   const isOrg = profile === "club";
   const keeperCount = keepers.length;
@@ -131,14 +140,16 @@ export function InscriptionFlow({
       },
     };
 
-    // 1. Persist the registration (requires being signed in).
-    let invoiceId: string;
+    // 1. Persist the plan + installment invoices (requires being signed in).
+    let planId: string;
     try {
       const result = await submitRegistration({
         profile: order.profile,
         org: order.org,
         notes: order.notes,
         keepers,
+        method,
+        cadence,
       });
       if (result.status === "auth") {
         setSubmitting(false);
@@ -150,21 +161,29 @@ export function InscriptionFlow({
         setError("generic");
         return;
       }
-      invoiceId = result.invoiceId;
-      setInvoiceRef(result.invoiceNumber);
+      planId = result.planId;
+      setInvoiceRef(result.firstInvoiceNumber);
+      setPaidMethod(result.method);
     } catch {
       setSubmitting(false);
       setError("generic");
       return;
     }
 
-    // 2. Try Stripe checkout. If not configured, the registration is already
-    //    saved (pending payment) — show the success screen.
+    // 2a. QR-invoice → no Stripe; the invoices are ready in the member area.
+    if (method === "qr_bill") {
+      setSubmitting(false);
+      setSubmitted(true);
+      return;
+    }
+
+    // 2b. Stripe checkout (card subscription / card annual / TWINT). If Stripe
+    //     isn't configured yet, the plan + invoices are already saved.
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ order, locale, invoiceId }),
+        body: JSON.stringify({ planId, locale }),
       });
       const data = (await res.json()) as { url?: string };
       if (data.url) {
@@ -172,7 +191,7 @@ export function InscriptionFlow({
         return;
       }
     } catch {
-      // Stripe unavailable — registration is saved, fall through to success.
+      // Stripe unavailable — plan is saved, fall through to success.
     }
 
     setSubmitting(false);
@@ -188,7 +207,11 @@ export function InscriptionFlow({
         <h2 className="font-anton text-h2 uppercase text-navy">
           {t("success.title")}
         </h2>
-        <p className="text-grey-700">{t("success.body")}</p>
+        <p className="text-grey-700">
+          {paidMethod === "card"
+            ? t("success.bodyCard")
+            : t("success.bodyManual")}
+        </p>
         {invoiceRef && (
           <p className="rounded-lg bg-grey-100 px-4 py-2 text-sm text-grey-700">
             {t("success.invoiceRef")}{" "}
@@ -577,6 +600,82 @@ export function InscriptionFlow({
             <p className="rounded-xl bg-grey-100 p-4 text-xs text-grey-700">
               {t("recap.note")}
             </p>
+
+            {/* Payment method + schedule */}
+            <div className="flex flex-col gap-4 border-t border-grey-100 pt-4">
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
+                  {t("payment.methodLabel")}
+                </span>
+                <div className="grid gap-2 sm:grid-cols-3">
+                  {PAYMENT_METHODS.map((m) => (
+                    <button
+                      key={m}
+                      type="button"
+                      onClick={() => setMethod(m)}
+                      className={cn(
+                        "flex flex-col gap-1 rounded-lg border p-3 text-left transition-colors",
+                        method === m
+                          ? "border-orange ring-2 ring-orange/20"
+                          : "border-grey-200 hover:border-grey-300",
+                      )}
+                    >
+                      <span className="font-anton text-sm uppercase text-navy">
+                        {t(`payment.methods.${m}.label`)}
+                      </span>
+                      <span className="text-xs text-grey-500">
+                        {t(`payment.methods.${m}.desc`)}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <span className="text-xs font-medium uppercase tracking-wide text-grey-500">
+                  {t("payment.cadenceLabel")}
+                </span>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {CADENCES.map((c) => {
+                    const cents = installmentCents(total, c);
+                    const amount = (cents / 100).toFixed(
+                      cents % 100 === 0 ? 0 : 2,
+                    );
+                    return (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => setCadence(c)}
+                        className={cn(
+                          "flex items-center justify-between gap-2 rounded-lg border px-4 py-2 text-left transition-colors",
+                          cadence === c
+                            ? "border-orange ring-1 ring-orange/30"
+                            : "border-grey-200 hover:border-grey-300",
+                        )}
+                      >
+                        <span className="text-sm font-medium text-navy">
+                          {t(`payment.cadences.${c}`)}
+                        </span>
+                        <span className="text-xs text-grey-500">
+                          {t("payment.breakdown", {
+                            count: INSTALLMENTS[c],
+                            amount,
+                          })}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <p className="rounded-xl bg-navy/5 p-3 text-xs text-grey-700">
+                {method === "card"
+                  ? t("payment.cardRecurringHint")
+                  : method === "twint"
+                    ? t("payment.twintHint")
+                    : t("payment.qrHint")}
+              </p>
+            </div>
 
             {!isAuthed && (
               <div className="flex flex-col gap-3 rounded-xl border border-orange/30 bg-orange/5 p-4">

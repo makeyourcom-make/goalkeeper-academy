@@ -121,4 +121,25 @@ export type Invoice = {
   stripe_session_id: string | null;
   pdf_url: string | null;
   issued_at: string;
+  payment_plan_id: string | null;
+  installment_number: number | null;
+};
+
+export type PaymentMethod = "card" | "twint" | "qr_bill";
+export type Cadence = "annual" | "semiannual" | "quarterly" | "monthly";
+
+export type PaymentPlan = {
+  id: string;
+  profile_id: string;
+  method: PaymentMethod;
+  cadence: Cadence;
+  installments_total: number;
+  installments_paid: number;
+  amount_total_cents: number;
+  amount_per_installment_cents: number;
+  currency: string;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  status: "pending" | "active" | "completed" | "cancelled" | "past_due";
+  created_at: string;
 };

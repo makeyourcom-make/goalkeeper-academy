@@ -1655,14 +1655,16 @@
       "next": "Continue",
       "send": "Send request",
       "pay": "Proceed to payment",
-      "confirm": "Confirm registration"
+      "confirm": "Confirm and pay"
     },
     "success": {
       "title": "Registration saved!",
       "body": "Thank you! Your registration is saved. You can find it in your account under My invoices. Payment details will follow (or will be handled online once payments are enabled).",
       "backHome": "Back to home",
       "invoiceRef": "Invoice reference:",
-      "viewInvoices": "View my invoices"
+      "viewInvoices": "View my invoices",
+      "bodyCard": "Thank you! Your registration is saved. The automatic charge is being set up; track your payments in My invoices.",
+      "bodyManual": "Thank you! Your registration is saved. Pay your instalments from My invoices (TWINT or QR-invoice)."
     },
     "mail": {
       "subject": "Registration request The Last Line"
@@ -1682,6 +1684,42 @@
     },
     "errors": {
       "generic": "Something went wrong. Please try again."
+    },
+    "payment": {
+      "title": "Payment",
+      "methodLabel": "Payment method",
+      "cadenceLabel": "Payment schedule",
+      "methods": {
+        "card": {
+          "label": "Credit card",
+          "desc": "Automatic charge on each instalment."
+        },
+        "twint": {
+          "label": "TWINT",
+          "desc": "You pay each instalment via TWINT."
+        },
+        "qr_bill": {
+          "label": "QR-invoice",
+          "desc": "Bank transfer via Swiss QR-invoice."
+        }
+      },
+      "cadences": {
+        "annual": "Annual",
+        "semiannual": "Semi-annual",
+        "quarterly": "Quarterly",
+        "monthly": "Monthly"
+      },
+      "cadenceCount": {
+        "annual": "1 payment",
+        "semiannual": "2 payments",
+        "quarterly": "4 payments",
+        "monthly": "10 payments"
+      },
+      "perInstallment": "per payment",
+      "breakdown": "{count} × {amount} CHF",
+      "cardRecurringHint": "Your card will be charged automatically on each instalment.",
+      "twintHint": "The 1st instalment is paid now via TWINT; the rest appear in My invoices.",
+      "qrHint": "One QR-invoice per instalment will be available in My invoices. You pay at your bank."
     }
   },
   "CookieBanner": {
