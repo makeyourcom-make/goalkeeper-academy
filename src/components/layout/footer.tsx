@@ -3,6 +3,27 @@ import { useTranslations } from "next-intl";
 import { Mail, MapPin } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
+import { BUSINESS } from "@/lib/seo";
+
+// lucide-react dropped brand glyphs, so the Instagram mark is inlined.
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
 
 const COLUMNS = [
   {
@@ -72,6 +93,15 @@ export function Footer() {
                 </a>
               </p>
             </div>
+            <a
+              href={BUSINESS.instagram.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Instagram"
+              className="inline-flex w-fit items-center gap-2 text-sm text-white/70 transition-colors hover:text-orange"
+            >
+              <InstagramIcon className="h-5 w-5" />@{BUSINESS.instagram.handle}
+            </a>
           </div>
 
           {COLUMNS.map((col) => (

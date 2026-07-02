@@ -55,8 +55,12 @@ export const BUSINESS = {
     "Valais",
     "Suisse romande",
   ],
-  // Social profiles (sameAs). Instagram to be added once the handle is live.
-  sameAs: [] as string[],
+  // Social profiles (sameAs) — reinforces the entity for Google & AI search.
+  sameAs: ["https://www.instagram.com/thelastline.goalkeeper"] as string[],
+  instagram: {
+    handle: "thelastline.goalkeeper",
+    url: "https://www.instagram.com/thelastline.goalkeeper",
+  },
 } as const;
 
 type Json = Record<string, unknown>;
