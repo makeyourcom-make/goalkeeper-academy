@@ -800,7 +800,7 @@
         },
         {
           "heading": "Modalités de paiement",
-          "body": "Séance découverte et séances à l'unité : payables à 100 % avant la séance.\nTour et saison complète : paiement en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu.\nLe paiement s'effectue par facture QR suisse ; les paiements par carte et TWINT (via Stripe) seront proposés prochainement.\nLa place est définitivement confirmée dès l'inscription et sa validation sur le site."
+          "body": "Séance découverte et séances à l'unité : payables à 100 % avant la séance.\nTour et saison complète : paiement en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu.\nLe paiement s'effectue par carte bancaire ou TWINT (paiement en ligne sécurisé via Stripe), ou par facture QR suisse (virement bancaire).\nLa place est définitivement confirmée dès l'inscription et sa validation sur le site."
         },
         {
           "heading": "Retard de paiement et exclusion",
