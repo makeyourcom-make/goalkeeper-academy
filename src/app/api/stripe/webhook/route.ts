@@ -4,6 +4,7 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe/client";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { CADENCE_MONTHS, type Cadence } from "@/lib/inscription/pricing";
+import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
 
 // Stripe needs the raw request body to verify the signature.
 export const dynamic = "force-dynamic";
@@ -36,8 +37,10 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
   const method =
     session.payment_method_types?.[0] === "twint" ? "twint" : "stripe";
 
+  let newlyPaid = false;
   if (invoiceId) {
-    await admin
+    // idempotent: only transitions pending → paid the first time
+    const { data: updated } = await admin
       .from("invoices")
       .update({
         status: "paid",
@@ -46,7 +49,9 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
         stripe_session_id: session.id,
       })
       .eq("id", invoiceId)
-      .eq("status", "pending"); // idempotent: only the first time
+      .eq("status", "pending")
+      .select("id");
+    newlyPaid = (updated?.length ?? 0) > 0;
   }
 
   if (planId) {
@@ -65,6 +70,10 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
       })
       .eq("id", planId);
     await confirmRegistrations(admin, planId);
+  }
+
+  if (newlyPaid && invoiceId) {
+    await sendPaymentConfirmation(admin, invoiceId);
   }
 }
 
@@ -208,6 +217,11 @@ async function handleInvoicePaid(admin: Admin, invoice: Stripe.Invoice) {
 
   await confirmRegistrations(admin, plan.id);
 
+  // The `seen` guard above means this runs once per Stripe invoice → no dup.
+  if (nextInv) {
+    await sendPaymentConfirmation(admin, nextInv.id);
+  }
+
   // Last installment collected → stop the subscription so it never rebills.
   if (done) {
     try {
@@ -254,6 +268,7 @@ export async function POST(req: NextRequest) {
     await handleInvoicePaid(admin, event.data.object as Stripe.Invoice);
   }
 
-  // TODO: confirmation email + PDF invoice (Resend) once the domain mail is ready.
+  // A payment-confirmation email is sent from the handlers above.
+  // TODO: attach a PDF invoice to that email later.
   return NextResponse.json({ received: true });
 }
