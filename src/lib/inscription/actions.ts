@@ -2,9 +2,12 @@
 
 import { revalidatePath } from "next/cache";
 
+import { headers } from "next/headers";
+
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { notifyAdminNewRegistration } from "@/lib/email/admin-notify";
+import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 import {
   CADENCE_MONTHS,
   INSTALLMENTS,
@@ -73,6 +76,15 @@ export async function submitRegistration(
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return { status: "auth" };
+
+  // Throttle orders per account + IP to prevent scripted registration/invoice
+  // spam (no-op without Upstash).
+  const ip = clientIp(await headers());
+  const [byUser, byIp] = await Promise.all([
+    rateLimit(`submit:user:${user.id}`, 15, 3600),
+    rateLimit(`submit:ip:${ip}`, 30, 3600),
+  ]);
+  if (!byUser.ok || !byIp.ok) return { status: "error" };
 
   if (!isPaymentMethod(input.method) || !isCadence(input.cadence)) {
     return { status: "error" };
@@ -199,8 +211,10 @@ export async function submitRegistration(
       formula: k.formula,
       sessions_count: SESSIONS[k.formula],
       amount_cents: priceFor(k.audience, k.formula) * 100,
-      // Place secured as soon as the registration is submitted on the site.
-      status: "confirmed",
+      // Pending until the first payment lands. The Stripe webhook (card/TWINT)
+      // and admin markInvoicePaid (QR/bank) flip it to "confirmed" — so an order
+      // abandoned before payment never counts as a secured place.
+      status: "pending",
     });
     if (regErr) return { status: "error" };
   }

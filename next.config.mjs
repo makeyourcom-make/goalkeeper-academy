@@ -9,10 +9,19 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 //  - Supabase (any *.supabase.co project) for auth + REST + storage
 //  - images from Unsplash/Pexels/Cloudinary (mirror of next.config images.remotePatterns)
 //  - 'unsafe-inline' on style-src is required by Tailwind/Next.js CSS-in-JS at runtime
-//  - 'unsafe-inline' / 'unsafe-eval' on script-src kept for Next.js dev hydration; tighten via nonces in Phase 10 if needed.
+//  - 'unsafe-eval' is only needed by the Next.js dev runtime (HMR); it is dropped
+//    in production. 'unsafe-inline' on script-src stays until we migrate to nonces.
+const isDev = process.env.NODE_ENV !== "production";
+const scriptSrc = [
+  "script-src 'self' 'unsafe-inline'",
+  isDev ? "'unsafe-eval'" : "",
+  "https://challenges.cloudflare.com",
+]
+  .filter(Boolean)
+  .join(" ");
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
+  scriptSrc,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://images.pexels.com https://res.cloudinary.com",
   "font-src 'self' data:",

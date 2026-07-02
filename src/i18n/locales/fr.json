@@ -944,7 +944,8 @@
       "passwordPlaceholder": "••••••••",
       "errorCredentials": "Email ou mot de passe incorrect.",
       "forgotPassword": "Mot de passe oublié ?",
-      "errorCaptcha": "Vérification anti-robot échouée. Réessayez."
+      "errorCaptcha": "Vérification anti-robot échouée. Réessayez.",
+      "errorRateLimit": "Trop de tentatives. Patientez quelques minutes avant de réessayer."
     },
     "signUp": {
       "metaTitle": "Inscription",

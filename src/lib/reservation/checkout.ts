@@ -105,6 +105,16 @@ export async function startCampCheckout(formData: FormData): Promise<void> {
 
   let regId = existingReg?.id ?? "";
   if (!regId) {
+    // Capacity guard: don't let a new keeper book a camp that's already full.
+    const { count: confirmedCount } = await admin
+      .from("camp_registrations")
+      .select("id", { count: "exact", head: true })
+      .eq("camp_id", campRow.id)
+      .eq("status", "confirmed");
+    if ((confirmedCount ?? 0) >= (camp.spotsTotal ?? 0)) {
+      redirect(`${back}?error=full`);
+    }
+
     const { data: reg } = await admin
       .from("camp_registrations")
       .insert({

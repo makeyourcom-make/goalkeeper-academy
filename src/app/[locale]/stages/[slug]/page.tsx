@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { confirmedCountForSlug } from "@/lib/camps/availability";
 import campsData from "@/data/camps.json";
 
 type Camp = (typeof campsData)[number];
@@ -21,6 +22,9 @@ type Camp = (typeof campsData)[number];
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
+
+// Re-check real availability periodically (spots left reflect paid registrations).
+export const revalidate = 600;
 
 function getCamp(slug: string): Camp | undefined {
   return (campsData as Camp[]).find((c) => c.slug === slug);
@@ -74,7 +78,13 @@ export default async function CampDetailPage({ params }: Props) {
   const localeKey = locale === "en" ? "en" : "fr";
   const dateRange = formatDateRange(camp.startDate, camp.endDate, locale);
   const ageRange = t("ageRange", { min: camp.ageMin, max: camp.ageMax });
-  const isFull = camp.spotsLeft === 0;
+  // Real spots left from paid registrations; fall back to the JSON counter.
+  const confirmed = await confirmedCountForSlug(camp.slug);
+  const spotsLeft =
+    confirmed === null
+      ? camp.spotsLeft
+      : Math.max(0, camp.spotsTotal - confirmed);
+  const isFull = spotsLeft === 0;
 
   const INFO = [
     { Icon: CalendarDays, label: t("info.dates"), value: dateRange },
@@ -118,7 +128,7 @@ export default async function CampDetailPage({ params }: Props) {
             </Link>
           </Button>
           <Badge variant={isFull ? "muted" : "orange"}>
-            {t("spotsLeft", { count: camp.spotsLeft })}
+            {t("spotsLeft", { count: spotsLeft })}
           </Badge>
           <h1 className="max-w-3xl text-balance font-anton text-h1 uppercase leading-tight text-white">
             {camp.title[localeKey]}

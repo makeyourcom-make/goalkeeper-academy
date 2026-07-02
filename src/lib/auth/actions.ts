@@ -2,12 +2,14 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { z } from "zod";
 
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { verifyTurnstile } from "@/lib/security/turnstile";
+import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 
 export type AuthActionState = {
   status: "idle" | "success" | "error";
@@ -36,6 +38,12 @@ export async function signIn(
 
   if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) {
     return { status: "error", message: "errorCaptcha" };
+  }
+
+  // Throttle password attempts per IP (brute-force defense; no-op w/o Upstash).
+  const ip = clientIp(await headers());
+  if (!(await rateLimit(`signin:${ip}`, 10, 900)).ok) {
+    return { status: "error", message: "errorRateLimit" };
   }
 
   const parsed = SIGN_IN_SCHEMA.safeParse({

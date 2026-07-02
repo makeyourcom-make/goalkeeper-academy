@@ -944,7 +944,8 @@
       "passwordPlaceholder": "••••••••",
       "errorCredentials": "Incorrect email or password.",
       "forgotPassword": "Forgot your password?",
-      "errorCaptcha": "Anti-bot check failed. Please try again."
+      "errorCaptcha": "Anti-bot check failed. Please try again.",
+      "errorRateLimit": "Too many attempts. Please wait a few minutes and try again."
     },
     "signUp": {
       "metaTitle": "Sign up",

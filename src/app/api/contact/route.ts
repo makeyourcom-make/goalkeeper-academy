@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { isEmailConfigured, sendMail } from "@/lib/email/smtp";
 import { verifyTurnstile } from "@/lib/security/turnstile";
+import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +21,12 @@ export async function POST(req: NextRequest) {
   // Not configured yet → tell the client to fall back to the mailto flow.
   if (!isEmailConfigured()) {
     return NextResponse.json({ configured: false });
+  }
+
+  // Throttle per IP to prevent mail-relay abuse (no-op without Upstash).
+  const ip = clientIp(req.headers);
+  if (!(await rateLimit(`contact:${ip}`, 5, 3600)).ok) {
+    return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
 
   let body: unknown;
