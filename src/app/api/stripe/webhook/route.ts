@@ -3,6 +3,7 @@ import type Stripe from "stripe";
 
 import { stripe } from "@/lib/stripe/client";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { CADENCE_MONTHS, type Cadence } from "@/lib/inscription/pricing";
 
 // Stripe needs the raw request body to verify the signature.
 export const dynamic = "force-dynamic";
@@ -79,6 +80,13 @@ async function handleSubscriptionStart(
       ? session.subscription
       : (session.subscription?.id ?? null);
   if (!planId) return;
+
+  const { data: plan } = await admin
+    .from("payment_plans")
+    .select("cadence, installments_total")
+    .eq("id", planId)
+    .maybeSingle<{ cadence: Cadence; installments_total: number }>();
+
   await admin
     .from("payment_plans")
     .update({
@@ -88,14 +96,38 @@ async function handleSubscriptionStart(
       status: "active",
     })
     .eq("id", planId);
+
+  // Backstop: hard-stop the subscription a bit after the last installment, so it
+  // can never bill forever if an invoice.paid webhook is ever missed. The
+  // invoice.paid counter is the primary (precise) stop.
+  if (subId && stripe && plan) {
+    const months =
+      (CADENCE_MONTHS[plan.cadence] ?? 1) * (plan.installments_total + 1);
+    const cancelAt =
+      Math.floor(Date.now() / 1000) + Math.round(months * 31 * 24 * 3600);
+    try {
+      await stripe.subscriptions.update(subId, { cancel_at: cancelAt });
+    } catch {
+      // ignore — counting via invoice.paid remains the primary stop
+    }
+  }
 }
 
 // A subscription invoice was paid → mark the next installment paid, and cancel
 // the subscription once the last installment has been collected.
 async function handleInvoicePaid(admin: Admin, invoice: Stripe.Invoice) {
-  const rawSub = (
-    invoice as unknown as { subscription?: string | { id: string } | null }
-  ).subscription;
+  // The subscription reference lives at invoice.subscription (API ≤ 2025) or at
+  // invoice.parent.subscription_details.subscription (API ≥ 2026, "dahlia").
+  const inv = invoice as unknown as {
+    subscription?: string | { id: string } | null;
+    parent?: {
+      subscription_details?: {
+        subscription?: string | { id: string } | null;
+      } | null;
+    } | null;
+  };
+  const rawSub =
+    inv.subscription ?? inv.parent?.subscription_details?.subscription ?? null;
   const subId = typeof rawSub === "string" ? rawSub : (rawSub?.id ?? null);
   if (!subId || !stripe) return;
 
