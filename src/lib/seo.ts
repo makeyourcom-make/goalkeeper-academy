@@ -2,8 +2,33 @@
 // The structured data powers local SEO (Google Business / maps), rich results
 // and AI search engines.
 
+import type { Metadata } from "next";
+
+import { getPathname } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://thelastline.ch";
+
+/**
+ * Per-page canonical + hreflang. Each public page must set its OWN alternates so
+ * that e.g. /fr/offres canonicalises to /fr/offres (not the site root). Returns
+ * relative paths — `metadataBase` in the layout resolves them to absolute URLs.
+ */
+export function alternatesFor(
+  href: Parameters<typeof getPathname>[0]["href"],
+  locale: string,
+): Metadata["alternates"] {
+  const languages: Record<string, string> = {};
+  for (const l of routing.locales) {
+    languages[l] = getPathname({ href, locale: l });
+  }
+  languages["x-default"] = getPathname({
+    href,
+    locale: routing.defaultLocale,
+  });
+  return { canonical: getPathname({ href, locale }), languages };
+}
 
 export const BUSINESS = {
   name: "The Last Line — Goalkeeper Academy",
@@ -107,6 +132,56 @@ export function faqGraph(qas: { question: string; answer: string }[]): Json {
       name: qa.question,
       acceptedAnswer: { "@type": "Answer", text: qa.answer },
     })),
+  };
+}
+
+/** Course + Event schema for a camp/stage (dates, price, venue, offer). */
+export function campGraph(camp: {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+  startDate: string;
+  endDate: string;
+  priceChf: number;
+  locality: string;
+  venue?: string;
+  locale: string;
+}): Json {
+  const url = camp.url.startsWith("http") ? camp.url : `${SITE_URL}${camp.url}`;
+  const offer = {
+    "@type": "Offer",
+    price: camp.priceChf,
+    priceCurrency: "CHF",
+    availability: "https://schema.org/InStock",
+    url,
+  };
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: camp.name,
+    description: camp.description,
+    inLanguage: camp.locale === "en" ? "en" : "fr",
+    image: camp.image ?? BUSINESS.image,
+    url,
+    provider: { "@id": `${SITE_URL}/#organization` },
+    offers: offer,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "onsite",
+      startDate: camp.startDate,
+      endDate: camp.endDate,
+      location: {
+        "@type": "Place",
+        name: camp.venue ?? camp.locality,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: camp.locality,
+          addressCountry: "CH",
+        },
+      },
+      offers: offer,
+    },
   };
 }
 

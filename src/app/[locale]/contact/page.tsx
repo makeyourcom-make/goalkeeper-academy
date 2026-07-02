@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Clock, type LucideIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { ContactForm } from "@/components/forms/contact-form";
+import { alternatesFor } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/contact", locale),
   };
 }
 

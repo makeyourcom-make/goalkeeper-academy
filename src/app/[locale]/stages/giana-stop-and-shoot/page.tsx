@@ -11,6 +11,7 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { alternatesFor } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/stages/giana-stop-and-shoot", locale),
   };
 }
 

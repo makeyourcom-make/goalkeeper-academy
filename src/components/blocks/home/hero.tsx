@@ -28,7 +28,7 @@ export async function HomeHero() {
 
       <div className="container relative z-10 flex flex-col items-center gap-6 py-24 text-center lg:py-36">
         <Badge variant="orange">{t("badge")}</Badge>
-        <h1 className="max-w-4xl text-balance font-anton text-h1 uppercase leading-tight tracking-wide text-white lg:text-h1-hero">
+        <h1 className="max-w-4xl text-balance font-anton text-3xl uppercase leading-tight tracking-wide text-white sm:text-4xl md:text-h1 lg:text-h1-hero">
           {t("title")}
         </h1>
         <p className="max-w-2xl text-lg text-white/80">{t("subtitle")}</p>

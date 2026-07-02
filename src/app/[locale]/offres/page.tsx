@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { cn } from "@/lib/utils";
-import { faqGraph } from "@/lib/seo";
+import { faqGraph, alternatesFor } from "@/lib/seo";
 import { Link } from "@/i18n/navigation";
 
 type Props = {
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/offres", locale),
   };
 }
 

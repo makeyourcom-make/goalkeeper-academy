@@ -13,7 +13,9 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Link } from "@/i18n/navigation";
+import { alternatesFor, campGraph } from "@/lib/seo";
 import { confirmedCountForSlug } from "@/lib/camps/availability";
 import campsData from "@/data/camps.json";
 
@@ -42,6 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: camp.title[localeKey],
     description: camp.description[localeKey],
+    alternates: alternatesFor(
+      { pathname: "/stages/[slug]", params: { slug } },
+      locale,
+    ),
     openGraph: {
       title: camp.title[localeKey],
       description: camp.description[localeKey],
@@ -99,6 +105,20 @@ export default async function CampDetailPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={campGraph({
+          name: camp.title[localeKey],
+          description: camp.description[localeKey],
+          url: `/${locale}/stages/${camp.slug}`,
+          image: camp.image,
+          startDate: camp.startDate,
+          endDate: camp.endDate,
+          priceChf: camp.price,
+          locality: camp.location,
+          venue: camp.venue,
+          locale,
+        })}
+      />
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy text-white">
         <div className="absolute inset-0">

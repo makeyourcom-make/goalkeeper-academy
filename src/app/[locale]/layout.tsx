@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Aldrich } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/react";
 
 import "../globals.css";
 
@@ -38,6 +39,11 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -45,7 +51,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  // Prod fallback (never localhost) so canonical/OG stay correct even if the env
+  // var is momentarily missing on a deploy.
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thelastline.ch";
 
   return {
     metadataBase: new URL(baseUrl),
@@ -159,6 +167,9 @@ export default async function LocaleLayout({
           <Footer />
           <CookieBanner />
         </NextIntlClientProvider>
+        {/* Cookieless, privacy-friendly audience measurement (Vercel). Sends
+            data only when Web Analytics is enabled in the Vercel dashboard. */}
+        <Analytics />
       </body>
     </html>
   );

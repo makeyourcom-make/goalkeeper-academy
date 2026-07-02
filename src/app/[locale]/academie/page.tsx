@@ -17,6 +17,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { alternatesFor } from "@/lib/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    alternates: alternatesFor("/academie", locale),
   };
 }
 
@@ -89,7 +91,7 @@ export default async function AcademiePage({ params }: Props) {
         </div>
         <div className="container relative z-10 flex flex-col items-center gap-5 py-24 text-center lg:py-32">
           <Badge variant="orange">{t("hero.eyebrow")}</Badge>
-          <h1 className="max-w-3xl text-balance font-anton text-h1 uppercase leading-tight text-white lg:text-h1-hero">
+          <h1 className="max-w-3xl text-balance font-anton text-3xl uppercase leading-tight text-white sm:text-4xl md:text-h1 lg:text-h1-hero">
             {t("hero.title")}
           </h1>
           <p className="max-w-2xl text-lg text-white/80">
