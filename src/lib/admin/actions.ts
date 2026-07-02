@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
 
 async function requireAdmin() {
   const supabase = await createSupabaseServerClient();
@@ -25,10 +26,18 @@ export async function markInvoicePaid(formData: FormData): Promise<void> {
   const supabase = await requireAdmin();
   if (!supabase) return;
 
-  await supabase
+  // Only transition pending → paid; send the same confirmation email as the
+  // Stripe flow so QR / bank-transfer payers are notified too.
+  const { data: updated } = await supabase
     .from("invoices")
     .update({ status: "paid", paid_at: new Date().toISOString() })
-    .eq("id", id);
+    .eq("id", id)
+    .eq("status", "pending")
+    .select("id");
+
+  if ((updated?.length ?? 0) > 0) {
+    await sendPaymentConfirmation(supabase, id);
+  }
 
   revalidatePath("/", "layout");
 }

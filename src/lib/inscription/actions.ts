@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
+import { notifyAdminNewRegistration } from "@/lib/email/admin-notify";
 import {
   CADENCE_MONTHS,
   INSTALLMENTS,
@@ -194,10 +195,21 @@ export async function submitRegistration(
       formula: k.formula,
       sessions_count: SESSIONS[k.formula],
       amount_cents: priceFor(k.audience, k.formula) * 100,
-      status: "pending",
+      // Place secured as soon as the registration is submitted on the site.
+      status: "confirmed",
     });
     if (regErr) return { status: "error" };
   }
+
+  // Alert the admin that a new family registered.
+  await notifyAdminNewRegistration(admin, {
+    invoiceNumber: firstInvoiceNumber,
+    total,
+    method,
+    cadence,
+    keeperNames: keepers.map((k) => `${k.firstName} ${k.lastName}`.trim()),
+    contactEmail: user.email ?? "",
+  });
 
   revalidatePath("/", "layout");
   return {

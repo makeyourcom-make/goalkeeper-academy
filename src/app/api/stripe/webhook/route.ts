@@ -5,6 +5,7 @@ import { stripe } from "@/lib/stripe/client";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { CADENCE_MONTHS, type Cadence } from "@/lib/inscription/pricing";
 import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
+import { notifyAdminPayment } from "@/lib/email/admin-notify";
 
 // Stripe needs the raw request body to verify the signature.
 export const dynamic = "force-dynamic";
@@ -74,6 +75,7 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
 
   if (newlyPaid && invoiceId) {
     await sendPaymentConfirmation(admin, invoiceId);
+    await notifyAdminPayment(admin, invoiceId);
   }
 }
 
@@ -220,6 +222,8 @@ async function handleInvoicePaid(admin: Admin, invoice: Stripe.Invoice) {
   // The `seen` guard above means this runs once per Stripe invoice → no dup.
   if (nextInv) {
     await sendPaymentConfirmation(admin, nextInv.id);
+    // Notify the admin only on the first installment (avoid monthly noise).
+    if (paid === 1) await notifyAdminPayment(admin, nextInv.id);
   }
 
   // Last installment collected → stop the subscription so it never rebills.
