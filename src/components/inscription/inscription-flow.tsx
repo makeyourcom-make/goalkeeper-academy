@@ -41,6 +41,12 @@ type KeeperLine = OrderKeeper;
 const PROFILES: Profile[] = ["private", "club"];
 const REF_YEAR = 2026;
 
+// Birth-year options for the dropdown: from age 5 down to age 80.
+const BIRTH_YEARS = Array.from(
+  { length: REF_YEAR - 5 - 1940 + 1 },
+  (_, i) => REF_YEAR - 5 - i,
+);
+
 function audienceFromYear(birthYear: number): Audience {
   return REF_YEAR - birthYear >= 18 ? "adult" : "youth";
 }
@@ -426,12 +432,13 @@ export function InscriptionFlow({
                         updateKeeper(i, { lastName: e.target.value })
                       }
                     />
-                    <input
-                      type="number"
-                      min={1940}
-                      max={REF_YEAR}
-                      placeholder={t("fields.birthYear")}
-                      className={cn(inputClass, "w-28")}
+                    <select
+                      aria-label={t("fields.birthYear")}
+                      className={cn(
+                        inputClass,
+                        "w-full sm:w-44",
+                        !k.birthYear && "text-grey-500",
+                      )}
                       value={k.birthYear}
                       onChange={(e) => {
                         const value = e.target.value;
@@ -443,7 +450,16 @@ export function InscriptionFlow({
                             : {}),
                         });
                       }}
-                    />
+                    >
+                      <option value="" disabled>
+                        {t("fields.birthYear")}
+                      </option>
+                      {BIRTH_YEARS.map((year) => (
+                        <option key={year} value={year}>
+                          {year}
+                        </option>
+                      ))}
+                    </select>
                   </div>
 
                   {/* Audience */}
