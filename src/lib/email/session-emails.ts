@@ -114,6 +114,88 @@ L'équipe The Last Line`;
   );
 }
 
+type CoachRow = {
+  profiles: {
+    email: string;
+    language: string | null;
+    first_name: string | null;
+  } | null;
+};
+
+export type CoachConvocationParams = {
+  coachId: string;
+  title: string;
+  location: string;
+  meetTime: string;
+  startTime: string;
+  endTime: string;
+  firstDate: string;
+  seriesUntil?: string | null;
+  seriesCount?: number;
+  keeperCount: number;
+};
+
+// Notifies the assigned coach when they are put on a session (or a weekly
+// series). Best-effort: no-ops without SMTP or a coach email.
+export async function sendCoachConvocation(
+  admin: SupabaseClient,
+  p: CoachConvocationParams,
+): Promise<void> {
+  if (!isEmailConfigured() || !p.coachId) return;
+  const { data } = await admin
+    .from("coaches")
+    .select("profiles(email, language, first_name)")
+    .eq("id", p.coachId)
+    .maybeSingle<CoachRow>();
+  const email = data?.profiles?.email;
+  if (!email) return;
+
+  const en = data.profiles!.language === "en";
+  const name = data.profiles!.first_name ?? "";
+  const isSeries = Boolean(p.seriesUntil && (p.seriesCount ?? 1) > 1);
+  const when = en
+    ? isSeries
+      ? `Every week from ${frDate(p.firstDate)} to ${frDate(p.seriesUntil!)} (${p.seriesCount} sessions)`
+      : frDate(p.firstDate)
+    : isSeries
+      ? `Chaque semaine du ${frDate(p.firstDate)} au ${frDate(p.seriesUntil!)} (${p.seriesCount} séances)`
+      : frDate(p.firstDate);
+
+  const subject = en
+    ? `Coaching assignment — ${p.title}`
+    : `Vous êtes convoqué·e (coach) — ${p.title}`;
+
+  const body = en
+    ? `Hello${name ? ` ${name}` : ""},
+
+You are assigned as the coach for ${isSeries ? "a weekly training series" : "a training session"}:
+
+Date: ${when}
+Call time: ${p.meetTime}
+Session: ${p.startTime}–${p.endTime}
+Place: ${p.location}
+Session: ${p.title}
+Convened goalkeepers: ${p.keeperCount}
+
+Thanks for being there!
+The Last Line team`
+    : `Bonjour${name ? ` ${name}` : ""},
+
+Vous êtes désigné·e comme entraîneur pour ${isSeries ? "des entraînements hebdomadaires" : "un entraînement"} :
+
+Date : ${when}
+Convocation : ${p.meetTime}
+Séance : ${p.startTime}–${p.endTime}
+Lieu : ${p.location}
+Intitulé : ${p.title}
+Gardiens convoqués : ${p.keeperCount}
+
+Merci de votre présence !
+L'équipe The Last Line`;
+
+  await sendMail({ to: email, subject, text: body });
+}
+
 export type ReminderParams = {
   childIds: string[];
   title: string;

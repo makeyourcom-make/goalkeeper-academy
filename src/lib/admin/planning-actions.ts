@@ -6,7 +6,10 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { sendConvocations } from "@/lib/email/session-emails";
+import {
+  sendConvocations,
+  sendCoachConvocation,
+} from "@/lib/email/session-emails";
 
 async function getAdminClient() {
   const supabase = await createSupabaseServerClient();
@@ -146,6 +149,22 @@ export async function createSession(
     });
   }
 
+  // Notify the assigned coach (convened even when no keeper is set yet).
+  if (d.coachId) {
+    await sendCoachConvocation(supabase, {
+      coachId: d.coachId,
+      title: d.title,
+      location: d.location,
+      meetTime: d.meetTime,
+      startTime: d.startTime,
+      endTime: d.endTime,
+      firstDate: d.date,
+      seriesUntil: dates.length > 1 ? dates[dates.length - 1] : null,
+      seriesCount: dates.length,
+      keeperCount: childIds.length,
+    });
+  }
+
   revalidatePath("/", "layout");
   return {
     status: "success",
@@ -186,6 +205,12 @@ export async function updateSession(
     return { status: "error", message: "errorValidation" };
   }
   const d = parsed.data;
+
+  const { data: before } = await supabase
+    .from("sessions")
+    .select("coach_id")
+    .eq("id", d.id)
+    .maybeSingle<{ coach_id: string | null }>();
 
   const { error } = await supabase
     .from("sessions")
@@ -233,6 +258,20 @@ export async function updateSession(
       startTime: d.startTime,
       endTime: d.endTime,
       firstDate: d.date,
+    });
+  }
+
+  // Notify the coach only if newly assigned or changed.
+  if (d.coachId && d.coachId !== before?.coach_id) {
+    await sendCoachConvocation(supabase, {
+      coachId: d.coachId,
+      title: d.title,
+      location: d.location,
+      meetTime: d.meetTime,
+      startTime: d.startTime,
+      endTime: d.endTime,
+      firstDate: d.date,
+      keeperCount: childIds.length,
     });
   }
 
