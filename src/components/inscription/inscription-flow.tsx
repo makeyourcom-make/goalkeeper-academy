@@ -14,7 +14,9 @@ import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import { Turnstile } from "@/components/security/turnstile";
 import { submitRegistration } from "@/lib/inscription/actions";
+import { createWizardAccount } from "@/lib/auth/actions";
 import {
   AUDIENCES,
   CADENCES,
@@ -75,6 +77,7 @@ export function InscriptionFlow({
     phone: "",
     org: "",
     notes: "",
+    password: "",
   });
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
@@ -117,7 +120,8 @@ export function InscriptionFlow({
       const contactOk =
         contact.firstName.trim() &&
         contact.lastName.trim() &&
-        contact.email.trim();
+        contact.email.trim() &&
+        (isAuthed || contact.password.trim().length >= 8);
       if (isOrg) return Boolean(contactOk && contact.org.trim());
       return Boolean(contactOk);
     }
@@ -147,6 +151,45 @@ export function InscriptionFlow({
       },
     };
 
+    // 0. Not signed in yet → create the account from the entered details.
+    if (!isAuthed) {
+      const token =
+        (
+          document.querySelector(
+            'input[name="cf-turnstile-response"]',
+          ) as HTMLInputElement | null
+        )?.value ?? "";
+      try {
+        const acc = await createWizardAccount({
+          email: contact.email,
+          password: contact.password,
+          role: isOrg ? "club" : "parent",
+          firstName: contact.firstName,
+          lastName: contact.lastName,
+          phone: contact.phone,
+          locale,
+          turnstileToken: token,
+        });
+        if (acc.status !== "ok") {
+          setSubmitting(false);
+          setError(
+            acc.status === "exists"
+              ? "accountExists"
+              : acc.status === "captcha"
+                ? "captcha"
+                : acc.status === "confirm"
+                  ? "confirm"
+                  : "generic",
+          );
+          return;
+        }
+      } catch {
+        setSubmitting(false);
+        setError("generic");
+        return;
+      }
+    }
+
     // 1. Persist the plan + installment invoices (requires being signed in).
     let planId: string;
     try {
@@ -160,7 +203,7 @@ export function InscriptionFlow({
       });
       if (result.status === "auth") {
         setSubmitting(false);
-        setError("auth");
+        setError("generic");
         return;
       }
       if (result.status !== "ok") {
@@ -244,23 +287,14 @@ export function InscriptionFlow({
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-6">
-      {/* Sign-in notice up front: an account is required to register */}
+      {/* The wizard creates the account from the entered details; existing
+          members can just sign in. */}
       {!isAuthed && (
-        <div className="flex flex-col gap-3 rounded-xl border border-orange/30 bg-orange/5 p-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex flex-col gap-0.5">
-            <span className="text-sm font-medium text-navy">
-              {t("auth.title")}
-            </span>
-            <span className="text-sm text-grey-700">{t("auth.bodyShort")}</span>
-          </div>
-          <div className="flex shrink-0 flex-wrap gap-2">
-            <Button asChild size="sm">
-              <Link href="/connexion">{t("auth.signIn")}</Link>
-            </Button>
-            <Button asChild size="sm" variant="outline">
-              <Link href="/inscription">{t("auth.signUp")}</Link>
-            </Button>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-grey-100 bg-grey-100/40 px-4 py-3 text-sm">
+          <span className="text-grey-700">{t("account.alreadyPrompt")}</span>
+          <Button asChild size="sm" variant="ghost">
+            <Link href="/connexion">{t("auth.signIn")}</Link>
+          </Button>
         </div>
       )}
 
@@ -568,6 +602,31 @@ export function InscriptionFlow({
                 />
               </div>
             </div>
+
+            {/* Account creation straight from the wizard */}
+            {!isAuthed && (
+              <div className="flex flex-col gap-3 border-t border-grey-100 pt-4">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium text-navy">
+                    {t("account.createTitle")}
+                  </span>
+                  <span className="text-xs text-grey-500">
+                    {t("account.createSubtitle")}
+                  </span>
+                </div>
+                <input
+                  type="password"
+                  autoComplete="new-password"
+                  className={inputClass}
+                  placeholder={t("account.passwordPlaceholder")}
+                  value={contact.password}
+                  onChange={(e) =>
+                    setContact((c) => ({ ...c, password: e.target.value }))
+                  }
+                />
+                <Turnstile />
+              </div>
+            )}
           </div>
         )}
 
@@ -695,25 +754,22 @@ export function InscriptionFlow({
               </p>
             </div>
 
-            {!isAuthed && (
-              <div className="flex flex-col gap-3 rounded-xl border border-orange/30 bg-orange/5 p-4">
-                <p className="text-sm font-medium text-navy">
-                  {t("auth.title")}
-                </p>
-                <p className="text-sm text-grey-700">{t("auth.body")}</p>
-                <div className="flex flex-wrap gap-3">
-                  <Button asChild size="sm">
-                    <Link href="/connexion">{t("auth.signIn")}</Link>
-                  </Button>
-                  <Button asChild size="sm" variant="outline">
-                    <Link href="/inscription">{t("auth.signUp")}</Link>
-                  </Button>
-                </div>
-              </div>
+            {error === "accountExists" && (
+              <p className="text-sm text-error">
+                {t("errors.accountExists")}{" "}
+                <Link
+                  href="/connexion"
+                  className="font-medium text-orange underline"
+                >
+                  {t("auth.signIn")}
+                </Link>
+              </p>
             )}
-
-            {error === "auth" && (
-              <p className="text-sm text-error">{t("auth.required")}</p>
+            {error === "captcha" && (
+              <p className="text-sm text-error">{t("errors.captcha")}</p>
+            )}
+            {error === "confirm" && (
+              <p className="text-sm text-error">{t("errors.confirm")}</p>
             )}
             {error === "generic" && (
               <p className="text-sm text-error">{t("errors.generic")}</p>
@@ -743,11 +799,7 @@ export function InscriptionFlow({
               {t("nav.next")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
-            <Button
-              type="button"
-              onClick={submit}
-              disabled={submitting || !isAuthed}
-            >
+            <Button type="button" onClick={submit} disabled={submitting}>
               {t("nav.confirm")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           )}

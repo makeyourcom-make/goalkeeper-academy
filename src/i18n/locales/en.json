@@ -1732,7 +1732,10 @@
       "bodyShort": "An account is required to complete a registration."
     },
     "errors": {
-      "generic": "Something went wrong. Please try again."
+      "generic": "Something went wrong. Please try again.",
+      "accountExists": "An account already exists with this email.",
+      "captcha": "Anti-bot check failed. Please try again.",
+      "confirm": "Account created. Confirm your email to continue."
     },
     "payment": {
       "title": "Payment",
@@ -1771,6 +1774,12 @@
       "qrHint": "One QR-invoice per instalment will be available in My invoices. You pay at your bank.",
       "oneTime": "One-off payment",
       "oneTimeHint": "Discovery session: a single payment, no instalments."
+    },
+    "account": {
+      "alreadyPrompt": "Already have an account?",
+      "createTitle": "Your account",
+      "createSubtitle": "An account is created with these details to track your registrations and invoices.",
+      "passwordPlaceholder": "Password (min. 8 characters)"
     }
   },
   "CookieBanner": {

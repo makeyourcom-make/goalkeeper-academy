@@ -1732,7 +1732,10 @@
       "bodyShort": "Un compte est nécessaire pour finaliser une inscription."
     },
     "errors": {
-      "generic": "Une erreur est survenue. Réessayez."
+      "generic": "Une erreur est survenue. Réessayez.",
+      "accountExists": "Un compte existe déjà avec cet e-mail.",
+      "captcha": "Vérification anti-robot échouée. Réessayez.",
+      "confirm": "Compte créé. Confirmez votre e-mail pour continuer."
     },
     "payment": {
       "title": "Paiement",
@@ -1771,6 +1774,12 @@
       "qrHint": "Une QR-facture par versement sera disponible dans Mes factures. Vous payez à votre banque.",
       "oneTime": "Paiement unique",
       "oneTimeHint": "Séance découverte : un seul paiement, sans échéances."
+    },
+    "account": {
+      "alreadyPrompt": "Déjà un compte ?",
+      "createTitle": "Votre compte",
+      "createSubtitle": "Un compte est créé avec ces coordonnées pour suivre vos inscriptions et factures.",
+      "passwordPlaceholder": "Mot de passe (min. 8 caractères)"
     }
   },
   "CookieBanner": {

@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { verifyTurnstile } from "@/lib/security/turnstile";
 
 export type AuthActionState = {
@@ -132,6 +133,79 @@ export async function signUp(
   }
 
   return { status: "success", message: "successConfirm" };
+}
+
+export type WizardAccountResult =
+  | { status: "ok" }
+  | { status: "exists" }
+  | { status: "confirm" }
+  | { status: "captcha" }
+  | { status: "error" };
+
+type WizardAccountInput = {
+  email: string;
+  password: string;
+  role: "parent" | "club";
+  firstName: string;
+  lastName: string;
+  phone: string;
+  locale: string;
+  turnstileToken: string;
+};
+
+// Create an account straight from the inscription wizard (email + password),
+// so registering no longer requires a separate sign-up. Signs the user in on
+// success so the registration + payment can proceed in the same flow.
+export async function createWizardAccount(
+  input: WizardAccountInput,
+): Promise<WizardAccountResult> {
+  if (!isSupabaseConfigured()) return { status: "error" };
+  if (!(await verifyTurnstile(input.turnstileToken))) {
+    return { status: "captcha" };
+  }
+
+  const email = input.email.trim().toLowerCase();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return { status: "error" };
+  if (!input.password || input.password.length < 8) return { status: "error" };
+  const role = input.role === "club" ? "club" : "parent";
+  const language = input.locale === "en" ? "en" : "fr";
+
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: input.password,
+    options: { data: { role, language } },
+  });
+
+  if (error) {
+    const msg = error.message?.toLowerCase() ?? "";
+    if (
+      msg.includes("already") ||
+      msg.includes("registered") ||
+      msg.includes("exists")
+    ) {
+      return { status: "exists" };
+    }
+    return { status: "error" };
+  }
+
+  // Email confirmation ON → no session, so payment cannot proceed right away.
+  if (!data.session) return { status: "confirm" };
+
+  // The trigger stored only role/language; save the name + phone on the profile.
+  if (data.user) {
+    const admin = createSupabaseAdminClient();
+    await admin
+      .from("profiles")
+      .update({
+        first_name: input.firstName.trim() || null,
+        last_name: input.lastName.trim() || null,
+        phone: input.phone.trim() || null,
+      })
+      .eq("id", data.user.id);
+  }
+
+  return { status: "ok" };
 }
 
 const CHANGE_PASSWORD_SCHEMA = z
