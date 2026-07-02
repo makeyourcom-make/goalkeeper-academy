@@ -43,12 +43,13 @@ export default async function ProfilePage({ params }: Props) {
 
   if (!user) redirect(`/${locale}/connexion`);
 
+  // Read the user's OWN profile with the service-role client. This is safe
+  // (authenticated user, strictly filtered to their own id) and immune to the
+  // state of the profiles SELECT RLS policy, which must never be able to 404
+  // this page for a logged-in user.
+  const admin = createSupabaseAdminClient();
   const [{ data: profileRow }, { data: coach }] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .maybeSingle<Profile>(),
+    admin.from("profiles").select("*").eq("id", user.id).maybeSingle<Profile>(),
     supabase
       .from("coaches")
       .select("id")
@@ -60,19 +61,19 @@ export default async function ProfilePage({ params }: Props) {
   // Self-heal: some accounts predate the auto-create trigger and have no
   // profile row — create it instead of 404-ing.
   if (!profile) {
-    const admin = createSupabaseAdminClient();
-    await admin
-      .from("profiles")
-      .upsert(
-        {
-          id: user.id,
-          email: user.email ?? "",
-          role: "parent",
-          language: locale,
-        },
-        { onConflict: "id" },
-      );
-    const refetch = await supabase
+    const { error: upsertError } = await admin.from("profiles").upsert(
+      {
+        id: user.id,
+        email: user.email ?? "",
+        role: "parent",
+        language: locale,
+      },
+      { onConflict: "id" },
+    );
+    if (upsertError) {
+      console.error("profil self-heal upsert failed:", upsertError);
+    }
+    const refetch = await admin
       .from("profiles")
       .select("*")
       .eq("id", user.id)
