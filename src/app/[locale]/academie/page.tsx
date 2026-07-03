@@ -77,7 +77,7 @@ export default async function AcademiePage({ params }: Props) {
       <section className="relative overflow-hidden bg-navy text-white">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?w=1920&q=80"
+            src="/images/ph-1527004013197.jpg"
             alt={t("hero.imageAlt")}
             fill
             priority
@@ -124,7 +124,7 @@ export default async function AcademiePage({ params }: Props) {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1614632537190-23e4146777db?w=1200&q=80"
+              src="/images/ph-1614632537190.jpg"
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

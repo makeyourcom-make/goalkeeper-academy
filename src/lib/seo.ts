@@ -160,6 +160,11 @@ export function campGraph(camp: {
   locale: string;
 }): Json {
   const url = camp.url.startsWith("http") ? camp.url : `${SITE_URL}${camp.url}`;
+  const image = !camp.image
+    ? BUSINESS.image
+    : camp.image.startsWith("http")
+      ? camp.image
+      : `${SITE_URL}${camp.image}`;
   const offer = {
     "@type": "Offer",
     price: camp.priceChf,
@@ -173,7 +178,7 @@ export function campGraph(camp: {
     name: camp.name,
     description: camp.description,
     inLanguage: camp.locale === "en" ? "en" : "fr",
-    image: camp.image ?? BUSINESS.image,
+    image,
     url,
     provider: { "@id": `${SITE_URL}/#organization` },
     offers: offer,

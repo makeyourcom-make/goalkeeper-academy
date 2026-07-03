@@ -50,7 +50,7 @@ export default async function GianaPage({ params }: Props) {
       <section className="relative overflow-hidden bg-navy text-white">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=1920&q=80"
+            src="/images/ph-1540747913346.jpg"
             alt=""
             fill
             priority
@@ -97,7 +97,7 @@ export default async function GianaPage({ params }: Props) {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image
-              src="https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1200&q=80"
+              src="/images/ph-1551958219.jpg"
               alt=""
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

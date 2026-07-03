@@ -12,7 +12,7 @@
     "price": 380,
     "spotsTotal": 20,
     "spotsLeft": 6,
-    "image": "https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1200&q=80",
+    "image": "/images/ph-1517466787929.jpg",
     "title": {
       "fr": "Stage de Pâques 2026 — U8 à U12",
       "en": "Easter Camp 2026 — U8 to U12"
@@ -51,7 +51,7 @@
     "price": 420,
     "spotsTotal": 24,
     "spotsLeft": 18,
-    "image": "https://images.unsplash.com/photo-1493924317585-818d70dc6830?w=1200&q=80",
+    "image": "/images/ph-1493924317585.jpg",
     "title": {
       "fr": "Stage été #1 — Monthey",
       "en": "Summer Camp #1 — Monthey"
@@ -90,7 +90,7 @@
     "price": 480,
     "spotsTotal": 18,
     "spotsLeft": 12,
-    "image": "https://images.unsplash.com/photo-1551958219-acbc608c6377?w=1200&q=80",
+    "image": "/images/ph-1551958219.jpg",
     "title": {
       "fr": "Stage performance — Vouvry",
       "en": "Performance Camp — Vouvry"
@@ -129,7 +129,7 @@
     "price": 220,
     "spotsTotal": 16,
     "spotsLeft": 16,
-    "image": "https://images.unsplash.com/photo-1459865264687-595d652de67e?w=1200&q=80",
+    "image": "/images/ph-1459865264687.jpg",
     "title": {
       "fr": "Stage d'automne — Découverte",
       "en": "Autumn Camp — Discovery"

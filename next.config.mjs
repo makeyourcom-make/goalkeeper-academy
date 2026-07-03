@@ -24,7 +24,7 @@ const csp = [
   "default-src 'self'",
   scriptSrc,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://images.pexels.com https://res.cloudinary.com https://www.google-analytics.com https://*.google-analytics.com",
+  "img-src 'self' data: blob: https://*.supabase.co https://res.cloudinary.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
   "frame-src 'self' https://www.openstreetmap.org https://challenges.cloudflare.com",
@@ -57,8 +57,6 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      { protocol: "https", hostname: "images.pexels.com" },
       { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
