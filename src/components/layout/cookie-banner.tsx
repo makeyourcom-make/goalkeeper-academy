@@ -33,6 +33,10 @@ export function CookieBanner() {
   function choose(value: "accepted" | "refused") {
     setConsent(value);
     setVisible(false);
+    // Let analytics (Google Analytics) start immediately on accept, no reload.
+    if (value === "accepted") {
+      window.dispatchEvent(new Event("tll-consent"));
+    }
   }
 
   return (

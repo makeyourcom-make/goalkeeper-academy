@@ -895,7 +895,7 @@
       "metaTitle": "Privacy policy",
       "metaDescription": "Privacy policy compliant with the Swiss FADP and the European GDPR.",
       "title": "Privacy policy",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-07-03",
       "intro": "The non-profit sports association The Last Line takes the protection of your data seriously. This policy explains what data we process, why, on what basis and what your rights are, in accordance with the Swiss Federal Act on Data Protection (nFADP) and, where applicable, the General Data Protection Regulation (GDPR).",
       "sections": [
         {
@@ -916,7 +916,7 @@
         },
         {
           "heading": "Processors and hosting",
-          "body": "We use providers acting on our behalf: Supabase (database hosting and authentication, data in the EU), Vercel (site hosting), LWS (e-mail), Cloudflare (anti-bot “Turnstile”) and, where relevant, Stripe (payments). These providers are contractually bound to protect your data. Some may be located outside Switzerland/EU; such transfers are covered by appropriate safeguards."
+          "body": "We use providers acting on our behalf: Supabase (database hosting and authentication, data in the EU), Vercel (site hosting and anonymous audience measurement), LWS (e-mail), Cloudflare (anti-bot “Turnstile”), Google (Google Analytics audience measurement, with your consent) and, where relevant, Stripe (payments). These providers are contractually bound to protect your data. Some may be located outside Switzerland/EU; such transfers are covered by appropriate safeguards."
         },
         {
           "heading": "Retention",
@@ -936,7 +936,7 @@
         },
         {
           "heading": "Audience measurement",
-          "body": "We measure site traffic anonymously and without cookies, using Vercel Web Analytics. This tool sets no cookies, does not track visitors across sites and collects no data that could identify you: it only provides aggregate statistics (page views, referrers) that help us improve the site. No data is sold or used for advertising."
+          "body": "We measure site traffic with two tools. Vercel Web Analytics: anonymous, cookieless, no personal data. Google Analytics 4 (provided by Google Ireland Limited): this tool sets audience-measurement cookies and is only activated after you consent via the cookie banner; it gives us aggregate statistics (page views, referrers, device type) to improve the site. You can withdraw your consent at any time. No data is sold."
         },
         {
           "heading": "Cookies",
@@ -952,7 +952,7 @@
       "metaTitle": "Cookie policy",
       "metaDescription": "Cookie usage policy for the The Last Line website.",
       "title": "Cookie policy",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-07-03",
       "intro": "The site thelastline.ch is published by the non-profit association The Last Line. This page explains which cookies the site uses. We use very few, and none for advertising or tracking.",
       "sections": [
         {
@@ -961,11 +961,11 @@
         },
         {
           "heading": "Cookies we use",
-          "body": "Strictly necessary cookies: login session (via Supabase) that keeps you signed in and secures your area; storage of your cookie-consent choice; a temporary cookie for the booking flow. A technical cookie may also be set by Cloudflare Turnstile, used to tell humans from bots on our forms. These cookies are essential and are not used to track you."
+          "body": "Strictly necessary cookies: login session (via Supabase) that keeps you signed in and secures your area; storage of your cookie-consent choice; a temporary cookie for the booking flow. A technical cookie may also be set by Cloudflare Turnstile, used to tell humans from bots on our forms. These cookies are essential and are not used to track you.\nAudience-measurement cookies (only with your consent): Google Analytics sets cookies (e.g. _ga, _ga_*) to count visits in aggregate. They are set only if you click “Accept”."
         },
         {
-          "heading": "No tracking or advertising cookies",
-          "body": "We use no Google Analytics, no advertising pixel and no third-party tracker that sets cookies. Our audience measurement (Vercel Web Analytics) is anonymous and cookieless. No data is sold or shared for advertising."
+          "heading": "Audience measurement and advertising",
+          "body": "We use Google Analytics 4 (Google) to measure site traffic, activated only after your consent, together with Vercel Web Analytics (anonymous, cookieless). We use no advertising cookies and sell no data. You can refuse or withdraw your consent at any time via the cookie banner or your browser settings."
         },
         {
           "heading": "Managing cookies",

@@ -16,6 +16,7 @@ const scriptSrc = [
   "script-src 'self' 'unsafe-inline'",
   isDev ? "'unsafe-eval'" : "",
   "https://challenges.cloudflare.com",
+  "https://www.googletagmanager.com",
 ]
   .filter(Boolean)
   .join(" ");
@@ -23,9 +24,9 @@ const csp = [
   "default-src 'self'",
   scriptSrc,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://images.pexels.com https://res.cloudinary.com",
+  "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://images.pexels.com https://res.cloudinary.com https://www.google-analytics.com https://*.google-analytics.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com",
+  "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com",
   "frame-src 'self' https://www.openstreetmap.org https://challenges.cloudflare.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",

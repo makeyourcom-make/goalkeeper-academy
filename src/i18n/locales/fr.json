@@ -895,7 +895,7 @@
       "metaTitle": "Politique de confidentialité",
       "metaDescription": "Politique de confidentialité conforme à la nLPD suisse et au RGPD européen.",
       "title": "Politique de confidentialité",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-07-03",
       "intro": "L'association sportive à but non lucratif The Last Line accorde une grande importance à la protection de vos données. La présente politique explique quelles données nous traitons, pourquoi, sur quelle base et quels sont vos droits, conformément à la loi fédérale suisse sur la protection des données (nLPD) et, lorsqu'il s'applique, au Règlement général sur la protection des données (RGPD).",
       "sections": [
         {
@@ -916,7 +916,7 @@
         },
         {
           "heading": "Sous-traitants et hébergement",
-          "body": "Nous recourons à des prestataires agissant pour notre compte : Supabase (hébergement de la base de données et authentification, données dans l'UE), Vercel (hébergement du site), LWS (messagerie e-mail), Cloudflare (protection anti-robots « Turnstile »), et, le cas échéant, Stripe (paiement). Ces prestataires sont tenus contractuellement de protéger vos données. Certains peuvent être situés hors de Suisse/UE ; les transferts sont alors encadrés par des garanties appropriées."
+          "body": "Nous recourons à des prestataires agissant pour notre compte : Supabase (hébergement de la base de données et authentification, données dans l'UE), Vercel (hébergement du site et mesure d'audience anonyme), LWS (messagerie e-mail), Cloudflare (protection anti-robots « Turnstile »), Google (mesure d'audience Google Analytics, avec votre consentement) et, le cas échéant, Stripe (paiement). Ces prestataires sont tenus contractuellement de protéger vos données. Certains peuvent être situés hors de Suisse/UE ; les transferts sont alors encadrés par des garanties appropriées."
         },
         {
           "heading": "Durée de conservation",
@@ -936,7 +936,7 @@
         },
         {
           "heading": "Mesure d'audience",
-          "body": "Nous mesurons la fréquentation du site de manière anonyme et sans cookie, à l'aide de Vercel Web Analytics. Cet outil ne dépose aucun cookie, ne suit pas les visiteurs d'un site à l'autre et ne collecte aucune donnée permettant de vous identifier : il fournit uniquement des statistiques agrégées (pages vues, provenance) qui nous aident à améliorer le site. Aucune donnée n'est vendue ni utilisée à des fins publicitaires."
+          "body": "Nous mesurons la fréquentation du site avec deux outils. Vercel Web Analytics : anonyme, sans cookie, aucune donnée personnelle. Google Analytics 4 (fourni par Google Ireland Limited) : cet outil dépose des cookies de mesure d'audience et n'est activé qu'après votre consentement via le bandeau cookies ; il nous fournit des statistiques agrégées (pages vues, provenance, type d'appareil) pour améliorer le site. Vous pouvez retirer votre consentement à tout moment. Aucune donnée n'est vendue."
         },
         {
           "heading": "Cookies",
@@ -952,7 +952,7 @@
       "metaTitle": "Politique cookies",
       "metaDescription": "Politique d'utilisation des cookies sur le site The Last Line.",
       "title": "Politique cookies",
-      "lastUpdated": "2026-07-02",
+      "lastUpdated": "2026-07-03",
       "intro": "Le site thelastline.ch est édité par l'association à but non lucratif The Last Line. Cette page explique quels cookies le site utilise. Nous en utilisons très peu et aucun à des fins publicitaires ou de suivi.",
       "sections": [
         {
@@ -961,11 +961,11 @@
         },
         {
           "heading": "Cookies que nous utilisons",
-          "body": "Cookies strictement nécessaires : session de connexion (via Supabase) permettant de vous garder connecté et de sécuriser votre espace ; mémorisation de votre choix de consentement aux cookies ; cookie temporaire lié au parcours de réservation. Un cookie technique peut aussi être posé par Cloudflare Turnstile, utilisé pour distinguer les humains des robots sur nos formulaires. Ces cookies sont indispensables et ne servent pas à vous suivre."
+          "body": "Cookies strictement nécessaires : session de connexion (via Supabase) permettant de vous garder connecté et de sécuriser votre espace ; mémorisation de votre choix de consentement aux cookies ; cookie temporaire lié au parcours de réservation. Un cookie technique peut aussi être posé par Cloudflare Turnstile, utilisé pour distinguer les humains des robots sur nos formulaires. Ces cookies sont indispensables et ne servent pas à vous suivre.\nCookies de mesure d'audience (avec votre consentement uniquement) : Google Analytics dépose des cookies (par ex. _ga, _ga_*) pour compter les visites de façon agrégée. Ils ne sont posés que si vous cliquez sur « Accepter »."
         },
         {
-          "heading": "Aucun cookie de suivi ni de publicité",
-          "body": "Nous n'utilisons ni Google Analytics, ni pixel publicitaire, ni traceur tiers déposant des cookies. Notre mesure d'audience (Vercel Web Analytics) est anonyme et sans cookie. Aucune donnée n'est vendue ni partagée à des fins publicitaires."
+          "heading": "Mesure d'audience et publicité",
+          "body": "Nous utilisons Google Analytics 4 (Google) pour mesurer l'audience du site, activé uniquement après votre consentement, ainsi que Vercel Web Analytics (anonyme, sans cookie). Nous n'utilisons aucun cookie publicitaire et ne vendons aucune donnée. Vous pouvez refuser ou retirer votre consentement à tout moment via le bandeau cookies ou les réglages de votre navigateur."
         },
         {
           "heading": "Gérer les cookies",
