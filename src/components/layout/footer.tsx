@@ -79,6 +79,7 @@ export function Footer() {
                 alt="The Last Line — Goalkeeper Academy"
                 width={1660}
                 height={181}
+                sizes="300px"
                 className="h-8 w-auto max-w-full"
               />
             </Link>

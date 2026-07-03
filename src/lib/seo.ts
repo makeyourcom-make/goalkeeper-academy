@@ -8,7 +8,7 @@ import { getPathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://thelastline.ch";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thelastline.ch";
 
 /**
  * Per-page canonical + hreflang. Each public page must set its OWN alternates so

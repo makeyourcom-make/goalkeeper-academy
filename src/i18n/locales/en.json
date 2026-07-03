@@ -1920,6 +1920,7 @@
     "aria": "Cookie banner",
     "message": "We only use cookies that are strictly necessary for the site to work (login, security). No tracking or advertising cookies.",
     "learnMore": "Learn more",
+    "learnMoreAria": "Learn more about our cookie policy",
     "accept": "Accept",
     "refuse": "Decline"
   }

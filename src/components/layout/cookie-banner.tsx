@@ -46,6 +46,7 @@ export function CookieBanner() {
           {t("message")}{" "}
           <Link
             href="/cookies"
+            aria-label={t("learnMoreAria")}
             className="font-medium text-orange hover:underline"
           >
             {t("learnMore")}

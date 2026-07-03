@@ -20,7 +20,8 @@ const PUBLIC_PATHS = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thelastline.ch";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thelastline.ch";
   const lastModified = new Date();
 
   // One <url> entry per locale (fr AND en), each carrying the full set of

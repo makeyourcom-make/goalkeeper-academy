@@ -140,6 +140,7 @@ export function Header({
             width={236}
             height={116}
             priority
+            sizes="120px"
             className="h-9 w-auto shrink-0 sm:h-11 lg:h-14"
           />
           <Image
@@ -148,6 +149,7 @@ export function Header({
             width={1670}
             height={181}
             priority
+            sizes="(max-width: 1024px) 220px, 340px"
             className="h-5 w-auto min-w-0 object-contain sm:h-8 lg:h-9"
           />
         </Link>

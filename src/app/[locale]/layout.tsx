@@ -55,7 +55,8 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" });
   // Prod fallback (never localhost) so canonical/OG stay correct even if the env
   // var is momentarily missing on a deploy.
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thelastline.ch";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thelastline.ch";
 
   return {
     metadataBase: new URL(baseUrl),
