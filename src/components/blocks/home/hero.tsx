@@ -13,7 +13,7 @@ export async function HomeHero() {
     <section className="relative overflow-hidden bg-navy text-white">
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1920&q=80"
+          src="/images/hero-goalkeeper.jpg"
           alt={t("imageAlt")}
           fill
           priority
