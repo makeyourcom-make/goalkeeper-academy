@@ -4,8 +4,12 @@
 //   UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN
 // Free tier is plenty for this traffic.
 
-const REST_URL = process.env.UPSTASH_REDIS_REST_URL;
-const REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+// Accept both the standalone Upstash env names and the Vercel Marketplace /
+// KV integration names, so either provisioning path works out of the box.
+const REST_URL =
+  process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+const REST_TOKEN =
+  process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
 
 export function isRateLimitConfigured(): boolean {
   return Boolean(REST_URL && REST_TOKEN);
