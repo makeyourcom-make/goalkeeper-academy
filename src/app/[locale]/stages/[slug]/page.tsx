@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Link } from "@/i18n/navigation";
-import { alternatesFor, campGraph } from "@/lib/seo";
+import { alternatesFor, campGraph, breadcrumbGraph } from "@/lib/seo";
 import { confirmedCountForSlug } from "@/lib/camps/availability";
 import campsData from "@/data/camps.json";
 
@@ -118,6 +118,19 @@ export default async function CampDetailPage({ params }: Props) {
           venue: camp.venue,
           locale,
         })}
+      />
+      <JsonLd
+        data={breadcrumbGraph([
+          { name: locale === "en" ? "Home" : "Accueil", url: `/${locale}` },
+          {
+            name: locale === "en" ? "Camps" : "Stages",
+            url: `/${locale}/stages`,
+          },
+          {
+            name: camp.title[localeKey],
+            url: `/${locale}/stages/${camp.slug}`,
+          },
+        ])}
       />
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy text-white">

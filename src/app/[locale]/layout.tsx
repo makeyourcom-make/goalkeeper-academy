@@ -178,6 +178,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${anton.variable} ${inter.variable}`}>
+      <head>
+        {/* Warm up the connection to the hero/image CDN (LCP). */}
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body className="flex min-h-screen flex-col bg-white font-sans text-grey-700 antialiased">
         <JsonLd data={siteGraph(locale)} />
         <NextIntlClientProvider>
