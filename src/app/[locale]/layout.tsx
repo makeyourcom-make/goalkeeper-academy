@@ -189,7 +189,7 @@ export default async function LocaleLayout({
         {/* Cookieless, privacy-friendly audience measurement (Vercel). Sends
             data only when Web Analytics is enabled in the Vercel dashboard. */}
         <Analytics />
-        {/* Google Analytics 4 — loads only after cookie consent. */}
+        {/* Google Analytics 4 with Consent Mode v2 — no cookies until consent. */}
         <GoogleAnalytics />
         {/* PWA: install to home screen + offline fallback (prod only). */}
         <RegisterSW />
