@@ -16,23 +16,17 @@ const CADENCE_LABEL: Record<string, string> = {
   monthly: "mensuel",
 };
 
-// Email addresses of every admin (fallback to ADMIN_EMAIL env if none in DB).
-async function adminEmails(admin: SupabaseClient): Promise<string[]> {
-  const { data } = await admin
-    .from("profiles")
-    .select("email")
-    .eq("role", "admin")
-    .returns<{ email: string }[]>();
-  const list = (data ?? []).map((p) => p.email).filter(Boolean);
-  if (list.length === 0 && process.env.ADMIN_EMAIL) {
-    list.push(process.env.ADMIN_EMAIL);
-  }
-  return list;
-}
+// Business inbox that receives admin notifications. Decoupled from the admin's
+// login email (which is a personal/agency address) — set ADMIN_EMAIL on Vercel
+// to override, or a comma-separated list for several recipients.
+const NOTIFY_TO = (process.env.ADMIN_EMAIL || "contact@thelastline.ch")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
 
 // Alerts the admin when a new registration is submitted.
 export async function notifyAdminNewRegistration(
-  admin: SupabaseClient,
+  _admin: SupabaseClient,
   opts: {
     invoiceNumber: string;
     total: number;
@@ -43,7 +37,7 @@ export async function notifyAdminNewRegistration(
   },
 ): Promise<void> {
   if (!isEmailConfigured()) return;
-  const to = await adminEmails(admin);
+  const to = NOTIFY_TO;
   if (to.length === 0) return;
 
   const keepers = opts.keeperNames.filter(Boolean).join(", ") || "—";
@@ -70,7 +64,7 @@ export async function notifyAdminPayment(
   invoiceId: string,
 ): Promise<void> {
   if (!isEmailConfigured() || !invoiceId) return;
-  const to = await adminEmails(admin);
+  const to = NOTIFY_TO;
   if (to.length === 0) return;
 
   const { data: invoice } = await admin
