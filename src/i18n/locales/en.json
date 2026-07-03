@@ -571,6 +571,7 @@
         "client": "Client",
         "type": "Type",
         "amount": "Amount",
+        "payment": "Payment",
         "status": "Status",
         "issued": "Issued",
         "actions": "Actions"
@@ -581,6 +582,34 @@
         "particulier": "Private lesson",
         "club_contract": "Club contract"
       },
+      "formulas": {
+        "single": "Trial session",
+        "tour1": "The Tour",
+        "tour2": "The Tour",
+        "season": "Full season"
+      },
+      "audiences": {
+        "youth": "Youth",
+        "adult": "Adult"
+      },
+      "methods": {
+        "stripe": "Card",
+        "card": "Card",
+        "twint": "TWINT",
+        "qr_bill": "QR invoice",
+        "bank_transfer": "Bank transfer",
+        "cash": "Cash"
+      },
+      "cadences": {
+        "annual": "annual",
+        "semiannual": "semiannual",
+        "quarterly": "quarterly",
+        "monthly": "monthly"
+      },
+      "split": "{count}× {cadence}",
+      "oneOff": "One-off payment",
+      "installment": "Instalment {n}/{total}",
+      "due": "Due {date}",
       "statuses": {
         "pending": "Pending",
         "paid": "Paid",

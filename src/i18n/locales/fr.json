@@ -571,6 +571,7 @@
         "client": "Client",
         "type": "Type",
         "amount": "Montant",
+        "payment": "Paiement",
         "status": "Statut",
         "issued": "Émise le",
         "actions": "Actions"
@@ -581,6 +582,34 @@
         "particulier": "Cours particulier",
         "club_contract": "Contrat club"
       },
+      "formulas": {
+        "single": "Séance découverte",
+        "tour1": "Le Tour",
+        "tour2": "Le Tour",
+        "season": "Saison complète"
+      },
+      "audiences": {
+        "youth": "Jeune",
+        "adult": "Adulte"
+      },
+      "methods": {
+        "stripe": "Carte",
+        "card": "Carte",
+        "twint": "TWINT",
+        "qr_bill": "QR-facture",
+        "bank_transfer": "Virement",
+        "cash": "Espèces"
+      },
+      "cadences": {
+        "annual": "annuel",
+        "semiannual": "semestriel",
+        "quarterly": "trimestriel",
+        "monthly": "mensuel"
+      },
+      "split": "{count}× {cadence}",
+      "oneOff": "Paiement unique",
+      "installment": "Versement {n}/{total}",
+      "due": "Échéance {date}",
       "statuses": {
         "pending": "En attente",
         "paid": "Payée",

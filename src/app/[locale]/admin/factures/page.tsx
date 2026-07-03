@@ -23,6 +23,8 @@ type InvoiceRow = {
   currency: string;
   status: "pending" | "paid" | "overdue" | "cancelled" | "refunded";
   issued_at: string;
+  due_date: string | null;
+  installment_number: number | null;
   payment_method: string | null;
   profile: {
     first_name: string | null;
@@ -33,6 +35,16 @@ type InvoiceRow = {
     formula: string;
     children: { first_name: string; last_name: string } | null;
   }[];
+  payment_plan: {
+    method: "card" | "twint" | "qr_bill";
+    cadence: "annual" | "semiannual" | "quarterly" | "monthly";
+    installments_total: number;
+    registrations: {
+      audience: "youth" | "adult";
+      formula: string;
+      children: { first_name: string; last_name: string } | null;
+    }[];
+  } | null;
   camp_registration: {
     children: { first_name: string; last_name: string } | null;
     camps: { title: string } | null;
@@ -62,7 +74,7 @@ export default async function AdminInvoicesPage({ params }: Props) {
   const { data: invoices } = await supabase
     .from("invoices")
     .select(
-      "id, invoice_number, type, amount_cents, currency, status, issued_at, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
+      "id, invoice_number, type, amount_cents, currency, status, issued_at, due_date, installment_number, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(method, cadence, installments_total, registrations(audience, formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
     )
     .order("issued_at", { ascending: false })
     .returns<InvoiceRow[]>();
@@ -102,6 +114,7 @@ export default async function AdminInvoicesPage({ params }: Props) {
                 <th className="px-4 py-3 font-medium">{t("table.client")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.type")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.amount")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.payment")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.status")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.issued")}</th>
                 <th className="px-4 py-3 text-right font-medium">
@@ -113,135 +126,204 @@ export default async function AdminInvoicesPage({ params }: Props) {
               {list.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={7}
+                    colSpan={8}
                     className="px-4 py-8 text-center text-grey-500"
                   >
                     {t("empty")}
                   </td>
                 </tr>
               ) : (
-                list.map((invoice) => (
-                  <tr key={invoice.id} className="hover:bg-grey-100/40">
-                    <td className="px-4 py-3 font-mono text-xs font-medium text-navy">
-                      {invoice.invoice_number}
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      <div>
-                        {invoice.profile
-                          ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
-                            invoice.profile.email
-                          : "—"}
-                      </div>
-                      {invoice.registrations?.length > 0 && (
-                        <div className="mt-0.5 text-xs text-grey-500">
-                          {invoice.registrations
-                            .map((r) =>
-                              `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
-                            )
-                            .filter(Boolean)
-                            .join(", ")}
+                list.map((invoice) => {
+                  const plan = invoice.payment_plan;
+                  const planRegs = plan?.registrations ?? [];
+                  const kidNames = [
+                    ...new Set(
+                      (planRegs.length
+                        ? planRegs.map((r) =>
+                            `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
+                          )
+                        : (invoice.registrations ?? []).map((r) =>
+                            `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
+                          )
+                      ).filter(Boolean),
+                    ),
+                  ];
+                  const abo = [
+                    ...new Set(
+                      planRegs.map(
+                        (r) =>
+                          `${t(`formulas.${r.formula}`)} · ${t(`audiences.${r.audience}`)}`,
+                      ),
+                    ),
+                  ];
+                  const method = invoice.payment_method ?? plan?.method ?? null;
+                  return (
+                    <tr key={invoice.id} className="hover:bg-grey-100/40">
+                      <td className="px-4 py-3 font-mono text-xs font-medium text-navy">
+                        {invoice.invoice_number}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        <div>
+                          {invoice.profile
+                            ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
+                              invoice.profile.email
+                            : "—"}
                         </div>
-                      )}
-                      {invoice.camp_registration?.children && (
-                        <div className="mt-0.5 text-xs text-grey-500">
-                          {`${invoice.camp_registration.children.first_name ?? ""} ${invoice.camp_registration.children.last_name ?? ""}`.trim()}
-                          {invoice.camp_registration.camps?.title
-                            ? ` · ${invoice.camp_registration.camps.title}`
-                            : ""}
+                        {kidNames.length > 0 && (
+                          <div className="mt-0.5 text-xs text-grey-500">
+                            {kidNames.join(", ")}
+                          </div>
+                        )}
+                        {invoice.camp_registration?.children && (
+                          <div className="mt-0.5 text-xs text-grey-500">
+                            {`${invoice.camp_registration.children.first_name ?? ""} ${invoice.camp_registration.children.last_name ?? ""}`.trim()}
+                            {invoice.camp_registration.camps?.title
+                              ? ` · ${invoice.camp_registration.camps.title}`
+                              : ""}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        <div>{t(`types.${invoice.type}`)}</div>
+                        {abo.length > 0 && (
+                          <div className="mt-0.5 text-xs text-grey-500">
+                            {abo.join(", ")}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 font-medium text-navy">
+                        {moneyFmt(invoice.amount_cents, invoice.currency)}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {method ? (
+                          <div className="text-navy">
+                            {t(`methods.${method}`)}
+                          </div>
+                        ) : (
+                          <span className="text-grey-400">—</span>
+                        )}
+                        {plan && (
+                          <div className="mt-0.5 text-xs text-grey-500">
+                            {plan.installments_total > 1
+                              ? t("split", {
+                                  count: plan.installments_total,
+                                  cadence: t(`cadences.${plan.cadence}`),
+                                })
+                              : t("oneOff")}
+                          </div>
+                        )}
+                        {plan &&
+                          plan.installments_total > 1 &&
+                          invoice.installment_number && (
+                            <div className="text-grey-400 text-xs">
+                              {t("installment", {
+                                n: invoice.installment_number,
+                                total: plan.installments_total,
+                              })}
+                            </div>
+                          )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span
+                          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[invoice.status]}`}
+                        >
+                          {t(`statuses.${invoice.status}`)}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-grey-500">
+                        <div>{dateFmt.format(new Date(invoice.issued_at))}</div>
+                        {invoice.due_date && (
+                          <div className="text-grey-400 mt-0.5 text-xs">
+                            {t("due", {
+                              date: dateFmt.format(new Date(invoice.due_date)),
+                            })}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex flex-wrap items-center justify-end gap-1">
+                          {(invoice.status === "pending" ||
+                            invoice.status === "overdue") && (
+                            <>
+                              <form action={markInvoicePaid}>
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  value={invoice.id}
+                                />
+                                <Button type="submit" variant="ghost" size="sm">
+                                  <Check className="mr-1 h-4 w-4" />
+                                  {t("markPaid")}
+                                </Button>
+                              </form>
+                              <form action={cancelInvoice}>
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  value={invoice.id}
+                                />
+                                <Button
+                                  type="submit"
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-grey-500"
+                                >
+                                  <X className="mr-1 h-4 w-4" />
+                                  {t("cancel")}
+                                </Button>
+                              </form>
+                            </>
+                          )}
+                          {invoice.status === "paid" && (
+                            <>
+                              <form action={refundInvoice}>
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  value={invoice.id}
+                                />
+                                <input
+                                  type="hidden"
+                                  name="percent"
+                                  value="50"
+                                />
+                                <Button
+                                  type="submit"
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-grey-500"
+                                >
+                                  {t("refundHalf")}
+                                </Button>
+                              </form>
+                              <form action={refundInvoice}>
+                                <input
+                                  type="hidden"
+                                  name="id"
+                                  value={invoice.id}
+                                />
+                                <input
+                                  type="hidden"
+                                  name="percent"
+                                  value="100"
+                                />
+                                <Button
+                                  type="submit"
+                                  variant="ghost"
+                                  size="sm"
+                                  className="text-error"
+                                >
+                                  <Undo2 className="mr-1 h-4 w-4" />
+                                  {t("refund")}
+                                </Button>
+                              </form>
+                            </>
+                          )}
                         </div>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      {t(`types.${invoice.type}`)}
-                    </td>
-                    <td className="px-4 py-3 font-medium text-navy">
-                      {moneyFmt(invoice.amount_cents, invoice.currency)}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span
-                        className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[invoice.status]}`}
-                      >
-                        {t(`statuses.${invoice.status}`)}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-grey-500">
-                      {dateFmt.format(new Date(invoice.issued_at))}
-                    </td>
-                    <td className="px-4 py-3">
-                      <div className="flex flex-wrap items-center justify-end gap-1">
-                        {(invoice.status === "pending" ||
-                          invoice.status === "overdue") && (
-                          <>
-                            <form action={markInvoicePaid}>
-                              <input
-                                type="hidden"
-                                name="id"
-                                value={invoice.id}
-                              />
-                              <Button type="submit" variant="ghost" size="sm">
-                                <Check className="mr-1 h-4 w-4" />
-                                {t("markPaid")}
-                              </Button>
-                            </form>
-                            <form action={cancelInvoice}>
-                              <input
-                                type="hidden"
-                                name="id"
-                                value={invoice.id}
-                              />
-                              <Button
-                                type="submit"
-                                variant="ghost"
-                                size="sm"
-                                className="text-grey-500"
-                              >
-                                <X className="mr-1 h-4 w-4" />
-                                {t("cancel")}
-                              </Button>
-                            </form>
-                          </>
-                        )}
-                        {invoice.status === "paid" && (
-                          <>
-                            <form action={refundInvoice}>
-                              <input
-                                type="hidden"
-                                name="id"
-                                value={invoice.id}
-                              />
-                              <input type="hidden" name="percent" value="50" />
-                              <Button
-                                type="submit"
-                                variant="ghost"
-                                size="sm"
-                                className="text-grey-500"
-                              >
-                                {t("refundHalf")}
-                              </Button>
-                            </form>
-                            <form action={refundInvoice}>
-                              <input
-                                type="hidden"
-                                name="id"
-                                value={invoice.id}
-                              />
-                              <input type="hidden" name="percent" value="100" />
-                              <Button
-                                type="submit"
-                                variant="ghost"
-                                size="sm"
-                                className="text-error"
-                              >
-                                <Undo2 className="mr-1 h-4 w-4" />
-                                {t("refund")}
-                              </Button>
-                            </form>
-                          </>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
