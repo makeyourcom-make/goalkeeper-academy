@@ -5,7 +5,11 @@ import { Check, X, Eye, UserPlus, UserMinus } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { setCoachPayment } from "@/lib/admin/coach-payment-actions";
-import { promoteToCoach, demoteCoach } from "@/lib/admin/coach-admin-actions";
+import {
+  promoteToCoach,
+  demoteCoach,
+  setCoachDetails,
+} from "@/lib/admin/coach-admin-actions";
 import { viewAsUser } from "@/lib/admin/impersonation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
@@ -213,16 +217,58 @@ export default async function AdminCoachesPage({ params }: Props) {
                 coaches.map((c) => (
                   <tr key={c.id} className="hover:bg-grey-100/40">
                     <td className="px-4 py-3">
-                      <div className="font-medium text-navy">{name(c)}</div>
-                      <div className="text-xs text-grey-500">
-                        {c.profiles?.email}
+                      <form
+                        id={`edit-${c.id}`}
+                        action={setCoachDetails}
+                        className="flex flex-col gap-1"
+                      >
+                        <input type="hidden" name="coachId" value={c.id} />
+                        <input
+                          type="hidden"
+                          name="profileId"
+                          value={c.profile_id}
+                        />
+                        <div className="flex gap-1">
+                          <input
+                            name="firstName"
+                            defaultValue={c.profiles?.first_name ?? ""}
+                            placeholder={t("edit.firstName")}
+                            className="w-24 rounded-lg border border-grey-300 bg-white px-2 py-1 text-sm text-navy outline-none focus:border-orange"
+                          />
+                          <input
+                            name="lastName"
+                            defaultValue={c.profiles?.last_name ?? ""}
+                            placeholder={t("edit.lastName")}
+                            className="w-24 rounded-lg border border-grey-300 bg-white px-2 py-1 text-sm text-navy outline-none focus:border-orange"
+                          />
+                        </div>
+                        <span className="text-xs text-grey-500">
+                          {c.profiles?.email}
+                        </span>
+                      </form>
+                    </td>
+                    <td className="px-4 py-3">
+                      <input
+                        form={`edit-${c.id}`}
+                        name="speciality"
+                        defaultValue={c.speciality ?? ""}
+                        placeholder={t("edit.speciality")}
+                        className="w-40 rounded-lg border border-grey-300 bg-white px-2 py-1 text-sm text-navy outline-none focus:border-orange"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1">
+                        <input
+                          form={`edit-${c.id}`}
+                          name="rate"
+                          type="number"
+                          min="0"
+                          step="1"
+                          defaultValue={c.rate_per_session}
+                          className="w-20 rounded-lg border border-grey-300 bg-white px-2 py-1 text-sm text-navy outline-none focus:border-orange"
+                        />
+                        <span className="text-xs text-grey-500">CHF</span>
                       </div>
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      {c.speciality || "—"}
-                    </td>
-                    <td className="px-4 py-3 font-medium text-navy">
-                      {chf.format(c.rate_per_session)}
                     </td>
                     <td className="px-4 py-3">
                       {c.profiles?.iban ? (
@@ -248,6 +294,13 @@ export default async function AdminCoachesPage({ params }: Props) {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap items-center gap-2">
+                        <button
+                          type="submit"
+                          form={`edit-${c.id}`}
+                          className="inline-flex items-center gap-1 whitespace-nowrap rounded-full bg-orange px-3 py-1 text-xs font-medium text-white transition hover:bg-orange/90"
+                        >
+                          <Check className="h-3.5 w-3.5" /> {t("edit.save")}
+                        </button>
                         <form action={viewAsUser}>
                           <input
                             type="hidden"

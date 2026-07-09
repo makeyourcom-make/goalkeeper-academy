@@ -47,6 +47,37 @@ export async function promoteToCoach(formData: FormData): Promise<void> {
   revalidatePath("/", "layout");
 }
 
+// Complete / edit a coach profile from the admin: name (on profiles),
+// speciality + rate per session (on coaches). Rate is in whole CHF.
+export async function setCoachDetails(formData: FormData): Promise<void> {
+  const admin = await requireAdminService();
+  if (!admin) return;
+
+  const coachId = String(formData.get("coachId") ?? "");
+  const profileId = String(formData.get("profileId") ?? "");
+  if (!coachId || !profileId) return;
+
+  const firstName = String(formData.get("firstName") ?? "").trim();
+  const lastName = String(formData.get("lastName") ?? "").trim();
+  const speciality = String(formData.get("speciality") ?? "").trim();
+  const rateRaw = String(formData.get("rate") ?? "").replace(",", ".");
+  const rate = Number.parseFloat(rateRaw);
+
+  const coachUpdate: { speciality: string | null; rate_per_session?: number } =
+    {
+      speciality: speciality || null,
+    };
+  if (Number.isFinite(rate) && rate >= 0) coachUpdate.rate_per_session = rate;
+  await admin.from("coaches").update(coachUpdate).eq("id", coachId);
+
+  await admin
+    .from("profiles")
+    .update({ first_name: firstName || null, last_name: lastName || null })
+    .eq("id", profileId);
+
+  revalidatePath("/", "layout");
+}
+
 // Remove the coach role: send the account back to "parent" and drop its coach
 // row. If the coach is still referenced (e.g. by sessions) the delete fails, so
 // we deactivate the row instead.

@@ -668,6 +668,12 @@
         "empty": "Aucun compte à promouvoir. La personne doit d’abord créer son compte sur le site (Connexion → Créer un compte).",
         "requested": "✋ a demandé entraîneur"
       },
+      "edit": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "speciality": "Spécialité",
+        "save": "Enregistrer"
+      },
       "demote": "Retirer le rôle"
     },
     "expenses": {

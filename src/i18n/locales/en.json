@@ -668,6 +668,12 @@
         "empty": "No account to promote. The person must first create an account on the site (Sign in → Create account).",
         "requested": "✋ requested coach"
       },
+      "edit": {
+        "firstName": "First name",
+        "lastName": "Last name",
+        "speciality": "Speciality",
+        "save": "Save"
+      },
       "demote": "Remove role"
     },
     "expenses": {
