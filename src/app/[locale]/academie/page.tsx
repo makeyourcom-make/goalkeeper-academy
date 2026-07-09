@@ -57,13 +57,14 @@ const VALUES: {
   { key: "passion", Icon: Heart },
 ];
 
-const TEAM = ["head", "youth"] as const;
+const TEAM = ["head", "youth", "michael"] as const;
 
 const STATS = ["keepers", "years", "clubs"] as const;
 
 const COACH_IMAGES: Record<(typeof TEAM)[number], string> = {
   head: "/team/gianluca-giannarelli.jpeg",
   youth: "/team/arthur-chazelle.jpg",
+  michael: "/team/michael-coach.jpg",
 };
 
 export default async function AcademiePage({ params }: Props) {
@@ -143,7 +144,7 @@ export default async function AcademiePage({ params }: Props) {
               {t("team.title")}
             </h2>
           </div>
-          <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {TEAM.map((key) => (
               <article
                 key={key}
