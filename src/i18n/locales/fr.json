@@ -546,10 +546,13 @@
       "count": "{count, plural, =0 {Aucun gardien} one {1 gardien enregistré} other {# gardiens enregistrés}}",
       "empty": "Aucun gardien enregistré pour le moment.",
       "ageYears": "{age} ans",
+      "sessionsUsed": "{used} / {total} utilisées",
+      "sessionsRemaining": "reste {count}",
       "table": {
         "name": "Nom",
         "age": "Âge",
         "level": "Niveau",
+        "sessions": "Séances",
         "parent": "Parent"
       },
       "levels": {
@@ -735,6 +738,9 @@
       "title": "Planning",
       "subtitle": "Créez les séances d'entraînement, convoquez les gardiens et assignez un coach.",
       "upcoming": "Séances à venir",
+      "sessionsHeading": "Séances",
+      "markDone": "Marquer effectuée",
+      "reopen": "Rouvrir",
       "empty": "Aucune séance planifiée.",
       "meet": "Convocation",
       "coachLabel": "Coach",
@@ -1203,6 +1209,8 @@
       "backToDashboard": "← Retour au tableau de bord",
       "empty": "Aucun gardien enregistré pour le moment. Ajoutez votre premier enfant pour commencer.",
       "ageYears": "{age} ans",
+      "sessionsUsed": "{used} / {total} séances",
+      "sessionsRemaining": "il reste {count, plural, one {# séance} other {# séances}}",
       "firstName": "Prénom",
       "lastName": "Nom",
       "birthDate": "Date de naissance",

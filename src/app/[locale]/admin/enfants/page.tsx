@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { sessionUsageByChild } from "@/lib/account/session-usage";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -52,6 +53,10 @@ export default async function AdminChildrenPage({ params }: Props) {
     .returns<ChildRow[]>();
 
   const list = children ?? [];
+  const usage = await sessionUsageByChild(
+    supabase,
+    list.map((c) => c.id),
+  );
 
   return (
     <div className="container py-12 lg:py-16">
@@ -75,6 +80,7 @@ export default async function AdminChildrenPage({ params }: Props) {
                 <th className="px-4 py-3 font-medium">{t("table.name")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.age")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.level")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.sessions")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.parent")}</th>
               </tr>
             </thead>
@@ -82,32 +88,52 @@ export default async function AdminChildrenPage({ params }: Props) {
               {list.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={4}
+                    colSpan={5}
                     className="px-4 py-8 text-center text-grey-500"
                   >
                     {t("empty")}
                   </td>
                 </tr>
               ) : (
-                list.map((child) => (
-                  <tr key={child.id} className="hover:bg-grey-100/40">
-                    <td className="px-4 py-3 font-medium text-navy">
-                      {child.first_name} {child.last_name}
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      {t("ageYears", { age: calcAge(child.birth_date) })}
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      {child.level ? t(`levels.${child.level}`) : "—"}
-                    </td>
-                    <td className="px-4 py-3 text-grey-700">
-                      {child.parent
-                        ? `${child.parent.first_name ?? ""} ${child.parent.last_name ?? ""}`.trim() ||
-                          child.parent.email
-                        : "—"}
-                    </td>
-                  </tr>
-                ))
+                list.map((child) => {
+                  const u = usage.get(child.id);
+                  return (
+                    <tr key={child.id} className="hover:bg-grey-100/40">
+                      <td className="px-4 py-3 font-medium text-navy">
+                        {child.first_name} {child.last_name}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {t("ageYears", { age: calcAge(child.birth_date) })}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {child.level ? t(`levels.${child.level}`) : "—"}
+                      </td>
+                      <td className="px-4 py-3">
+                        {u && u.total > 0 ? (
+                          <div className="leading-tight">
+                            <div className="font-medium text-navy">
+                              {t("sessionsUsed", {
+                                used: u.used,
+                                total: u.total,
+                              })}
+                            </div>
+                            <div className="text-xs text-grey-500">
+                              {t("sessionsRemaining", { count: u.remaining })}
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="text-grey-400">—</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {child.parent
+                          ? `${child.parent.first_name ?? ""} ${child.parent.last_name ?? ""}`.trim() ||
+                            child.parent.email
+                          : "—"}
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>

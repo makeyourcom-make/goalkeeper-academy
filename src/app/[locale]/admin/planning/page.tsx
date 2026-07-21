@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { MapPin, Clock, Users, Pencil, Trash2, Repeat } from "lucide-react";
+import {
+  MapPin,
+  Clock,
+  Users,
+  Pencil,
+  Trash2,
+  Repeat,
+  Check,
+  Undo2,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { SessionForm } from "@/components/admin/session-form";
 import { MonthCalendar } from "@/components/admin/month-calendar";
-import { deleteSession } from "@/lib/admin/planning-actions";
+import { deleteSession, setSessionStatus } from "@/lib/admin/planning-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const DEFAULT_LOCATION = "Terrain de la Mêlée, Aigle";
@@ -114,10 +123,12 @@ export default async function AdminPlanningPage({
     year: "numeric",
   }).format(new Date(calYear, calMonth, 1));
 
-  // Upcoming sessions (today onward) for the side list.
+  // Side list: recent past (still validatable) + upcoming sessions.
+  const pastCutoff = new Date(todayIso);
+  pastCutoff.setDate(pastCutoff.getDate() - 21);
   const upcoming = sessions
-    .filter((s) => new Date(s.starts_at) >= new Date(todayIso))
-    .slice(0, 12);
+    .filter((s) => new Date(s.starts_at) >= pastCutoff)
+    .slice(0, 15);
 
   const dateFmt = new Intl.DateTimeFormat(locale, {
     weekday: "short",
@@ -167,7 +178,7 @@ export default async function AdminPlanningPage({
         {/* List */}
         <div className="flex flex-col gap-3">
           <h2 className="font-anton text-xl uppercase text-navy">
-            {t("upcoming")}
+            {t("sessionsHeading")}
           </h2>
           {upcoming.length === 0 ? (
             <p className="rounded-2xl border border-grey-100 bg-white p-6 text-sm text-grey-500 shadow-sm">
@@ -189,7 +200,15 @@ export default async function AdminPlanningPage({
                         {dateFmt.format(new Date(s.starts_at))}
                       </p>
                     </div>
-                    <span className="rounded-full bg-grey-100 px-2 py-0.5 text-xs font-medium text-grey-700">
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                        s.status === "completed"
+                          ? "bg-success/15 text-success"
+                          : s.status === "cancelled"
+                            ? "bg-error/10 text-error"
+                            : "bg-grey-100 text-grey-700"
+                      }`}
+                    >
                       {t(`status.${s.status}`)}
                     </span>
                   </div>
@@ -221,41 +240,69 @@ export default async function AdminPlanningPage({
                     </p>
                   )}
                   <div className="mt-3 flex items-center gap-2 border-t border-grey-100 pt-3">
+                    <form action={setSessionStatus}>
+                      <input type="hidden" name="id" value={s.id} />
+                      <input
+                        type="hidden"
+                        name="status"
+                        value={
+                          s.status === "completed" ? "scheduled" : "completed"
+                        }
+                      />
+                      {s.status === "completed" ? (
+                        <Button
+                          type="submit"
+                          variant="ghost"
+                          size="sm"
+                          className="text-grey-500"
+                        >
+                          <Undo2 className="mr-1 h-4 w-4" />
+                          {t("reopen")}
+                        </Button>
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="ghost"
+                          size="sm"
+                          className="text-success"
+                        >
+                          <Check className="mr-1 h-4 w-4" />
+                          {t("markDone")}
+                        </Button>
+                      )}
+                    </form>
                     {s.series_id && (
-                      <span className="mr-auto inline-flex items-center gap-1 text-xs font-medium text-grey-500">
+                      <span className="inline-flex items-center gap-1 text-xs font-medium text-grey-500">
                         <Repeat className="h-3.5 w-3.5" />
                         {t("seriesBadge")}
                       </span>
                     )}
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className={s.series_id ? "" : "ml-auto"}
-                    >
-                      <Link
-                        href={{
-                          pathname: "/admin/planning/[id]",
-                          params: { id: s.id },
-                        }}
-                      >
-                        <Pencil className="mr-1 h-4 w-4" />
-                        {t("edit")}
-                      </Link>
-                    </Button>
-                    <form action={deleteSession}>
-                      <input type="hidden" name="id" value={s.id} />
-                      <input type="hidden" name="locale" value={locale} />
-                      <input type="hidden" name="stay" value="1" />
-                      <button
-                        type="submit"
-                        aria-label={t("deleteOne")}
-                        title={t("deleteOne")}
-                        className="text-grey-400 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-error/10 hover:text-error"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    </form>
+                    <span className="ml-auto flex items-center gap-2">
+                      <Button asChild variant="ghost" size="sm">
+                        <Link
+                          href={{
+                            pathname: "/admin/planning/[id]",
+                            params: { id: s.id },
+                          }}
+                        >
+                          <Pencil className="mr-1 h-4 w-4" />
+                          {t("edit")}
+                        </Link>
+                      </Button>
+                      <form action={deleteSession}>
+                        <input type="hidden" name="id" value={s.id} />
+                        <input type="hidden" name="locale" value={locale} />
+                        <input type="hidden" name="stay" value="1" />
+                        <button
+                          type="submit"
+                          aria-label={t("deleteOne")}
+                          title={t("deleteOne")}
+                          className="text-grey-400 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-error/10 hover:text-error"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </form>
+                    </span>
                   </div>
                 </li>
               ))}

@@ -279,6 +279,20 @@ export async function updateSession(
   return { status: "success", message: "success" };
 }
 
+// Mark a session "effectuée" (completed) or reopen it ("scheduled"). Marking a
+// session completed is what consumes a package: a keeper's used sessions = the
+// completed sessions they were convened to (present or not).
+export async function setSessionStatus(formData: FormData): Promise<void> {
+  const supabase = await getAdminClient();
+  const id = String(formData.get("id") ?? "");
+  const status = String(formData.get("status") ?? "");
+  if (!supabase || !id || (status !== "completed" && status !== "scheduled")) {
+    return;
+  }
+  await supabase.from("sessions").update({ status }).eq("id", id);
+  revalidatePath("/", "layout");
+}
+
 // Delete just this session.
 export async function deleteSession(formData: FormData): Promise<void> {
   const supabase = await getAdminClient();

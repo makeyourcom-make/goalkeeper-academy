@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>The Last Line · Proposition de partenariat FC La Combe 2026/2027</title>
+<style>
+  @page{size:210mm 297mm;margin:0;}
+  :root{
+    --navy:#0B2545; --navy-800:#081B35; --navy-900:#051024; --navy-400:#2E4A70;
+    --orange:#F57C00; --orange-400:#FF9428;
+    --ink:#1f2a3a; --grey:#6B7280; --line:#E4E8EE; --soft:#F4F6F8; --green:#10B981;
+    --paper:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{margin:0;padding:0;background:#c9ccd1;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;color:var(--ink);font-size:10.6pt;line-height:1.5;}
+  h1,h2,h3,.display,.eyebrow,.num{font-family:"Bahnschrift","DIN Alternate","Segoe UI",sans-serif;}
+  .sheet{position:relative;width:210mm;height:297mm;background:var(--paper);margin:0 auto;overflow:hidden;}
+  .pad{position:absolute;inset:0;padding:23mm 21mm;}
+  .eyebrow{text-transform:uppercase;letter-spacing:.22em;font-size:8.5pt;font-weight:600;color:var(--orange);}
+  .rule{height:3px;width:54px;background:var(--orange);border-radius:2px;margin:9px 0 0;}
+  .muted{color:var(--grey);}
+  .num{font-variant-numeric:tabular-nums;}
+
+  /* ---------- COVER ---------- */
+  .cover{background:radial-gradient(120% 90% at 80% 0%, #14315a 0%, var(--navy) 42%, var(--navy-900) 100%);color:#fff;}
+  .cover .pad{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22mm 21mm 0;}
+  .cover .logo{width:55mm;display:block;}
+  .cover-mid{margin:auto 0;display:flex;flex-direction:column;align-items:center;width:100%;}
+  .season{font-size:13pt;letter-spacing:.38em;color:var(--orange-400);text-transform:uppercase;font-weight:600;}
+  .cover h1{font-size:35pt;line-height:1.03;font-weight:700;letter-spacing:.01em;margin-top:6mm;text-transform:uppercase;}
+  .cover h1 span{color:var(--orange-400);}
+  .cover .sub{font-size:11.5pt;color:#c7d2e2;margin-top:5mm;max-width:145mm;}
+  .vs{display:flex;align-items:center;justify-content:center;gap:9mm;margin-top:11mm;}
+  .vs .party{display:flex;flex-direction:column;gap:3mm;align-items:center;text-align:center;width:52mm;}
+  .vs .lbl{font-size:8pt;letter-spacing:.2em;text-transform:uppercase;color:#8aa0be;}
+  .badge-club{width:39mm;height:39mm;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.28);}
+  .badge-club img{width:74%;height:74%;object-fit:contain;}
+  .tll-mark{width:39mm;height:39mm;display:flex;align-items:center;justify-content:center;}
+  .tll-mark img{width:35mm;}
+  .vs .x{font-family:"Bahnschrift",sans-serif;font-size:18pt;color:var(--orange-400);}
+  .vs .pname{font-size:8.5pt;color:#c7d2e2;letter-spacing:.04em;font-weight:600;}
+  .cover-foot{position:absolute;left:21mm;right:21mm;bottom:16mm;display:flex;justify-content:space-between;align-items:flex-end;text-align:left;border-top:1px solid rgba(255,255,255,.18);padding-top:5mm;font-size:8.5pt;color:#a9bad3;}
+  .cover-foot b{color:#fff;font-weight:600;}
+
+  /* ---------- CONTENT PAGES ---------- */
+  .page-head{display:flex;justify-content:space-between;align-items:flex-start;}
+  .page-head .mini-logo{height:12mm;opacity:.9;}
+  .page-title{font-size:26pt;font-weight:700;color:var(--navy);text-transform:uppercase;line-height:1.05;margin-top:5mm;letter-spacing:.01em;}
+  .lead{font-size:12.5pt;color:#3c4859;margin-top:9mm;max-width:170mm;text-align:justify;line-height:1.65;}
+  .page-mission .pad{display:flex;flex-direction:column;}
+  .mission-body{margin:auto 0;width:100%;}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:5mm;margin-top:8mm;}
+  .card{border:1px solid var(--line);border-radius:4mm;padding:6mm 6mm;background:#fff;}
+  .card .ic{font-family:"Bahnschrift";font-size:15pt;color:var(--orange);font-weight:700;}
+  .card h3{font-size:12.5pt;color:var(--navy);margin:2mm 0 2mm;font-weight:600;letter-spacing:.01em;}
+  .card p{font-size:9.6pt;color:var(--grey);line-height:1.45;}
+
+  .callout{margin-top:8mm;background:var(--navy);color:#fff;border-radius:4mm;padding:10mm 11mm;position:relative;overflow:hidden;}
+  .callout::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--orange);}
+  .callout .q{font-size:9pt;letter-spacing:.2em;text-transform:uppercase;color:var(--orange-400);}
+  .callout p{font-size:13pt;line-height:1.6;margin-top:4mm;color:#e7edf6;}
+  .callout b{color:#fff;}
+
+  .incl{margin-top:12mm;}
+  .incl h4{font-size:9.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);font-weight:700;margin-bottom:6mm;}
+  .incl ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6mm 8mm;}
+  .incl li{font-size:10.6pt;padding-left:7mm;position:relative;color:#3c4859;}
+  .incl li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:700;}
+
+  /* ---------- OFFER PAGES ---------- */
+  .offer-tag{display:flex;align-items:baseline;gap:4mm;margin-top:4mm;}
+  .offer-tag .n{font-family:"Bahnschrift";font-size:40pt;font-weight:700;color:var(--soft);line-height:.8;}
+  .offer-desc{font-size:10.4pt;color:#3c4859;margin-top:5mm;text-align:justify;max-width:170mm;}
+  .setup{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:6mm;}
+  .setup .s{border:1px solid var(--line);border-radius:3mm;padding:4mm 4.5mm;}
+  .setup .s .k{font-size:7.5pt;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);}
+  .setup .s .v{font-size:10.4pt;color:var(--navy);font-weight:600;margin-top:1.5mm;line-height:1.25;}
+
+  .price{margin-top:7mm;border:1px solid var(--line);border-radius:4mm;overflow:hidden;}
+  .price .ph{background:var(--soft);padding:4mm 6mm;font-size:8.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);font-weight:700;}
+  .price table{width:100%;border-collapse:collapse;}
+  .price td{padding:3.1mm 6mm;font-size:10pt;border-top:1px solid var(--line);}
+  .price td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--navy);font-weight:600;}
+  .price tr.sub td{color:var(--grey);font-size:9.2pt;}
+  .price tr.key td{background:#fff;}
+  .price tr.key td:first-child{font-weight:600;color:var(--navy);}
+  .price tr.total td{background:var(--navy);color:#fff;font-size:12.5pt;font-weight:700;padding-top:4.5mm;padding-bottom:4.5mm;letter-spacing:.02em;}
+  .price tr.total td.r{color:var(--orange-400);font-size:15pt;}
+  .pill{display:inline-block;background:var(--orange);color:#fff;font-size:8pt;font-weight:700;letter-spacing:.08em;padding:1mm 3mm;border-radius:20px;text-transform:uppercase;}
+
+  .note{margin-top:5mm;font-size:8.4pt;color:var(--grey);line-height:1.45;}
+  .pagefoot{position:absolute;left:21mm;right:21mm;bottom:15mm;display:flex;justify-content:space-between;font-size:7.6pt;color:#9aa4b2;border-top:1px solid var(--line);padding-top:3.5mm;letter-spacing:.02em;}
+
+  /* closing */
+  .close{margin-top:8mm;background:linear-gradient(135deg,#14315a,var(--navy));color:#fff;border-radius:4mm;padding:8mm;}
+  .close h3{font-size:16pt;font-weight:700;text-transform:uppercase;}
+  .close p{color:#c7d2e2;margin-top:3mm;font-size:10pt;}
+  .sign{display:flex;gap:12mm;margin-top:7mm;}
+  .sign .who b{color:#fff;}
+  .sign .who span{color:#8aa0be;font-size:8.5pt;}
+  .contactbar{display:flex;gap:8mm;margin-top:7mm;flex-wrap:wrap;font-size:9pt;color:#d5deea;}
+  .contactbar b{color:var(--orange-400);}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — COVER ============ -->
+<section class="sheet cover">
+  <div class="pad">
+    <img class="logo" src="logos/logo-full-white.png" alt="The Last Line — Goalkeeper Academy" />
+
+    <div class="cover-mid">
+      <div class="season">Saison 2026 / 2027</div>
+      <h1>Proposition de<br><span>partenariat</span> gardiens</h1>
+      <div class="sub">Une formation spécifique du poste de gardien pour les gardiens du FC La Combe, encadrée par d'anciens gardiens diplômés.</div>
+
+      <div class="vs">
+        <div class="party">
+          <span class="lbl">L'académie</span>
+          <div class="tll-mark"><img src="logos/logo-icon-white.png" alt="The Last Line" /></div>
+          <span class="pname">The Last Line</span>
+        </div>
+        <div class="x">×</div>
+        <div class="party">
+          <span class="lbl">Le club</span>
+          <div class="badge-club"><img src="logos/fclacombe.jpg" alt="FC La Combe" /></div>
+          <span class="pname">FC La Combe</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-foot">
+      <div>
+        <b>The Last Line — Goalkeeper Academy</b><br>
+        L'académie de gardiens de but du Chablais
+      </div>
+      <div style="text-align:right;">
+        contact@thelastline.ch · +41 78 704 29 16<br>
+        www.thelastline.ch
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 — L'ACADÉMIE ============ -->
+<section class="sheet page-mission">
+  <div class="pad">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">L'académie &amp; notre savoir-faire</div>
+        <div class="rule"></div>
+      </div>
+      <img class="mini-logo" src="logos/logo-icon.png" alt="The Last Line" />
+    </div>
+
+    <div class="mission-body">
+    <h1 class="page-title">Le gardien au centre,<br>rien que le gardien</h1>
+    <p class="lead">The Last Line est une académie entièrement dédiée aux gardiennes et gardiens de but. Nos coachs sont tous d'anciens gardiens ayant évolué à un niveau compétitif et titulaires d'une certification fédérale. Aucune séance partagée avec les joueurs de champ : chaque exercice cible un geste précis du poste : plongeons, jeu au pied, prise de balle, placement, relance et lecture du jeu.</p>
+
+    <div class="callout" style="margin-top:12mm;">
+      <div class="q">Une histoire commune</div>
+      <p>Notre co-fondateur <b>Gianluca Giannarelli</b> a défendu les cages du <b>FC La Combe</b> durant sa carrière. C'est donc avec une attention toute particulière, et une vraie connaissance de votre club, que nous vous proposons ce partenariat pour la saison 2026/2027.</p>
+    </div>
+
+    <div class="incl">
+      <h4>Ce que comprend l'accompagnement</h4>
+      <ul>
+        <li>Un coach gardiens attitré pour la saison</li>
+        <li>Séances hebdomadaires planifiées à l'avance</li>
+        <li>Coordination avec les entraîneurs d'équipe</li>
+        <li>Programme progressif par tranche de niveau</li>
+        <li>Bilan individuel en fin de saison</li>
+      </ul>
+    </div>
+    </div>
+
+    <div class="pagefoot"><span>The Last Line — Goalkeeper Academy</span><span>Proposition FC La Combe · 2026/2027</span></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 — OFFRE 1 ============ -->
+<section class="sheet">
+  <div class="pad">
+    <div class="page-head">
+      <div><div class="eyebrow">Offre 1 sur 2</div><div class="rule"></div></div>
+      <img class="mini-logo" src="logos/logo-icon.png" alt="The Last Line" />
+    </div>
+
+    <div class="offer-tag"><div class="n">1</div><h1 class="page-title" style="margin-top:0;">100 % chez vous,<br>à La Combe</h1></div>
+    <p class="offer-desc">Nous mettons à disposition l'un de nos coachs gardiens, présent <b>une fois par semaine</b> sur vos terrains, dans la limite du nombre de séances de l'offre saison. Le coach vient <b>un soir</b> et enchaîne les deux entraînements, afin de laisser vos entraîneurs récupérer les gardiens avec l'équipe lorsque les créneaux se croisent. Formule pour vos <b>9 gardiens adultes</b> (5 actifs + 4 séniors).</p>
+
+    <div class="setup">
+      <div class="s"><div class="k">Lieu</div><div class="v">Terrains du FC La Combe</div></div>
+      <div class="s"><div class="k">Rythme</div><div class="v">1 soir / semaine · 2 entraînements enchaînés</div></div>
+      <div class="s"><div class="k">Effectif</div><div class="v">9 gardiens adultes</div></div>
+    </div>
+
+    <div class="price">
+      <div class="ph">Investissement saison · séance double</div>
+      <table>
+        <tr class="key"><td>Séance double (2 groupes de gardiens enchaînés)</td><td class="r">CHF 110.—</td></tr>
+        <tr class="sub"><td>Nombre d'entraînements sur la saison</td><td class="r">36</td></tr>
+        <tr class="key"><td>Sous-total coaching</td><td class="r">CHF 3'960.—</td></tr>
+        <tr class="sub"><td>Déplacement : 0.80 CHF/km × 50 km = 40.—/séance × 36</td><td class="r">+ CHF 1'440.—</td></tr>
+        <tr class="total"><td>Total saison 2026/2027</td><td class="r">CHF 5'400.—</td></tr>
+      </table>
+    </div>
+
+    <p class="note">Tarifs nets en CHF (association, sans TVA). Montants totaux arrondis. Le nombre de séances (36) suit le calendrier de la saison et est défini par l'offre. Les frais de déplacement couvrent un aller-retour hebdomadaire Aigle ↔ La Combe (50 km) pour le soir d'entraînement.</p>
+
+    <div class="pagefoot"><span>The Last Line — Goalkeeper Academy</span><span>Offre 1 · 100 % à La Combe</span></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — OFFRE 2 (100 % à Aigle) + CLÔTURE ============ -->
+<section class="sheet">
+  <div class="pad">
+    <div class="page-head">
+      <div><div class="eyebrow">Offre 2 sur 2</div><div class="rule"></div></div>
+      <img class="mini-logo" src="logos/logo-icon.png" alt="The Last Line" />
+    </div>
+
+    <div class="offer-tag">
+      <div class="n">2</div>
+      <div>
+        <h1 class="page-title" style="margin-top:0;">100 % à Aigle,<br>l'immersion complète</h1>
+      </div>
+    </div>
+    <p class="offer-desc" style="margin-top:4mm;"><span class="pill">Sans frais de déplacement</span> &nbsp;Les <b>deux entraînements hebdomadaires</b> se déroulent, distincts, directement dans notre académie à Aigle. Vos gardiens profitent pleinement de nos installations et de l'émulation d'un groupe 100 % gardiens : c'est la <b>formule la plus complète</b>, sans aucun frais de déplacement.</p>
+
+    <div class="price">
+      <div class="ph">Investissement saison · deux séances à Aigle</div>
+      <table>
+        <tr class="key"><td>Deux séances hebdomadaires distinctes (à Aigle)</td><td class="r">CHF 175.—</td></tr>
+        <tr class="sub"><td>Nombre de semaines sur la saison</td><td class="r">36</td></tr>
+        <tr class="key"><td>Sous-total coaching (175.— × 36)</td><td class="r">CHF 6'300.—</td></tr>
+        <tr class="sub"><td>Frais de déplacement</td><td class="r">CHF 0.—</td></tr>
+        <tr class="total"><td>Total saison 2026/2027</td><td class="r">CHF 6'300.—</td></tr>
+      </table>
+    </div>
+
+    <div class="close">
+      <h3>Construisons la saison ensemble</h3>
+      <p>Chaque formule est adaptable (effectif, nombre de séances, créneaux). Nous serions ravis d'en discuter et de convenir de la solution idéale pour les gardiens du FC La Combe.</p>
+      <div class="contactbar">
+        <div><b>E-mail</b> &nbsp;contact@thelastline.ch</div>
+        <div><b>Tél.</b> &nbsp;+41 78 704 29 16</div>
+        <div><b>Web</b> &nbsp;www.thelastline.ch</div>
+      </div>
+      <div class="sign">
+        <div class="who"><b>Gianluca Giannarelli</b><br><span>Co-fondateur &amp; coach</span></div>
+        <div class="who"><b>Arthur Chazelle</b><br><span>Co-fondateur &amp; coach</span></div>
+      </div>
+    </div>
+
+    <div class="pagefoot"><span>Association The Last Line · CHE-235.374.703 · Torgon, commune de Vionnaz (VS)</span><span>Offre 2 · 100 % à Aigle</span></div>
+  </div>
+</section>
+
+</body>
+</html>

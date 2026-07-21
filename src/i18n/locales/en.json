@@ -546,10 +546,13 @@
       "count": "{count, plural, =0 {No goalkeepers} one {1 goalkeeper registered} other {# goalkeepers registered}}",
       "empty": "No goalkeepers registered yet.",
       "ageYears": "{age} y/o",
+      "sessionsUsed": "{used} / {total} used",
+      "sessionsRemaining": "{count} left",
       "table": {
         "name": "Name",
         "age": "Age",
         "level": "Level",
+        "sessions": "Sessions",
         "parent": "Parent"
       },
       "levels": {
@@ -735,6 +738,9 @@
       "title": "Schedule",
       "subtitle": "Create training sessions, call up goalkeepers and assign a coach.",
       "upcoming": "Upcoming sessions",
+      "sessionsHeading": "Sessions",
+      "markDone": "Mark done",
+      "reopen": "Reopen",
       "empty": "No sessions scheduled.",
       "meet": "Call",
       "coachLabel": "Coach",
@@ -1203,6 +1209,8 @@
       "backToDashboard": "← Back to dashboard",
       "empty": "No goalkeepers registered yet. Add your first child to get started.",
       "ageYears": "{age} years old",
+      "sessionsUsed": "{used} / {total} sessions",
+      "sessionsRemaining": "{count, plural, one {# session left} other {# sessions left}}",
       "firstName": "First name",
       "lastName": "Last name",
       "birthDate": "Date of birth",

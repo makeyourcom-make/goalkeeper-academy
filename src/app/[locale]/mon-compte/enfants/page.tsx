@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
+import { sessionUsageByChild } from "@/lib/account/session-usage";
 import { signedAvatarUrls } from "@/lib/storage/signed";
 import type { Child } from "@/types/database";
 
@@ -55,6 +56,10 @@ export default async function ChildrenPage({ params }: Props) {
     list.map((c) => c.photo_url),
   );
   const photoById = new Map(list.map((c, i) => [c.id, signed[i]]));
+  const usage = await sessionUsageByChild(
+    ctx.db,
+    list.map((c) => c.id),
+  );
 
   return (
     <>
@@ -91,60 +96,86 @@ export default async function ChildrenPage({ params }: Props) {
             </div>
           ) : (
             <ul className="grid gap-4 md:grid-cols-2">
-              {list.map((child) => (
-                <li
-                  key={child.id}
-                  className="flex flex-col gap-3 rounded-2xl border border-grey-100 bg-white p-6 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3">
-                      <span className="border-grey-200 text-grey-400 relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-grey-100">
-                        {photoById.get(child.id) ? (
-                          <Image
-                            src={photoById.get(child.id) as string}
-                            alt={`${child.first_name} ${child.last_name}`}
-                            fill
-                            sizes="48px"
-                            className="object-cover"
-                            unoptimized
-                          />
-                        ) : (
-                          <User className="h-6 w-6" />
-                        )}
-                      </span>
-                      <div>
-                        <h2 className="font-anton text-xl uppercase text-navy">
-                          {child.first_name} {child.last_name}
-                        </h2>
-                        <p className="text-sm text-grey-500">
-                          {t("ageYears", { age: calcAge(child.birth_date) })}
-                        </p>
-                      </div>
-                    </div>
-                    {child.level && (
-                      <span className="rounded-full bg-orange/10 px-3 py-1 text-xs font-medium text-orange">
-                        {t(`levels.${child.level}`)}
-                      </span>
-                    )}
-                  </div>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className="self-start"
+              {list.map((child) => {
+                const u = usage.get(child.id);
+                return (
+                  <li
+                    key={child.id}
+                    className="flex flex-col gap-3 rounded-2xl border border-grey-100 bg-white p-6 shadow-sm"
                   >
-                    <Link
-                      href={{
-                        pathname: "/mon-compte/enfants/[id]",
-                        params: { id: child.id },
-                      }}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="border-grey-200 text-grey-400 relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border bg-grey-100">
+                          {photoById.get(child.id) ? (
+                            <Image
+                              src={photoById.get(child.id) as string}
+                              alt={`${child.first_name} ${child.last_name}`}
+                              fill
+                              sizes="48px"
+                              className="object-cover"
+                              unoptimized
+                            />
+                          ) : (
+                            <User className="h-6 w-6" />
+                          )}
+                        </span>
+                        <div>
+                          <h2 className="font-anton text-xl uppercase text-navy">
+                            {child.first_name} {child.last_name}
+                          </h2>
+                          <p className="text-sm text-grey-500">
+                            {t("ageYears", { age: calcAge(child.birth_date) })}
+                          </p>
+                        </div>
+                      </div>
+                      {child.level && (
+                        <span className="rounded-full bg-orange/10 px-3 py-1 text-xs font-medium text-orange">
+                          {t(`levels.${child.level}`)}
+                        </span>
+                      )}
+                    </div>
+                    {u && u.total > 0 && (
+                      <div className="rounded-lg bg-grey-100/70 px-3 py-2 text-sm">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-grey-700">
+                            {t("sessionsUsed", {
+                              used: u.used,
+                              total: u.total,
+                            })}
+                          </span>
+                          <span className="font-medium text-orange">
+                            {t("sessionsRemaining", { count: u.remaining })}
+                          </span>
+                        </div>
+                        <div className="bg-grey-200 mt-1.5 h-1.5 w-full overflow-hidden rounded-full">
+                          <div
+                            className="h-full rounded-full bg-orange"
+                            style={{
+                              width: `${Math.min(100, Math.round((u.used / u.total) * 100))}%`,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    )}
+                    <Button
+                      asChild
+                      variant="ghost"
+                      size="sm"
+                      className="self-start"
                     >
-                      <Pencil className="mr-2 h-4 w-4" />
-                      {t("edit")}
-                    </Link>
-                  </Button>
-                </li>
-              ))}
+                      <Link
+                        href={{
+                          pathname: "/mon-compte/enfants/[id]",
+                          params: { id: child.id },
+                        }}
+                      >
+                        <Pencil className="mr-2 h-4 w-4" />
+                        {t("edit")}
+                      </Link>
+                    </Button>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
