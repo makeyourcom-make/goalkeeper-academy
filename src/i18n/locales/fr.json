@@ -548,6 +548,28 @@
       "ageYears": "{age} ans",
       "sessionsUsed": "{used} / {total} utilisées",
       "sessionsRemaining": "reste {count}",
+      "detail": {
+        "metaTitle": "Admin · Fiche gardien",
+        "back": "← Retour aux gardiens",
+        "packageTitle": "Forfait de séances",
+        "totalLabel": "Total du forfait",
+        "usedLabel": "Utilisées",
+        "remainingLabel": "Restantes",
+        "noPackage": "Aucun forfait enregistré pour ce gardien (pas d'inscription avec un nombre de séances).",
+        "historyTitle": "Historique des séances",
+        "empty": "Aucune séance pour ce gardien pour le moment.",
+        "table": {
+          "date": "Date",
+          "session": "Séance",
+          "coach": "Coach",
+          "status": "Statut"
+        },
+        "status": {
+          "completed": "Utilisée",
+          "scheduled": "À venir",
+          "cancelled": "Annulée"
+        }
+      },
       "table": {
         "name": "Nom",
         "age": "Âge",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { Badge } from "@/components/ui/badge";
+import { Link } from "@/i18n/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { sessionUsageByChild } from "@/lib/account/session-usage";
 
@@ -100,7 +101,15 @@ export default async function AdminChildrenPage({ params }: Props) {
                   return (
                     <tr key={child.id} className="hover:bg-grey-100/40">
                       <td className="px-4 py-3 font-medium text-navy">
-                        {child.first_name} {child.last_name}
+                        <Link
+                          href={{
+                            pathname: "/admin/enfants/[id]",
+                            params: { id: child.id },
+                          }}
+                          className="underline-offset-2 hover:text-orange hover:underline"
+                        >
+                          {child.first_name} {child.last_name}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 text-grey-700">
                         {t("ageYears", { age: calcAge(child.birth_date) })}

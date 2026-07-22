@@ -548,6 +548,28 @@
       "ageYears": "{age} y/o",
       "sessionsUsed": "{used} / {total} used",
       "sessionsRemaining": "{count} left",
+      "detail": {
+        "metaTitle": "Admin · Goalkeeper file",
+        "back": "← Back to goalkeepers",
+        "packageTitle": "Session package",
+        "totalLabel": "Package total",
+        "usedLabel": "Used",
+        "remainingLabel": "Remaining",
+        "noPackage": "No package recorded for this goalkeeper (no registration with a session count).",
+        "historyTitle": "Session history",
+        "empty": "No sessions for this goalkeeper yet.",
+        "table": {
+          "date": "Date",
+          "session": "Session",
+          "coach": "Coach",
+          "status": "Status"
+        },
+        "status": {
+          "completed": "Used",
+          "scheduled": "Upcoming",
+          "cancelled": "Cancelled"
+        }
+      },
       "table": {
         "name": "Name",
         "age": "Age",
