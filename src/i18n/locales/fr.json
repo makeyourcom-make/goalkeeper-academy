@@ -499,7 +499,51 @@
       "coaches": "Entraîneurs",
       "expenses": "Charges",
       "accounting": "Comptabilité",
-      "planning": "Planning"
+      "planning": "Planning",
+      "emails": "Emails"
+    },
+    "emails": {
+      "metaTitle": "Admin · E-mails",
+      "eyebrow": "Administration",
+      "title": "Centre e-mails",
+      "subtitle": "Composez et envoyez un e-mail, et suivez tout ce qui part depuis The Last Line.",
+      "openWebmail": "Ouvrir la boîte mail",
+      "composeTitle": "Nouveau message",
+      "to": "À",
+      "toPlaceholder": "nom@exemple.ch (séparez par des virgules)",
+      "cc": "Cc",
+      "bcc": "Cci",
+      "addCc": "+ Ajouter Cc / Cci",
+      "optional": "Optionnel",
+      "subject": "Objet",
+      "message": "Message",
+      "send": "Envoyer",
+      "sending": "Envoi…",
+      "sent": "✓ E-mail envoyé et enregistré dans le journal.",
+      "fromNote": "Envoyé depuis contact@thelastline.ch",
+      "logTitle": "Journal des envois",
+      "logCols": {
+        "recipient": "Destinataire",
+        "subject": "Objet",
+        "status": "Statut"
+      },
+      "logEmpty": "Aucun e-mail envoyé pour le moment.",
+      "kinds": {
+        "manual": "Manuel",
+        "auto": "Automatique"
+      },
+      "statuses": {
+        "sent": "Envoyé",
+        "failed": "Échec"
+      },
+      "errors": {
+        "errorAuth": "Action réservée à l'administrateur.",
+        "errorNotConfigured": "L'envoi d'e-mails n'est pas configuré (variables SMTP manquantes sur Vercel).",
+        "errorRecipients": "Adresse(s) destinataire invalide(s).",
+        "errorSubject": "L'objet est requis.",
+        "errorMessage": "Le message est requis.",
+        "errorSend": "L'envoi a échoué. Réessayez ou vérifiez la configuration SMTP."
+      }
     },
     "dashboard": {
       "metaTitle": "Admin · Tableau de bord",

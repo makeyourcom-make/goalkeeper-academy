@@ -499,7 +499,51 @@
       "coaches": "Coaches",
       "expenses": "Expenses",
       "accounting": "Accounting",
-      "planning": "Schedule"
+      "planning": "Schedule",
+      "emails": "Emails"
+    },
+    "emails": {
+      "metaTitle": "Admin · Emails",
+      "eyebrow": "Administration",
+      "title": "Email center",
+      "subtitle": "Compose and send an email, and track everything that goes out from The Last Line.",
+      "openWebmail": "Open mailbox",
+      "composeTitle": "New message",
+      "to": "To",
+      "toPlaceholder": "name@example.ch (comma-separated)",
+      "cc": "Cc",
+      "bcc": "Bcc",
+      "addCc": "+ Add Cc / Bcc",
+      "optional": "Optional",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send",
+      "sending": "Sending…",
+      "sent": "✓ Email sent and recorded in the log.",
+      "fromNote": "Sent from contact@thelastline.ch",
+      "logTitle": "Sent log",
+      "logCols": {
+        "recipient": "Recipient",
+        "subject": "Subject",
+        "status": "Status"
+      },
+      "logEmpty": "No emails sent yet.",
+      "kinds": {
+        "manual": "Manual",
+        "auto": "Automatic"
+      },
+      "statuses": {
+        "sent": "Sent",
+        "failed": "Failed"
+      },
+      "errors": {
+        "errorAuth": "Admin only.",
+        "errorNotConfigured": "Email sending is not configured (SMTP variables missing on Vercel).",
+        "errorRecipients": "Invalid recipient address(es).",
+        "errorSubject": "Subject is required.",
+        "errorMessage": "Message is required.",
+        "errorSend": "Sending failed. Try again or check the SMTP configuration."
+      }
     },
     "dashboard": {
       "metaTitle": "Admin · Dashboard",

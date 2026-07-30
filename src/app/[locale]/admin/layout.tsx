@@ -10,6 +10,7 @@ import {
   Dumbbell,
   Wallet,
   Calculator,
+  Mail,
 } from "lucide-react";
 
 import { Link } from "@/i18n/navigation";
@@ -58,7 +59,8 @@ export default async function AdminLayout({ children, params }: Props) {
       | "/admin/factures"
       | "/admin/stages"
       | "/admin/charges"
-      | "/admin/comptabilite";
+      | "/admin/comptabilite"
+      | "/admin/emails";
     label: string;
     Icon: typeof LayoutDashboard;
   }[] = [
@@ -71,6 +73,7 @@ export default async function AdminLayout({ children, params }: Props) {
     { href: "/admin/factures", label: t("invoices"), Icon: Receipt },
     { href: "/admin/charges", label: t("expenses"), Icon: Wallet },
     { href: "/admin/comptabilite", label: t("accounting"), Icon: Calculator },
+    { href: "/admin/emails", label: t("emails"), Icon: Mail },
   ];
 
   return (
