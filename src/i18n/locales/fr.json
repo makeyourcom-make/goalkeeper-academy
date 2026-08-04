@@ -688,7 +688,8 @@
       },
       "refund": "Rembourser",
       "refundHalf": "Rembourser 50%",
-      "cancel": "Annuler"
+      "cancel": "Annuler",
+      "view": "Voir"
     },
     "camps": {
       "metaTitle": "Admin · Stages",

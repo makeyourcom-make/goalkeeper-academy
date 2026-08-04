@@ -688,7 +688,8 @@
       },
       "refund": "Refund",
       "refundHalf": "Refund 50%",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "view": "View"
     },
     "camps": {
       "metaTitle": "Admin · Camps",

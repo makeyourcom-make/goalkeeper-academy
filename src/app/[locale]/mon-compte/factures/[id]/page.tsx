@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { PrintButton } from "@/components/invoices/print-button";
 import { getAccountContext } from "@/lib/account/view-context";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { BUSINESS } from "@/lib/seo";
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
 type InvoiceRow = {
   id: string;
   invoice_number: string;
+  profile_id: string;
   type: string;
   amount_cents: number;
   currency: string;
@@ -49,21 +51,47 @@ export default async function InvoiceDetailPage({ params }: Props) {
   const ctx = await getAccountContext();
   if (!ctx) redirect(`/${locale}/connexion`);
 
-  const { data: invoice } = await ctx.db
+  const SELECT =
+    "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
+
+  let { data: invoice } = await ctx.db
     .from("invoices")
-    .select(
-      "id, invoice_number, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
-    )
+    .select(SELECT)
     .eq("id", id)
     .eq("profile_id", ctx.userId)
     .maybeSingle<InvoiceRow>();
+
+  // Admins may open any client's invoice (to print it or chase a payment).
+  // The invoices RLS policy itself only returns the row to admins, so this
+  // fallback grants nothing to regular users.
+  if (!invoice) {
+    const supabase = await createSupabaseServerClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const { data: me } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .maybeSingle();
+      if (me?.role === "admin") {
+        const res = await supabase
+          .from("invoices")
+          .select(SELECT)
+          .eq("id", id)
+          .maybeSingle<InvoiceRow>();
+        invoice = res.data;
+      }
+    }
+  }
 
   if (!invoice) redirect(`/${locale}/mon-compte/factures`);
 
   const { data: payer } = await ctx.db
     .from("profiles")
     .select("first_name, last_name, email")
-    .eq("id", ctx.userId)
+    .eq("id", invoice.profile_id)
     .maybeSingle<{
       first_name: string | null;
       last_name: string | null;

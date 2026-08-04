@@ -4,11 +4,13 @@ export type SessionUsage = { used: number; total: number; remaining: number };
 
 // Per-keeper package tracking. A session is "used" once it is marked completed
 // ("effectuée") — every convened keeper consumes one, present or absent. The
-// total allotment is the sum of the keeper's CONFIRMED (paid) registration
-// session counts (découverte = 1, Tour = 18, saison = 36, or a custom
-// package); pending/cancelled/refunded registrations don't credit sessions
-// (e.g. a cancelled duplicate order must not double the package). Runs with
-// the caller's client, so RLS naturally scopes a parent to their own children.
+// total allotment is the sum of the keeper's ACTIVE registration session
+// counts (découverte = 1, Tour = 18, saison = 36, or a custom package).
+// "Active" = pending or confirmed: a QR-bill subscriber trains before their
+// first instalment is paid (pending must count), while cancelled/refunded
+// registrations must not (a cancelled duplicate order would double the
+// package). Runs with the caller's client, so RLS naturally scopes a parent
+// to their own children.
 export async function sessionUsageByChild(
   db: SupabaseClient,
   childIds: string[],
@@ -21,7 +23,7 @@ export async function sessionUsageByChild(
       .from("registrations")
       .select("child_id, sessions_count")
       .in("child_id", childIds)
-      .eq("status", "confirmed"),
+      .in("status", ["pending", "confirmed"]),
     db
       .from("session_attendees")
       .select("child_id, sessions(status)")

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, Undo2, X } from "lucide-react";
+import { Check, Eye, Undo2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import {
   markInvoicePaid,
   refundInvoice,
@@ -242,6 +243,17 @@ export default async function AdminInvoicesPage({ params }: Props) {
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap items-center justify-end gap-1">
+                          <Button asChild variant="ghost" size="sm">
+                            <Link
+                              href={{
+                                pathname: "/mon-compte/factures/[id]",
+                                params: { id: invoice.id },
+                              }}
+                            >
+                              <Eye className="mr-1 h-4 w-4" />
+                              {t("view")}
+                            </Link>
+                          </Button>
                           {(invoice.status === "pending" ||
                             invoice.status === "overdue") && (
                             <>
