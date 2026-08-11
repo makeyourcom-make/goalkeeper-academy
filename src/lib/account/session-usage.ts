@@ -21,7 +21,7 @@ export async function sessionUsageByChild(
   const [regsRes, attRes] = await Promise.all([
     db
       .from("registrations")
-      .select("child_id, sessions_count")
+      .select("child_id, sessions_count, status, formula")
       .in("child_id", childIds)
       .in("status", ["pending", "confirmed"]),
     db
@@ -30,15 +30,33 @@ export async function sessionUsageByChild(
       .in("child_id", childIds),
   ]);
 
-  const totals = new Map<string, number>();
+  // Group by (keeper, formula). Within a group the CONFIRMED registrations win:
+  // a still-"pending" one is only counted when no confirmed registration exists
+  // for that same formula. That way a QR-bill subscriber who trains before
+  // paying their first instalment still sees their package, while an abandoned
+  // duplicate (parent resubmitted the form after a payment that never went
+  // through) no longer doubles it.
+  const groups = new Map<string, { confirmed: number[]; pending: number[] }>();
   for (const r of (regsRes.data ?? []) as {
     child_id: string;
     sessions_count: number | null;
+    status: string;
+    formula: string | null;
   }[]) {
-    totals.set(
-      r.child_id,
-      (totals.get(r.child_id) ?? 0) + (r.sessions_count ?? 0),
+    const key = `${r.child_id}|${r.formula ?? ""}`;
+    const g = groups.get(key) ?? { confirmed: [], pending: [] };
+    (r.status === "confirmed" ? g.confirmed : g.pending).push(
+      r.sessions_count ?? 0,
     );
+    groups.set(key, g);
+  }
+
+  const totals = new Map<string, number>();
+  for (const [key, g] of groups) {
+    const childId = key.slice(0, key.lastIndexOf("|"));
+    const counted = g.confirmed.length > 0 ? g.confirmed : g.pending;
+    const sum = counted.reduce((a, b) => a + b, 0);
+    totals.set(childId, (totals.get(childId) ?? 0) + sum);
   }
 
   const used = new Map<string, number>();
