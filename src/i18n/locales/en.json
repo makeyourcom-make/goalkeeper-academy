@@ -1374,6 +1374,11 @@
       "dueOn": "Due",
       "seat": "Registered office",
       "installmentShort": "instalment {n}",
+      "payTitle": "Payment details",
+      "payBeneficiary": "Beneficiary",
+      "payReference": "Reference",
+      "payAmount": "Amount due",
+      "payQrHint": "You can also open the QR-bill (button at the top of the page) and scan the code from your banking app.",
       "receiptFooter": "Thank you for your trust. The Last Line — Goalkeeper Academy. Any questions: contact@thelastline.ch",
       "methods": {
         "stripe": "Credit card",
@@ -1981,7 +1986,9 @@
       "generic": "Something went wrong. Please try again.",
       "accountExists": "An account already exists with this email.",
       "captcha": "Anti-bot check failed. Please try again.",
-      "confirm": "Account created. Confirm your email to continue."
+      "confirm": "Account created. Confirm your email to continue.",
+      "duplicate": "A registration is already awaiting payment for {keeper}. No need to start over:",
+      "duplicateLink": "settle the existing invoice"
     },
     "payment": {
       "title": "Payment",

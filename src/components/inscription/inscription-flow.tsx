@@ -88,6 +88,9 @@ export function InscriptionFlow({
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  // Keeper name reported by the server when an unpaid registration already
+  // exists for them (shown in the "duplicate" message).
+  const [dupKeeper, setDupKeeper] = React.useState<string>("");
   const [invoiceRef, setInvoiceRef] = React.useState<string | null>(null);
   const [method, setMethod] = React.useState<PaymentMethod>("card");
   const [cadence, setCadence] = React.useState<Cadence>("annual");
@@ -213,6 +216,12 @@ export function InscriptionFlow({
       if (result.status === "auth") {
         setSubmitting(false);
         setError("generic");
+        return;
+      }
+      if (result.status === "duplicate") {
+        setSubmitting(false);
+        setDupKeeper(result.keeper);
+        setError("duplicate");
         return;
       }
       if (result.status !== "ok") {
@@ -796,6 +805,17 @@ export function InscriptionFlow({
             )}
             {error === "confirm" && (
               <p className="text-sm text-error">{t("errors.confirm")}</p>
+            )}
+            {error === "duplicate" && (
+              <p className="text-sm text-error">
+                {t("errors.duplicate", { keeper: dupKeeper })}{" "}
+                <Link
+                  href="/mon-compte/factures"
+                  className="font-medium text-orange underline"
+                >
+                  {t("errors.duplicateLink")}
+                </Link>
+              </p>
             )}
             {error === "generic" && (
               <p className="text-sm text-error">{t("errors.generic")}</p>

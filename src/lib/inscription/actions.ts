@@ -35,6 +35,10 @@ export type RegistrationResult =
       installments: number;
     }
   | { status: "auth" }
+  // A keeper already has an unpaid registration for the same formula: we refuse
+  // instead of creating a second invoice, and point the family to the existing
+  // one (seen in production: a parent resubmits the form when a payment fails).
+  | { status: "duplicate"; keeper: string }
   | { status: "error" };
 
 const REF_YEAR = 2026;
@@ -112,6 +116,35 @@ export async function submitRegistration(
   const perCents = installmentCents(total, cadence);
 
   const admin = createSupabaseAdminClient();
+
+  // 0. Guard against a duplicate order. If one of the keepers already has a
+  //    registration awaiting payment for the same formula, stop here: creating
+  //    a second plan would double both the invoice and the session package.
+  const norm = (s: string) => s.trim().toLowerCase();
+  const { data: openRegs } = await admin
+    .from("registrations")
+    .select("formula, children(first_name, last_name)")
+    .eq("profile_id", user.id)
+    .eq("status", "pending");
+  const open = (openRegs ?? []) as unknown as {
+    formula: string;
+    children: { first_name: string; last_name: string } | null;
+  }[];
+  for (const k of keepers) {
+    const clash = open.some(
+      (r) =>
+        r.formula === k.formula &&
+        r.children &&
+        norm(r.children.first_name) === norm(k.firstName) &&
+        norm(r.children.last_name) === norm(k.lastName),
+    );
+    if (clash) {
+      return {
+        status: "duplicate",
+        keeper: `${k.firstName.trim()} ${k.lastName.trim()}`.trim(),
+      };
+    }
+  }
 
   // 1. Payment plan (one per order).
   const { data: plan, error: planErr } = await admin

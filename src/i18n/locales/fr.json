@@ -1374,6 +1374,11 @@
       "dueOn": "Échéance",
       "seat": "Siège",
       "installmentShort": "versement {n}",
+      "payTitle": "Coordonnées de paiement",
+      "payBeneficiary": "Bénéficiaire",
+      "payReference": "Communication",
+      "payAmount": "Montant à payer",
+      "payQrHint": "Vous pouvez aussi ouvrir la QR-facture (bouton en haut de page) et scanner le code depuis votre application bancaire.",
       "receiptFooter": "Merci pour votre confiance. Association The Last Line — Goalkeeper Academy. Pour toute question : contact@thelastline.ch",
       "methods": {
         "stripe": "Carte bancaire",
@@ -1981,7 +1986,9 @@
       "generic": "Une erreur est survenue. Réessayez.",
       "accountExists": "Un compte existe déjà avec cet e-mail.",
       "captcha": "Vérification anti-robot échouée. Réessayez.",
-      "confirm": "Compte créé. Confirmez votre e-mail pour continuer."
+      "confirm": "Compte créé. Confirmez votre e-mail pour continuer.",
+      "duplicate": "Une inscription est déjà en attente de paiement pour {keeper}. Inutile de la refaire :",
+      "duplicateLink": "réglez la facture existante"
     },
     "payment": {
       "title": "Paiement",

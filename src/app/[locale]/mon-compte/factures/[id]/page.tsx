@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { PrintButton } from "@/components/invoices/print-button";
 import { getAccountContext } from "@/lib/account/view-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { creditorConfigured } from "@/lib/invoices/qr-bill";
 import { BUSINESS } from "@/lib/seo";
 
 type Props = {
@@ -137,6 +138,20 @@ export default async function InvoiceDetailPage({ params }: Props) {
   const payerName =
     `${payer?.first_name ?? ""} ${payer?.last_name ?? ""}`.trim();
 
+  // Payment details printed on the document itself, so a family can pay straight
+  // from the PDF. Shown while the invoice is still open (pending OR overdue) and
+  // settled by transfer / QR-bill — card and TWINT are paid online instead.
+  const isOpen = invoice.status === "pending" || invoice.status === "overdue";
+  const byTransfer =
+    invoice.payment_method === "qr_bill" ||
+    invoice.payment_method === "bank_transfer";
+  const showPaymentBlock = isOpen && byTransfer && creditorConfigured();
+  const ibanPretty = (process.env.CREDITOR_IBAN ?? "")
+    .replace(/\s/g, "")
+    .replace(/(.{4})/g, "$1 ")
+    .trim();
+  const creditorName = process.env.CREDITOR_NAME ?? BUSINESS.legal.entity;
+
   return (
     <section className="bg-white py-12 lg:py-16">
       <div className="container flex max-w-3xl flex-col gap-6">
@@ -146,7 +161,7 @@ export default async function InvoiceDetailPage({ params }: Props) {
             <Link href="/mon-compte/factures">{t("backToInvoices")}</Link>
           </Button>
           <div className="flex gap-2">
-            {invoice.status === "pending" &&
+            {(invoice.status === "pending" || invoice.status === "overdue") &&
               invoice.payment_method === "qr_bill" && (
                 <Button asChild variant="outline">
                   <Link
@@ -259,6 +274,43 @@ export default async function InvoiceDetailPage({ params }: Props) {
               )
             )}
           </dl>
+
+          {showPaymentBlock && (
+            <div className="mt-6 rounded-xl border border-grey-100 bg-grey-100/40 p-5">
+              <p className="text-xs font-semibold uppercase tracking-wide text-navy">
+                {t("payTitle")}
+              </p>
+              <dl className="mt-3 grid gap-2 text-sm">
+                <div className="flex flex-wrap justify-between gap-2">
+                  <dt className="text-grey-500">{t("payBeneficiary")}</dt>
+                  <dd className="font-medium text-navy">{creditorName}</dd>
+                </div>
+                <div className="flex flex-wrap justify-between gap-2">
+                  <dt className="text-grey-500">IBAN</dt>
+                  <dd className="font-mono font-medium text-navy">
+                    {ibanPretty}
+                  </dd>
+                </div>
+                <div className="flex flex-wrap justify-between gap-2">
+                  <dt className="text-grey-500">{t("payReference")}</dt>
+                  <dd className="font-mono font-medium text-navy">
+                    {invoice.invoice_number}
+                  </dd>
+                </div>
+                <div className="flex flex-wrap justify-between gap-2">
+                  <dt className="text-grey-500">{t("payAmount")}</dt>
+                  <dd className="font-medium text-navy">
+                    {money(invoice.amount_cents)}
+                  </dd>
+                </div>
+              </dl>
+              {invoice.payment_method === "qr_bill" && (
+                <p className="mt-3 text-xs text-grey-500 print:hidden">
+                  {t("payQrHint")}
+                </p>
+              )}
+            </div>
+          )}
 
           <p className="mt-8 border-t border-grey-100 pt-4 text-xs text-grey-500">
             {t("receiptFooter")}
