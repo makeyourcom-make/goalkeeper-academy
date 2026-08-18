@@ -55,6 +55,7 @@ export async function GET(req: NextRequest) {
     .gte("starts_at", dayStart)
     .lt("starts_at", dayEnd)
     .eq("status", "scheduled")
+    .eq("is_private", false)
     .returns<SessionRow[]>();
 
   let reminders = 0;

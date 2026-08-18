@@ -854,7 +854,9 @@
           "fri": "Fr",
           "sat": "Sa",
           "sun": "Su"
-        }
+        },
+        "privateLabel": "Private training",
+        "privateHint": "Blocks the slot in the agenda (other club, selection…). No keeper convened, no session counted, no pay."
       },
       "editMetaTitle": "Edit session",
       "editTitle": "Edit session",
@@ -867,7 +869,8 @@
       "deleteSeriesHint": "Deletes this session and all others in the same recurrence.",
       "upcomingHeading": "Upcoming sessions",
       "pastHeading": "Past sessions",
-      "pastEmpty": "No past sessions."
+      "pastEmpty": "No past sessions.",
+      "privateBadge": "Private"
     },
     "finance": {
       "addTitle": "Add an entry",

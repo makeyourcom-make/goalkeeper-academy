@@ -72,6 +72,7 @@ export default async function AdminCoachesPage({ params }: Props) {
         .gte("starts_at", periodStart)
         .lt("starts_at", periodEnd)
         .neq("status", "cancelled")
+        .eq("is_private", false)
         .returns<{ id: string; coach_id: string | null }[]>(),
       supabase
         .from("coach_payments")

@@ -118,7 +118,12 @@ export async function createSession(
   }
   const d = parsed.data;
 
-  const childIds = formData.getAll("childIds").map(String).filter(Boolean);
+  // A private slot just blocks the agenda (other football commitments): no
+  // keepers, no convocation, and excluded from every count downstream.
+  const isPrivate = formData.get("isPrivate") === "1";
+  const childIds = isPrivate
+    ? []
+    : formData.getAll("childIds").map(String).filter(Boolean);
 
   // Ticked weekdays (0 = Sunday … 6 = Saturday) for a multi-day recurrence.
   const weekdays = [
@@ -151,6 +156,7 @@ export async function createSession(
         ends_at: `${dt}T${d.endTime}:00`,
         status: "scheduled",
         series_id: seriesId,
+        is_private: isPrivate,
       })),
     )
     .select("id");
@@ -184,7 +190,8 @@ export async function createSession(
   }
 
   // Notify the assigned coach (convened even when no keeper is set yet).
-  if (d.coachId) {
+  // A private slot is the coach's own commitment: nothing to announce.
+  if (d.coachId && !isPrivate) {
     await sendCoachConvocation(supabase, {
       coachId: d.coachId,
       title: d.title,

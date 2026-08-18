@@ -46,6 +46,7 @@ type SessionQ = {
   ends_at: string;
   status: string;
   series_id: string | null;
+  is_private: boolean | null;
   coaches: {
     profiles: { first_name: string | null; last_name: string | null } | null;
   } | null;
@@ -95,7 +96,7 @@ export default async function AdminPlanningPage({
     supabase
       .from("sessions")
       .select(
-        "id, title, location, meet_at, starts_at, ends_at, status, series_id, coaches(profiles(first_name, last_name)), session_attendees(child_id)",
+        "id, title, location, meet_at, starts_at, ends_at, status, series_id, is_private, coaches(profiles(first_name, last_name)), session_attendees(child_id)",
       )
       .order("starts_at", { ascending: true })
       .returns<SessionQ[]>(),
@@ -155,6 +156,11 @@ export default async function AdminPlanningPage({
           <p className="text-xs font-medium uppercase tracking-wide text-orange">
             {dateFmt.format(new Date(s.starts_at))}
           </p>
+          {s.is_private && (
+            <span className="mt-1 inline-flex rounded-full bg-navy/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-navy">
+              {t("privateBadge")}
+            </span>
+          )}
         </div>
         <span
           className={`rounded-full px-2 py-0.5 text-xs font-medium ${

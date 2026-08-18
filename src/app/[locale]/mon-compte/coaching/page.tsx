@@ -60,6 +60,7 @@ export default async function CoachingPage({ params }: Props) {
     .eq("coach_id", coach.id)
     .gte("starts_at", new Date().toISOString())
     .neq("status", "cancelled")
+    .eq("is_private", false)
     .order("starts_at", { ascending: true })
     .returns<SessionRow[]>();
 

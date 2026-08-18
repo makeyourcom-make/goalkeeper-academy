@@ -7,6 +7,7 @@ import { CheckCircle2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   createSession,
   type SessionFormState,
@@ -49,6 +50,8 @@ export function SessionForm({
   const t = useTranslations("Admin.planning.form");
   const [state, formAction] = useFormState(createSession, INITIAL);
   const [repeat, setRepeat] = React.useState("none");
+  // A private slot only blocks the agenda: no keepers, no convocation.
+  const [isPrivate, setIsPrivate] = React.useState(false);
 
   // Open the native date/time picker on click instead of forcing manual typing.
   function openPicker(e: React.MouseEvent<HTMLInputElement>) {
@@ -161,6 +164,23 @@ export function SessionForm({
         </div>
       )}
 
+      <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-grey-300 bg-white p-3">
+        <input
+          type="checkbox"
+          name="isPrivate"
+          value="1"
+          checked={isPrivate}
+          onChange={(e) => setIsPrivate(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-orange"
+        />
+        <span className="flex flex-col gap-0.5">
+          <span className="text-sm font-medium text-navy">
+            {t("privateLabel")}
+          </span>
+          <span className="text-xs text-grey-500">{t("privateHint")}</span>
+        </span>
+      </label>
+
       <div className={fieldCls}>
         <label className={labelCls}>{t("coach")}</label>
         <select
@@ -177,7 +197,7 @@ export function SessionForm({
         </select>
       </div>
 
-      <div className={fieldCls}>
+      <div className={cn(fieldCls, isPrivate && "hidden")}>
         <label className={labelCls}>{t("keepers")}</label>
         {keepers.length === 0 ? (
           <p className="text-sm text-grey-500">{t("keepersEmpty")}</p>

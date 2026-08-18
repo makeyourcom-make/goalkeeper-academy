@@ -854,7 +854,9 @@
           "fri": "Ve",
           "sat": "Sa",
           "sun": "Di"
-        }
+        },
+        "privateLabel": "Entraînement privé",
+        "privateHint": "Bloque le créneau dans l’agenda (autre club, sélection…). Aucun gardien convoqué, aucune séance décomptée, aucune rémunération."
       },
       "editMetaTitle": "Modifier la séance",
       "editTitle": "Modifier la séance",
@@ -867,7 +869,8 @@
       "deleteSeriesHint": "Supprime cette séance et toutes celles de la même répétition.",
       "upcomingHeading": "Séances à venir",
       "pastHeading": "Séances passées",
-      "pastEmpty": "Aucune séance passée."
+      "pastEmpty": "Aucune séance passée.",
+      "privateBadge": "Privé"
     },
     "finance": {
       "addTitle": "Ajouter une écriture",
