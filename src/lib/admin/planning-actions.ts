@@ -45,17 +45,36 @@ const SCHEMA = z.object({
   repeatUntil: z.string().regex(DATE).optional().or(z.literal("")),
 });
 
-// All session dates (YYYY-MM-DD) for a weekly recurrence. Uses noon UTC to
-// avoid day-boundary/DST issues; capped to keep things sane.
+// All session dates (YYYY-MM-DD) for a recurrence. Uses noon UTC to avoid
+// day-boundary/DST issues; capped to keep things sane.
+//   weekdays = [2,4] -> every Tuesday and Thursday up to "until"
+//   weekdays = []    -> same weekday as the start date, every week
 function buildDates(
   start: string,
   repeat: "none" | "weekly",
   until?: string,
+  weekdays: number[] = [],
 ): string[] {
-  const dates = [start];
-  if (repeat !== "weekly" || !until) return dates;
-  const cur = new Date(`${start}T12:00:00Z`);
+  if (repeat !== "weekly" || !until) return [start];
+
   const end = new Date(`${until}T12:00:00Z`);
+  const cur = new Date(`${start}T12:00:00Z`);
+
+  // Several weekdays ticked: walk day by day and keep the matching ones.
+  if (weekdays.length > 0) {
+    // The start date always belongs to the series, whatever its weekday.
+    const out = new Set<string>([start]);
+    while (cur <= end && out.size < 200) {
+      if (weekdays.includes(cur.getUTCDay())) {
+        out.add(cur.toISOString().slice(0, 10));
+      }
+      cur.setUTCDate(cur.getUTCDate() + 1);
+    }
+    return [...out].sort();
+  }
+
+  // Fallback: weekly, on the start date's own weekday.
+  const dates = [start];
   cur.setUTCDate(cur.getUTCDate() + 7);
   while (cur <= end && dates.length < 60) {
     dates.push(cur.toISOString().slice(0, 10));
@@ -101,7 +120,22 @@ export async function createSession(
 
   const childIds = formData.getAll("childIds").map(String).filter(Boolean);
 
-  const dates = buildDates(d.date, d.repeat, d.repeatUntil || undefined);
+  // Ticked weekdays (0 = Sunday … 6 = Saturday) for a multi-day recurrence.
+  const weekdays = [
+    ...new Set(
+      formData
+        .getAll("weekdays")
+        .map((v) => Number(v))
+        .filter((n) => Number.isInteger(n) && n >= 0 && n <= 6),
+    ),
+  ];
+
+  const dates = buildDates(
+    d.date,
+    d.repeat,
+    d.repeatUntil || undefined,
+    weekdays,
+  );
   // Group the recurrence so it can later be edited/deleted as one series.
   const seriesId = dates.length > 1 ? randomUUID() : null;
 

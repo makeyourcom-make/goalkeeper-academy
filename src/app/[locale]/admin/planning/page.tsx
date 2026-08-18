@@ -9,6 +9,7 @@ import {
   Repeat,
   Check,
   Undo2,
+  ChevronRight,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -123,12 +124,14 @@ export default async function AdminPlanningPage({
     year: "numeric",
   }).format(new Date(calYear, calMonth, 1));
 
-  // Side list: recent past (still validatable) + upcoming sessions.
-  const pastCutoff = new Date(todayIso);
-  pastCutoff.setDate(pastCutoff.getDate() - 21);
-  const upcoming = sessions
-    .filter((s) => new Date(s.starts_at) >= pastCutoff)
-    .slice(0, 15);
+  // Two buckets so each can be collapsed independently: what is still to come
+  // (open by default) and what already happened (folded away, newest first).
+  const startOfToday = new Date(todayIso);
+  const future = sessions.filter((s) => new Date(s.starts_at) >= startOfToday);
+  const past = sessions
+    .filter((s) => new Date(s.starts_at) < startOfToday)
+    .reverse()
+    .slice(0, 40);
 
   const dateFmt = new Intl.DateTimeFormat(locale, {
     weekday: "short",
@@ -139,6 +142,124 @@ export default async function AdminPlanningPage({
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  // One session card, shared by both sections.
+  const sessionCard = (s: SessionQ) => (
+    <li
+      key={s.id}
+      className="rounded-2xl border border-grey-100 bg-white p-4 shadow-sm"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="font-anton text-base uppercase text-navy">{s.title}</p>
+          <p className="text-xs font-medium uppercase tracking-wide text-orange">
+            {dateFmt.format(new Date(s.starts_at))}
+          </p>
+        </div>
+        <span
+          className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+            s.status === "completed"
+              ? "bg-success/15 text-success"
+              : s.status === "cancelled"
+                ? "bg-error/10 text-error"
+                : "bg-grey-100 text-grey-700"
+          }`}
+        >
+          {t(`status.${s.status}`)}
+        </span>
+      </div>
+      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-grey-700">
+        <span className="inline-flex items-center gap-1">
+          <Clock className="h-4 w-4 text-orange" />
+          {s.meet_at
+            ? `${t("meet")} ${timeFmt.format(new Date(s.meet_at))} · `
+            : ""}
+          {timeFmt.format(new Date(s.starts_at))}–
+          {timeFmt.format(new Date(s.ends_at))}
+        </span>
+        {s.location && (
+          <span className="inline-flex items-center gap-1">
+            <MapPin className="h-4 w-4 text-orange" />
+            {s.location}
+          </span>
+        )}
+        <span className="inline-flex items-center gap-1">
+          <Users className="h-4 w-4 text-orange" />
+          {t("keepersCount", {
+            count: s.session_attendees?.length ?? 0,
+          })}
+        </span>
+      </div>
+      {fullName(s.coaches?.profiles ?? null) && (
+        <p className="mt-1 text-xs text-grey-500">
+          {t("coachLabel")}: {fullName(s.coaches?.profiles ?? null)}
+        </p>
+      )}
+      <div className="mt-3 flex items-center gap-2 border-t border-grey-100 pt-3">
+        <form action={setSessionStatus}>
+          <input type="hidden" name="id" value={s.id} />
+          <input
+            type="hidden"
+            name="status"
+            value={s.status === "completed" ? "scheduled" : "completed"}
+          />
+          {s.status === "completed" ? (
+            <Button
+              type="submit"
+              variant="ghost"
+              size="sm"
+              className="text-grey-500"
+            >
+              <Undo2 className="mr-1 h-4 w-4" />
+              {t("reopen")}
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              variant="ghost"
+              size="sm"
+              className="text-success"
+            >
+              <Check className="mr-1 h-4 w-4" />
+              {t("markDone")}
+            </Button>
+          )}
+        </form>
+        {s.series_id && (
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-grey-500">
+            <Repeat className="h-3.5 w-3.5" />
+            {t("seriesBadge")}
+          </span>
+        )}
+        <span className="ml-auto flex items-center gap-2">
+          <Button asChild variant="ghost" size="sm">
+            <Link
+              href={{
+                pathname: "/admin/planning/[id]",
+                params: { id: s.id },
+              }}
+            >
+              <Pencil className="mr-1 h-4 w-4" />
+              {t("edit")}
+            </Link>
+          </Button>
+          <form action={deleteSession}>
+            <input type="hidden" name="id" value={s.id} />
+            <input type="hidden" name="locale" value={locale} />
+            <input type="hidden" name="stay" value="1" />
+            <button
+              type="submit"
+              aria-label={t("deleteOne")}
+              title={t("deleteOne")}
+              className="text-grey-400 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-error/10 hover:text-error"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </form>
+        </span>
+      </div>
+    </li>
+  );
 
   return (
     <div className="container py-12 lg:py-16">
@@ -175,139 +296,51 @@ export default async function AdminPlanningPage({
           defaultLocation={DEFAULT_LOCATION}
         />
 
-        {/* List */}
-        <div className="flex flex-col gap-3">
-          <h2 className="font-anton text-xl uppercase text-navy">
-            {t("sessionsHeading")}
-          </h2>
-          {upcoming.length === 0 ? (
-            <p className="rounded-2xl border border-grey-100 bg-white p-6 text-sm text-grey-500 shadow-sm">
-              {t("empty")}
-            </p>
-          ) : (
-            <ul className="flex flex-col gap-3">
-              {upcoming.map((s) => (
-                <li
-                  key={s.id}
-                  className="rounded-2xl border border-grey-100 bg-white p-4 shadow-sm"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="font-anton text-base uppercase text-navy">
-                        {s.title}
-                      </p>
-                      <p className="text-xs font-medium uppercase tracking-wide text-orange">
-                        {dateFmt.format(new Date(s.starts_at))}
-                      </p>
-                    </div>
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                        s.status === "completed"
-                          ? "bg-success/15 text-success"
-                          : s.status === "cancelled"
-                            ? "bg-error/10 text-error"
-                            : "bg-grey-100 text-grey-700"
-                      }`}
-                    >
-                      {t(`status.${s.status}`)}
-                    </span>
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-grey-700">
-                    <span className="inline-flex items-center gap-1">
-                      <Clock className="h-4 w-4 text-orange" />
-                      {s.meet_at
-                        ? `${t("meet")} ${timeFmt.format(new Date(s.meet_at))} · `
-                        : ""}
-                      {timeFmt.format(new Date(s.starts_at))}–
-                      {timeFmt.format(new Date(s.ends_at))}
-                    </span>
-                    {s.location && (
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="h-4 w-4 text-orange" />
-                        {s.location}
-                      </span>
-                    )}
-                    <span className="inline-flex items-center gap-1">
-                      <Users className="h-4 w-4 text-orange" />
-                      {t("keepersCount", {
-                        count: s.session_attendees?.length ?? 0,
-                      })}
-                    </span>
-                  </div>
-                  {fullName(s.coaches?.profiles ?? null) && (
-                    <p className="mt-1 text-xs text-grey-500">
-                      {t("coachLabel")}: {fullName(s.coaches?.profiles ?? null)}
-                    </p>
-                  )}
-                  <div className="mt-3 flex items-center gap-2 border-t border-grey-100 pt-3">
-                    <form action={setSessionStatus}>
-                      <input type="hidden" name="id" value={s.id} />
-                      <input
-                        type="hidden"
-                        name="status"
-                        value={
-                          s.status === "completed" ? "scheduled" : "completed"
-                        }
-                      />
-                      {s.status === "completed" ? (
-                        <Button
-                          type="submit"
-                          variant="ghost"
-                          size="sm"
-                          className="text-grey-500"
-                        >
-                          <Undo2 className="mr-1 h-4 w-4" />
-                          {t("reopen")}
-                        </Button>
-                      ) : (
-                        <Button
-                          type="submit"
-                          variant="ghost"
-                          size="sm"
-                          className="text-success"
-                        >
-                          <Check className="mr-1 h-4 w-4" />
-                          {t("markDone")}
-                        </Button>
-                      )}
-                    </form>
-                    {s.series_id && (
-                      <span className="inline-flex items-center gap-1 text-xs font-medium text-grey-500">
-                        <Repeat className="h-3.5 w-3.5" />
-                        {t("seriesBadge")}
-                      </span>
-                    )}
-                    <span className="ml-auto flex items-center gap-2">
-                      <Button asChild variant="ghost" size="sm">
-                        <Link
-                          href={{
-                            pathname: "/admin/planning/[id]",
-                            params: { id: s.id },
-                          }}
-                        >
-                          <Pencil className="mr-1 h-4 w-4" />
-                          {t("edit")}
-                        </Link>
-                      </Button>
-                      <form action={deleteSession}>
-                        <input type="hidden" name="id" value={s.id} />
-                        <input type="hidden" name="locale" value={locale} />
-                        <input type="hidden" name="stay" value="1" />
-                        <button
-                          type="submit"
-                          aria-label={t("deleteOne")}
-                          title={t("deleteOne")}
-                          className="text-grey-400 flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-error/10 hover:text-error"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </form>
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
+        {/* List — collapsible sections */}
+        <div className="flex flex-col gap-4">
+          <details open className="group">
+            <summary className="flex cursor-pointer list-none items-center gap-2">
+              <ChevronRight className="h-5 w-5 text-orange transition-transform group-open:rotate-90" />
+              <h2 className="font-anton text-xl uppercase text-navy">
+                {t("upcomingHeading")}
+              </h2>
+              <span className="rounded-full bg-orange/10 px-2 py-0.5 text-xs font-semibold text-orange">
+                {future.length}
+              </span>
+            </summary>
+            <div className="mt-3">
+              {future.length === 0 ? (
+                <p className="rounded-2xl border border-grey-100 bg-white p-6 text-sm text-grey-500 shadow-sm">
+                  {t("empty")}
+                </p>
+              ) : (
+                <ul className="flex flex-col gap-3">
+                  {future.map(sessionCard)}
+                </ul>
+              )}
+            </div>
+          </details>
+
+          <details className="group">
+            <summary className="flex cursor-pointer list-none items-center gap-2">
+              <ChevronRight className="h-5 w-5 text-grey-500 transition-transform group-open:rotate-90" />
+              <h2 className="font-anton text-xl uppercase text-grey-700">
+                {t("pastHeading")}
+              </h2>
+              <span className="rounded-full bg-grey-100 px-2 py-0.5 text-xs font-semibold text-grey-700">
+                {past.length}
+              </span>
+            </summary>
+            <div className="mt-3">
+              {past.length === 0 ? (
+                <p className="rounded-2xl border border-grey-100 bg-white p-6 text-sm text-grey-500 shadow-sm">
+                  {t("pastEmpty")}
+                </p>
+              ) : (
+                <ul className="flex flex-col gap-3">{past.map(sessionCard)}</ul>
+              )}
+            </div>
+          </details>
         </div>
       </div>
     </div>

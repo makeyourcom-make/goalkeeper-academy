@@ -10,6 +10,33 @@ export function creditorConfigured(): boolean {
   );
 }
 
+// Plain-text bank details for an email. A QR code is a convenience, not a
+// requirement: the IBAN + reference are enough to pay by transfer. Returns null
+// when the creditor isn't configured (caller then omits the block).
+export function paymentInstructions(
+  invoiceNumber: string,
+  amountCents: number,
+  currency = "CHF",
+  en = false,
+): string | null {
+  const iban = (process.env.CREDITOR_IBAN ?? "").replace(/\s/g, "");
+  const name = process.env.CREDITOR_NAME;
+  if (!iban || !name) return null;
+  const pretty = iban.replace(/(.{4})/g, "$1 ").trim();
+  const amount = `${(amountCents / 100).toFixed(2)} ${currency}`;
+  return en
+    ? `HOW TO PAY (bank transfer)
+Beneficiary: ${name}
+IBAN: ${pretty}
+Reference: ${invoiceNumber}
+Amount: ${amount}`
+    : `COMMENT PAYER (virement bancaire)
+Bénéficiaire : ${name}
+IBAN : ${pretty}
+Communication : ${invoiceNumber}
+Montant : ${amount}`;
+}
+
 // "1860 Aigle" → { zip: "1860", city: "Aigle" }. Returns null if unparseable.
 function parseCity(raw: string): { zip: string; city: string } | null {
   const m = raw.trim().match(/^(\d{4,5})\s+(.+)$/);

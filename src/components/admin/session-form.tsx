@@ -17,6 +17,17 @@ type Keeper = { id: string; name: string };
 
 const INITIAL: SessionFormState = { status: "idle", message: "" };
 
+// Monday first (Swiss habit); value = JS getUTCDay() (0 = Sunday).
+const WEEKDAYS = [
+  { value: 1, key: "mon" },
+  { value: 2, key: "tue" },
+  { value: 3, key: "wed" },
+  { value: 4, key: "thu" },
+  { value: 5, key: "fri" },
+  { value: 6, key: "sat" },
+  { value: 0, key: "sun" },
+] as const;
+
 function SubmitButton({ label, pending }: { label: string; pending: string }) {
   const status = useFormStatus();
   return (
@@ -127,6 +138,28 @@ export function SessionForm({
           </div>
         )}
       </div>
+
+      {repeat === "weekly" && (
+        <div className={fieldCls}>
+          <label className={labelCls}>{t("repeatDays")}</label>
+          <div className="flex flex-wrap gap-2">
+            {WEEKDAYS.map((d) => (
+              <label key={d.value} className="cursor-pointer">
+                <input
+                  type="checkbox"
+                  name="weekdays"
+                  value={d.value}
+                  className="peer sr-only"
+                />
+                <span className="inline-flex h-9 min-w-[2.75rem] items-center justify-center rounded-lg border border-grey-300 bg-white px-3 text-sm font-medium text-grey-700 transition peer-checked:border-orange peer-checked:bg-orange peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-orange/40">
+                  {t(`days.${d.key}`)}
+                </span>
+              </label>
+            ))}
+          </div>
+          <span className="text-xs text-grey-500">{t("repeatDaysHint")}</span>
+        </div>
+      )}
 
       <div className={fieldCls}>
         <label className={labelCls}>{t("coach")}</label>

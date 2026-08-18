@@ -843,7 +843,18 @@
         "successMany": "Sessions created across the whole period.",
         "editTitle": "Edit session",
         "editSuccess": "Session updated.",
-        "editSubmit": "Save changes"
+        "editSubmit": "Save changes",
+        "repeatDays": "Repeat on days",
+        "repeatDaysHint": "Tick one or more days. With none selected, the session repeats weekly on the same day.",
+        "days": {
+          "mon": "Mo",
+          "tue": "Tu",
+          "wed": "We",
+          "thu": "Th",
+          "fri": "Fr",
+          "sat": "Sa",
+          "sun": "Su"
+        }
       },
       "editMetaTitle": "Edit session",
       "editTitle": "Edit session",
@@ -853,7 +864,10 @@
       "dangerTitle": "Delete",
       "deleteOne": "Delete this session",
       "deleteSeries": "Delete the whole series",
-      "deleteSeriesHint": "Deletes this session and all others in the same recurrence."
+      "deleteSeriesHint": "Deletes this session and all others in the same recurrence.",
+      "upcomingHeading": "Upcoming sessions",
+      "pastHeading": "Past sessions",
+      "pastEmpty": "No past sessions."
     },
     "finance": {
       "addTitle": "Add an entry",

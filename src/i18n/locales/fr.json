@@ -843,7 +843,18 @@
         "successMany": "Séances créées sur toute la période.",
         "editTitle": "Modifier la séance",
         "editSuccess": "Séance mise à jour.",
-        "editSubmit": "Enregistrer les modifications"
+        "editSubmit": "Enregistrer les modifications",
+        "repeatDays": "Répéter les jours",
+        "repeatDaysHint": "Cochez un ou plusieurs jours. Sans sélection, la séance se répète chaque semaine le même jour.",
+        "days": {
+          "mon": "Lu",
+          "tue": "Ma",
+          "wed": "Me",
+          "thu": "Je",
+          "fri": "Ve",
+          "sat": "Sa",
+          "sun": "Di"
+        }
       },
       "editMetaTitle": "Modifier la séance",
       "editTitle": "Modifier la séance",
@@ -853,7 +864,10 @@
       "dangerTitle": "Supprimer",
       "deleteOne": "Supprimer cette séance",
       "deleteSeries": "Supprimer toute la série",
-      "deleteSeriesHint": "Supprime cette séance et toutes celles de la même répétition."
+      "deleteSeriesHint": "Supprime cette séance et toutes celles de la même répétition.",
+      "upcomingHeading": "Séances à venir",
+      "pastHeading": "Séances passées",
+      "pastEmpty": "Aucune séance passée."
     },
     "finance": {
       "addTitle": "Ajouter une écriture",

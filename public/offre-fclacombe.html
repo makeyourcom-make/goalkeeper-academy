@@ -93,6 +93,30 @@
   .note{margin-top:4mm;font-size:8.4pt;color:var(--grey);line-height:1.45;}
   .pagefoot{position:absolute;left:21mm;right:21mm;bottom:15mm;display:flex;justify-content:space-between;font-size:7.6pt;color:#9aa4b2;border-top:1px solid var(--line);padding-top:3.5mm;letter-spacing:.02em;}
 
+  /* ---------- CALENDAR PAGE ---------- */
+  .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:4mm;margin-top:7mm;}
+  .slot{border:1px solid var(--line);border-radius:3mm;padding:4mm 4.5mm;display:flex;flex-direction:column;gap:1.5mm;}
+  .slot .g{font-size:7.5pt;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);}
+  .slot .h{font-size:10.4pt;color:var(--navy);font-weight:600;}
+
+  .dates{display:grid;grid-template-columns:1fr 1fr;gap:3mm 5mm;margin-top:7mm;}
+  .d{display:flex;align-items:center;gap:4mm;border:1px solid var(--line);border-radius:2.5mm;padding:3mm 4mm;}
+  .d .n{font-family:"Bahnschrift",sans-serif;font-size:11pt;font-weight:700;color:var(--orange);width:6mm;text-align:center;}
+  .d .dt{font-size:10.4pt;color:var(--navy);font-weight:600;}
+
+  .recap{margin-top:7mm;background:var(--navy);color:#fff;border-radius:3mm;padding:5mm 6mm;display:flex;justify-content:space-between;align-items:center;gap:5mm;font-size:10.4pt;}
+  .recap b{font-family:"Bahnschrift",sans-serif;font-size:15pt;color:var(--orange-400);}
+
+  .sigwrap{margin-top:9mm;border-top:1px solid var(--line);padding-top:6mm;}
+  .sigtitle{font-size:9pt;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);font-weight:700;}
+  .sigcols{display:grid;grid-template-columns:1fr 1fr;gap:12mm;margin-top:7mm;}
+  .sigcol{display:flex;flex-direction:column;}
+  .sigcol .lbl{font-size:9.4pt;font-weight:600;color:var(--navy);}
+  .sigcol .line{display:block;border-bottom:1px solid var(--navy-400);height:16mm;}
+  .sigcol .hint{font-size:7.6pt;color:var(--grey);margin-top:2mm;}
+  .contactline{display:flex;gap:8mm;flex-wrap:wrap;margin-top:7mm;font-size:8.6pt;color:var(--grey);}
+  .contactline b{color:var(--navy);font-weight:600;}
+
   /* closing */
   .close{margin-top:5mm;background:linear-gradient(135deg,#14315a,var(--navy));color:#fff;border-radius:4mm;padding:5.5mm 6.5mm;}
   .close h3{font-size:14pt;font-weight:700;text-transform:uppercase;}
@@ -109,7 +133,7 @@
 <!-- ============ PAGE 1 — COVER ============ -->
 <section class="sheet cover">
   <div class="pad">
-    <img class="logo" src="logos/logo-full-white.png" alt="The Last Line — Goalkeeper Academy" />
+    <img class="logo" src="logos/logo-full-white.svg" alt="The Last Line — Goalkeeper Academy" />
 
     <div class="cover-mid">
       <div class="season">Saison 2026 / 2027</div>
@@ -119,7 +143,7 @@
       <div class="vs">
         <div class="party">
           <span class="lbl">L'académie</span>
-          <div class="tll-mark"><img src="logos/logo-icon-white.png" alt="The Last Line" /></div>
+          <div class="tll-mark"><img src="logos/logo-icon-white.svg" alt="The Last Line" /></div>
           <span class="pname">The Last Line</span>
         </div>
         <div class="x">×</div>
@@ -152,7 +176,7 @@
         <div class="eyebrow">L'académie &amp; notre savoir-faire</div>
         <div class="rule"></div>
       </div>
-      <img class="mini-logo" src="logos/logo-icon.png" alt="The Last Line" />
+      <img class="mini-logo" src="logos/logo-icon.svg" alt="The Last Line" />
     </div>
 
     <div class="mission-body">
@@ -167,8 +191,7 @@
     <div class="incl">
       <h4>Ce que comprend l'accompagnement</h4>
       <ul>
-        <li>Un coach gardiens attitré pour la saison</li>
-        <li>Séances hebdomadaires planifiées à l'avance</li>
+        <li>Séances planifiées à l'avance</li>
         <li>Coordination avec les entraîneurs d'équipe</li>
         <li>Programme progressif par tranche de niveau</li>
         <li>Bilan individuel en fin de saison</li>
@@ -185,16 +208,16 @@
   <div class="pad">
     <div class="page-head">
       <div><div class="eyebrow">Notre proposition</div><div class="rule"></div></div>
-      <img class="mini-logo" src="logos/logo-icon.png" alt="The Last Line" />
+      <img class="mini-logo" src="logos/logo-icon.svg" alt="The Last Line" />
     </div>
 
-    <h1 class="page-title">Chez vous,<br>une semaine sur deux</h1>
-    <p class="offer-desc" style="margin-top:5mm;"><span class="pill">Phase aller</span> &nbsp;Nous mettons à disposition l'un de nos coachs gardiens, qui se déplace <b>sur vos terrains une semaine sur deux</b>, pendant <b>toute la phase aller</b>. Il vient <b>un soir</b> et enchaîne les deux entraînements, afin de laisser vos entraîneurs récupérer les gardiens avec l'équipe lorsque les créneaux se croisent. Formule pour vos <b>9 gardiens</b> (5 actifs + 4 juniors), répartis en deux groupes.</p>
+    <h1 class="page-title">Chez vous,<br>8 séances spécifiques</h1>
+    <p class="offer-desc" style="margin-top:5mm;"><span class="pill">Phase aller</span> &nbsp;Nous mettons à disposition l'un de nos coachs gardiens, qui se déplace <b>sur vos terrains le mardi soir</b>, pendant <b>toute la phase aller</b>. Il enchaîne les deux groupes sur la même soirée : le premier de <b>18h30 à 19h15</b>, le second de <b>19h15 à 20h00</b>. Vos entraîneurs peuvent ainsi récupérer les gardiens avec l'équipe lorsque les créneaux se croisent. Formule pour vos <b>9 gardiens</b> (5 actifs + 4 juniors).</p>
 
     <div class="setup">
       <div class="s"><div class="k">Lieu</div><div class="v">Terrains du FC La Combe</div></div>
-      <div class="s"><div class="k">Rythme</div><div class="v">1 soir / 2 semaines · 2 entraînements enchaînés</div></div>
-      <div class="s"><div class="k">Période</div><div class="v">Phase aller · jusqu'au 8 nov. 2026</div></div>
+      <div class="s"><div class="k">Horaires</div><div class="v">Mardi · 18h30 – 20h00 (2 groupes)</div></div>
+      <div class="s"><div class="k">Période</div><div class="v">18 août – 27 octobre 2026 · 8 séances</div></div>
     </div>
 
     <div class="price">
@@ -203,28 +226,73 @@
         <tr class="key"><td>Séance double (2 groupes de gardiens enchaînés)</td><td class="r">CHF 110.—</td></tr>
         <tr class="sub"><td>Déplacement : 0.80 CHF/km × 50 km</td><td class="r">+ CHF 40.—</td></tr>
         <tr class="key"><td>Prix par séance, tout compris</td><td class="r">CHF 150.—</td></tr>
-        <tr class="sub"><td>Nombre d'entraînements (1 semaine sur 2)</td><td class="r">8</td></tr>
+        <tr class="sub"><td>Nombre de séances (calendrier en page suivante)</td><td class="r">8</td></tr>
         <tr class="total"><td>Total phase aller 2026/2027</td><td class="r">CHF 1'200.—</td></tr>
       </table>
     </div>
 
-    <p class="note">Phase aller achevée le week-end du <b>7-8 novembre 2026</b> : le calendrier est arrêté avec vous et <b>la facturation suit les séances réellement planifiées</b>, à 150.— l'unité. Formule <b>reconductible pour la phase retour</b>, ou évolutive vers un rythme hebdomadaire. Tarifs nets en CHF (association, sans TVA).</p>
+    <p class="note"><b>Paiement en une fois</b>, à réception de la facture. Le calendrier des 8 séances figure en page suivante : la réservation vaut <b>engagement sur l'ensemble des séances</b>, et une séance annulée par le club n'est pas remboursée. Formule <b>reconductible pour la phase retour</b>. Tarifs nets en CHF (association, sans TVA).</p>
 
-    <div class="close">
-      <h3>Construisons la saison ensemble</h3>
-      <p>Cette formule est adaptable (effectif, nombre de séances, créneaux). Nous serions ravis d'en discuter avec vous.</p>
-      <div class="contactbar">
-        <div><b>E-mail</b> &nbsp;contact@thelastline.ch</div>
-        <div><b>Tél.</b> &nbsp;+41 78 704 29 16</div>
-        <div><b>Web</b> &nbsp;www.thelastline.ch</div>
+    <div class="pagefoot"><span>The Last Line — Goalkeeper Academy</span><span>Proposition · Phase aller</span></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 — CALENDRIER + SIGNATURE ============ -->
+<section class="sheet">
+  <div class="pad">
+    <div class="page-head">
+      <div><div class="eyebrow">Calendrier &amp; confirmation</div><div class="rule"></div></div>
+      <img class="mini-logo" src="logos/logo-icon.svg" alt="The Last Line" />
+    </div>
+
+    <h1 class="page-title">Les 8 séances<br>de la phase aller</h1>
+
+    <div class="slots">
+      <div class="slot"><span class="g">Groupe 1</span><span class="h">18h30 – 19h15</span></div>
+      <div class="slot"><span class="g">Groupe 2</span><span class="h">19h15 – 20h00</span></div>
+      <div class="slot"><span class="g">Lieu</span><span class="h">Terrains du FC La Combe</span></div>
+    </div>
+
+    <div class="dates">
+      <div class="d"><span class="n">1</span><span class="dt">Mardi 18 août 2026</span></div>
+      <div class="d"><span class="n">2</span><span class="dt">Mardi 25 août 2026</span></div>
+      <div class="d"><span class="n">3</span><span class="dt">Mardi 1<sup>er</sup> septembre 2026</span></div>
+      <div class="d"><span class="n">4</span><span class="dt">Mardi 8 septembre 2026</span></div>
+      <div class="d"><span class="n">5</span><span class="dt">Mardi 15 septembre 2026</span></div>
+      <div class="d"><span class="n">6</span><span class="dt">Mardi 29 septembre 2026</span></div>
+      <div class="d"><span class="n">7</span><span class="dt">Mardi 13 octobre 2026</span></div>
+      <div class="d"><span class="n">8</span><span class="dt">Mardi 27 octobre 2026</span></div>
+    </div>
+
+    <div class="recap">
+      <span>8 séances × 150.— (coaching + déplacement)</span>
+      <b>CHF 1'200.—</b>
+    </div>
+
+    <p class="note" style="margin-top:4mm;">Paiement en une fois, à réception de la facture. La réservation vaut <b>engagement sur les 8 séances</b> : une séance annulée par le club n'est pas remboursée. En cas d'intempéries ou de terrain impraticable, la séance est <b>reportée</b> d'entente entre le club et l'académie.</p>
+
+    <div class="sigwrap">
+      <p class="sigtitle">Bon pour accord</p>
+      <div class="sigcols">
+        <div class="sigcol">
+          <span class="lbl">Pour le FC La Combe</span>
+          <span class="line"></span>
+          <span class="hint">Lieu, date et signature</span>
+        </div>
+        <div class="sigcol">
+          <span class="lbl">Pour The Last Line</span>
+          <span class="line"></span>
+          <span class="hint">Lieu, date et signature</span>
+        </div>
       </div>
-      <div class="sign">
-        <div class="who"><b>Gianluca Giannarelli</b><br><span>Co-fondateur &amp; coach</span></div>
-        <div class="who"><b>Arthur Chazelle</b><br><span>Co-fondateur &amp; coach</span></div>
+      <div class="contactline">
+        <span><b>contact@thelastline.ch</b></span>
+        <span><b>+41 78 704 29 16</b></span>
+        <span><b>www.thelastline.ch</b></span>
       </div>
     </div>
 
-    <div class="pagefoot"><span>Association The Last Line · CHE-235.374.703 · Torgon, commune de Vionnaz (VS)</span><span>Proposition · Phase aller</span></div>
+    <div class="pagefoot"><span>Association The Last Line · CHE-235.374.703 · Torgon, commune de Vionnaz (VS)</span><span>Calendrier · Phase aller</span></div>
   </div>
 </section>
 
