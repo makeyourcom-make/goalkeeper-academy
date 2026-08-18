@@ -32,6 +32,7 @@ export function MonthCalendar({
   basePath,
   todayIso,
 }: Props) {
+  const isAdmin = basePath === "/admin/planning";
   const weekdays = Array.from({ length: 7 }, (_, i) => {
     // Monday-first labels
     const d = new Date(2024, 0, 1 + i); // Jan 1 2024 is a Monday
@@ -115,18 +116,39 @@ export function MonthCalendar({
                     {dayNum}
                   </span>
                   <div className="mt-1 flex flex-col gap-1">
-                    {daySessions.map((s) => (
-                      <div
-                        key={s.id}
-                        className="truncate rounded bg-navy/5 px-1.5 py-0.5 text-[11px] font-medium text-navy"
-                        title={s.title}
-                      >
-                        <span className="text-orange">
-                          {timeFmt.format(new Date(s.starts_at))}
-                        </span>{" "}
-                        {s.title}
-                      </div>
-                    ))}
+                    {daySessions.map((s) => {
+                      const label = (
+                        <>
+                          <span className="text-orange group-hover:text-white">
+                            {timeFmt.format(new Date(s.starts_at))}
+                          </span>{" "}
+                          {s.title}
+                        </>
+                      );
+                      const base =
+                        "block truncate rounded bg-navy/5 px-1.5 py-0.5 text-[11px] font-medium text-navy";
+                      // Only the admin calendar has a session detail page to open.
+                      return isAdmin ? (
+                        <Link
+                          key={s.id}
+                          href={{
+                            pathname: "/admin/planning/[id]",
+                            params: { id: s.id },
+                          }}
+                          title={s.title}
+                          className={cn(
+                            base,
+                            "group transition-colors hover:bg-orange hover:text-white",
+                          )}
+                        >
+                          {label}
+                        </Link>
+                      ) : (
+                        <div key={s.id} className={base} title={s.title}>
+                          {label}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               )}
