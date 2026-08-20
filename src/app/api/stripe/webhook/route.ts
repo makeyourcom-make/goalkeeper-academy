@@ -7,6 +7,7 @@ import { CADENCE_MONTHS, type Cadence } from "@/lib/inscription/pricing";
 import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
 import { notifyAdminPayment } from "@/lib/email/admin-notify";
 import { recordIncomeFromInvoice } from "@/lib/admin/record-income";
+import { settleInvoicePaid } from "@/lib/invoices/settle";
 
 // Stripe needs the raw request body to verify the signature.
 export const dynamic = "force-dynamic";
@@ -30,6 +31,73 @@ async function confirmRegistrations(admin: Admin, planId: string) {
     .update({ status: "confirmed" })
     .eq("payment_plan_id", planId)
     .eq("status", "pending");
+}
+
+// A Stripe invoice created by hand in the dashboard carries none of our
+// metadata, so it used to be ignored: the site invoice stayed "pending", went
+// "overdue" the next morning and a dunning e-mail went out to someone who had
+// already paid. We reconcile it here, from the strongest signal to the weakest.
+const INVOICE_NO = /GKA-d{4}-d{5}/i;
+
+// Our invoice number, wherever the admin typed it on the Stripe invoice.
+function findInvoiceNumber(inv: Stripe.Invoice): string | null {
+  const haystack = [
+    inv.description ?? "",
+    inv.footer ?? "",
+    ...Object.values(inv.metadata ?? {}),
+    ...(inv.lines?.data ?? []).map((l) => l.description ?? ""),
+  ].join(" ");
+  const m = INVOICE_NO.exec(haystack);
+  return m ? m[0].toUpperCase() : null;
+}
+
+async function handleStandaloneInvoice(admin: Admin, invoice: Stripe.Invoice) {
+  const paid = invoice.amount_paid ?? 0;
+  if (paid <= 0) return;
+  const pdfUrl = invoice.invoice_pdf ?? null;
+
+  // Best case: the admin wrote the GKA number on the Stripe invoice.
+  const number = findInvoiceNumber(invoice);
+  if (number) {
+    const { data } = await admin
+      .from("invoices")
+      .select("id")
+      .eq("invoice_number", number)
+      .in("status", ["pending", "overdue"])
+      .maybeSingle<{ id: string }>();
+    if (data) {
+      await settleInvoicePaid(admin, admin, data.id, {
+        pdfUrl,
+        stripeRef: invoice.id,
+      });
+      await notifyAdminPayment(admin, data.id);
+    }
+    return;
+  }
+
+  // Fallback: same payer, same amount. Only acted on when it is unambiguous —
+  // two open invoices of the same amount are left for the admin to settle by
+  // hand rather than risk crediting the wrong one.
+  const email = invoice.customer_email;
+  if (!email) return;
+  const { data: matches } = await admin
+    .from("invoices")
+    .select("id, profile:profiles!invoices_profile_id_fkey(email)")
+    .eq("amount_cents", paid)
+    .in("status", ["pending", "overdue"])
+    .returns<{ id: string; profile: { email: string | null } | null }[]>();
+
+  const hits = (matches ?? []).filter(
+    (r) => r.profile?.email?.toLowerCase() === email.toLowerCase(),
+  );
+  const hit = hits[0];
+  if (hits.length !== 1 || !hit) return;
+
+  await settleInvoicePaid(admin, admin, hit.id, {
+    pdfUrl,
+    stripeRef: invoice.id,
+  });
+  await notifyAdminPayment(admin, hit.id);
 }
 
 // One-time payment completed (card "annuel" or the first TWINT installment).
@@ -152,7 +220,13 @@ async function handleInvoicePaid(admin: Admin, invoice: Stripe.Invoice) {
   const rawSub =
     inv.subscription ?? inv.parent?.subscription_details?.subscription ?? null;
   const subId = typeof rawSub === "string" ? rawSub : (rawSub?.id ?? null);
-  if (!subId || !stripe) return;
+  if (!subId) {
+    // Invoice raised straight from the Stripe dashboard (no subscription):
+    // try to match it to the site invoice instead of dropping it.
+    await handleStandaloneInvoice(admin, invoice);
+    return;
+  }
+  if (!stripe) return;
 
   // Only count real charges (first charge + each renewal).
   const reason = invoice.billing_reason ?? "";

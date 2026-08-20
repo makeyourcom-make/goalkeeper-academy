@@ -592,6 +592,7 @@
       "ageYears": "{age} y/o",
       "sessionsUsed": "{used} / {total} used",
       "sessionsRemaining": "{count} left",
+      "sessionsOver": "{count, plural, one {# unpaid session} other {# unpaid sessions}}",
       "detail": {
         "metaTitle": "Admin · Goalkeeper file",
         "back": "← Back to goalkeepers",
@@ -600,6 +601,7 @@
         "usedLabel": "Used",
         "remainingLabel": "Remaining",
         "noPackage": "No package recorded for this goalkeeper (no registration with a session count).",
+        "overWarning": "This goalkeeper attended {count, plural, one {# session} other {# sessions}} beyond their paid package. An additional invoice is due.",
         "historyTitle": "Session history",
         "empty": "No sessions for this goalkeeper yet.",
         "table": {

@@ -95,6 +95,7 @@ export default async function AdminChildDetailPage({ params }: Props) {
     used: 0,
     total: 0,
     remaining: 0,
+    over: 0,
   };
 
   // Most recent first: the sessions actually consumed sit at the top.
@@ -146,7 +147,7 @@ export default async function AdminChildDetailPage({ params }: Props) {
         <h2 className="font-anton text-lg uppercase text-navy">
           {t("detail.packageTitle")}
         </h2>
-        {usage.total === 0 ? (
+        {usage.total === 0 && usage.used === 0 ? (
           <p className="mt-3 text-sm text-grey-500">{t("detail.noPackage")}</p>
         ) : (
           <>
@@ -178,6 +179,11 @@ export default async function AdminChildDetailPage({ params }: Props) {
                 style={{ width: `${pct}%` }}
               />
             </div>
+            {usage.over > 0 && (
+              <p className="mt-4 rounded-xl bg-error/10 px-4 py-3 text-sm font-medium text-error">
+                {t("detail.overWarning", { count: usage.over })}
+              </p>
+            )}
           </>
         )}
       </div>

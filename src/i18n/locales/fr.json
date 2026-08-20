@@ -592,6 +592,7 @@
       "ageYears": "{age} ans",
       "sessionsUsed": "{used} / {total} utilisées",
       "sessionsRemaining": "reste {count}",
+      "sessionsOver": "{count, plural, one {# séance non payée} other {# séances non payées}}",
       "detail": {
         "metaTitle": "Admin · Fiche gardien",
         "back": "← Retour aux gardiens",
@@ -600,6 +601,7 @@
         "usedLabel": "Utilisées",
         "remainingLabel": "Restantes",
         "noPackage": "Aucun forfait enregistré pour ce gardien (pas d'inscription avec un nombre de séances).",
+        "overWarning": "Ce gardien a effectué {count, plural, one {# séance} other {# séances}} de plus que son forfait payé. Une facture complémentaire est à établir.",
         "historyTitle": "Historique des séances",
         "empty": "Aucune séance pour ce gardien pour le moment.",
         "table": {

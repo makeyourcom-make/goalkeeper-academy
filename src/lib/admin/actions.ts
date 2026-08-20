@@ -5,8 +5,7 @@ import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { stripe } from "@/lib/stripe/client";
-import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
-import { recordIncomeFromInvoice } from "@/lib/admin/record-income";
+import { settleInvoicePaid } from "@/lib/invoices/settle";
 
 type SupabaseAny = ReturnType<typeof createSupabaseAdminClient>;
 
@@ -53,40 +52,9 @@ export async function markInvoicePaid(formData: FormData): Promise<void> {
   const supabase = await requireAdmin();
   if (!supabase) return;
 
-  // Only transition pending/overdue → paid; send the same confirmation email as
-  // the Stripe flow so QR / bank-transfer payers are notified too.
-  const { data: updated } = await supabase
-    .from("invoices")
-    .update({ status: "paid", paid_at: new Date().toISOString() })
-    .eq("id", id)
-    .in("status", ["pending", "overdue"])
-    .select("id, camp_registration_id, payment_plan_id")
-    .maybeSingle<{
-      id: string;
-      camp_registration_id: string | null;
-      payment_plan_id: string | null;
-    }>();
-
-  if (updated) {
-    await sendPaymentConfirmation(supabase, id);
-    await recordIncomeFromInvoice(supabase, id);
-    // Secure the seat, exactly like the Stripe webhook does on card/TWINT.
-    const admin = createSupabaseAdminClient();
-    if (updated.camp_registration_id) {
-      await admin
-        .from("camp_registrations")
-        .update({ status: "confirmed" })
-        .eq("id", updated.camp_registration_id)
-        .eq("status", "pending");
-    }
-    if (updated.payment_plan_id) {
-      await admin
-        .from("registrations")
-        .update({ status: "confirmed" })
-        .eq("payment_plan_id", updated.payment_plan_id)
-        .eq("status", "pending");
-    }
-  }
+  // Same transition and side effects as the Stripe webhook, so QR / bank
+  // transfer payers are notified and booked exactly like card payers.
+  await settleInvoicePaid(supabase, createSupabaseAdminClient(), id);
 
   revalidatePath("/", "layout");
 }

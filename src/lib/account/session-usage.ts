@@ -1,6 +1,14 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
-export type SessionUsage = { used: number; total: number; remaining: number };
+export type SessionUsage = {
+  used: number;
+  total: number;
+  remaining: number;
+  // Sessions attended beyond the paid package. Kept apart from `remaining`
+  // (which stays >= 0 so the parent view never shows a negative balance) so the
+  // admin can spot a keeper who trained more than they paid for and invoice it.
+  over: number;
+};
 
 // Per-keeper package tracking. A session is "used" once it is marked completed
 // ("effectuée") — every convened keeper consumes one, present or absent. The
@@ -74,7 +82,12 @@ export async function sessionUsageByChild(
   for (const id of childIds) {
     const total = totals.get(id) ?? 0;
     const u = used.get(id) ?? 0;
-    map.set(id, { used: u, total, remaining: Math.max(0, total - u) });
+    map.set(id, {
+      used: u,
+      total,
+      remaining: Math.max(0, total - u),
+      over: Math.max(0, u - total),
+    });
   }
   return map;
 }

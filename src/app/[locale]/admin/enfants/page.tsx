@@ -118,7 +118,7 @@ export default async function AdminChildrenPage({ params }: Props) {
                         {child.level ? t(`levels.${child.level}`) : "—"}
                       </td>
                       <td className="px-4 py-3">
-                        {u && u.total > 0 ? (
+                        {u && (u.total > 0 || u.used > 0) ? (
                           <div className="leading-tight">
                             <div className="font-medium text-navy">
                               {t("sessionsUsed", {
@@ -126,9 +126,15 @@ export default async function AdminChildrenPage({ params }: Props) {
                                 total: u.total,
                               })}
                             </div>
-                            <div className="text-xs text-grey-500">
-                              {t("sessionsRemaining", { count: u.remaining })}
-                            </div>
+                            {u.over > 0 ? (
+                              <div className="mt-0.5 inline-flex rounded-full bg-error/10 px-2 py-0.5 text-xs font-semibold text-error">
+                                {t("sessionsOver", { count: u.over })}
+                              </div>
+                            ) : (
+                              <div className="text-xs text-grey-500">
+                                {t("sessionsRemaining", { count: u.remaining })}
+                              </div>
+                            )}
                           </div>
                         ) : (
                           <span className="text-grey-400">—</span>
