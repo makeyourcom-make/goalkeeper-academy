@@ -120,7 +120,16 @@ export async function submitRegistration(
   // 0. Guard against a duplicate order. If one of the keepers already has a
   //    registration awaiting payment for the same formula, stop here: creating
   //    a second plan would double both the invoice and the session package.
-  const norm = (s: string) => s.trim().toLowerCase();
+  // Casse, accents et espaces multiples ignorés: "Esteban" et "esteban " sont
+  // le même gardien. Une comparaison stricte créait une 2e fiche et éclatait
+  // son forfait sur deux lignes.
+  const norm = (s: string) =>
+    s
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/s+/g, " ");
   const { data: openRegs } = await admin
     .from("registrations")
     .select("formula, children(first_name, last_name)")
@@ -199,8 +208,15 @@ export async function submitRegistration(
     }
   }
 
-  // 3. Children (reuse an exact match for this parent, else create) + one
-  //    registration per keeper, linked to the plan.
+  // 3. Children (reuse this parent's keeper when the name matches, else
+  //    create) + one registration per keeper, linked to the plan.
+  const { data: ownChildren } = await admin
+    .from("children")
+    .select("id, first_name, last_name")
+    .eq("parent_id", user.id)
+    .returns<{ id: string; first_name: string; last_name: string }[]>();
+  const known = ownChildren ?? [];
+
   for (const k of keepers) {
     const year = parseInt(k.birthYear || "0", 10);
     const birthDate =
@@ -208,14 +224,11 @@ export async function submitRegistration(
     const firstName = k.firstName.trim();
     const lastName = k.lastName.trim();
 
-    const { data: existing } = await admin
-      .from("children")
-      .select("id")
-      .eq("parent_id", user.id)
-      .eq("first_name", firstName)
-      .eq("last_name", lastName)
-      .eq("birth_date", birthDate)
-      .maybeSingle();
+    const existing = known.find(
+      (c) =>
+        norm(c.first_name) === norm(firstName) &&
+        norm(c.last_name) === norm(lastName),
+    );
 
     let childId = existing?.id ?? null;
     if (!childId) {
@@ -233,6 +246,7 @@ export async function submitRegistration(
         .single();
       if (childErr || !child) return { status: "error" };
       childId = child.id;
+      known.push({ id: child.id, first_name: firstName, last_name: lastName });
     }
 
     const { error: regErr } = await admin.from("registrations").insert({
