@@ -21,7 +21,12 @@ type CoachQ = {
   id: string;
   profiles: { first_name: string | null; last_name: string | null } | null;
 };
-type ChildQ = { id: string; first_name: string; last_name: string };
+type ChildQ = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  clubs: { name: string } | null;
+};
 type SessionQ = {
   id: string;
   title: string;
@@ -76,7 +81,7 @@ export default async function EditSessionPage({ params }: Props) {
       .returns<CoachQ[]>(),
     supabase
       .from("children")
-      .select("id, first_name, last_name")
+      .select("id, first_name, last_name, clubs(name)")
       .order("first_name")
       .returns<ChildQ[]>(),
   ]);
@@ -91,6 +96,7 @@ export default async function EditSessionPage({ params }: Props) {
   const keepers = (childrenRes.data ?? []).map((k) => ({
     id: k.id,
     name: `${k.first_name} ${k.last_name}`.trim(),
+    club: k.clubs?.name ?? null,
   }));
 
   const session: SessionEditData = {

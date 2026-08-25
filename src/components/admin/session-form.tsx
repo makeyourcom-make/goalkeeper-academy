@@ -14,7 +14,7 @@ import {
 } from "@/lib/admin/planning-actions";
 
 type Coach = { id: string; name: string };
-type Keeper = { id: string; name: string };
+type Keeper = { id: string; name: string; club: string | null };
 
 const INITIAL: SessionFormState = { status: "idle", message: "" };
 
@@ -215,6 +215,11 @@ export function SessionForm({
                   className="h-4 w-4 rounded border-grey-300 text-orange focus-visible:ring-orange"
                 />
                 {k.name}
+                {k.club && (
+                  <span className="ml-auto shrink-0 rounded-full bg-navy/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-navy">
+                    {k.club}
+                  </span>
+                )}
               </label>
             ))}
           </div>
