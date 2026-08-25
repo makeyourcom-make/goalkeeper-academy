@@ -872,7 +872,8 @@
       "upcomingHeading": "Upcoming sessions",
       "pastHeading": "Past sessions",
       "pastEmpty": "No past sessions.",
-      "privateBadge": "Private"
+      "privateBadge": "Private",
+      "duplicate": "Duplicate"
     },
     "finance": {
       "addTitle": "Add an entry",

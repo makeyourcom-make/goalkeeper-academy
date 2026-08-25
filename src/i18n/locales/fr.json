@@ -872,7 +872,8 @@
       "upcomingHeading": "Séances à venir",
       "pastHeading": "Séances passées",
       "pastEmpty": "Aucune séance passée.",
-      "privateBadge": "Privé"
+      "privateBadge": "Privé",
+      "duplicate": "Dupliquer"
     },
     "finance": {
       "addTitle": "Ajouter une écriture",

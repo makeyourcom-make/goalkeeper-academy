@@ -10,6 +10,7 @@ import {
   Check,
   Undo2,
   ChevronRight,
+  Copy,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -17,7 +18,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { SessionForm } from "@/components/admin/session-form";
 import { MonthCalendar } from "@/components/admin/month-calendar";
-import { deleteSession, setSessionStatus } from "@/lib/admin/planning-actions";
+import {
+  deleteSession,
+  duplicateSession,
+  setSessionStatus,
+} from "@/lib/admin/planning-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 const DEFAULT_LOCATION = "Terrain de la Mêlée, Aigle";
@@ -238,6 +243,14 @@ export default async function AdminPlanningPage({
           </span>
         )}
         <span className="ml-auto flex items-center gap-2">
+          <form action={duplicateSession}>
+            <input type="hidden" name="id" value={s.id} />
+            <input type="hidden" name="locale" value={locale} />
+            <Button type="submit" variant="ghost" size="sm">
+              <Copy className="mr-1 h-4 w-4" />
+              {t("duplicate")}
+            </Button>
+          </form>
           <Button asChild variant="ghost" size="sm">
             <Link
               href={{

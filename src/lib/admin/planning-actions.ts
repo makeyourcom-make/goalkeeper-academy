@@ -334,6 +334,79 @@ export async function setSessionStatus(formData: FormData): Promise<void> {
   revalidatePath("/", "layout");
 }
 
+// Duplicate a session as a fresh, editable copy. Shifted one week ahead — the
+// usual reason to copy a session is to run the same one again next week — and
+// left "scheduled" outside of any series. Convocations are copied but NOT
+// e-mailed: the admin lands on the edit page to adjust date, coach or keepers
+// first, and sends from there.
+export async function duplicateSession(formData: FormData): Promise<void> {
+  const supabase = await getAdminClient();
+  const id = String(formData.get("id") ?? "");
+  const locale = String(formData.get("locale") ?? "fr");
+  if (!supabase || !id) return;
+
+  const { data: src } = await supabase
+    .from("sessions")
+    .select(
+      "title, description, coach_id, location, starts_at, ends_at, meet_at, capacity, level, is_private",
+    )
+    .eq("id", id)
+    .maybeSingle<{
+      title: string;
+      description: string | null;
+      coach_id: string | null;
+      location: string | null;
+      starts_at: string;
+      ends_at: string;
+      meet_at: string | null;
+      capacity: number | null;
+      level: string | null;
+      is_private: boolean | null;
+    }>();
+  if (!src) return;
+
+  const WEEK = 7 * 24 * 60 * 60 * 1000;
+  const shift = (iso: string | null) =>
+    iso ? new Date(new Date(iso).getTime() + WEEK).toISOString() : null;
+
+  const { data: copy } = await supabase
+    .from("sessions")
+    .insert({
+      title: src.title,
+      description: src.description,
+      coach_id: src.coach_id,
+      location: src.location,
+      starts_at: shift(src.starts_at),
+      ends_at: shift(src.ends_at),
+      meet_at: shift(src.meet_at),
+      capacity: src.capacity,
+      level: src.level,
+      is_private: src.is_private ?? false,
+      status: "scheduled",
+    })
+    .select("id")
+    .single<{ id: string }>();
+  if (!copy) return;
+
+  // Same keepers convened, so a weekly group carries over untouched.
+  const { data: attendees } = await supabase
+    .from("session_attendees")
+    .select("child_id")
+    .eq("session_id", id)
+    .returns<{ child_id: string }[]>();
+  if (attendees && attendees.length > 0) {
+    await supabase.from("session_attendees").insert(
+      attendees.map((a) => ({
+        session_id: copy.id,
+        child_id: a.child_id,
+      })),
+    );
+  }
+
+  revalidatePath("/", "layout");
+  redirect(`/${locale}/admin/planning/${copy.id}`);
+}
+
 // Delete just this session.
 export async function deleteSession(formData: FormData): Promise<void> {
   const supabase = await getAdminClient();
