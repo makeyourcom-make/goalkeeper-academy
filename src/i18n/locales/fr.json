@@ -47,7 +47,7 @@
       "resources": {
         "title": "Ressources",
         "blog": "Actualités",
-        "giana": "Giana Stop & Shoot",
+        "giana": "Gianna Stop & Shoot",
         "members": "Espace membre"
       },
       "legal": {
@@ -216,7 +216,7 @@
     },
     "partner": {
       "eyebrow": "L'évènement de la fin d'année",
-      "title": "Giana Stop & Shoot",
+      "title": "Gianna Stop & Shoot",
       "description": "Le tournoi de référence des gardiens en Suisse romande, créé par notre co-fondateur Gianluca Giannarelli.",
       "cta": "Découvrir le tournoi"
     },
@@ -410,17 +410,17 @@
     }
   },
   "GianaPage": {
-    "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "Le Giana Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but, créé par Gianluca Giannarelli, co-fondateur de The Last Line.",
+    "metaTitle": "Gianna Stop & Shoot",
+    "metaDescription": "Le Gianna Stop & Shoot, le tournoi suisse romand entièrement dédié aux gardiens de but, créé par Gianluca Giannarelli, co-fondateur de The Last Line.",
     "hero": {
       "eyebrow": "L'évènement de la fin d'année",
-      "title": "Giana Stop & Shoot",
+      "title": "Gianna Stop & Shoot",
       "subtitle": "Le rendez-vous suisse romand entièrement dédié aux gardiens de but. Une journée, un tournoi, une passion commune."
     },
     "about": {
       "eyebrow": "Le tournoi",
       "title": "Un format unique pour les gardiens",
-      "intro": "Le Giana Stop & Shoot rassemble chaque année une centaine de gardiens de toute la Suisse romande autour d'épreuves techniques et d'un mini-tournoi à élimination directe. Pas de joueurs de champ : juste des gardiens, leurs gants et un public de connaisseurs.",
+      "intro": "Le Gianna Stop & Shoot rassemble chaque année une centaine de gardiens de toute la Suisse romande autour d'épreuves techniques et d'un mini-tournoi à élimination directe. Pas de joueurs de champ : juste des gardiens, leurs gants et un public de connaisseurs.",
       "stats": {
         "editions": {
           "value": "5",
@@ -1783,7 +1783,7 @@
         "head": {
           "name": "Gianluca Giannarelli",
           "role": "Co-fondateur & coach",
-          "bio": "Le poste de gardien a toujours été sa passion. Formé au Martigny-Sport, il atteint la 1ère équipe et y passe 5 ans en LNB. Après une blessure et la relégation du club, il défend ensuite les cages du FC Leytron, du FC La Combe puis du FC Fully. Il obtient son diplôme d'entraîneur de niveau 2 à Macolin. Il a aussi créé le tournoi Giana Stop & Shoot, afin de mettre en avant les gardiens lors d'un évènement qui leur est spécifiquement dédié."
+          "bio": "Le poste de gardien a toujours été sa passion. Formé au Martigny-Sport, il atteint la 1ère équipe et y passe 5 ans en LNB. Après une blessure et la relégation du club, il défend ensuite les cages du FC Leytron, du FC La Combe puis du FC Fully. Il obtient son diplôme d'entraîneur de niveau 2 à Macolin. Il a aussi créé le tournoi Gianna Stop & Shoot, afin de mettre en avant les gardiens lors d'un évènement qui leur est spécifiquement dédié."
         },
         "youth": {
           "name": "Arthur Chazelle",

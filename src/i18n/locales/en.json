@@ -47,7 +47,7 @@
       "resources": {
         "title": "Resources",
         "blog": "News",
-        "giana": "Giana Stop & Shoot",
+        "giana": "Gianna Stop & Shoot",
         "members": "Members area"
       },
       "legal": {
@@ -216,7 +216,7 @@
     },
     "partner": {
       "eyebrow": "The end-of-season event",
-      "title": "Giana Stop & Shoot",
+      "title": "Gianna Stop & Shoot",
       "description": "The benchmark goalkeeper tournament in French-speaking Switzerland, created by our co-founder Gianluca Giannarelli.",
       "cta": "Discover the tournament"
     },
@@ -410,17 +410,17 @@
     }
   },
   "GianaPage": {
-    "metaTitle": "Giana Stop & Shoot",
-    "metaDescription": "The Giana Stop & Shoot, the French-speaking Swiss tournament entirely dedicated to goalkeepers, created by Gianluca Giannarelli, co-founder of The Last Line.",
+    "metaTitle": "Gianna Stop & Shoot",
+    "metaDescription": "The Gianna Stop & Shoot, the French-speaking Swiss tournament entirely dedicated to goalkeepers, created by Gianluca Giannarelli, co-founder of The Last Line.",
     "hero": {
       "eyebrow": "The end-of-season event",
-      "title": "Giana Stop & Shoot",
+      "title": "Gianna Stop & Shoot",
       "subtitle": "The French-speaking Swiss event fully dedicated to goalkeepers. One day, one tournament, one shared passion."
     },
     "about": {
       "eyebrow": "The tournament",
       "title": "A unique format for goalkeepers",
-      "intro": "Each year, Giana Stop & Shoot gathers around a hundred goalkeepers from all over French-speaking Switzerland for technical contests and a knockout mini-tournament. No outfield players: just goalkeepers, their gloves and an audience of connoisseurs.",
+      "intro": "Each year, Gianna Stop & Shoot gathers around a hundred goalkeepers from all over French-speaking Switzerland for technical contests and a knockout mini-tournament. No outfield players: just goalkeepers, their gloves and an audience of connoisseurs.",
       "stats": {
         "editions": {
           "value": "5",
@@ -1783,7 +1783,7 @@
         "head": {
           "name": "Gianluca Giannarelli",
           "role": "Co-founder & coach",
-          "bio": "Goalkeeping has always been his passion. He came up through Martigny-Sport, reached the first team and spent 5 years in LNB. After an injury and the club's relegation, he went on to defend the goal for FC Leytron, FC La Combe and FC Fully. He earned his Level 2 coaching diploma at Macolin. He also created the Giana Stop & Shoot tournament, to put goalkeepers in the spotlight at an event dedicated entirely to them."
+          "bio": "Goalkeeping has always been his passion. He came up through Martigny-Sport, reached the first team and spent 5 years in LNB. After an injury and the club's relegation, he went on to defend the goal for FC Leytron, FC La Combe and FC Fully. He earned his Level 2 coaching diploma at Macolin. He also created the Gianna Stop & Shoot tournament, to put goalkeepers in the spotlight at an event dedicated entirely to them."
         },
         "youth": {
           "name": "Arthur Chazelle",
