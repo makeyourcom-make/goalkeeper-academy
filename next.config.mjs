@@ -71,6 +71,17 @@ const nextConfig = {
   async redirects() {
     // The blog was renamed to "Actualités" (news). Keep old URLs working.
     return [
+      // The tournament's name was misspelled: "Giana" -> "Gianna".
+      {
+        source: "/fr/stages/giana-stop-and-shoot",
+        destination: "/fr/stages/gianna-stop-and-shoot",
+        permanent: true,
+      },
+      {
+        source: "/en/camps/giana-stop-and-shoot",
+        destination: "/en/camps/gianna-stop-and-shoot",
+        permanent: true,
+      },
       { source: "/fr/blog", destination: "/fr/actualites", permanent: true },
       {
         source: "/fr/blog/:slug",

@@ -22,9 +22,9 @@ export const routing = defineRouting({
       fr: "/stages",
       en: "/camps",
     },
-    "/stages/giana-stop-and-shoot": {
-      fr: "/stages/giana-stop-and-shoot",
-      en: "/camps/giana-stop-and-shoot",
+    "/stages/gianna-stop-and-shoot": {
+      fr: "/stages/gianna-stop-and-shoot",
+      en: "/camps/gianna-stop-and-shoot",
     },
     "/stages/[slug]": {
       fr: "/stages/[slug]",

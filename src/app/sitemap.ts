@@ -9,7 +9,7 @@ const PUBLIC_PATHS = [
   "/academie",
   "/offres",
   "/stages",
-  "/stages/giana-stop-and-shoot",
+  "/stages/gianna-stop-and-shoot",
   "/blog",
   "/contact",
   "/rayon-d-action",

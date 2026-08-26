@@ -75,7 +75,7 @@ export default async function StagesPage({ params }: Props) {
             </div>
             <div className="md:justify-self-end">
               <Button asChild>
-                <Link href="/stages/giana-stop-and-shoot">
+                <Link href="/stages/gianna-stop-and-shoot">
                   {t("partner.cta")}
                 </Link>
               </Button>

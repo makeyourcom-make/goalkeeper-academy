@@ -49,7 +49,7 @@ const COLUMNS = [
     key: "resources",
     links: [
       { href: "/blog", labelKey: "blog" },
-      { href: "/stages/giana-stop-and-shoot", labelKey: "giana" },
+      { href: "/stages/gianna-stop-and-shoot", labelKey: "giana" },
       { href: "/connexion", labelKey: "members" },
     ],
   },
