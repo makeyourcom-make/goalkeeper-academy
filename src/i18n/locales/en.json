@@ -593,6 +593,8 @@
       "sessionsUsed": "{used} / {total} used",
       "sessionsRemaining": "{count} left",
       "sessionsOver": "{count, plural, one {# unpaid session} other {# unpaid sessions}}",
+      "clubPackage": "Club package",
+      "sessionsDone": "{count, plural, one {# session attended} other {# sessions attended}}",
       "detail": {
         "metaTitle": "Admin · Goalkeeper file",
         "back": "← Back to goalkeepers",
@@ -602,6 +604,8 @@
         "remainingLabel": "Remaining",
         "noPackage": "No package recorded for this goalkeeper (no registration with a session count).",
         "overWarning": "This goalkeeper attended {count, plural, one {# session} other {# sessions}} beyond their paid package. An additional invoice is due.",
+        "clubPackage": "Club package · {club}",
+        "clubPackageHint": "Sessions covered by the club contract, with no individual balance. {count, plural, one {# session attended} other {# sessions attended}} so far.",
         "historyTitle": "Session history",
         "empty": "No sessions for this goalkeeper yet.",
         "table": {

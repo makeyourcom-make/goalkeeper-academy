@@ -19,6 +19,7 @@ type ChildQ = {
   last_name: string;
   birth_date: string;
   level: string | null;
+  clubs: { name: string } | null;
   parent: {
     first_name: string | null;
     last_name: string | null;
@@ -75,7 +76,7 @@ export default async function AdminChildDetailPage({ params }: Props) {
     supabase
       .from("children")
       .select(
-        "id, first_name, last_name, birth_date, level, parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
+        "id, first_name, last_name, birth_date, level, clubs(name), parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
       )
       .eq("id", id)
       .maybeSingle<ChildQ>(),
@@ -147,7 +148,16 @@ export default async function AdminChildDetailPage({ params }: Props) {
         <h2 className="font-anton text-lg uppercase text-navy">
           {t("detail.packageTitle")}
         </h2>
-        {usage.total === 0 && usage.used === 0 ? (
+        {child.clubs ? (
+          <div className="mt-4">
+            <span className="inline-flex rounded-full bg-orange/10 px-3 py-1 text-sm font-semibold text-orange">
+              {t("detail.clubPackage", { club: child.clubs.name })}
+            </span>
+            <p className="mt-3 text-sm text-grey-700">
+              {t("detail.clubPackageHint", { count: usage.used })}
+            </p>
+          </div>
+        ) : usage.total === 0 && usage.used === 0 ? (
           <p className="mt-3 text-sm text-grey-500">{t("detail.noPackage")}</p>
         ) : (
           <>

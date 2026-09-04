@@ -17,6 +17,7 @@ type ChildRow = {
   birth_date: string;
   level: string | null;
   registered_at: string;
+  clubs: { name: string } | null;
   parent: {
     first_name: string | null;
     last_name: string | null;
@@ -48,7 +49,7 @@ export default async function AdminChildrenPage({ params }: Props) {
   const { data: children } = await supabase
     .from("children")
     .select(
-      "id, first_name, last_name, birth_date, level, registered_at, parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
+      "id, first_name, last_name, birth_date, level, registered_at, clubs(name), parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
     )
     .order("registered_at", { ascending: false })
     .returns<ChildRow[]>();
@@ -118,7 +119,16 @@ export default async function AdminChildrenPage({ params }: Props) {
                         {child.level ? t(`levels.${child.level}`) : "—"}
                       </td>
                       <td className="px-4 py-3">
-                        {u && (u.total > 0 || u.used > 0) ? (
+                        {child.clubs ? (
+                          <div className="leading-tight">
+                            <div className="inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-semibold text-orange">
+                              {t("clubPackage")}
+                            </div>
+                            <div className="mt-0.5 text-xs text-grey-500">
+                              {t("sessionsDone", { count: u?.used ?? 0 })}
+                            </div>
+                          </div>
+                        ) : u && (u.total > 0 || u.used > 0) ? (
                           <div className="leading-tight">
                             <div className="font-medium text-navy">
                               {t("sessionsUsed", {

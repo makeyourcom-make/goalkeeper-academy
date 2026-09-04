@@ -593,6 +593,8 @@
       "sessionsUsed": "{used} / {total} utilisées",
       "sessionsRemaining": "reste {count}",
       "sessionsOver": "{count, plural, one {# séance non payée} other {# séances non payées}}",
+      "clubPackage": "Forfait club",
+      "sessionsDone": "{count, plural, one {# séance effectuée} other {# séances effectuées}}",
       "detail": {
         "metaTitle": "Admin · Fiche gardien",
         "back": "← Retour aux gardiens",
@@ -602,6 +604,8 @@
         "remainingLabel": "Restantes",
         "noPackage": "Aucun forfait enregistré pour ce gardien (pas d'inscription avec un nombre de séances).",
         "overWarning": "Ce gardien a effectué {count, plural, one {# séance} other {# séances}} de plus que son forfait payé. Une facture complémentaire est à établir.",
+        "clubPackage": "Forfait club · {club}",
+        "clubPackageHint": "Séances couvertes par le contrat du club, sans décompte individuel. {count, plural, one {# séance effectuée} other {# séances effectuées}} à ce jour.",
         "historyTitle": "Historique des séances",
         "empty": "Aucune séance pour ce gardien pour le moment.",
         "table": {
