@@ -14,6 +14,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ q?: string; status?: string; type?: string }>;
 };
 
 type InvoiceRow = {
@@ -58,6 +59,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: t("metaTitle"), robots: { index: false, follow: false } };
 }
 
+const STATUSES: InvoiceRow["status"][] = [
+  "pending",
+  "paid",
+  "overdue",
+  "cancelled",
+  "refunded",
+];
+const TYPES: InvoiceRow["type"][] = [
+  "subscription",
+  "camp",
+  "particulier",
+  "club_contract",
+];
+
 const STATUS_STYLES: Record<InvoiceRow["status"], string> = {
   pending: "bg-warning/15 text-warning",
   paid: "bg-success/15 text-success",
@@ -66,21 +81,42 @@ const STATUS_STYLES: Record<InvoiceRow["status"], string> = {
   refunded: "bg-navy/10 text-navy",
 };
 
-export default async function AdminInvoicesPage({ params }: Props) {
+export default async function AdminInvoicesPage({
+  params,
+  searchParams,
+}: Props) {
   const { locale } = await params;
+  const { q = "", status = "", type = "" } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("Admin.invoices");
 
   const supabase = await createSupabaseServerClient();
-  const { data: invoices } = await supabase
+  let query = supabase
     .from("invoices")
     .select(
       "id, invoice_number, type, amount_cents, currency, status, issued_at, due_date, installment_number, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(method, cadence, installments_total, registrations(audience, formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
     )
-    .order("issued_at", { ascending: false })
-    .returns<InvoiceRow[]>();
+    .order("issued_at", { ascending: false });
+  if (STATUSES.includes(status as InvoiceRow["status"])) {
+    query = query.eq("status", status);
+  }
+  if (TYPES.includes(type as InvoiceRow["type"])) {
+    query = query.eq("type", type);
+  }
+  const { data: invoices } = await query.returns<InvoiceRow[]>();
 
-  const list = invoices ?? [];
+  const all = invoices ?? [];
+  const needle = q.trim().toLowerCase();
+  const list = needle
+    ? all.filter((i) => {
+        const client = `${i.profile?.first_name ?? ""} ${i.profile?.last_name ?? ""} ${i.profile?.email ?? ""}`;
+        return (
+          i.invoice_number.toLowerCase().includes(needle) ||
+          client.toLowerCase().includes(needle)
+        );
+      })
+    : all;
+  const filtered = Boolean(needle || status || type);
   const moneyFmt = (cents: number, currency: string) =>
     new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
       style: "currency",
@@ -106,7 +142,79 @@ export default async function AdminInvoicesPage({ params }: Props) {
         </p>
       </div>
 
-      <div className="mt-8 overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
+      <form
+        method="get"
+        className="mt-8 flex flex-wrap items-end gap-3 rounded-2xl border border-grey-100 bg-white p-4 shadow-sm"
+      >
+        <div className="min-w-[220px] flex-1">
+          <label
+            htmlFor="q"
+            className="block text-xs font-medium uppercase tracking-wide text-grey-500"
+          >
+            {t("filters.search")}
+          </label>
+          <input
+            id="q"
+            type="search"
+            name="q"
+            defaultValue={q}
+            placeholder={t("filters.searchPlaceholder")}
+            className="border-grey-200 mt-1 w-full rounded-lg border px-3 py-2 text-sm text-navy focus-visible:ring-orange"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="status"
+            className="block text-xs font-medium uppercase tracking-wide text-grey-500"
+          >
+            {t("table.status")}
+          </label>
+          <select
+            id="status"
+            name="status"
+            defaultValue={status}
+            className="border-grey-200 mt-1 rounded-lg border px-3 py-2 text-sm text-navy"
+          >
+            <option value="">{t("filters.all")}</option>
+            {STATUSES.map((v) => (
+              <option key={v} value={v}>
+                {t(`statuses.${v}`)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label
+            htmlFor="type"
+            className="block text-xs font-medium uppercase tracking-wide text-grey-500"
+          >
+            {t("table.type")}
+          </label>
+          <select
+            id="type"
+            name="type"
+            defaultValue={type}
+            className="border-grey-200 mt-1 rounded-lg border px-3 py-2 text-sm text-navy"
+          >
+            <option value="">{t("filters.all")}</option>
+            {TYPES.map((v) => (
+              <option key={v} value={v}>
+                {t(`types.${v}`)}
+              </option>
+            ))}
+          </select>
+        </div>
+        <Button type="submit" size="sm">
+          {t("filters.apply")}
+        </Button>
+        {filtered && (
+          <Button asChild variant="ghost" size="sm">
+            <Link href="/admin/factures">{t("filters.reset")}</Link>
+          </Button>
+        )}
+      </form>
+
+      <div className="mt-4 overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">

@@ -695,7 +695,14 @@
       "refund": "Rembourser",
       "refundHalf": "Rembourser 50%",
       "cancel": "Annuler",
-      "view": "Voir"
+      "view": "Voir",
+      "filters": {
+        "search": "Recherche",
+        "searchPlaceholder": "N° de facture, nom ou e-mail…",
+        "all": "Toutes",
+        "apply": "Filtrer",
+        "reset": "Réinitialiser"
+      }
     },
     "camps": {
       "metaTitle": "Admin · Stages",
