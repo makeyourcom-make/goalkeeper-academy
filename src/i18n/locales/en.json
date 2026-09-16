@@ -573,7 +573,8 @@
         "role": "Role",
         "language": "Language",
         "joined": "Joined",
-        "actions": "Preview"
+        "actions": "Preview",
+        "phone": "Phone"
       },
       "roles": {
         "parent": "Parent",

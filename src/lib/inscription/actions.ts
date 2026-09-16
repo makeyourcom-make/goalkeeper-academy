@@ -50,6 +50,7 @@ type SubmitInput = {
   keepers: OrderKeeper[];
   method: PaymentMethod;
   cadence: Cadence;
+  phone?: string;
 };
 
 function registrationType(formula: string): string {
@@ -104,6 +105,11 @@ export async function submitRegistration(
   );
   if (keepers.length === 0) return { status: "error" };
 
+  // A reachable number is mandatory: convocations, cancellations and
+  // last-minute changes go by phone.
+  const phone = (input.phone ?? "").trim();
+  if (!phone) return { status: "error" };
+
   // A "séance découverte" (single) is paid once — never split. Only season/tour
   // orders may keep the chosen cadence. Enforced here (never trust the client).
   const allowInstallments = keepers.some((k) => k.formula !== "single");
@@ -116,6 +122,10 @@ export async function submitRegistration(
   const perCents = installmentCents(total, cadence);
 
   const admin = createSupabaseAdminClient();
+
+  // Save the number on the profile. Sign-up was the only other writer, so a
+  // parent who already had an account never got their phone stored.
+  await admin.from("profiles").update({ phone }).eq("id", user.id);
 
   // 0. Guard against a duplicate order. If one of the keepers already has a
   //    registration awaiting payment for the same formula, stop here: creating

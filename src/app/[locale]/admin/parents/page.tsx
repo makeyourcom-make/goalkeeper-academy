@@ -58,6 +58,7 @@ export default async function AdminParentsPage({ params }: Props) {
               <tr>
                 <th className="px-4 py-3 font-medium">{t("table.name")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.email")}</th>
+                <th className="px-4 py-3 font-medium">{t("table.phone")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.role")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.language")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.joined")}</th>
@@ -83,6 +84,18 @@ export default async function AdminParentsPage({ params }: Props) {
                         : "—"}
                     </td>
                     <td className="px-4 py-3 text-grey-700">{profile.email}</td>
+                    <td className="px-4 py-3 text-grey-700">
+                      {profile.phone ? (
+                        <a
+                          href={`tel:${profile.phone}`}
+                          className="hover:text-orange"
+                        >
+                          {profile.phone}
+                        </a>
+                      ) : (
+                        <span className="text-grey-400">—</span>
+                      )}
+                    </td>
                     <td className="px-4 py-3">
                       <span className="inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange">
                         {t(`roles.${profile.role}`)}

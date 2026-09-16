@@ -131,6 +131,7 @@ export function InscriptionFlow({
         contact.firstName.trim() &&
         contact.lastName.trim() &&
         contact.email.trim() &&
+        contact.phone.trim() &&
         (isAuthed || contact.password.trim().length >= 8);
       if (isOrg) return Boolean(contactOk && contact.org.trim());
       return Boolean(contactOk);
@@ -212,6 +213,7 @@ export function InscriptionFlow({
         keepers,
         method,
         cadence,
+        phone: contact.phone,
       });
       if (result.status === "auth") {
         setSubmitting(false);
@@ -621,6 +623,7 @@ export function InscriptionFlow({
                 />
                 <input
                   type="tel"
+                  required
                   className={inputClass}
                   placeholder={t("fields.phone")}
                   value={contact.phone}
