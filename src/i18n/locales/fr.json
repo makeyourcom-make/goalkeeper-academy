@@ -1168,7 +1168,10 @@
       "errorCaptcha": "Vérification anti-robot échouée. Réessayez.",
       "roleCoach": "Un entraîneur",
       "roleCoachDescription": "Rejoignez l’équipe technique (accès sur validation).",
-      "successCoach": "Votre compte est créé ! L’accès entraîneur doit être validé par un administrateur de l’association. Vous serez averti dès que c’est fait."
+      "successCoach": "Votre compte est créé ! L’accès entraîneur doit être validé par un administrateur de l’association. Vous serez averti dès que c’est fait.",
+      "phoneLabel": "Téléphone",
+      "phonePlaceholder": "+41 79 000 00 00",
+      "errorPhone": "Indiquez un numéro de téléphone valide."
     },
     "callback": {
       "errorTitle": "Lien invalide ou expiré",

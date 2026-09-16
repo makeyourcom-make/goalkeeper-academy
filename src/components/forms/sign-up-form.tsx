@@ -124,6 +124,21 @@ export function SignUpForm() {
       </div>
 
       <div className="flex flex-col gap-2">
+        <label htmlFor="signup-phone" className="text-sm font-medium text-navy">
+          {t("phoneLabel")}
+        </label>
+        <Input
+          id="signup-phone"
+          name="phone"
+          type="tel"
+          autoComplete="tel"
+          required
+          minLength={7}
+          placeholder={t("phonePlaceholder")}
+        />
+      </div>
+
+      <div className="flex flex-col gap-2">
         <label
           htmlFor="signup-password"
           className="text-sm font-medium text-navy"

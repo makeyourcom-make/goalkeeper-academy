@@ -1168,7 +1168,10 @@
       "errorCaptcha": "Anti-bot check failed. Please try again.",
       "roleCoach": "A coach",
       "roleCoachDescription": "Join the technical team (access on approval).",
-      "successCoach": "Your account has been created! Coach access must be approved by an association administrator. You will be notified once it is done."
+      "successCoach": "Your account has been created! Coach access must be approved by an association administrator. You will be notified once it is done.",
+      "phoneLabel": "Phone",
+      "phonePlaceholder": "+41 79 000 00 00",
+      "errorPhone": "Please enter a valid phone number."
     },
     "callback": {
       "errorTitle": "Invalid or expired link",

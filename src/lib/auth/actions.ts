@@ -24,6 +24,9 @@ const SIGN_IN_SCHEMA = z.object({
 const SIGN_UP_SCHEMA = z.object({
   email: z.string().trim().email(),
   password: z.string().min(8),
+  // Convocations and last-minute changes go by phone: mandatory everywhere a
+  // profile is created (the registration wizard already requires it).
+  phone: z.string().trim().min(7),
   role: z.enum(["parent", "club", "coach"]),
   consent: z.literal("on"),
 });
@@ -85,6 +88,7 @@ export async function signUp(
   const parsed = SIGN_UP_SCHEMA.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
+    phone: formData.get("phone"),
     role: formData.get("role"),
     consent: formData.get("consent"),
   });
@@ -94,6 +98,8 @@ export async function signUp(
       return { status: "error", message: "errorEmail" };
     if (issue?.path[0] === "password")
       return { status: "error", message: "errorPassword" };
+    if (issue?.path[0] === "phone")
+      return { status: "error", message: "errorPhone" };
     if (issue?.path[0] === "role")
       return { status: "error", message: "errorRole" };
     if (issue?.path[0] === "consent")
@@ -125,6 +131,14 @@ export async function signUp(
 
   if (error) {
     return { status: "error", message: "errorGeneric" };
+  }
+
+  // The trigger stores only role/language; the phone goes on the profile.
+  if (data.user) {
+    await createSupabaseAdminClient()
+      .from("profiles")
+      .update({ phone: parsed.data.phone })
+      .eq("id", data.user.id);
   }
 
   // Coach requests always land on the "await validation" message, even when a
