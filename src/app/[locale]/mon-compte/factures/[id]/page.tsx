@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
+import { payInstallment } from "@/lib/inscription/pay-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { creditorConfigured } from "@/lib/invoices/qr-bill";
 import { BUSINESS } from "@/lib/seo";
@@ -27,6 +28,7 @@ type InvoiceRow = {
   issued_at: string;
   payment_method: string | null;
   installment_number: number | null;
+  payment_plan_id: string | null;
   registrations: {
     formula: string;
     children: { first_name: string | null; last_name: string | null } | null;
@@ -52,7 +54,7 @@ export default async function InvoiceDetailPage({ params }: Props) {
   if (!ctx) redirect(`/${locale}/connexion`);
 
   const SELECT =
-    "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
+    "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, payment_plan_id, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
 
   let { data: invoice } = await ctx.db
     .from("invoices")
@@ -87,6 +89,17 @@ export default async function InvoiceDetailPage({ params }: Props) {
   }
 
   if (!invoice) redirect(`/${locale}/mon-compte/factures`);
+
+  // Le bouton Payer depend du mode du plan: TWINT (ou carte en une fois) se
+  // regle echeance par echeance, tandis qu'un abonnement carte est preleve par
+  // Stripe et n'a rien a declencher ici.
+  const { data: plan } = invoice.payment_plan_id
+    ? await ctx.db
+        .from("payment_plans")
+        .select("method, installments_total")
+        .eq("id", invoice.payment_plan_id)
+        .maybeSingle<{ method: string; installments_total: number }>()
+    : { data: null };
 
   const { data: payer } = await ctx.db
     .from("profiles")
@@ -172,6 +185,22 @@ export default async function InvoiceDetailPage({ params }: Props) {
                     {t("qrBill")}
                   </Link>
                 </Button>
+              )}
+            {/* Payer depuis la facture elle-meme: le rappel et l'avis
+                d'echeance pointent ici, et n'y trouvaient aucun bouton.
+                Masque en consultation admin ("voir en tant que") et sur la
+                facture d'autrui: on ne paie jamais a la place d'une famille. */}
+            {isOpen &&
+              !ctx.isImpersonating &&
+              invoice.profile_id === ctx.userId &&
+              plan &&
+              (plan.method === "twint" ||
+                (plan.method === "card" && plan.installments_total === 1)) && (
+                <form action={payInstallment}>
+                  <input type="hidden" name="invoiceId" value={invoice.id} />
+                  <input type="hidden" name="locale" value={locale} />
+                  <Button type="submit">{t("pay")}</Button>
+                </form>
               )}
             {/* A real PDF now, not window.print(): the label promised a
                 download and the family needs a document they can keep. */}
