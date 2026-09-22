@@ -5,6 +5,7 @@ import { Check, Eye, FileDown, Undo2, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { InvoiceForm } from "@/components/admin/invoice-form";
 import {
   markInvoicePaid,
   refundInvoice,
@@ -28,6 +29,7 @@ type InvoiceRow = {
   due_date: string | null;
   installment_number: number | null;
   payment_method: string | null;
+  description: string | null;
   profile: {
     first_name: string | null;
     last_name: string | null;
@@ -94,7 +96,7 @@ export default async function AdminInvoicesPage({
   let query = supabase
     .from("invoices")
     .select(
-      "id, invoice_number, type, amount_cents, currency, status, issued_at, due_date, installment_number, payment_method, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(method, cadence, installments_total, registrations(audience, formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
+      "id, invoice_number, type, amount_cents, currency, status, issued_at, due_date, installment_number, payment_method, description, profile:profiles!invoices_profile_id_fkey(first_name, last_name, email), registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(method, cadence, installments_total, registrations(audience, formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))",
     )
     .order("issued_at", { ascending: false });
   if (STATUSES.includes(status as InvoiceRow["status"])) {
@@ -104,6 +106,27 @@ export default async function AdminInvoicesPage({
     query = query.eq("type", type);
   }
   const { data: invoices } = await query.returns<InvoiceRow[]>();
+
+  // Clients facturables. On lit tous les profils sauf les coachs: un contrat
+  // club est porte par un profil "club", une famille par un profil "parent".
+  const { data: clientRows } = await supabase
+    .from("profiles")
+    .select("id, first_name, last_name, email, role")
+    .in("role", ["parent", "club", "admin"])
+    .order("last_name")
+    .returns<
+      {
+        id: string;
+        first_name: string | null;
+        last_name: string | null;
+        email: string;
+        role: string;
+      }[]
+    >();
+  const clients = (clientRows ?? []).map((c) => {
+    const name = `${c.first_name ?? ""} ${c.last_name ?? ""}`.trim();
+    return { id: c.id, label: name ? `${name} — ${c.email}` : c.email };
+  });
 
   const all = invoices ?? [];
   const needle = q.trim().toLowerCase();
@@ -141,6 +164,8 @@ export default async function AdminInvoicesPage({
           {t("count", { count: list.length })}
         </p>
       </div>
+
+      <InvoiceForm clients={clients} />
 
       <form
         method="get"
@@ -294,6 +319,11 @@ export default async function AdminInvoicesPage({
                       </td>
                       <td className="px-4 py-3 text-grey-700">
                         <div>{t(`types.${invoice.type}`)}</div>
+                        {invoice.description && (
+                          <div className="text-xs text-grey-500">
+                            {invoice.description}
+                          </div>
+                        )}
                         {abo.length > 0 && (
                           <div className="mt-0.5 text-xs text-grey-500">
                             {abo.join(", ")}

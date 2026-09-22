@@ -164,3 +164,92 @@ export async function payInstallment(formData: FormData): Promise<void> {
 
   redirect(url ?? backUrl);
 }
+
+// Pay a stand-alone invoice raised from the admin console: it hangs off no
+// payment plan and no camp registration, so neither payInstallment nor
+// payCampInvoice will take it. The webhook settles it through metadata.invoiceId.
+export async function payStandaloneInvoice(formData: FormData): Promise<void> {
+  const invoiceId = String(formData.get("invoiceId") ?? "");
+  const locale = String(formData.get("locale") ?? "fr") === "en" ? "en" : "fr";
+  const backUrl = `/${locale}/mon-compte/factures`;
+
+  if (!invoiceId) redirect(backUrl);
+  // Admin preview must never trigger a real payment.
+  if (await isViewingAs()) redirect(backUrl);
+
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect(`/${locale}/connexion`);
+
+  const admin = createSupabaseAdminClient();
+  const { data: invoice } = await admin
+    .from("invoices")
+    .select(
+      "id, invoice_number, profile_id, amount_cents, status, payment_method, payment_plan_id, camp_registration_id, description",
+    )
+    .eq("id", invoiceId)
+    .maybeSingle<
+      Pick<
+        Invoice,
+        | "id"
+        | "invoice_number"
+        | "profile_id"
+        | "amount_cents"
+        | "status"
+        | "payment_method"
+        | "payment_plan_id"
+        | "camp_registration_id"
+      > & { description: string | null }
+    >();
+
+  if (
+    !invoice ||
+    invoice.profile_id !== user.id ||
+    (invoice.status !== "pending" && invoice.status !== "overdue") ||
+    invoice.payment_plan_id ||
+    invoice.camp_registration_id
+  ) {
+    redirect(backUrl);
+  }
+
+  const useTwint = invoice.payment_method === "twint";
+  if (
+    invoice.payment_method !== "twint" &&
+    invoice.payment_method !== "stripe"
+  ) {
+    redirect(backUrl);
+  }
+  if (!stripe) redirect(backUrl);
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  let url: string | null = null;
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: useTwint ? ["twint"] : ["card"],
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: "chf",
+            unit_amount: invoice.amount_cents,
+            product_data: {
+              name: `The Last Line - ${invoice.description ?? invoice.invoice_number}`,
+            },
+          },
+        },
+      ],
+      customer_email: user.email || undefined,
+      success_url: `${siteUrl}${backUrl}?paid=1`,
+      cancel_url: `${siteUrl}${backUrl}?canceled=1`,
+      metadata: { invoiceId: invoice.id, kind: "standalone" },
+    });
+    url = session.url;
+  } catch {
+    url = null;
+  }
+
+  redirect(url ?? backUrl);
+}

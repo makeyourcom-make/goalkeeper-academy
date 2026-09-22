@@ -6,6 +6,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { stripe } from "@/lib/stripe/client";
 import { settleInvoicePaid } from "@/lib/invoices/settle";
+import { sendInvoiceDueNotice } from "@/lib/email/invoice-due-notice";
 
 type SupabaseAny = ReturnType<typeof createSupabaseAdminClient>;
 
@@ -178,4 +179,83 @@ export async function cancelInvoice(formData: FormData): Promise<void> {
     await releaseSeats(createSupabaseAdminClient(), updated, "cancelled");
   }
   revalidatePath("/", "layout");
+}
+
+export type CreateInvoiceState = {
+  status: "idle" | "ok" | "error";
+  message: string;
+  invoiceNumber?: string;
+};
+
+// Issue a one-off invoice from the admin console: a make-up session, an agreed
+// arrangement, anything that did not come through the registration wizard.
+// Without it the only way to bill such a thing was to raise the invoice
+// straight in Stripe, where it existed neither in the tracking, nor in the
+// accounts, nor in the family's own space.
+export async function createInvoice(
+  _prev: CreateInvoiceState,
+  formData: FormData,
+): Promise<CreateInvoiceState> {
+  const supabase = await requireAdmin();
+  if (!supabase) return { status: "error", message: "errorAuth" };
+
+  const profileId = String(formData.get("profileId") ?? "").trim();
+  const description = String(formData.get("description") ?? "").trim();
+  const amountRaw = String(formData.get("amount") ?? "").replace(",", ".");
+  const dueDate = String(formData.get("dueDate") ?? "").trim();
+  const method = String(formData.get("method") ?? "twint");
+  const notify = formData.get("notify") === "1";
+
+  if (!profileId || !description) {
+    return { status: "error", message: "errorMissing" };
+  }
+  // Swiss francs in, centimes stored: parse then round, never trust a float.
+  const amount = Number.parseFloat(amountRaw);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return { status: "error", message: "errorAmount" };
+  }
+  const amountCents = Math.round(amount * 100);
+  if (method !== "twint" && method !== "stripe") {
+    return { status: "error", message: "errorMethod" };
+  }
+
+  const admin = createSupabaseAdminClient();
+  const { data: payer } = await admin
+    .from("profiles")
+    .select("id")
+    .eq("id", profileId)
+    .maybeSingle<{ id: string }>();
+  if (!payer) return { status: "error", message: "errorClient" };
+
+  // invoice_number carries a DEFAULT backed by a sequence: never set it here,
+  // or two invoices could collide.
+  const { data: created, error } = await admin
+    .from("invoices")
+    .insert({
+      profile_id: profileId,
+      type: "particulier",
+      description,
+      amount_cents: amountCents,
+      currency: "CHF",
+      status: "pending",
+      due_date: dueDate || null,
+      payment_method: method,
+    })
+    .select("id, invoice_number")
+    .single<{ id: string; invoice_number: string }>();
+
+  if (error || !created) return { status: "error", message: "errorGeneric" };
+
+  if (notify) {
+    // Same notice as an upcoming instalment: amount, due date, a direct link to
+    // the Pay button, and the PDF attached.
+    await sendInvoiceDueNotice(admin, created.id);
+  }
+
+  revalidatePath("/", "layout");
+  return {
+    status: "ok",
+    message: "created",
+    invoiceNumber: created.invoice_number,
+  };
 }

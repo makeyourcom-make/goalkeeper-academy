@@ -90,6 +90,7 @@ type InvoiceRow = {
   paid_at: string | null;
   issued_at: string;
   installment_number: number | null;
+  description: string | null;
   registrations: Reg[];
   payment_plan: {
     installments_total: number;
@@ -102,7 +103,7 @@ type InvoiceRow = {
 };
 
 const SELECT =
-  "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, installment_number, registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(installments_total, registrations(formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
+  "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, installment_number, description, registrations(formula, children(first_name, last_name)), payment_plan:payment_plans(installments_total, registrations(formula, children(first_name, last_name))), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
 
 // Builds the invoice as a real PDF. Runs with whichever client is passed, so
 // RLS still scopes a parent to their own invoices when called from their space.
@@ -257,6 +258,9 @@ export async function buildInvoicePdf(
       : (invoice.payment_plan?.registrations ?? []);
 
   const lines: string[] = [];
+  // Une facture libre porte sa propre designation: elle prime sur le libelle
+  // deduit des inscriptions.
+  if (invoice.description) lines.push(invoice.description);
   if (invoice.camp_registration) {
     const kid = invoice.camp_registration.children;
     lines.push(

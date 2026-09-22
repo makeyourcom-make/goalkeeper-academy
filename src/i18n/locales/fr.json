@@ -703,6 +703,30 @@
         "all": "Toutes",
         "apply": "Filtrer",
         "reset": "Réinitialiser"
+      },
+      "create": {
+        "open": "Nouvelle facture",
+        "title": "Nouvelle facture",
+        "cancel": "Annuler",
+        "client": "Client",
+        "clientPlaceholder": "Choisir un client…",
+        "description": "Désignation",
+        "descriptionPlaceholder": "Séance de rattrapage, arrangement…",
+        "amount": "Montant (CHF)",
+        "dueDate": "Échéance",
+        "method": "Moyen de paiement",
+        "methodTwint": "TWINT",
+        "methodCard": "Carte bancaire",
+        "notify": "Prévenir le client par e-mail",
+        "submit": "Créer la facture",
+        "hint": "La facture apparaît aussitôt dans l’espace du client, avec son bouton Payer.",
+        "created": "Facture {number} créée.",
+        "errorAuth": "Accès refusé.",
+        "errorMissing": "Client et désignation sont obligatoires.",
+        "errorAmount": "Montant invalide.",
+        "errorMethod": "Moyen de paiement invalide.",
+        "errorClient": "Client introuvable.",
+        "errorGeneric": "Une erreur est survenue. Réessayez."
       }
     },
     "camps": {

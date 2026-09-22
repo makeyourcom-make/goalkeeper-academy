@@ -8,7 +8,11 @@ import { redirect } from "next/navigation";
 
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
-import { payInstallment, payCampInvoice } from "@/lib/inscription/pay-actions";
+import {
+  payInstallment,
+  payCampInvoice,
+  payStandaloneInvoice,
+} from "@/lib/inscription/pay-actions";
 import type { Invoice, PaymentPlan } from "@/types/database";
 
 type Props = {
@@ -116,6 +120,13 @@ export default async function InvoicesPage({ params }: Props) {
                 // Camp (stage) invoices have no plan: they pay via their own
                 // action (card/TWINT) or the QR page (qr_bill).
                 const isCamp = !plan && !!invoice.camp_registration_id;
+                // Facture libre emise depuis la console admin: ni forfait, ni
+                // stage. Elle se regle en une fois, par son action dediee.
+                const isStandalone =
+                  !plan &&
+                  !invoice.camp_registration_id &&
+                  (invoice.payment_method === "twint" ||
+                    invoice.payment_method === "stripe");
                 const isCampQr = isCamp && invoice.payment_method === "qr_bill";
                 const isCampOnline = isCamp && !isCampQr;
 
@@ -215,6 +226,23 @@ export default async function InvoicesPage({ params }: Props) {
                           )}
                           {isCampOnline && (
                             <form action={payCampInvoice}>
+                              <input
+                                type="hidden"
+                                name="invoiceId"
+                                value={invoice.id}
+                              />
+                              <input
+                                type="hidden"
+                                name="locale"
+                                value={locale}
+                              />
+                              <Button type="submit" size="sm">
+                                {t("pay")}
+                              </Button>
+                            </form>
+                          )}
+                          {isStandalone && (
+                            <form action={payStandaloneInvoice}>
                               <input
                                 type="hidden"
                                 name="invoiceId"

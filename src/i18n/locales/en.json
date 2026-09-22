@@ -703,6 +703,30 @@
         "all": "All",
         "apply": "Filter",
         "reset": "Reset"
+      },
+      "create": {
+        "open": "New invoice",
+        "title": "New invoice",
+        "cancel": "Cancel",
+        "client": "Client",
+        "clientPlaceholder": "Choose a client…",
+        "description": "Description",
+        "descriptionPlaceholder": "Make-up session, arrangement…",
+        "amount": "Amount (CHF)",
+        "dueDate": "Due date",
+        "method": "Payment method",
+        "methodTwint": "TWINT",
+        "methodCard": "Card",
+        "notify": "Notify the client by e-mail",
+        "submit": "Create invoice",
+        "hint": "The invoice appears right away in the client space, with its Pay button.",
+        "created": "Invoice {number} created.",
+        "errorAuth": "Access denied.",
+        "errorMissing": "Client and description are required.",
+        "errorAmount": "Invalid amount.",
+        "errorMethod": "Invalid payment method.",
+        "errorClient": "Client not found.",
+        "errorGeneric": "Something went wrong. Please try again."
       }
     },
     "camps": {

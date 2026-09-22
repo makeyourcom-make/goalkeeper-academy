@@ -6,7 +6,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { getAccountContext } from "@/lib/account/view-context";
-import { payInstallment } from "@/lib/inscription/pay-actions";
+import {
+  payInstallment,
+  payStandaloneInvoice,
+} from "@/lib/inscription/pay-actions";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { creditorConfigured } from "@/lib/invoices/qr-bill";
 import { BUSINESS } from "@/lib/seo";
@@ -29,6 +32,8 @@ type InvoiceRow = {
   payment_method: string | null;
   installment_number: number | null;
   payment_plan_id: string | null;
+  camp_registration_id: string | null;
+  description: string | null;
   registrations: {
     formula: string;
     children: { first_name: string | null; last_name: string | null } | null;
@@ -54,7 +59,7 @@ export default async function InvoiceDetailPage({ params }: Props) {
   if (!ctx) redirect(`/${locale}/connexion`);
 
   const SELECT =
-    "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, payment_plan_id, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
+    "id, invoice_number, profile_id, type, amount_cents, currency, status, due_date, paid_at, issued_at, payment_method, installment_number, payment_plan_id, camp_registration_id, description, registrations(formula, children(first_name, last_name)), camp_registration:camp_registrations(children(first_name, last_name), camps(title))";
 
   let { data: invoice } = await ctx.db
     .from("invoices")
@@ -127,6 +132,7 @@ export default async function InvoiceDetailPage({ params }: Props) {
 
   // Human line description (camp title, or formula + child names).
   const lines: string[] = [];
+  if (invoice.description) lines.push(invoice.description);
   if (invoice.camp_registration?.camps?.title) {
     const child = invoice.camp_registration.children;
     const who = `${child?.first_name ?? ""} ${child?.last_name ?? ""}`.trim();
@@ -190,6 +196,18 @@ export default async function InvoiceDetailPage({ params }: Props) {
                 d'echeance pointent ici, et n'y trouvaient aucun bouton.
                 Masque en consultation admin ("voir en tant que") et sur la
                 facture d'autrui: on ne paie jamais a la place d'une famille. */}
+            {isOpen &&
+              invoice.profile_id === ctx.userId &&
+              !plan &&
+              !invoice.camp_registration_id &&
+              (invoice.payment_method === "twint" ||
+                invoice.payment_method === "stripe") && (
+                <form action={payStandaloneInvoice}>
+                  <input type="hidden" name="invoiceId" value={invoice.id} />
+                  <input type="hidden" name="locale" value={locale} />
+                  <Button type="submit">{t("pay")}</Button>
+                </form>
+              )}
             {isOpen &&
               invoice.profile_id === ctx.userId &&
               plan &&
