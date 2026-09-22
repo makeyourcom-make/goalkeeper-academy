@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 import { notifyAdminNewRegistration } from "@/lib/email/admin-notify";
+import { sendRegistrationConfirmation } from "@/lib/email/registration-confirmation";
 import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 import {
   CADENCE_MONTHS,
@@ -194,6 +195,7 @@ export async function submitRegistration(
   const now = new Date();
   let firstInvoiceId = "";
   let firstInvoiceNumber = "";
+  let firstDueDate = "";
   for (let i = 1; i <= installmentsTotal; i++) {
     const dueDate = isoDate(addMonths(now, (i - 1) * CADENCE_MONTHS[cadence]));
     const { data: inv, error: invErr } = await admin
@@ -215,6 +217,7 @@ export async function submitRegistration(
     if (i === 1) {
       firstInvoiceId = inv.id;
       firstInvoiceNumber = inv.invoice_number;
+      firstDueDate = dueDate;
     }
   }
 
@@ -275,6 +278,21 @@ export async function submitRegistration(
     });
     if (regErr) return { status: "error" };
   }
+
+  // Tell the family what they owe and how to pay. Without it, a subscriber
+  // paying by transfer never learns where to send the money: their invoice
+  // silently goes overdue and the first thing they hear is a reminder.
+  await sendRegistrationConfirmation({
+    to: user.email ?? "",
+    keeperNames: keepers.map((k) => `${k.firstName} ${k.lastName}`.trim()),
+    total,
+    method,
+    cadence,
+    installments: installmentsTotal,
+    invoiceNumber: firstInvoiceNumber,
+    installmentCents: perCents,
+    dueDate: firstDueDate || null,
+  });
 
   // Alert the admin that a new family registered.
   await notifyAdminNewRegistration(admin, {

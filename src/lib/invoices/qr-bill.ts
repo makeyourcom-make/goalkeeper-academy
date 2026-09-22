@@ -2,9 +2,25 @@
 // from env (CREDITOR_*). The debtor is intentionally omitted — parents fill
 // their own details — which keeps the slip valid without storing addresses.
 
+// Checksum (ISO 13616 mod-97). A placeholder such as "CH00 0000 0000 0000 0000 0"
+// satisfies a mere presence test, so the site once treated it as configured and
+// would have printed a fake IBAN on invoices and e-mails. Validating rules that
+// entire class of mistake out.
+export function isValidIban(raw: string | undefined): boolean {
+  const iban = (raw ?? "").replace(/\s/g, "").toUpperCase();
+  if (!/^[A-Z]{2}\d{2}[A-Z0-9]{10,30}$/.test(iban)) return false;
+  const rearranged = iban.slice(4) + iban.slice(0, 4);
+  const digits = rearranged.replace(/[A-Z]/g, (c) =>
+    String(c.charCodeAt(0) - 55),
+  );
+  let remainder = 0;
+  for (const d of digits) remainder = (remainder * 10 + Number(d)) % 97;
+  return remainder === 1;
+}
+
 export function creditorConfigured(): boolean {
   return Boolean(
-    process.env.CREDITOR_IBAN &&
+    isValidIban(process.env.CREDITOR_IBAN) &&
     process.env.CREDITOR_NAME &&
     process.env.CREDITOR_CITY,
   );

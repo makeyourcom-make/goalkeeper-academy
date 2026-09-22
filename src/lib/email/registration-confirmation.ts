@@ -1,4 +1,5 @@
 import { isEmailConfigured, sendMail } from "@/lib/email/smtp";
+import { paymentInstructions } from "@/lib/invoices/qr-bill";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thelastline.ch";
 
@@ -16,22 +17,6 @@ const CADENCE_LABEL: Record<string, string> = {
 
 function money(cents: number): string {
   return `${(cents / 100).toFixed(2)} CHF`;
-}
-
-// Bank details for a transfer. Kept text-only on purpose: a QR code is a
-// convenience, not a requirement — the IBAN + reference are enough to pay.
-function paymentBlock(invoiceNumber: string, amountCents: number): string {
-  const iban = (process.env.CREDITOR_IBAN ?? "").replace(/\s/g, "");
-  const name = process.env.CREDITOR_NAME;
-  if (!iban || !name) {
-    return `Nous vous transmettons les coordonnées de paiement séparément.`;
-  }
-  const pretty = iban.replace(/(.{4})/g, "$1 ").trim();
-  return `COMMENT PAYER (virement bancaire)
-Bénéficiaire : ${name}
-IBAN : ${pretty}
-Communication : ${invoiceNumber}
-Montant : ${money(amountCents)}`;
 }
 
 type Opts = {
@@ -65,7 +50,7 @@ export async function sendRegistrationConfirmation(opts: Opts): Promise<void> {
   const howToPay = online
     ? `Votre paiement s'effectue en ligne (${method}). Si le paiement n'a pas abouti, vous pouvez le relancer depuis votre espace :
 ${SITE}/fr/mon-compte/factures`
-    : `${paymentBlock(opts.invoiceNumber, opts.installmentCents)}
+    : `${paymentInstructions(opts.invoiceNumber, opts.installmentCents) ?? "Nous vous transmettons les coordonnées de paiement séparément."}
 
 Vous retrouvez votre facture (et son QR, si vous préférez scanner) dans votre espace :
 ${SITE}/fr/mon-compte/factures`;

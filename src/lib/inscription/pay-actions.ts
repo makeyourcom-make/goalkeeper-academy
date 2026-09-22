@@ -35,7 +35,7 @@ export async function payCampInvoice(formData: FormData): Promise<void> {
   if (
     !invoice ||
     invoice.profile_id !== user.id ||
-    invoice.status !== "pending" ||
+    (invoice.status !== "pending" && invoice.status !== "overdue") ||
     !invoice.camp_registration_id
   ) {
     redirect(backUrl);
@@ -112,7 +112,7 @@ export async function payInstallment(formData: FormData): Promise<void> {
   if (
     !invoice ||
     invoice.profile_id !== user.id ||
-    invoice.status !== "pending" ||
+    (invoice.status !== "pending" && invoice.status !== "overdue") ||
     !invoice.payment_plan_id
   ) {
     redirect(backUrl);

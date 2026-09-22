@@ -100,7 +100,11 @@ export default async function InvoicesPage({ params }: Props) {
                 const plan = invoice.payment_plan_id
                   ? planById.get(invoice.payment_plan_id)
                   : undefined;
-                const isPending = invoice.status === "pending";
+                // "overdue" = impayée dont l'échéance est passée: c'est
+                // précisément là qu'il faut pouvoir payer. La restreindre à
+                // "pending" faisait disparaître le bouton au moment du rappel.
+                const isPending =
+                  invoice.status === "pending" || invoice.status === "overdue";
                 const isManualPay =
                   !!plan &&
                   (plan.method === "twint" ||
