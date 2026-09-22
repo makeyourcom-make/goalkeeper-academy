@@ -198,13 +198,7 @@ export default async function InvoiceDetailPage({ params }: Props) {
                 <form action={payInstallment}>
                   <input type="hidden" name="invoiceId" value={invoice.id} />
                   <input type="hidden" name="locale" value={locale} />
-                  <Button
-                    type="submit"
-                    disabled={ctx.isImpersonating}
-                    title={ctx.isImpersonating ? t("payViewAsHint") : undefined}
-                  >
-                    {t("pay")}
-                  </Button>
+                  <Button type="submit">{t("pay")}</Button>
                 </form>
               )}
             {/* A real PDF now, not window.print(): the label promised a

@@ -177,9 +177,11 @@ export default async function InvoicesPage({ params }: Props) {
                       >
                         {t("download")}
                       </a>
-                      {/* Visibles aussi en consultation admin, mais
-                          desactivees: l'admin doit pouvoir constater qu'une
-                          famille a bien de quoi payer, sans payer a sa place. */}
+                      {/* "Voir en tant que" doit montrer l'ecran exact de
+                          la famille, boutons compris: un affichage amenage ne
+                          permettrait plus de diagnostiquer ce qu'elle voit.
+                          La protection est cote serveur: payInstallment
+                          rattache la facture au compte reellement connecte. */}
                       {isPending && (
                         <>
                           {(plan?.method === "qr_bill" || isCampQr) && (
@@ -206,16 +208,7 @@ export default async function InvoicesPage({ params }: Props) {
                                 name="locale"
                                 value={locale}
                               />
-                              <Button
-                                type="submit"
-                                size="sm"
-                                disabled={ctx.isImpersonating}
-                                title={
-                                  ctx.isImpersonating
-                                    ? t("payViewAsHint")
-                                    : undefined
-                                }
-                              >
+                              <Button type="submit" size="sm">
                                 {t("pay")}
                               </Button>
                             </form>
