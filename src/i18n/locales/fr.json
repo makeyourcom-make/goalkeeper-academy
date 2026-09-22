@@ -1421,7 +1421,8 @@
         "qr_bill": "QR-facture",
         "bank_transfer": "Virement bancaire",
         "cash": "Espèces"
-      }
+      },
+      "payViewAsHint": "Seul le client peut effectuer le paiement depuis son compte."
     },
     "terms": {
       "children": "enfants",

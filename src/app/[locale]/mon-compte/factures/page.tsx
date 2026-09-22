@@ -177,7 +177,10 @@ export default async function InvoicesPage({ params }: Props) {
                       >
                         {t("download")}
                       </a>
-                      {isPending && !ctx.isImpersonating && (
+                      {/* Visibles aussi en consultation admin, mais
+                          desactivees: l'admin doit pouvoir constater qu'une
+                          famille a bien de quoi payer, sans payer a sa place. */}
+                      {isPending && (
                         <>
                           {(plan?.method === "qr_bill" || isCampQr) && (
                             <Button asChild size="sm" variant="outline">
@@ -203,7 +206,16 @@ export default async function InvoicesPage({ params }: Props) {
                                 name="locale"
                                 value={locale}
                               />
-                              <Button type="submit" size="sm">
+                              <Button
+                                type="submit"
+                                size="sm"
+                                disabled={ctx.isImpersonating}
+                                title={
+                                  ctx.isImpersonating
+                                    ? t("payViewAsHint")
+                                    : undefined
+                                }
+                              >
                                 {t("pay")}
                               </Button>
                             </form>

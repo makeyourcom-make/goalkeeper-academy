@@ -191,7 +191,6 @@ export default async function InvoiceDetailPage({ params }: Props) {
                 Masque en consultation admin ("voir en tant que") et sur la
                 facture d'autrui: on ne paie jamais a la place d'une famille. */}
             {isOpen &&
-              !ctx.isImpersonating &&
               invoice.profile_id === ctx.userId &&
               plan &&
               (plan.method === "twint" ||
@@ -199,7 +198,13 @@ export default async function InvoiceDetailPage({ params }: Props) {
                 <form action={payInstallment}>
                   <input type="hidden" name="invoiceId" value={invoice.id} />
                   <input type="hidden" name="locale" value={locale} />
-                  <Button type="submit">{t("pay")}</Button>
+                  <Button
+                    type="submit"
+                    disabled={ctx.isImpersonating}
+                    title={ctx.isImpersonating ? t("payViewAsHint") : undefined}
+                  >
+                    {t("pay")}
+                  </Button>
                 </form>
               )}
             {/* A real PDF now, not window.print(): the label promised a

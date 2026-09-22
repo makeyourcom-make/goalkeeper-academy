@@ -1421,7 +1421,8 @@
         "qr_bill": "QR-invoice",
         "bank_transfer": "Bank transfer",
         "cash": "Cash"
-      }
+      },
+      "payViewAsHint": "Only the client can make the payment from their own account."
     },
     "terms": {
       "children": "children",
