@@ -48,7 +48,9 @@ export async function sendInvoiceDueReminder(
     : en
       ? "Hello,"
       : "Bonjour,";
-  const invoicesUrl = `${SITE}/${en ? "en/account/invoices" : "fr/mon-compte/factures"}`;
+  // Lien direct vers la facture concernée, pas vers la liste: le bouton Payer
+  // est sur la facture elle-même.
+  const invoicesUrl = `${SITE}/${en ? "en/account/invoices" : "fr/mon-compte/factures"}/${invoiceId}`;
 
   const subject = en
     ? `Payment reminder — ${invoice.invoice_number}`
@@ -61,7 +63,7 @@ A payment is still due:
 Invoice: ${invoice.invoice_number}
 Amount: ${amount} ${invoice.currency}
 
-Please settle it from My invoices: ${invoicesUrl}
+Pay online (card or TWINT): ${invoicesUrl}
 
 Thank you,
 The Last Line team`
@@ -72,7 +74,7 @@ Un versement est toujours en attente :
 Facture : ${invoice.invoice_number}
 Montant : ${amount} ${invoice.currency}
 
-Merci de le régler depuis Mes factures : ${invoicesUrl}
+Payer en ligne (carte ou TWINT) : ${invoicesUrl}
 
 Merci,
 L'équipe The Last Line`;
