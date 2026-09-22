@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, Eye, Undo2, X } from "lucide-react";
+import { Check, Eye, FileDown, Undo2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -351,6 +351,16 @@ export default async function AdminInvoicesPage({
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex flex-wrap items-center justify-end gap-1">
+                          <Button asChild variant="ghost" size="sm">
+                            <a
+                              href={`/api/invoices/${invoice.id}/pdf`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <FileDown className="mr-1 h-4 w-4" />
+                              PDF
+                            </a>
+                          </Button>
                           <Button asChild variant="ghost" size="sm">
                             <Link
                               href={{

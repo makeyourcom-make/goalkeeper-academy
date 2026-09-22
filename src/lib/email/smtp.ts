@@ -39,6 +39,13 @@ type SendArgs = {
   // Free-form category for the email log (e.g. "manual", "payment",
   // "registration", "convocation", "reminder"). Defaults to "auto".
   kind?: string;
+  // Files to attach, e.g. the invoice PDF. Never logged (only the metadata of
+  // a send is recorded), so no document content reaches the log table.
+  attachments?: {
+    filename: string;
+    content: Buffer;
+    contentType?: string;
+  }[];
 };
 
 // Best-effort write to the email log. Never throws (the table may not be
@@ -72,6 +79,7 @@ export async function sendMail(args: SendArgs): Promise<boolean> {
       subject: args.subject,
       text: args.text,
       replyTo: args.replyTo,
+      attachments: args.attachments,
     });
     await logEmail(args, "sent");
     return true;

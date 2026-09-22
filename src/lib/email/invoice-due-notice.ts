@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { isEmailConfigured, sendMail } from "@/lib/email/smtp";
+import { buildInvoicePdf } from "@/lib/invoices/pdf";
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.thelastline.ch";
 
@@ -115,11 +116,23 @@ Si vous avez déjà réglé, ce message ne vous concerne pas.
 Merci,
 L'équipe The Last Line`;
 
+  // Best-effort: a PDF that fails to build must not hold back the e-mail.
+  const pdf = await buildInvoicePdf(admin, invoiceId).catch(() => null);
+
   await sendMail({
     to: profile.email,
     subject,
     text,
     kind: DUE_NOTICE_KIND,
+    attachments: pdf
+      ? [
+          {
+            filename: pdf.filename,
+            content: Buffer.from(pdf.bytes),
+            contentType: "application/pdf",
+          },
+        ]
+      : undefined,
   });
   return true;
 }

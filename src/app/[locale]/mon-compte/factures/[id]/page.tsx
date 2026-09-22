@@ -5,7 +5,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { PrintButton } from "@/components/invoices/print-button";
 import { getAccountContext } from "@/lib/account/view-context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { creditorConfigured } from "@/lib/invoices/qr-bill";
@@ -174,7 +173,17 @@ export default async function InvoiceDetailPage({ params }: Props) {
                   </Link>
                 </Button>
               )}
-            <PrintButton label={t("downloadPdf")} />
+            {/* A real PDF now, not window.print(): the label promised a
+                download and the family needs a document they can keep. */}
+            <Button asChild>
+              <a
+                href={`/api/invoices/${invoice.id}/pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {t("downloadPdf")}
+              </a>
+            </Button>
           </div>
         </div>
 

@@ -37,3 +37,6 @@ next-env.d.ts
 
 # Local Claude Code config
 .claude/
+
+# PDF de test generes localement (peuvent contenir des donnees clients)
+facture-test.pdf

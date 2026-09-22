@@ -157,26 +157,26 @@ export default async function InvoicesPage({ params }: Props) {
                           locale,
                         )}
                       </p>
-                      {invoice.pdf_url ? (
-                        <a
-                          href={invoice.pdf_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-medium text-orange hover:underline"
-                        >
-                          {t("download")}
-                        </a>
-                      ) : (
-                        <Link
-                          href={{
-                            pathname: "/mon-compte/factures/[id]",
-                            params: { id: invoice.id },
-                          }}
-                          className="text-xs font-medium text-orange hover:underline"
-                        >
-                          {t("view")}
-                        </Link>
-                      )}
+                      <Link
+                        href={{
+                          pathname: "/mon-compte/factures/[id]",
+                          params: { id: invoice.id },
+                        }}
+                        className="text-xs font-medium text-orange hover:underline"
+                      >
+                        {t("view")}
+                      </Link>
+                      {/* Always our own PDF: it carries the GKA number and the
+                          association's details, where pdf_url may hold Stripe's
+                          own document for a card subscription. */}
+                      <a
+                        href={`/api/invoices/${invoice.id}/pdf`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-medium text-orange hover:underline"
+                      >
+                        {t("download")}
+                      </a>
                       {isPending && !ctx.isImpersonating && (
                         <>
                           {(plan?.method === "qr_bill" || isCampQr) && (
