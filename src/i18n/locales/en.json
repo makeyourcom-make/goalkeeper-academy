@@ -727,6 +727,11 @@
         "errorMethod": "Invalid payment method.",
         "errorClient": "Client not found.",
         "errorGeneric": "Something went wrong. Please try again."
+      },
+      "group": {
+        "count": "{count, plural, one {# invoice} other {# invoices}}",
+        "due": "{amount} outstanding",
+        "paid": "{amount} collected"
       }
     },
     "camps": {

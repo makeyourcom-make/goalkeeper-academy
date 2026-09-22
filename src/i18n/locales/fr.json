@@ -727,6 +727,11 @@
         "errorMethod": "Moyen de paiement invalide.",
         "errorClient": "Client introuvable.",
         "errorGeneric": "Une erreur est survenue. Réessayez."
+      },
+      "group": {
+        "count": "{count, plural, one {# facture} other {# factures}}",
+        "due": "{amount} à encaisser",
+        "paid": "{amount} encaissés"
       }
     },
     "camps": {

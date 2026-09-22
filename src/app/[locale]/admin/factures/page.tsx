@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Check, Eye, FileDown, Undo2, X } from "lucide-react";
+import { Check, ChevronRight, Eye, FileDown, Undo2, X } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -151,6 +151,237 @@ export default async function AdminInvoicesPage({
     year: "numeric",
   });
 
+  // Une ligne de facture, partagee par tous les groupes clients.
+  const invoiceRow = (invoice: InvoiceRow) => {
+    const plan = invoice.payment_plan;
+    const planRegs = plan?.registrations ?? [];
+    const kidNames = [
+      ...new Set(
+        (planRegs.length
+          ? planRegs.map((r) =>
+              `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
+            )
+          : (invoice.registrations ?? []).map((r) =>
+              `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
+            )
+        ).filter(Boolean),
+      ),
+    ];
+    const abo = [
+      ...new Set(
+        planRegs.map(
+          (r) =>
+            `${t(`formulas.${r.formula}`)} · ${t(`audiences.${r.audience}`)}`,
+        ),
+      ),
+    ];
+    const method = invoice.payment_method ?? plan?.method ?? null;
+    return (
+      <tr key={invoice.id} className="hover:bg-grey-100/40">
+        <td className="px-4 py-3 font-mono text-xs font-medium text-navy">
+          {invoice.invoice_number}
+        </td>
+        <td className="px-4 py-3 text-grey-700">
+          <div>
+            {invoice.profile
+              ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
+                invoice.profile.email
+              : "—"}
+          </div>
+          {kidNames.length > 0 && (
+            <div className="mt-0.5 text-xs text-grey-500">
+              {kidNames.join(", ")}
+            </div>
+          )}
+          {invoice.camp_registration?.children && (
+            <div className="mt-0.5 text-xs text-grey-500">
+              {`${invoice.camp_registration.children.first_name ?? ""} ${invoice.camp_registration.children.last_name ?? ""}`.trim()}
+              {invoice.camp_registration.camps?.title
+                ? ` · ${invoice.camp_registration.camps.title}`
+                : ""}
+            </div>
+          )}
+        </td>
+        <td className="px-4 py-3 text-grey-700">
+          <div>{t(`types.${invoice.type}`)}</div>
+          {invoice.description && (
+            <div className="text-xs text-grey-500">{invoice.description}</div>
+          )}
+          {abo.length > 0 && (
+            <div className="mt-0.5 text-xs text-grey-500">{abo.join(", ")}</div>
+          )}
+        </td>
+        <td className="px-4 py-3 font-medium text-navy">
+          {moneyFmt(invoice.amount_cents, invoice.currency)}
+        </td>
+        <td className="px-4 py-3 text-grey-700">
+          {method ? (
+            <div className="text-navy">{t(`methods.${method}`)}</div>
+          ) : (
+            <span className="text-grey-400">—</span>
+          )}
+          {plan && (
+            <div className="mt-0.5 text-xs text-grey-500">
+              {plan.installments_total > 1
+                ? t("split", {
+                    count: plan.installments_total,
+                    cadence: t(`cadences.${plan.cadence}`),
+                  })
+                : t("oneOff")}
+            </div>
+          )}
+          {plan &&
+            plan.installments_total > 1 &&
+            invoice.installment_number && (
+              <div className="text-grey-400 text-xs">
+                {t("installment", {
+                  n: invoice.installment_number,
+                  total: plan.installments_total,
+                })}
+              </div>
+            )}
+        </td>
+        <td className="px-4 py-3">
+          <span
+            className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[invoice.status]}`}
+          >
+            {t(`statuses.${invoice.status}`)}
+          </span>
+        </td>
+        <td className="px-4 py-3 text-grey-500">
+          <div>{dateFmt.format(new Date(invoice.issued_at))}</div>
+          {invoice.due_date && (
+            <div className="text-grey-400 mt-0.5 text-xs">
+              {t("due", {
+                date: dateFmt.format(new Date(invoice.due_date)),
+              })}
+            </div>
+          )}
+        </td>
+        <td className="px-4 py-3">
+          <div className="flex flex-wrap items-center justify-end gap-1">
+            <Button asChild variant="ghost" size="sm">
+              <a
+                href={`/api/invoices/${invoice.id}/pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FileDown className="mr-1 h-4 w-4" />
+                PDF
+              </a>
+            </Button>
+            <Button asChild variant="ghost" size="sm">
+              <Link
+                href={{
+                  pathname: "/mon-compte/factures/[id]",
+                  params: { id: invoice.id },
+                }}
+              >
+                <Eye className="mr-1 h-4 w-4" />
+                {t("view")}
+              </Link>
+            </Button>
+            {(invoice.status === "pending" || invoice.status === "overdue") && (
+              <>
+                <form action={markInvoicePaid}>
+                  <input type="hidden" name="id" value={invoice.id} />
+                  <Button type="submit" variant="ghost" size="sm">
+                    <Check className="mr-1 h-4 w-4" />
+                    {t("markPaid")}
+                  </Button>
+                </form>
+                <form action={cancelInvoice}>
+                  <input type="hidden" name="id" value={invoice.id} />
+                  <Button
+                    type="submit"
+                    variant="ghost"
+                    size="sm"
+                    className="text-grey-500"
+                  >
+                    <X className="mr-1 h-4 w-4" />
+                    {t("cancel")}
+                  </Button>
+                </form>
+              </>
+            )}
+            {invoice.status === "paid" && (
+              <>
+                <form action={refundInvoice}>
+                  <input type="hidden" name="id" value={invoice.id} />
+                  <input type="hidden" name="percent" value="50" />
+                  <Button
+                    type="submit"
+                    variant="ghost"
+                    size="sm"
+                    className="text-grey-500"
+                  >
+                    {t("refundHalf")}
+                  </Button>
+                </form>
+                <form action={refundInvoice}>
+                  <input type="hidden" name="id" value={invoice.id} />
+                  <input type="hidden" name="percent" value="100" />
+                  <Button
+                    type="submit"
+                    variant="ghost"
+                    size="sm"
+                    className="text-error"
+                  >
+                    <Undo2 className="mr-1 h-4 w-4" />
+                    {t("refund")}
+                  </Button>
+                </form>
+              </>
+            )}
+          </div>
+        </td>
+      </tr>
+    );
+  };
+
+  // Regroupement par client: 39 factures a plat se lisent mal, et ce qui
+  // interesse l'admin c'est "qui doit quoi". Les clients ayant un solde ouvert
+  // remontent en tete, les retards d'abord.
+  type Group = {
+    key: string;
+    name: string;
+    email: string;
+    currency: string;
+    invoices: InvoiceRow[];
+    openCents: number;
+    paidCents: number;
+    hasOverdue: boolean;
+  };
+  const byClient = new Map<string, Group>();
+  for (const inv of list) {
+    const email = inv.profile?.email ?? "—";
+    const name =
+      `${inv.profile?.first_name ?? ""} ${inv.profile?.last_name ?? ""}`.trim() ||
+      email;
+    const g = byClient.get(email) ?? {
+      key: email,
+      name,
+      email,
+      currency: inv.currency || "CHF",
+      invoices: [],
+      openCents: 0,
+      paidCents: 0,
+      hasOverdue: false,
+    };
+    g.invoices.push(inv);
+    if (inv.status === "pending" || inv.status === "overdue") {
+      g.openCents += inv.amount_cents;
+    }
+    if (inv.status === "paid") g.paidCents += inv.amount_cents;
+    if (inv.status === "overdue") g.hasOverdue = true;
+    byClient.set(email, g);
+  }
+  const groups = [...byClient.values()].sort((a, b) => {
+    if (a.hasOverdue !== b.hasOverdue) return a.hasOverdue ? -1 : 1;
+    if (a.openCents !== b.openCents) return b.openCents - a.openCents;
+    return a.name.localeCompare(b.name);
+  });
+
   return (
     <div className="container py-12 lg:py-16">
       <div className="flex flex-col gap-3">
@@ -239,256 +470,92 @@ export default async function AdminInvoicesPage({
         )}
       </form>
 
-      <div className="mt-4 overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
-              <tr>
-                <th className="px-4 py-3 font-medium">{t("table.number")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.client")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.type")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.amount")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.payment")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.status")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.issued")}</th>
-                <th className="px-4 py-3 text-right font-medium">
-                  {t("table.actions")}
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-grey-100">
-              {list.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={8}
-                    className="px-4 py-8 text-center text-grey-500"
+      {groups.length === 0 ? (
+        <p className="mt-4 rounded-2xl border border-grey-100 bg-white p-8 text-center text-sm text-grey-500 shadow-sm">
+          {t("empty")}
+        </p>
+      ) : (
+        <div className="mt-4 flex flex-col gap-3">
+          {groups.map((g) => (
+            <details
+              key={g.key}
+              open={groups.length === 1 || filtered}
+              className="group overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm"
+            >
+              <summary className="flex cursor-pointer list-none flex-wrap items-center gap-3 px-4 py-3">
+                <ChevronRight className="h-5 w-5 shrink-0 text-orange transition-transform group-open:rotate-90" />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate font-medium text-navy">
+                    {g.name}
+                  </span>
+                  <span className="block truncate text-xs text-grey-500">
+                    {g.email}
+                  </span>
+                </span>
+                <span className="text-xs text-grey-500">
+                  {t("group.count", { count: g.invoices.length })}
+                </span>
+                {g.openCents > 0 && (
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                      g.hasOverdue
+                        ? "bg-error/10 text-error"
+                        : "bg-warning/15 text-warning"
+                    }`}
                   >
-                    {t("empty")}
-                  </td>
-                </tr>
-              ) : (
-                list.map((invoice) => {
-                  const plan = invoice.payment_plan;
-                  const planRegs = plan?.registrations ?? [];
-                  const kidNames = [
-                    ...new Set(
-                      (planRegs.length
-                        ? planRegs.map((r) =>
-                            `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
-                          )
-                        : (invoice.registrations ?? []).map((r) =>
-                            `${r.children?.first_name ?? ""} ${r.children?.last_name ?? ""}`.trim(),
-                          )
-                      ).filter(Boolean),
-                    ),
-                  ];
-                  const abo = [
-                    ...new Set(
-                      planRegs.map(
-                        (r) =>
-                          `${t(`formulas.${r.formula}`)} · ${t(`audiences.${r.audience}`)}`,
-                      ),
-                    ),
-                  ];
-                  const method = invoice.payment_method ?? plan?.method ?? null;
-                  return (
-                    <tr key={invoice.id} className="hover:bg-grey-100/40">
-                      <td className="px-4 py-3 font-mono text-xs font-medium text-navy">
-                        {invoice.invoice_number}
-                      </td>
-                      <td className="px-4 py-3 text-grey-700">
-                        <div>
-                          {invoice.profile
-                            ? `${invoice.profile.first_name ?? ""} ${invoice.profile.last_name ?? ""}`.trim() ||
-                              invoice.profile.email
-                            : "—"}
-                        </div>
-                        {kidNames.length > 0 && (
-                          <div className="mt-0.5 text-xs text-grey-500">
-                            {kidNames.join(", ")}
-                          </div>
-                        )}
-                        {invoice.camp_registration?.children && (
-                          <div className="mt-0.5 text-xs text-grey-500">
-                            {`${invoice.camp_registration.children.first_name ?? ""} ${invoice.camp_registration.children.last_name ?? ""}`.trim()}
-                            {invoice.camp_registration.camps?.title
-                              ? ` · ${invoice.camp_registration.camps.title}`
-                              : ""}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 text-grey-700">
-                        <div>{t(`types.${invoice.type}`)}</div>
-                        {invoice.description && (
-                          <div className="text-xs text-grey-500">
-                            {invoice.description}
-                          </div>
-                        )}
-                        {abo.length > 0 && (
-                          <div className="mt-0.5 text-xs text-grey-500">
-                            {abo.join(", ")}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-4 py-3 font-medium text-navy">
-                        {moneyFmt(invoice.amount_cents, invoice.currency)}
-                      </td>
-                      <td className="px-4 py-3 text-grey-700">
-                        {method ? (
-                          <div className="text-navy">
-                            {t(`methods.${method}`)}
-                          </div>
-                        ) : (
-                          <span className="text-grey-400">—</span>
-                        )}
-                        {plan && (
-                          <div className="mt-0.5 text-xs text-grey-500">
-                            {plan.installments_total > 1
-                              ? t("split", {
-                                  count: plan.installments_total,
-                                  cadence: t(`cadences.${plan.cadence}`),
-                                })
-                              : t("oneOff")}
-                          </div>
-                        )}
-                        {plan &&
-                          plan.installments_total > 1 &&
-                          invoice.installment_number && (
-                            <div className="text-grey-400 text-xs">
-                              {t("installment", {
-                                n: invoice.installment_number,
-                                total: plan.installments_total,
-                              })}
-                            </div>
-                          )}
-                      </td>
-                      <td className="px-4 py-3">
-                        <span
-                          className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_STYLES[invoice.status]}`}
-                        >
-                          {t(`statuses.${invoice.status}`)}
-                        </span>
-                      </td>
-                      <td className="px-4 py-3 text-grey-500">
-                        <div>{dateFmt.format(new Date(invoice.issued_at))}</div>
-                        {invoice.due_date && (
-                          <div className="text-grey-400 mt-0.5 text-xs">
-                            {t("due", {
-                              date: dateFmt.format(new Date(invoice.due_date)),
-                            })}
-                          </div>
-                        )}
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex flex-wrap items-center justify-end gap-1">
-                          <Button asChild variant="ghost" size="sm">
-                            <a
-                              href={`/api/invoices/${invoice.id}/pdf`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              <FileDown className="mr-1 h-4 w-4" />
-                              PDF
-                            </a>
-                          </Button>
-                          <Button asChild variant="ghost" size="sm">
-                            <Link
-                              href={{
-                                pathname: "/mon-compte/factures/[id]",
-                                params: { id: invoice.id },
-                              }}
-                            >
-                              <Eye className="mr-1 h-4 w-4" />
-                              {t("view")}
-                            </Link>
-                          </Button>
-                          {(invoice.status === "pending" ||
-                            invoice.status === "overdue") && (
-                            <>
-                              <form action={markInvoicePaid}>
-                                <input
-                                  type="hidden"
-                                  name="id"
-                                  value={invoice.id}
-                                />
-                                <Button type="submit" variant="ghost" size="sm">
-                                  <Check className="mr-1 h-4 w-4" />
-                                  {t("markPaid")}
-                                </Button>
-                              </form>
-                              <form action={cancelInvoice}>
-                                <input
-                                  type="hidden"
-                                  name="id"
-                                  value={invoice.id}
-                                />
-                                <Button
-                                  type="submit"
-                                  variant="ghost"
-                                  size="sm"
-                                  className="text-grey-500"
-                                >
-                                  <X className="mr-1 h-4 w-4" />
-                                  {t("cancel")}
-                                </Button>
-                              </form>
-                            </>
-                          )}
-                          {invoice.status === "paid" && (
-                            <>
-                              <form action={refundInvoice}>
-                                <input
-                                  type="hidden"
-                                  name="id"
-                                  value={invoice.id}
-                                />
-                                <input
-                                  type="hidden"
-                                  name="percent"
-                                  value="50"
-                                />
-                                <Button
-                                  type="submit"
-                                  variant="ghost"
-                                  size="sm"
-                                  className="text-grey-500"
-                                >
-                                  {t("refundHalf")}
-                                </Button>
-                              </form>
-                              <form action={refundInvoice}>
-                                <input
-                                  type="hidden"
-                                  name="id"
-                                  value={invoice.id}
-                                />
-                                <input
-                                  type="hidden"
-                                  name="percent"
-                                  value="100"
-                                />
-                                <Button
-                                  type="submit"
-                                  variant="ghost"
-                                  size="sm"
-                                  className="text-error"
-                                >
-                                  <Undo2 className="mr-1 h-4 w-4" />
-                                  {t("refund")}
-                                </Button>
-                              </form>
-                            </>
-                          )}
-                        </div>
-                      </td>
+                    {t("group.due", {
+                      amount: moneyFmt(g.openCents, g.currency),
+                    })}
+                  </span>
+                )}
+                {g.paidCents > 0 && (
+                  <span className="rounded-full bg-success/15 px-2 py-0.5 text-xs font-semibold text-success">
+                    {t("group.paid", {
+                      amount: moneyFmt(g.paidCents, g.currency),
+                    })}
+                  </span>
+                )}
+              </summary>
+
+              <div className="overflow-x-auto border-t border-grey-100">
+                <table className="w-full text-sm">
+                  <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
+                    <tr>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.number")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.client")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.type")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.amount")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.payment")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.status")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("table.issued")}
+                      </th>
+                      <th className="px-4 py-3 text-right font-medium">
+                        {t("table.actions")}
+                      </th>
                     </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
+                  </thead>
+                  <tbody className="divide-y divide-grey-100">
+                    {g.invoices.map(invoiceRow)}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          ))}
         </div>
-      </div>
+      )}
     </div>
   );
 }
