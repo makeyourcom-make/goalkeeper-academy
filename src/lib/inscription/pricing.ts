@@ -86,7 +86,11 @@ export function computeTotals(keepers: OrderKeeper[]): PricedOrder {
 // ============================================================================
 
 export type PaymentMethod = "card" | "twint" | "qr_bill";
-export const PAYMENT_METHODS: PaymentMethod[] = ["card", "twint", "qr_bill"];
+// Méthodes proposées à l'inscription. "qr_bill" reste dans le type parce que
+// des plans et des factures existants le portent, mais il n'est plus offert:
+// l'association n'a pas de compte bancaire (tout passe par Stripe), donc une
+// facture à virer était impayable et finissait en rappel d'impayé.
+export const PAYMENT_METHODS: PaymentMethod[] = ["card", "twint"];
 
 // annual = paid once; the others split the total into N installments.
 export type Cadence = "annual" | "semiannual" | "quarterly" | "monthly";

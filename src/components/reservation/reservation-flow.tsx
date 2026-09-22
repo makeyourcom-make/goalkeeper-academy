@@ -7,7 +7,6 @@ import {
   Check,
   CreditCard,
   Smartphone,
-  FileText,
   Lock,
   Loader2,
   ArrowRight,
@@ -386,12 +385,11 @@ export function ReservationFlow({
               </div>
 
               {/* Payment method tabs */}
-              <div role="tablist" className="grid grid-cols-3 gap-2">
+              <div role="tablist" className="grid grid-cols-2 gap-2">
                 {(
                   [
                     { key: "card", Icon: CreditCard },
                     { key: "twint", Icon: Smartphone },
-                    { key: "qr_bill", Icon: FileText },
                   ] as const
                 ).map(({ key, Icon }) => {
                   const active = paymentMethod === key;
@@ -440,21 +438,6 @@ export function ReservationFlow({
                   <p className="text-sm text-grey-700">
                     {t("step3.twint.body")}
                   </p>
-                </div>
-              )}
-
-              {paymentMethod === "qr_bill" && (
-                <div className="flex flex-col gap-3 rounded-xl border border-grey-100 bg-white p-6">
-                  <FileText className="h-8 w-8 text-orange" />
-                  <p className="font-medium text-navy">{t("step3.qr.title")}</p>
-                  <p className="text-sm text-grey-700">{t("step3.qr.body")}</p>
-                  <ul className="mt-2 flex flex-col gap-1 text-xs text-grey-500">
-                    <li>{t("step3.qr.iban")} CH00 0000 0000 0000 0000 0</li>
-                    <li>{t("step3.qr.beneficiary")} The Last Line SA</li>
-                    <li>
-                      {t("step3.qr.due")} 30 {t("step3.qr.days")}
-                    </li>
-                  </ul>
                 </div>
               )}
 
