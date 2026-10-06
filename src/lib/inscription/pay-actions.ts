@@ -42,7 +42,6 @@ export async function payCampInvoice(formData: FormData): Promise<void> {
   }
 
   // Only card / TWINT go through Stripe here; QR-bill uses the printable QR page.
-  const useTwint = invoice.payment_method === "twint";
   if (
     invoice.payment_method !== "twint" &&
     invoice.payment_method !== "stripe"
@@ -56,7 +55,9 @@ export async function payCampInvoice(formData: FormData): Promise<void> {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: useTwint ? ["twint"] : ["card"],
+      // Les deux moyens, le client choisit sur la page Stripe. Le mode
+      // enregistre sur la facture ne sert qu'au suivi et aux relances.
+      payment_method_types: ["card", "twint"],
       line_items: [
         {
           quantity: 1,
@@ -135,7 +136,9 @@ export async function payInstallment(formData: FormData): Promise<void> {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: plan.method === "twint" ? ["twint"] : ["card"],
+      // Les deux moyens, le client choisit sur la page Stripe. Le mode
+      // enregistre sur la facture ne sert qu'au suivi et aux relances.
+      payment_method_types: ["card", "twint"],
       line_items: [
         {
           quantity: 1,
@@ -214,7 +217,6 @@ export async function payStandaloneInvoice(formData: FormData): Promise<void> {
     redirect(backUrl);
   }
 
-  const useTwint = invoice.payment_method === "twint";
   if (
     invoice.payment_method !== "twint" &&
     invoice.payment_method !== "stripe"
@@ -228,7 +230,9 @@ export async function payStandaloneInvoice(formData: FormData): Promise<void> {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: useTwint ? ["twint"] : ["card"],
+      // Les deux moyens, le client choisit sur la page Stripe. Le mode
+      // enregistre sur la facture ne sert qu'au suivi et aux relances.
+      payment_method_types: ["card", "twint"],
       line_items: [
         {
           quantity: 1,
