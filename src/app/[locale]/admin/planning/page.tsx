@@ -60,13 +60,7 @@ type SessionQ = {
   coaches: {
     profiles: { first_name: string | null; last_name: string | null } | null;
   } | null;
-  session_attendees: {
-    child_id: string;
-    children:
-      | { first_name: string; last_name: string }
-      | { first_name: string; last_name: string }[]
-      | null;
-  }[];
+  session_attendees: { child_id: string }[];
 };
 
 function fullName(
@@ -112,7 +106,7 @@ export default async function AdminPlanningPage({
     supabase
       .from("sessions")
       .select(
-        "id, title, location, meet_at, starts_at, ends_at, status, series_id, is_private, coaches(profiles(first_name, last_name)), session_attendees(child_id, children(first_name, last_name))",
+        "id, title, location, meet_at, starts_at, ends_at, status, series_id, is_private, coaches(profiles(first_name, last_name)), session_attendees(child_id)",
       )
       .order("starts_at", { ascending: true })
       .returns<SessionQ[]>(),
@@ -127,6 +121,7 @@ export default async function AdminPlanningPage({
     name: `${k.first_name} ${k.last_name}`.trim(),
     club: k.clubs?.name ?? null,
   }));
+  const keeperName = new Map(keepers.map((k) => [k.id, k.name]));
   const sessions = sessionsRes.data ?? [];
 
   // Sessions falling within the displayed calendar month.
@@ -216,9 +211,7 @@ export default async function AdminPlanningPage({
       {(s.session_attendees?.length ?? 0) > 0 && (
         <div className="mt-2 flex flex-wrap gap-1.5">
           {s.session_attendees.map((a) => {
-            const kid = Array.isArray(a.children) ? a.children[0] : a.children;
-            const name =
-              `${kid?.first_name ?? ""} ${kid?.last_name ?? ""}`.trim();
+            const name = keeperName.get(a.child_id);
             if (!name) return null;
             return (
               <span
