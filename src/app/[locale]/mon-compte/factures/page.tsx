@@ -109,14 +109,23 @@ export default async function InvoicesPage({ params }: Props) {
                 // "pending" faisait disparaître le bouton au moment du rappel.
                 const isPending =
                   invoice.status === "pending" || invoice.status === "overdue";
-                const isManualPay =
-                  !!plan &&
-                  (plan.method === "twint" ||
-                    (plan.method === "card" && plan.installments_total === 1));
+                // Une carte en plusieurs fois n'est prelevee automatiquement
+                // que si l'abonnement Stripe existe vraiment. Quand le checkout
+                // n'a pas abouti, il n'y a rien a prelever: la facture doit
+                // alors se regler a la main, sans quoi la famille n'a aucun
+                // moyen de payer (cas reste invisible cinq semaines en
+                // septembre).
+                const hasSubscription = !!plan?.stripe_subscription_id;
                 const isAutoCard =
                   !!plan &&
                   plan.method === "card" &&
-                  plan.installments_total > 1;
+                  plan.installments_total > 1 &&
+                  hasSubscription;
+                const isManualPay =
+                  !!plan &&
+                  (plan.method === "twint" ||
+                    (plan.method === "card" &&
+                      (plan.installments_total === 1 || !hasSubscription)));
                 // Camp (stage) invoices have no plan: they pay via their own
                 // action (card/TWINT) or the QR page (qr_bill).
                 const isCamp = !plan && !!invoice.camp_registration_id;
