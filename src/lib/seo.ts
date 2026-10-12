@@ -57,10 +57,17 @@ export const BUSINESS = {
     "Suisse romande",
   ],
   // Social profiles (sameAs) — reinforces the entity for Google & AI search.
-  sameAs: ["https://www.instagram.com/thelastline.goalkeeper"] as string[],
+  sameAs: [
+    "https://www.instagram.com/thelastline.goalkeeper",
+    "https://www.facebook.com/thelastline.goalkeeper",
+  ] as string[],
   instagram: {
     handle: "thelastline.goalkeeper",
     url: "https://www.instagram.com/thelastline.goalkeeper",
+  },
+  facebook: {
+    handle: "thelastline.goalkeeper",
+    url: "https://www.facebook.com/thelastline.goalkeeper",
   },
   // Legal issuer details (from the imprint) — used on invoices/receipts.
   legal: {
