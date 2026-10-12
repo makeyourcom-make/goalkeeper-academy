@@ -14,6 +14,7 @@ import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/seo/json-ld";
 import { RegisterSW } from "@/components/pwa/register-sw";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { MetricoolTracker } from "@/components/analytics/metricool";
 import { routing } from "@/i18n/routing";
 import { siteGraph } from "@/lib/seo";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
@@ -189,6 +190,8 @@ export default async function LocaleLayout({
         {/* Cookieless, privacy-friendly audience measurement (Vercel). Sends
             data only when Web Analytics is enabled in the Vercel dashboard. */}
         <Analytics />
+        {/* Metricool — rendered only once cookies are accepted. */}
+        <MetricoolTracker />
         {/* Google Analytics 4 with Consent Mode v2 — no cookies until consent. */}
         <GoogleAnalytics />
         {/* PWA: install to home screen + offline fallback (prod only). */}
