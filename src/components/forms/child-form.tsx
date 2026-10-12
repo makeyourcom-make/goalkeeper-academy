@@ -1,5 +1,7 @@
 "use client";
 
+import { GLOVE_SIZES, SHIRT_SIZES } from "@/lib/account/kit-sizes";
+
 import * as React from "react";
 import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
@@ -9,8 +11,6 @@ import { CheckCircle2, Upload, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
-  GLOVE_SIZES,
-  SHIRT_SIZES,
   createChild,
   updateChild,
   type ChildActionState,

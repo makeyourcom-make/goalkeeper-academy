@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { isViewingAs } from "@/lib/account/view-context";
+import { GLOVE_SIZES, SHIRT_SIZES } from "@/lib/account/kit-sizes";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
@@ -51,36 +52,6 @@ const CHILD_LEVELS = [
   "competition",
 ] as const;
 const HANDS = ["droite", "gauche", "ambidextre"] as const;
-
-// Tailles proposées. Les gants suivent la numérotation universelle (4 = petite
-// main d'enfant, 11 = grande main d'adulte); le haut va de la taille enfant
-// 10 ans aux tailles adulte.
-export const GLOVE_SIZES = [
-  "4",
-  "5",
-  "6",
-  "7",
-  "7.5",
-  "8",
-  "8.5",
-  "9",
-  "9.5",
-  "10",
-  "10.5",
-  "11",
-] as const;
-export const SHIRT_SIZES = [
-  "10 ans",
-  "12 ans",
-  "14 ans",
-  "16 ans",
-  "XS",
-  "S",
-  "M",
-  "L",
-  "XL",
-  "XXL",
-] as const;
 
 const CHILD_SCHEMA = z.object({
   first_name: z.string().trim().min(1).max(80),
