@@ -626,7 +626,9 @@
         "age": "Age",
         "level": "Level",
         "sessions": "Sessions",
-        "parent": "Parent"
+        "parent": "Parent",
+        "gloveSize": "Glove size",
+        "shirtSize": "Shirt size"
       },
       "levels": {
         "debutant": "Beginner",
@@ -1375,7 +1377,9 @@
       "errorPhotoSize": "Image too large (4 MB max).",
       "errorPhotoType": "Unsupported format (JPG, PNG or WebP).",
       "errorPhotoUpload": "Photo upload failed. Please try again.",
-      "errorReadOnly": "Not available in preview mode (read-only)."
+      "errorReadOnly": "Not available in preview mode (read-only).",
+      "gloveSize": "Glove size",
+      "shirtSize": "Shirt size"
     },
     "planning": {
       "metaTitle": "My schedule",

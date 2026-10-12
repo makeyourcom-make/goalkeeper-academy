@@ -15,7 +15,8 @@ type ChildRow = {
   first_name: string;
   last_name: string;
   birth_date: string;
-  level: string | null;
+  glove_size: string | null;
+  shirt_size: string | null;
   registered_at: string;
   clubs: { name: string } | null;
   parent: {
@@ -49,7 +50,7 @@ export default async function AdminChildrenPage({ params }: Props) {
   const { data: children } = await supabase
     .from("children")
     .select(
-      "id, first_name, last_name, birth_date, level, registered_at, clubs(name), parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
+      "id, first_name, last_name, birth_date, glove_size, shirt_size, registered_at, clubs(name), parent:profiles!children_parent_id_fkey(first_name, last_name, email)",
     )
     .order("registered_at", { ascending: false })
     .returns<ChildRow[]>();
@@ -81,7 +82,12 @@ export default async function AdminChildrenPage({ params }: Props) {
               <tr>
                 <th className="px-4 py-3 font-medium">{t("table.name")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.age")}</th>
-                <th className="px-4 py-3 font-medium">{t("table.level")}</th>
+                <th className="px-4 py-3 font-medium">
+                  {t("table.gloveSize")}
+                </th>
+                <th className="px-4 py-3 font-medium">
+                  {t("table.shirtSize")}
+                </th>
                 <th className="px-4 py-3 font-medium">{t("table.sessions")}</th>
                 <th className="px-4 py-3 font-medium">{t("table.parent")}</th>
               </tr>
@@ -116,7 +122,10 @@ export default async function AdminChildrenPage({ params }: Props) {
                         {t("ageYears", { age: calcAge(child.birth_date) })}
                       </td>
                       <td className="px-4 py-3 text-grey-700">
-                        {child.level ? t(`levels.${child.level}`) : "—"}
+                        {child.glove_size ?? "—"}
+                      </td>
+                      <td className="px-4 py-3 text-grey-700">
+                        {child.shirt_size ?? "—"}
                       </td>
                       <td className="px-4 py-3">
                         {child.clubs ? (

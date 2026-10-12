@@ -9,6 +9,8 @@ import { CheckCircle2, Upload, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
+  GLOVE_SIZES,
+  SHIRT_SIZES,
   createChild,
   updateChild,
   type ChildActionState,
@@ -188,6 +190,49 @@ export function ChildForm({
             </option>
           ))}
         </select>
+      </div>
+
+      {/* Tailles d'équipement: elles changent vite chez un enfant, d'où un
+          champ modifiable à tout moment plutôt qu'une question posée une fois
+          à l'inscription. */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="glove_size" className="text-sm font-medium text-navy">
+            {t("gloveSize")}
+          </label>
+          <select
+            id="glove_size"
+            name="glove_size"
+            defaultValue={child?.glove_size ?? ""}
+            className="h-11 rounded-lg border border-grey-300 bg-white px-3 text-sm text-navy focus:border-navy focus:outline-none"
+          >
+            <option value="">{t("notSpecified")}</option>
+            {GLOVE_SIZES.map((g) => (
+              <option key={g} value={g}>
+                {g}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="shirt_size" className="text-sm font-medium text-navy">
+            {t("shirtSize")}
+          </label>
+          <select
+            id="shirt_size"
+            name="shirt_size"
+            defaultValue={child?.shirt_size ?? ""}
+            className="h-11 rounded-lg border border-grey-300 bg-white px-3 text-sm text-navy focus:border-navy focus:outline-none"
+          >
+            <option value="">{t("notSpecified")}</option>
+            {SHIRT_SIZES.map((sz) => (
+              <option key={sz} value={sz}>
+                {sz}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">

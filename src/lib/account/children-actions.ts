@@ -52,6 +52,36 @@ const CHILD_LEVELS = [
 ] as const;
 const HANDS = ["droite", "gauche", "ambidextre"] as const;
 
+// Tailles proposées. Les gants suivent la numérotation universelle (4 = petite
+// main d'enfant, 11 = grande main d'adulte); le haut va de la taille enfant
+// 10 ans aux tailles adulte.
+export const GLOVE_SIZES = [
+  "4",
+  "5",
+  "6",
+  "7",
+  "7.5",
+  "8",
+  "8.5",
+  "9",
+  "9.5",
+  "10",
+  "10.5",
+  "11",
+] as const;
+export const SHIRT_SIZES = [
+  "10 ans",
+  "12 ans",
+  "14 ans",
+  "16 ans",
+  "XS",
+  "S",
+  "M",
+  "L",
+  "XL",
+  "XXL",
+] as const;
+
 const CHILD_SCHEMA = z.object({
   first_name: z.string().trim().min(1).max(80),
   last_name: z.string().trim().min(1).max(80),
@@ -63,6 +93,18 @@ const CHILD_SCHEMA = z.object({
       v && CHILD_LEVELS.includes(v as (typeof CHILD_LEVELS)[number])
         ? (v as (typeof CHILD_LEVELS)[number])
         : null,
+    ),
+  glove_size: z
+    .string()
+    .optional()
+    .transform((v) =>
+      v && GLOVE_SIZES.includes(v as (typeof GLOVE_SIZES)[number]) ? v : null,
+    ),
+  shirt_size: z
+    .string()
+    .optional()
+    .transform((v) =>
+      v && SHIRT_SIZES.includes(v as (typeof SHIRT_SIZES)[number]) ? v : null,
     ),
   dominant_hand: z
     .string()
@@ -87,6 +129,8 @@ function parseChildForm(formData: FormData) {
     last_name: formData.get("last_name"),
     birth_date: formData.get("birth_date"),
     level: formData.get("level") ?? "",
+    glove_size: formData.get("glove_size") ?? "",
+    shirt_size: formData.get("shirt_size") ?? "",
     dominant_hand: formData.get("dominant_hand") ?? "",
     medical_notes: formData.get("medical_notes") ?? "",
     photo_consent: formData.get("photo_consent"),

@@ -54,6 +54,8 @@ export type Child = {
   birth_date: string; // ISO date
   level: ChildLevel | null;
   dominant_hand: DominantHand | null;
+  glove_size: string | null;
+  shirt_size: string | null;
   medical_notes: string | null;
   photo_consent: boolean;
   photo_url: string | null;

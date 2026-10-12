@@ -626,7 +626,9 @@
         "age": "Âge",
         "level": "Niveau",
         "sessions": "Séances",
-        "parent": "Parent"
+        "parent": "Parent",
+        "gloveSize": "Taille de gant",
+        "shirtSize": "Taille du haut"
       },
       "levels": {
         "debutant": "Débutant",
@@ -1375,7 +1377,9 @@
       "errorPhotoSize": "Image trop lourde (4 Mo maximum).",
       "errorPhotoType": "Format non supporté (JPG, PNG ou WebP).",
       "errorPhotoUpload": "Échec de l envoi de la photo. Réessayez.",
-      "errorReadOnly": "Action impossible en mode aperçu (lecture seule)."
+      "errorReadOnly": "Action impossible en mode aperçu (lecture seule).",
+      "gloveSize": "Taille de gant",
+      "shirtSize": "Taille du haut"
     },
     "planning": {
       "metaTitle": "Mon planning",
