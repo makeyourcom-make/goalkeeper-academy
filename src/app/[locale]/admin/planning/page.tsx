@@ -62,7 +62,10 @@ type SessionQ = {
   } | null;
   session_attendees: {
     child_id: string;
-    children: { first_name: string; last_name: string } | null;
+    children:
+      | { first_name: string; last_name: string }
+      | { first_name: string; last_name: string }[]
+      | null;
   }[];
 };
 
@@ -213,8 +216,9 @@ export default async function AdminPlanningPage({
       {(s.session_attendees?.length ?? 0) > 0 && (
         <div className="mt-2 flex flex-wrap gap-1.5">
           {s.session_attendees.map((a) => {
+            const kid = Array.isArray(a.children) ? a.children[0] : a.children;
             const name =
-              `${a.children?.first_name ?? ""} ${a.children?.last_name ?? ""}`.trim();
+              `${kid?.first_name ?? ""} ${kid?.last_name ?? ""}`.trim();
             if (!name) return null;
             return (
               <span
