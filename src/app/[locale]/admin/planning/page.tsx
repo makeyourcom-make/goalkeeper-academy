@@ -60,7 +60,10 @@ type SessionQ = {
   coaches: {
     profiles: { first_name: string | null; last_name: string | null } | null;
   } | null;
-  session_attendees: { child_id: string }[];
+  session_attendees: {
+    child_id: string;
+    children: { first_name: string; last_name: string } | null;
+  }[];
 };
 
 function fullName(
@@ -106,7 +109,7 @@ export default async function AdminPlanningPage({
     supabase
       .from("sessions")
       .select(
-        "id, title, location, meet_at, starts_at, ends_at, status, series_id, is_private, coaches(profiles(first_name, last_name)), session_attendees(child_id)",
+        "id, title, location, meet_at, starts_at, ends_at, status, series_id, is_private, coaches(profiles(first_name, last_name)), session_attendees(child_id, children(first_name, last_name))",
       )
       .order("starts_at", { ascending: true })
       .returns<SessionQ[]>(),
@@ -207,8 +210,25 @@ export default async function AdminPlanningPage({
           })}
         </span>
       </div>
+      {(s.session_attendees?.length ?? 0) > 0 && (
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {s.session_attendees.map((a) => {
+            const name =
+              `${a.children?.first_name ?? ""} ${a.children?.last_name ?? ""}`.trim();
+            if (!name) return null;
+            return (
+              <span
+                key={a.child_id}
+                className="rounded-full bg-grey-100 px-2 py-0.5 text-xs text-navy"
+              >
+                {name}
+              </span>
+            );
+          })}
+        </div>
+      )}
       {fullName(s.coaches?.profiles ?? null) && (
-        <p className="mt-1 text-xs text-grey-500">
+        <p className="mt-2 text-xs text-grey-500">
           {t("coachLabel")}: {fullName(s.coaches?.profiles ?? null)}
         </p>
       )}
