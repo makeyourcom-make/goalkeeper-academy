@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { BUSINESS } from "@/lib/seo";
 
 // lucide-react dropped brand glyphs, so the brand marks are inlined.
-function FacebookIcon({ className }: { className?: string }) {
+export function FacebookIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -19,7 +19,7 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-function InstagramIcon({ className }: { className?: string }) {
+export function InstagramIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -108,26 +108,24 @@ export function Footer() {
                   {t("email")}
                 </a>
               </p>
-              <p className="flex items-center gap-2">
-                <InstagramIcon className="h-4 w-4 shrink-0 text-orange" />
+              <p className="flex items-center gap-4 pt-1">
                 <a
                   href={BUSINESS.instagram.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="hover:text-white"
+                  aria-label={`Instagram — @${BUSINESS.instagram.handle}`}
+                  className="text-orange transition-colors hover:text-white"
                 >
-                  @{BUSINESS.instagram.handle}
+                  <InstagramIcon className="h-5 w-5" />
                 </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <FacebookIcon className="h-4 w-4 shrink-0 text-orange" />
                 <a
                   href={BUSINESS.facebook.url}
                   target="_blank"
                   rel="noreferrer noopener"
-                  className="hover:text-white"
+                  aria-label="Facebook — The Last Line"
+                  className="text-orange transition-colors hover:text-white"
                 >
-                  Facebook
+                  <FacebookIcon className="h-5 w-5" />
                 </a>
               </p>
             </div>

@@ -4,7 +4,8 @@ import { Mail, Phone, MapPin, Clock, type LucideIcon } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { ContactForm } from "@/components/forms/contact-form";
-import { alternatesFor } from "@/lib/seo";
+import { alternatesFor, BUSINESS } from "@/lib/seo";
+import { FacebookIcon, InstagramIcon } from "@/components/layout/footer";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -89,6 +90,37 @@ export default async function ContactPage({ params }: Props) {
                   </div>
                 </li>
               ))}
+
+              {/* Reseaux: les deux marques se reconnaissent a leur icone, le
+                  nom du compte n'apporterait rien de plus. */}
+              <li className="flex items-start gap-4 rounded-xl border border-grey-100 bg-white p-5 shadow-sm">
+                <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-orange/10 text-orange">
+                  <InstagramIcon className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="text-sm text-grey-500">{t("info.social")}</p>
+                  <p className="mt-1 flex items-center gap-3">
+                    <a
+                      href={BUSINESS.instagram.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label={`Instagram — @${BUSINESS.instagram.handle}`}
+                      className="text-navy transition-colors hover:text-orange"
+                    >
+                      <InstagramIcon className="h-6 w-6" />
+                    </a>
+                    <a
+                      href={BUSINESS.facebook.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      aria-label="Facebook — The Last Line"
+                      className="text-navy transition-colors hover:text-orange"
+                    >
+                      <FacebookIcon className="h-6 w-6" />
+                    </a>
+                  </p>
+                </div>
+              </li>
             </ul>
           </aside>
         </div>
