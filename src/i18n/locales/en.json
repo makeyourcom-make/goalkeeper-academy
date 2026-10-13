@@ -830,11 +830,14 @@
       "title": "Accounting",
       "subtitle": "Track the association's income and outflows.",
       "cards": {
-        "income": "Income",
-        "expense": "Expenses",
+        "income": "Money in",
+        "expense": "Money out",
         "balance": "Balance",
         "coachOwed": "Owed to coaches",
-        "forecast": "Projected balance"
+        "forecast": "Projected balance",
+        "realBalance": "Actual balance",
+        "toCollect": "Invoices to collect",
+        "coachUpcoming": "Upcoming sessions"
       },
       "table": {
         "date": "Date",
@@ -847,7 +850,13 @@
         "income": "Income",
         "expense": "Expense"
       },
-      "empty": "No entries yet."
+      "empty": "No entries yet.",
+      "sections": {
+        "real": "Actual position",
+        "realHint": "What actually came in and went out, less sessions already held and not yet paid to coaches.",
+        "forecast": "Forecast",
+        "forecastHint": "Invoices issued and still unpaid, and sessions already scheduled that remain to be paid."
+      }
     },
     "planning": {
       "metaTitle": "Schedule",

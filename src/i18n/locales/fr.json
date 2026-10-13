@@ -830,11 +830,14 @@
       "title": "Comptabilité",
       "subtitle": "Suivi des entrées et sorties de l'association.",
       "cards": {
-        "income": "Entrées",
-        "expense": "Sorties",
+        "income": "Entrées encaissées",
+        "expense": "Sorties payées",
         "balance": "Solde",
-        "coachOwed": "À payer aux coachs",
-        "forecast": "Solde prévisionnel"
+        "coachOwed": "Coachs à payer",
+        "forecast": "Solde prévisionnel",
+        "realBalance": "Solde réel",
+        "toCollect": "Factures à encaisser",
+        "coachUpcoming": "Séances à venir"
       },
       "table": {
         "date": "Date",
@@ -847,7 +850,13 @@
         "income": "Entrée",
         "expense": "Sortie"
       },
-      "empty": "Aucune écriture pour le moment."
+      "empty": "Aucune écriture pour le moment.",
+      "sections": {
+        "real": "Situation réelle",
+        "realHint": "Ce qui est effectivement entré et sorti, moins les séances déjà données et non encore payées aux coachs.",
+        "forecast": "Prévisionnel",
+        "forecastHint": "Factures émises en attente de règlement, et séances déjà au planning restant à rémunérer."
+      }
     },
     "planning": {
       "metaTitle": "Planning",

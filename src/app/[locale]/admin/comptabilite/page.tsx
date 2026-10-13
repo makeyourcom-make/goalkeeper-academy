@@ -94,10 +94,26 @@ export default async function AdminAccountingPage({ params }: Props) {
     (sum, x) => sum + Number(x.amount),
     0,
   );
-  // Reste dû sur les séances déjà données, puis ce que deviendrait le solde
-  // une fois tout honoré, séances programmées comprises.
+  // Reste dû sur les séances déjà données.
   const coachOwed = Math.max(0, coachDone - coachPaid);
-  const forecast = balance - coachOwed - coachUpcoming;
+
+  // SITUATION RÉELLE: ce qui est effectivement entré, moins ce qui est sorti,
+  // moins ce qu'on doit aux coachs pour des séances déjà données. C'est la
+  // trésorerie disponible une fois les dettes du moment honorées.
+  const realBalance = balance - coachOwed;
+
+  // PRÉVISIONNEL: les factures émises et non encore réglées, et les séances
+  // déjà au planning qu'il faudra payer.
+  const { data: openInvoices } = await supabase
+    .from("invoices")
+    .select("amount_cents")
+    .in("status", ["pending", "overdue"])
+    .returns<{ amount_cents: number }[]>();
+  const toCollect = (openInvoices ?? []).reduce(
+    (sum, i) => sum + Number(i.amount_cents) / 100,
+    0,
+  );
+  const forecast = realBalance + toCollect - coachUpcoming;
 
   const chf = new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
     style: "currency",
@@ -113,28 +129,31 @@ export default async function AdminAccountingPage({ params }: Props) {
   const tf = await getTranslations("Admin.finance");
   const coaches = await getCoachOptions(supabase);
 
-  const CARDS = [
+  // Deux lectures distinctes: ce qui est constaté, et ce qui est attendu.
+  // Les mélanger donnait un solde qui ne correspondait ni à la banque ni à la
+  // réalité économique.
+  const REAL_CARDS = [
+    { key: "income", value: income, Icon: TrendingUp, tone: "text-success" },
+    { key: "expense", value: expense, Icon: TrendingDown, tone: "text-error" },
+    { key: "coachOwed", value: coachOwed, Icon: Users, tone: "text-warning" },
     {
-      key: "income",
-      value: income,
+      key: "realBalance",
+      value: realBalance,
+      Icon: Scale,
+      tone: realBalance >= 0 ? "text-navy" : "text-error",
+    },
+  ] as const;
+
+  const FORECAST_CARDS = [
+    {
+      key: "toCollect",
+      value: toCollect,
       Icon: TrendingUp,
       tone: "text-success",
     },
     {
-      key: "expense",
-      value: expense,
-      Icon: TrendingDown,
-      tone: "text-error",
-    },
-    {
-      key: "balance",
-      value: balance,
-      Icon: Scale,
-      tone: balance >= 0 ? "text-navy" : "text-error",
-    },
-    {
-      key: "coachOwed",
-      value: coachOwed,
+      key: "coachUpcoming",
+      value: coachUpcoming,
       Icon: Users,
       tone: "text-warning",
     },
@@ -158,23 +177,58 @@ export default async function AdminAccountingPage({ params }: Props) {
         <p className="max-w-2xl text-grey-700">{t("subtitle")}</p>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {CARDS.map(({ key, value, Icon, tone }) => (
-          <div
-            key={key}
-            className="flex flex-col gap-2 rounded-2xl border border-grey-100 bg-white p-5 shadow-sm"
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-xs uppercase tracking-wide text-grey-500">
-                {t(`cards.${key}`)}
+      {/* 1. Ce qui est constaté: l'argent réellement entré et sorti. */}
+      <div className="mt-8">
+        <h2 className="font-anton text-xl uppercase text-navy">
+          {t("sections.real")}
+        </h2>
+        <p className="mt-1 text-sm text-grey-500">{t("sections.realHint")}</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {REAL_CARDS.map(({ key, value, Icon, tone }) => (
+            <div
+              key={key}
+              className="flex flex-col gap-2 rounded-2xl border border-grey-100 bg-white p-5 shadow-sm"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs uppercase tracking-wide text-grey-500">
+                  {t(`cards.${key}`)}
+                </span>
+                <Icon className={`h-5 w-5 shrink-0 ${tone}`} />
+              </div>
+              <span className={`font-anton text-h3 ${tone}`}>
+                {chf.format(value)}
               </span>
-              <Icon className={`h-5 w-5 ${tone}`} />
             </div>
-            <span className={`font-anton text-h2 ${tone}`}>
-              {chf.format(value)}
-            </span>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
+
+      {/* 2. Ce qui est attendu: factures émises non réglées et séances à venir. */}
+      <div className="mt-8">
+        <h2 className="font-anton text-xl uppercase text-navy">
+          {t("sections.forecast")}
+        </h2>
+        <p className="mt-1 text-sm text-grey-500">
+          {t("sections.forecastHint")}
+        </p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {FORECAST_CARDS.map(({ key, value, Icon, tone }) => (
+            <div
+              key={key}
+              className="flex flex-col gap-2 rounded-2xl border border-grey-100 bg-white p-5 shadow-sm"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="text-xs uppercase tracking-wide text-grey-500">
+                  {t(`cards.${key}`)}
+                </span>
+                <Icon className={`h-5 w-5 shrink-0 ${tone}`} />
+              </div>
+              <span className={`font-anton text-h3 ${tone}`}>
+                {chf.format(value)}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
