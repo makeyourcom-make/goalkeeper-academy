@@ -829,7 +829,9 @@
       "cards": {
         "income": "Income",
         "expense": "Expenses",
-        "balance": "Balance"
+        "balance": "Balance",
+        "coachOwed": "Owed to coaches",
+        "forecast": "Projected balance"
       },
       "table": {
         "date": "Date",

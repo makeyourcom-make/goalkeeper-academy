@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { TrendingUp, TrendingDown, Scale, Trash2 } from "lucide-react";
+import {
+  TrendingUp,
+  TrendingDown,
+  Scale,
+  Trash2,
+  Users,
+  CalendarClock,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { TransactionForm } from "@/components/admin/transaction-form";
@@ -19,6 +26,14 @@ type Transaction = {
   label: string;
   amount: number;
   occurred_on: string;
+};
+
+type SessionCost = {
+  status: string;
+  is_private: boolean | null;
+  // PostgREST renvoie l'imbrication en objet ou en tableau selon la façon dont
+  // il résout la relation: accepter les deux plutôt que parier sur une forme.
+  coaches: { rate_per_session: number } | { rate_per_session: number }[] | null;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -47,6 +62,42 @@ export default async function AdminAccountingPage({ params }: Props) {
     .filter((x) => x.kind === "expense")
     .reduce((s, x) => s + Number(x.amount), 0);
   const balance = income - expense;
+
+  // Prévision des rémunérations coach. Une séance marquée effectuée crée une
+  // dette; celles encore au planning sont un engagement à venir. Les séances
+  // privées en sont exclues (elles bloquent l'agenda sans être rémunérées).
+  const [sessionsRes, paidRes] = await Promise.all([
+    supabase
+      .from("sessions")
+      .select("status, is_private, coaches(rate_per_session)")
+      .neq("status", "cancelled")
+      .returns<SessionCost[]>(),
+    supabase
+      .from("coach_payments")
+      .select("amount")
+      .eq("status", "paid")
+      .returns<{ amount: number }[]>(),
+  ]);
+
+  const rateOf = (row: SessionCost): number => {
+    const c = Array.isArray(row.coaches) ? row.coaches[0] : row.coaches;
+    return Number(c?.rate_per_session ?? 0);
+  };
+  const billable = (sessionsRes.data ?? []).filter((x) => !x.is_private);
+  const coachDone = billable
+    .filter((x) => x.status === "completed")
+    .reduce((sum, x) => sum + rateOf(x), 0);
+  const coachUpcoming = billable
+    .filter((x) => x.status !== "completed")
+    .reduce((sum, x) => sum + rateOf(x), 0);
+  const coachPaid = (paidRes.data ?? []).reduce(
+    (sum, x) => sum + Number(x.amount),
+    0,
+  );
+  // Reste dû sur les séances déjà données, puis ce que deviendrait le solde
+  // une fois tout honoré, séances programmées comprises.
+  const coachOwed = Math.max(0, coachDone - coachPaid);
+  const forecast = balance - coachOwed - coachUpcoming;
 
   const chf = new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
     style: "currency",
@@ -81,6 +132,18 @@ export default async function AdminAccountingPage({ params }: Props) {
       Icon: Scale,
       tone: balance >= 0 ? "text-navy" : "text-error",
     },
+    {
+      key: "coachOwed",
+      value: coachOwed,
+      Icon: Users,
+      tone: "text-warning",
+    },
+    {
+      key: "forecast",
+      value: forecast,
+      Icon: CalendarClock,
+      tone: forecast >= 0 ? "text-success" : "text-error",
+    },
   ] as const;
 
   return (
@@ -95,7 +158,7 @@ export default async function AdminAccountingPage({ params }: Props) {
         <p className="max-w-2xl text-grey-700">{t("subtitle")}</p>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-3">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {CARDS.map(({ key, value, Icon, tone }) => (
           <div
             key={key}

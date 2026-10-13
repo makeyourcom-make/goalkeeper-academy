@@ -829,7 +829,9 @@
       "cards": {
         "income": "Entrées",
         "expense": "Sorties",
-        "balance": "Solde"
+        "balance": "Solde",
+        "coachOwed": "À payer aux coachs",
+        "forecast": "Solde prévisionnel"
       },
       "table": {
         "date": "Date",
