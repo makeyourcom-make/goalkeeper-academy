@@ -771,7 +771,10 @@
         "paid": "Payé",
         "pending": "En attente",
         "markPaid": "Marquer payé",
-        "markUnpaid": "Annuler"
+        "markUnpaid": "Annuler",
+        "historyTitle": "Historique des paiements",
+        "period": "Période",
+        "coach": "Coach"
       },
       "viewAs": "Voir en tant que",
       "promote": {

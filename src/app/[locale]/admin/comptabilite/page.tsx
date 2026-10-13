@@ -158,7 +158,7 @@ export default async function AdminAccountingPage({ params }: Props) {
         <p className="max-w-2xl text-grey-700">{t("subtitle")}</p>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CARDS.map(({ key, value, Icon, tone }) => (
           <div
             key={key}

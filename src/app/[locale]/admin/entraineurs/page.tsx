@@ -118,6 +118,32 @@ export default async function AdminCoachesPage({ params }: Props) {
   const paidStatus = new Map<string, string>();
   for (const p of paymentsRes.data ?? []) paidStatus.set(p.coach_id, p.status);
 
+  // Historique: toutes les périodes antérieures, pour pouvoir contrôler ce qui
+  // a réellement été versé. Sans lui, la page ne montre que le mois courant et
+  // ne permet aucune vérification a posteriori.
+  const { data: historyRows } = await supabase
+    .from("coach_payments")
+    .select("coach_id, period, sessions_count, amount, status")
+    .neq("period", period)
+    .order("period", { ascending: false })
+    .returns<
+      {
+        coach_id: string;
+        period: string;
+        sessions_count: number;
+        amount: number;
+        status: string;
+      }[]
+    >();
+  const history = historyRows ?? [];
+  const coachName = new Map(
+    (coachesRes.data ?? []).map((c) => [
+      c.id,
+      `${c.profiles?.first_name ?? ""} ${c.profiles?.last_name ?? ""}`.trim() ||
+        (c.profiles?.email ?? "—"),
+    ]),
+  );
+
   const chf = new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
     style: "currency",
     currency: "CHF",
@@ -442,6 +468,70 @@ export default async function AdminCoachesPage({ params }: Props) {
             </table>
           </div>
         </div>
+
+        {/* Historique: la vue du mois courant ne dit rien de ce qui a déjà été
+            versé, ce qui rend impossible tout contrôle a posteriori. */}
+        {history.length > 0 && (
+          <div className="mt-10">
+            <h2 className="font-anton text-xl uppercase text-navy">
+              {t("payments.historyTitle")}
+            </h2>
+            <div className="mt-4 overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
+                    <tr>
+                      <th className="px-4 py-3 font-medium">
+                        {t("payments.period")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("payments.coach")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("payments.sessions")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("payments.amount")}
+                      </th>
+                      <th className="px-4 py-3 font-medium">
+                        {t("payments.status")}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-grey-100">
+                    {history.map((h) => (
+                      <tr key={`${h.period}-${h.coach_id}`}>
+                        <td className="px-4 py-3 font-medium text-navy">
+                          {h.period}
+                        </td>
+                        <td className="px-4 py-3 text-grey-700">
+                          {coachName.get(h.coach_id) ?? "—"}
+                        </td>
+                        <td className="px-4 py-3 text-grey-700">
+                          {h.sessions_count}
+                        </td>
+                        <td className="px-4 py-3 font-medium text-navy">
+                          {chf.format(Number(h.amount))}
+                        </td>
+                        <td className="px-4 py-3">
+                          <span
+                            className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                              h.status === "paid"
+                                ? "bg-success/15 text-success"
+                                : "bg-warning/15 text-warning"
+                            }`}
+                          >
+                            {t(`payments.${h.status}`)}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -771,7 +771,10 @@
         "paid": "Paid",
         "pending": "Pending",
         "markPaid": "Mark paid",
-        "markUnpaid": "Undo"
+        "markUnpaid": "Undo",
+        "historyTitle": "Payment history",
+        "period": "Period",
+        "coach": "Coach"
       },
       "viewAs": "View as",
       "promote": {
