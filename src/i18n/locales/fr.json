@@ -950,7 +950,8 @@
         "cotisation": "Cotisation",
         "stage": "Stage",
         "sponsor": "Sponsor",
-        "subvention": "Subvention"
+        "subvention": "Subvention",
+        "frais": "Frais bancaires"
       },
       "date": "Date",
       "label": "Libellé",

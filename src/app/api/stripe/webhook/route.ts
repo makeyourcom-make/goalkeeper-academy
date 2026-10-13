@@ -8,6 +8,7 @@ import { sendPaymentConfirmation } from "@/lib/email/payment-confirmation";
 import { notifyAdminPayment } from "@/lib/email/admin-notify";
 import { recordIncomeFromInvoice } from "@/lib/admin/record-income";
 import { settleInvoicePaid } from "@/lib/invoices/settle";
+import { recordStripeFee } from "@/lib/invoices/stripe-fee";
 
 // Stripe needs the raw request body to verify the signature.
 export const dynamic = "force-dynamic";
@@ -71,6 +72,7 @@ async function handleStandaloneInvoice(admin: Admin, invoice: Stripe.Invoice) {
         stripeRef: invoice.id,
       });
       await notifyAdminPayment(admin, data.id);
+      await bookFeeFromInvoice(admin, invoice, data.id);
     }
     return;
   }
@@ -98,6 +100,32 @@ async function handleStandaloneInvoice(admin: Admin, invoice: Stripe.Invoice) {
     stripeRef: invoice.id,
   });
   await notifyAdminPayment(admin, hit.id);
+  await bookFeeFromInvoice(admin, invoice, hit.id);
+}
+
+// A Stripe invoice carries either a charge or a payment intent, depending on
+// how it was settled: both lead to the same balance transaction.
+async function bookFeeFromInvoice(
+  admin: Admin,
+  invoice: Stripe.Invoice,
+  invoiceId: string,
+) {
+  const inv = invoice as Stripe.Invoice & {
+    charge?: string | { id: string } | null;
+    payment_intent?: string | { id: string } | null;
+  };
+  const charge = typeof inv.charge === "string" ? inv.charge : inv.charge?.id;
+  if (charge) {
+    await recordStripeFee(admin, invoiceId, { kind: "charge", id: charge });
+    return;
+  }
+  const pi =
+    typeof inv.payment_intent === "string"
+      ? inv.payment_intent
+      : inv.payment_intent?.id;
+  if (pi) {
+    await recordStripeFee(admin, invoiceId, { kind: "payment_intent", id: pi });
+  }
 }
 
 // One-time payment completed (card "annuel" or the first TWINT installment).
@@ -156,6 +184,16 @@ async function handleOneTime(admin: Admin, session: Stripe.Checkout.Session) {
     await sendPaymentConfirmation(admin, invoiceId);
     await notifyAdminPayment(admin, invoiceId);
     await recordIncomeFromInvoice(admin, invoiceId);
+    const pi =
+      typeof session.payment_intent === "string"
+        ? session.payment_intent
+        : (session.payment_intent?.id ?? null);
+    if (pi) {
+      await recordStripeFee(admin, invoiceId, {
+        kind: "payment_intent",
+        id: pi,
+      });
+    }
   }
 }
 

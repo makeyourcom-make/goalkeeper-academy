@@ -950,7 +950,8 @@
         "cotisation": "Membership",
         "stage": "Camp",
         "sponsor": "Sponsor",
-        "subvention": "Grant"
+        "subvention": "Grant",
+        "frais": "Bank fees"
       },
       "date": "Date",
       "label": "Label",
