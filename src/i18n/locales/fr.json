@@ -102,9 +102,9 @@
           "badge": "Demi-saison",
           "title": "Le Tour",
           "price": "Dès 43 CHF / séance",
-          "description": "Un engagement sur une demi-saison de 18 séances, pour les jeunes comme pour les adultes.",
+          "description": "Un engagement sur une demi-saison, pour les jeunes comme pour les adultes.",
           "bullets": [
-            "18 séances par tour",
+            "Engagement sur une demi-saison",
             "Séance de 4 gardiens maximum",
             "Sans réengagement"
           ],
@@ -114,9 +114,9 @@
           "badge": "Le plus populaire",
           "title": "Saison complète",
           "price": "Dès 40 CHF / séance",
-          "description": "Toute la saison sur 36 séances, le meilleur tarif à la séance.",
+          "description": "Toute la saison, au meilleur tarif à la séance.",
           "bullets": [
-            "36 séances sur la saison",
+            "Suivi sur toute la saison",
             "Séance de 4 gardiens maximum",
             "−11 % vs séance à l’unité"
           ],
@@ -1635,7 +1635,7 @@
     "hero": {
       "eyebrow": "Offres & tarifs",
       "title": "Des tarifs clairs, pour chaque gardien",
-      "subtitle": "Notre saison se joue en 36 séances, réparties en deux Tours de 18 séances chacun. Testez avec une séance découverte, engagez-vous sur un Tour, ou profitez du meilleur tarif sur la saison complète."
+      "subtitle": "Notre saison se joue en deux Tours. Testez avec une séance découverte, engagez-vous sur un Tour, ou profitez du meilleur tarif sur la saison complète."
     },
     "audiences": {
       "youth": {
@@ -1661,10 +1661,10 @@
           "title": "Tour",
           "price": "43 CHF",
           "unit": "/ séance",
-          "description": "Un engagement sur une demi-saison : 18 séances par tour.",
+          "description": "Un engagement sur une demi-saison, d’un Tour à l’autre.",
           "bullets": [
-            "18 séances par tour",
             "774 CHF le tour",
+            "Séance de 4 gardiens maximum",
             "Engagement demi-saison"
           ],
           "cta": "Choisir le Tour"
@@ -1675,10 +1675,10 @@
           "title": "Saison complète",
           "price": "40 CHF",
           "unit": "/ séance",
-          "description": "Toute la saison sur 36 séances, pour le meilleur rapport qualité/prix.",
+          "description": "Toute la saison, pour le meilleur rapport qualité/prix.",
           "bullets": [
-            "36 séances",
             "−11 % vs séance à l’unité",
+            "Séance de 4 gardiens maximum",
             "Suivi sur toute la saison"
           ],
           "cta": "Inscrire pour la saison"
@@ -1707,10 +1707,10 @@
           "title": "Tour",
           "price": "48 CHF",
           "unit": "/ séance",
-          "description": "Un engagement sur une demi-saison : 18 séances par tour.",
+          "description": "Un engagement sur une demi-saison, d’un Tour à l’autre.",
           "bullets": [
-            "18 séances par tour",
             "864 CHF le tour",
+            "Séance de 4 gardiens maximum",
             "Engagement demi-saison"
           ],
           "cta": "Choisir le Tour"
@@ -1721,10 +1721,10 @@
           "title": "Saison complète",
           "price": "44 CHF",
           "unit": "/ séance",
-          "description": "Toute la saison sur 36 séances, pour le meilleur rapport qualité/prix.",
+          "description": "Toute la saison, pour le meilleur rapport qualité/prix.",
           "bullets": [
-            "36 séances",
             "−12 % vs séance à l’unité",
+            "Séance de 4 gardiens maximum",
             "Suivi sur toute la saison"
           ],
           "cta": "Inscrire pour la saison"
@@ -1798,7 +1798,7 @@
         },
         "cancel": {
           "question": "Comment fonctionne l'engagement ?",
-          "answer": "L'engagement se fait par Tour (une demi-saison de 18 séances) ou par saison complète (36 séances). À la fin d'un Tour, vous êtes libre de continuer ou non. La séance découverte, elle, est sans aucun engagement."
+          "answer": "L’engagement se fait par Tour (une demi-saison) ou par saison complète. À la fin d’un Tour, vous êtes libre de continuer ou non. La séance découverte, elle, est sans aucun engagement."
         },
         "club": {
           "question": "Comment fonctionne le contrat club ?",

@@ -102,11 +102,11 @@
           "badge": "Half-season",
           "title": "The Tour",
           "price": "From CHF 43 / session",
-          "description": "A commitment over a half-season of 18 sessions, for youth and adults alike.",
+          "description": "A half-season commitment, for youngsters and adults alike.",
           "bullets": [
-            "18 sessions per Tour",
-            "Sessions of 4 goalkeepers max",
-            "No re-commitment"
+            "Half-season commitment",
+            "Four goalkeepers per session, maximum",
+            "No automatic renewal"
           ],
           "cta": "See pricing"
         },
@@ -114,10 +114,10 @@
           "badge": "Most popular",
           "title": "Full season",
           "price": "From CHF 40 / session",
-          "description": "The whole season over 36 sessions, the best per-session rate.",
+          "description": "The whole season, at our best rate per session.",
           "bullets": [
-            "36 sessions over the season",
-            "Sessions of 4 goalkeepers max",
+            "Followed all season long",
+            "Four goalkeepers per session, maximum",
             "−11% vs single session"
           ],
           "cta": "See pricing"
@@ -1635,7 +1635,7 @@
     "hero": {
       "eyebrow": "Offers & pricing",
       "title": "Clear pricing, for every keeper",
-      "subtitle": "Our season runs over 36 sessions, split into two Tours of 18 sessions each. Try a discovery session, commit to a Tour, or get the best rate with the full season."
+      "subtitle": "Our season runs over two Tours. Try a discovery session, commit to a Tour, or get our best rate on the full season."
     },
     "audiences": {
       "youth": {
@@ -1661,10 +1661,10 @@
           "title": "Tour",
           "price": "CHF 43",
           "unit": "/ session",
-          "description": "A commitment over a half-season: 18 sessions per Tour.",
+          "description": "A half-season commitment, from one Tour to the next.",
           "bullets": [
-            "18 sessions per Tour",
             "CHF 774 per Tour",
+            "Four goalkeepers per session, maximum",
             "Half-season commitment"
           ],
           "cta": "Choose the Tour"
@@ -1675,10 +1675,10 @@
           "title": "Full season",
           "price": "CHF 40",
           "unit": "/ session",
-          "description": "The whole season over 36 sessions, best value for money.",
+          "description": "The whole season, for the best value.",
           "bullets": [
-            "36 sessions",
             "−11% vs single session",
+            "Four goalkeepers per session, maximum",
             "Follow-up all season long"
           ],
           "cta": "Enrol for the season"
@@ -1707,10 +1707,10 @@
           "title": "Tour",
           "price": "CHF 48",
           "unit": "/ session",
-          "description": "A commitment over a half-season: 18 sessions per Tour.",
+          "description": "A half-season commitment, from one Tour to the next.",
           "bullets": [
-            "18 sessions per Tour",
             "CHF 864 per Tour",
+            "Four goalkeepers per session, maximum",
             "Half-season commitment"
           ],
           "cta": "Choose the Tour"
@@ -1721,10 +1721,10 @@
           "title": "Full season",
           "price": "CHF 44",
           "unit": "/ session",
-          "description": "The whole season over 36 sessions, best value for money.",
+          "description": "The whole season, for the best value.",
           "bullets": [
-            "36 sessions",
             "−12% vs single session",
+            "Four goalkeepers per session, maximum",
             "Follow-up all season long"
           ],
           "cta": "Enrol for the season"
@@ -1798,7 +1798,7 @@
         },
         "cancel": {
           "question": "How does the commitment work?",
-          "answer": "You commit by Tour (a half-season of 18 sessions) or by full season (36 sessions). At the end of a Tour, you're free to continue or not. The discovery session has no commitment at all."
+          "answer": "You commit either to a Tour (half a season) or to the full season. At the end of a Tour you are free to continue or not. The discovery session carries no commitment at all."
         },
         "club": {
           "question": "How does the club contract work?",
