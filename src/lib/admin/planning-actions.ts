@@ -9,6 +9,7 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   sendConvocations,
   sendCoachConvocation,
+  sendSessionUpdate,
 } from "@/lib/email/session-emails";
 
 async function getAdminClient() {
@@ -249,9 +250,15 @@ export async function updateSession(
 
   const { data: before } = await supabase
     .from("sessions")
-    .select("coach_id")
+    .select("coach_id, location, meet_at, starts_at, ends_at")
     .eq("id", d.id)
-    .maybeSingle<{ coach_id: string | null }>();
+    .maybeSingle<{
+      coach_id: string | null;
+      location: string | null;
+      meet_at: string | null;
+      starts_at: string;
+      ends_at: string;
+    }>();
 
   const { error } = await supabase
     .from("sessions")
@@ -313,6 +320,47 @@ export async function updateSession(
       endTime: d.endTime,
       firstDate: d.date,
       keeperCount: childIds.length,
+    });
+  }
+
+  // Date, horaires ou lieu modifiés: prévenir ceux qui étaient déjà convoqués,
+  // coach compris. Sans cela, une séance avancée d'une heure ne se découvrait
+  // que sur le terrain.
+  const hhmm = (iso: string | null) => (iso ? iso.slice(11, 16) : "");
+  const day = (iso: string | null) => (iso ? iso.slice(0, 10) : "");
+  const changes: string[] = [];
+  if (before) {
+    if (day(before.starts_at) !== d.date) {
+      changes.push(`Date : ${day(before.starts_at)} → ${d.date}`);
+    }
+    if (hhmm(before.meet_at) !== d.meetTime) {
+      changes.push(`Convocation : ${hhmm(before.meet_at)} → ${d.meetTime}`);
+    }
+    if (
+      hhmm(before.starts_at) !== d.startTime ||
+      hhmm(before.ends_at) !== d.endTime
+    ) {
+      changes.push(
+        `Horaire : ${hhmm(before.starts_at)}–${hhmm(before.ends_at)} → ${d.startTime}–${d.endTime}`,
+      );
+    }
+    if ((before.location ?? "") !== d.location) {
+      changes.push(`Lieu : ${before.location ?? "—"} → ${d.location}`);
+    }
+  }
+  if (changes.length > 0) {
+    // Les nouveaux viennent de recevoir une convocation avec les bons horaires.
+    const alreadyConvened = childIds.filter((id) => existingIds.has(id));
+    await sendSessionUpdate(supabase, {
+      childIds: alreadyConvened,
+      coachId: d.coachId && d.coachId === before?.coach_id ? d.coachId : null,
+      title: d.title,
+      location: d.location,
+      meetTime: d.meetTime,
+      startTime: d.startTime,
+      endTime: d.endTime,
+      date: d.date,
+      changes,
     });
   }
 

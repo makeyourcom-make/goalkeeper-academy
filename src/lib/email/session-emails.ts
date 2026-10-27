@@ -313,3 +313,131 @@ L'équipe The Last Line`;
     }),
   );
 }
+
+export type SessionChangeParams = {
+  childIds: string[];
+  coachId: string | null;
+  title: string;
+  location: string;
+  meetTime: string;
+  startTime: string;
+  endTime: string;
+  date: string;
+  // Ce qui a bougé, pour le dire explicitement plutôt que de laisser le
+  // destinataire comparer avec ce qu'il croit savoir.
+  changes: string[];
+};
+
+// Prévient les gardiens déjà convoqués ET le coach qu'une séance a changé.
+// Jusqu'ici une modification d'horaire, de date ou de lieu ne déclenchait
+// rien: seuls les gardiens nouvellement ajoutés recevaient une convocation,
+// et le coach n'était averti que s'il changeait. Tout le monde découvrait le
+// changement sur place.
+export async function sendSessionUpdate(
+  admin: SupabaseClient,
+  p: SessionChangeParams,
+): Promise<void> {
+  if (!isEmailConfigured()) return;
+  if (p.changes.length === 0) return;
+
+  const details = (en: boolean) =>
+    en
+      ? `Date: ${frDate(p.date)}
+Call time: ${p.meetTime}
+Session: ${p.startTime}–${p.endTime}
+Place: ${p.location}`
+      : `Date : ${frDate(p.date)}
+Convocation : ${p.meetTime}
+Séance : ${p.startTime}–${p.endTime}
+Lieu : ${p.location}`;
+
+  // Les familles.
+  if (p.childIds.length > 0) {
+    const people = await recipients(admin, p.childIds);
+    await Promise.all(
+      people.map(({ email, childName, en }) =>
+        sendMail({
+          to: email,
+          subject: en
+            ? `Session updated — ${p.title}`
+            : `Séance modifiée — ${p.title}`,
+          kind: "session-update",
+          text: en
+            ? `Hello,
+
+The session ${childName ? `${childName} is convened to` : "below"} has changed:
+
+${p.changes.join("\n")}
+
+Here are the new details:
+
+${details(true)}
+Session: ${p.title}
+
+See you there,
+The Last Line team`
+            : `Bonjour,
+
+La séance ${childName ? `à laquelle ${childName} est convoqué·e` : "ci-dessous"} a été modifiée :
+
+${p.changes.join("\n")}
+
+Voici les nouvelles informations :
+
+${details(false)}
+Intitulé : ${p.title}
+
+À bientôt sur le terrain,
+L'équipe The Last Line`,
+        }),
+      ),
+    );
+  }
+
+  // Le coach.
+  if (!p.coachId) return;
+  const { data } = await admin
+    .from("coaches")
+    .select("profiles(email, language, first_name)")
+    .eq("id", p.coachId)
+    .maybeSingle<CoachRow>();
+  const email = data?.profiles?.email;
+  if (!email) return;
+
+  const en = data.profiles!.language === "en";
+  const name = data.profiles!.first_name ?? "";
+  await sendMail({
+    to: email,
+    subject: en
+      ? `Session updated — ${p.title}`
+      : `Séance modifiée — ${p.title}`,
+    kind: "session-update",
+    text: en
+      ? `Hello${name ? ` ${name}` : ""},
+
+A session you run has changed:
+
+${p.changes.join("\n")}
+
+New details:
+
+${details(true)}
+Session: ${p.title}
+Convened goalkeepers: ${p.childIds.length}
+
+The Last Line team`
+      : `Bonjour${name ? ` ${name}` : ""},
+
+Une séance que vous encadrez a été modifiée :
+
+${p.changes.join("\n")}
+
+Nouvelles informations :
+
+${details(false)}
+Intitulé : ${p.title}
+Gardiens convoqués : ${p.childIds.length}
+
+L'équipe The Last Line`,
+  });
+}
