@@ -97,7 +97,7 @@ export async function sendConvocations(
       const body = en
         ? `Hello,
 
-${childName || "Your goalkeeper"} is convened to a training session:
+Training session for ${childName || "your goalkeeper"}:
 
 Date: ${when}
 Call time: ${p.meetTime}
@@ -115,7 +115,7 @@ See you on the pitch!
 The Last Line team`
         : `Bonjour,
 
-${childName || "Votre gardien·ne"} est convoqué·e à un entraînement :
+Entraînement pour ${childName || "votre gardien·ne"} :
 
 Date : ${when}
 Convocation : ${p.meetTime}
@@ -388,7 +388,7 @@ Lieu : ${p.location}`;
           text: en
             ? `Hello,
 
-The session ${childName ? `${childName} is convened to` : "below"} has changed:
+The session ${childName ? `for ${childName}` : "below"} has changed:
 
 ${p.changes.join("\n")}
 
@@ -401,7 +401,7 @@ See you there,
 The Last Line team`
             : `Bonjour,
 
-La séance ${childName ? `à laquelle ${childName} est convoqué·e` : "ci-dessous"} a été modifiée :
+La séance ${childName ? `de ${childName}` : "ci-dessous"} a été modifiée :
 
 ${p.changes.join("\n")}
 
