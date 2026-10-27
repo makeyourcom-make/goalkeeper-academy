@@ -1021,7 +1021,7 @@
         },
         {
           "heading": "Prestations et formules",
-          "body": "L'association propose des entraînements spécifiques de gardien de but à travers les formules suivantes :\nSéance découverte : à l'unité, sans engagement, pour essayer nos entraînements.\nTour : bloc de 18 séances.\nSaison complète : 36 séances réparties sur l'ensemble de la saison.\nStages : entraînements intensifs ponctuels.\nLe détail, le nombre de séances et les tarifs figurent sur la page Offres. Les horaires et lieux sont communiqués via l'espace membre et peuvent être adaptés pour des raisons d'organisation."
+          "body": "L'association propose des entraînements spécifiques de gardien de but à travers les formules suivantes :\nSéance découverte : à l'unité, sans engagement, pour essayer nos entraînements.\nTour : engagement sur une demi-saison.\nSaison complète : engagement sur l'ensemble de la saison.\nStages : entraînements intensifs ponctuels.\nLe nombre de séances d'un Tour ou d'une saison dépend du calendrier établi par l'association, lui-même tributaire de la disponibilité des installations sportives et des décisions des autorités communales. L'association s'engage à proposer un programme régulier sur toute la durée de la formule choisie ; le calendrier, les horaires et les lieux sont communiqués via l'espace membre et peuvent être adaptés pour des raisons d'organisation.\nLes tarifs figurent sur la page Offres."
         },
         {
           "heading": "Inscription et compte",
@@ -1987,18 +1987,18 @@
       },
       "tour1": {
         "label": "Tour 1",
-        "hint": "Demi-saison · 18 séances",
-        "totalHint": "le Tour 1 (18 séances)"
+        "hint": "Demi-saison",
+        "totalHint": "le Tour 1"
       },
       "tour2": {
         "label": "Tour 2",
-        "hint": "Demi-saison · 18 séances",
-        "totalHint": "le Tour 2 (18 séances)"
+        "hint": "Demi-saison",
+        "totalHint": "le Tour 2"
       },
       "season": {
         "label": "Saison complète",
-        "hint": "36 séances sur la saison",
-        "totalHint": "la saison (36 séances)"
+        "hint": "Toute la saison",
+        "totalHint": "la saison"
       }
     },
     "categories": {

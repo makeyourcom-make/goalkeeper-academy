@@ -1021,7 +1021,7 @@
         },
         {
           "heading": "Services and plans",
-          "body": "The association offers goalkeeper-specific training through the following plans:\nDiscovery session: single, no commitment, to try out our training.\nTour: a block of 18 sessions.\nFull season: 36 sessions spread across the whole season.\nCamps: occasional intensive training.\nDetails, session counts and prices are on the Offers page. Times and locations are shared through the member area and may be adjusted for organisational reasons."
+          "body": "The association offers goalkeeper-specific training through the following options:\nDiscovery session: a single session, no commitment, to try our training.\nTour: a half-season commitment.\nFull season: a commitment over the whole season.\nCamps: occasional intensive training.\nThe number of sessions in a Tour or a season depends on the calendar set by the association, which itself depends on the availability of the sports facilities and on decisions by the municipal authorities. The association undertakes to provide a regular programme throughout the chosen option; the calendar, times and venues are communicated through the member area and may be adjusted for organisational reasons.\nPrices are listed on the Offers page."
         },
         {
           "heading": "Registration and account",
@@ -1987,18 +1987,18 @@
       },
       "tour1": {
         "label": "Tour 1",
-        "hint": "Half-season · 18 sessions",
-        "totalHint": "for Tour 1 (18 sessions)"
+        "hint": "Half-season",
+        "totalHint": "Tour 1"
       },
       "tour2": {
         "label": "Tour 2",
-        "hint": "Half-season · 18 sessions",
-        "totalHint": "for Tour 2 (18 sessions)"
+        "hint": "Half-season",
+        "totalHint": "Tour 2"
       },
       "season": {
         "label": "Full season",
-        "hint": "36 sessions over the season",
-        "totalHint": "for the season (36 sessions)"
+        "hint": "The whole season",
+        "totalHint": "the season"
       }
     },
     "categories": {
