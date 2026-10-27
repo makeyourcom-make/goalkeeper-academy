@@ -137,6 +137,12 @@ export default async function AdminChildrenPage({ params }: Props) {
                               {t("sessionsDone", { count: u?.used ?? 0 })}
                             </div>
                           </div>
+                        ) : u && !u.tracked && u.used >= 0 ? (
+                          // Engagement sans forfait fixe: on compte, on ne
+                          // décompte pas.
+                          <div className="text-sm text-navy">
+                            {t("sessionsDone", { count: u.used })}
+                          </div>
                         ) : u && (u.total > 0 || u.used > 0) ? (
                           <div className="leading-tight">
                             <div className="font-medium text-navy">

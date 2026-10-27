@@ -97,6 +97,7 @@ export default async function AdminChildDetailPage({ params }: Props) {
     total: 0,
     remaining: 0,
     over: 0,
+    tracked: false,
   };
 
   // Most recent first: the sessions actually consumed sit at the top.
@@ -155,6 +156,15 @@ export default async function AdminChildDetailPage({ params }: Props) {
             </span>
             <p className="mt-3 text-sm text-grey-700">
               {t("detail.clubPackageHint", { count: usage.used })}
+            </p>
+          </div>
+        ) : !usage.tracked ? (
+          <div className="mt-4">
+            <p className="font-anton text-h3 text-navy">
+              {t("detail.sessionsDone", { count: usage.used })}
+            </p>
+            <p className="mt-2 text-sm text-grey-500">
+              {t("detail.noAllowanceHint")}
             </p>
           </div>
         ) : usage.total === 0 && usage.used === 0 ? (

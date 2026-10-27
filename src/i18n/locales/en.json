@@ -619,7 +619,9 @@
           "completed": "Used",
           "scheduled": "Upcoming",
           "cancelled": "Cancelled"
-        }
+        },
+        "sessionsDone": "{count, plural, one {# session attended} other {# sessions attended}}",
+        "noAllowanceHint": "Committed to a Tour or a season: sessions are counted, with no fixed allotment. The calendar depends on pitch availability."
       },
       "table": {
         "name": "Name",

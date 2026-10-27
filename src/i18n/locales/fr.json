@@ -619,7 +619,9 @@
           "completed": "Utilisée",
           "scheduled": "À venir",
           "cancelled": "Annulée"
-        }
+        },
+        "sessionsDone": "{count, plural, one {# séance effectuée} other {# séances effectuées}}",
+        "noAllowanceHint": "Engagement sur un Tour ou une saison : les séances sont comptées, sans forfait fixe. Le calendrier dépend des disponibilités du terrain."
       },
       "table": {
         "name": "Nom",

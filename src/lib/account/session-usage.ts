@@ -8,6 +8,11 @@ export type SessionUsage = {
   // (which stays >= 0 so the parent view never shows a negative balance) so the
   // admin can spot a keeper who trained more than they paid for and invoice it.
   over: number;
+  // Whether a fixed allotment applies. Registrations taken from October 2026
+  // commit to a Tour or a season without a set number of sessions: there is no
+  // balance to draw down, only sessions to count. Without this flag they would
+  // all show a nil package and trigger the "unpaid sessions" alert.
+  tracked: boolean;
 };
 
 // Per-keeper package tracking. A session is "used" once it is marked completed
@@ -82,11 +87,16 @@ export async function sessionUsageByChild(
   for (const id of childIds) {
     const total = totals.get(id) ?? 0;
     const u = used.get(id) ?? 0;
+    // Un forfait à nombre fixe se décompte; un engagement sur un Tour ou une
+    // saison se compte seulement. Sans allotissement, pas de solde ni de
+    // dépassement: on afficherait un "0 restante" trompeur et une alerte à tort.
+    const tracked = total > 0;
     map.set(id, {
+      tracked,
       used: u,
       total,
-      remaining: Math.max(0, total - u),
-      over: Math.max(0, u - total),
+      remaining: tracked ? Math.max(0, total - u) : 0,
+      over: tracked ? Math.max(0, u - total) : 0,
     });
   }
   return map;

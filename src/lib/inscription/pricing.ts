@@ -22,6 +22,18 @@ export const SESSIONS: Record<Formula, number> = {
   season: 36,
 };
 
+// Séances créditées au forfait du gardien, à ne pas confondre avec SESSIONS
+// ci-dessus, qui reste la base de facturation. Depuis octobre 2026, un Tour ou
+// une saison n'ouvre plus un nombre fixe de séances: le calendrier dépend de la
+// disponibilité des installations. On compte alors simplement les séances
+// effectuées, sans solde. La séance découverte, elle, reste à l'unité.
+export const SESSION_ALLOWANCE: Record<Formula, number> = {
+  single: 1,
+  tour1: 0,
+  tour2: 0,
+  season: 0,
+};
+
 export function priceFor(audience: Audience, formula: Formula): number {
   return PRICING[audience][formula] * SESSIONS[formula];
 }

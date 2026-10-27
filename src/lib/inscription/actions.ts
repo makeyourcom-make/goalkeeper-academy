@@ -12,7 +12,7 @@ import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 import {
   CADENCE_MONTHS,
   INSTALLMENTS,
-  SESSIONS,
+  SESSION_ALLOWANCE,
   computeTotals,
   installmentCents,
   isAudience,
@@ -269,7 +269,7 @@ export async function submitRegistration(
       child_id: childId,
       audience: k.audience,
       formula: k.formula,
-      sessions_count: SESSIONS[k.formula],
+      sessions_count: SESSION_ALLOWANCE[k.formula],
       amount_cents: priceFor(k.audience, k.formula) * 100,
       // Pending until the first payment lands. The Stripe webhook (card/TWINT)
       // and admin markInvoicePaid (QR/bank) flip it to "confirmed" — so an order
