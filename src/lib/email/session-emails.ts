@@ -26,13 +26,36 @@ async function recipients(
     .select("first_name, last_name, profiles(email, language)")
     .in("id", childIds)
     .returns<ChildRow[]>();
-  return (data ?? [])
-    .filter((c) => c.profiles?.email)
-    .map((c) => ({
-      email: c.profiles!.email,
-      childName: `${c.first_name ?? ""} ${c.last_name ?? ""}`.trim(),
+  const byEmail = new Map<
+    string,
+    { email: string; names: string[]; en: boolean }
+  >();
+  for (const c of data ?? []) {
+    const email = c.profiles?.email;
+    if (!email) continue;
+    const entry = byEmail.get(email) ?? {
+      email,
+      names: [],
       en: c.profiles!.language === "en",
-    }));
+    };
+    const name = `${c.first_name ?? ""} ${c.last_name ?? ""}`.trim();
+    if (name) entry.names.push(name);
+    byEmail.set(email, entry);
+  }
+
+  // "Rodrigo, Loris et Paul" se lit mieux qu'une énumération brute, et un club
+  // voit d'un coup qui est concerné.
+  const joinNames = (names: string[], en: boolean): string => {
+    if (names.length <= 1) return names[0] ?? "";
+    const last = names[names.length - 1];
+    return `${names.slice(0, -1).join(", ")} ${en ? "and" : "et"} ${last}`;
+  };
+
+  return [...byEmail.values()].map((r) => ({
+    email: r.email,
+    childName: joinNames(r.names, r.en),
+    en: r.en,
+  }));
 }
 
 export type ConvocationParams = {
