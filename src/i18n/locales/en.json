@@ -1035,7 +1035,7 @@
         },
         {
           "heading": "Payment terms",
-          "body": "Discovery and single sessions: payable in full (100%) before the session.\nTour and full season: payment in one instalment (per tour or per season) or spread out (monthly or quarterly). Choosing a Tour or a season is a firm commitment for the entire package, regardless of the chosen payment method.\nPayment is made by credit card or TWINT (secure online payment via Stripe), or by Swiss QR invoice (bank transfer).\nThe place is definitively confirmed once payment (or the first instalment for staggered payments) is received."
+          "body": "Discovery and single sessions: payable in full (100%) before the session.\nTour and full season: payment in one instalment (per tour or per season) or spread out (half-yearly, quarterly or monthly). A staggered payment runs for six months at most from registration, so that the package is settled before the end of the sports season. Choosing a Tour or a season is a firm commitment for the entire package, regardless of the chosen payment method.\nPayment is made by credit card or TWINT, online and securely via Stripe.\nThe place is definitively confirmed once payment (or the first instalment for staggered payments) is received."
         },
         {
           "heading": "Late payment and exclusion",
@@ -2079,7 +2079,7 @@
     "payment": {
       "title": "Payment",
       "methodLabel": "Payment method",
-      "cadenceLabel": "Payment schedule",
+      "cadenceLabel": "Payment schedule (six months at most)",
       "methods": {
         "card": {
           "label": "Credit card",
@@ -2102,12 +2102,6 @@
         "semiannual": "Semi-annual",
         "quarterly": "Quarterly",
         "monthly": "Monthly"
-      },
-      "cadenceCount": {
-        "annual": "1 payment",
-        "semiannual": "2 payments",
-        "quarterly": "4 payments",
-        "monthly": "10 payments"
       },
       "perInstallment": "per payment",
       "breakdown": "{count} × {amount} CHF",

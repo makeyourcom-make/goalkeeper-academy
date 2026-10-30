@@ -60,11 +60,25 @@ export async function POST(req: NextRequest) {
   const cancelUrl = `${siteUrl}/${locale}/reserver?canceled=1`;
   const per = plan.amount_per_installment_cents;
 
+  // Le premier versement peut porter quelques centimes de plus que les autres
+  // quand le total ne se divise pas en parts égales. C'est son montant à lui
+  // qu'il faut encaisser, sinon la facture reste ouverte pour un centime.
+  const { data: firstInvoice } = await admin
+    .from("invoices")
+    .select("id, amount_cents")
+    .eq("payment_plan_id", plan.id)
+    .eq("installment_number", 1)
+    .maybeSingle<{ id: string; amount_cents: number }>();
+  const firstCents = firstInvoice?.amount_cents ?? per;
+
   try {
     // ---- Card, échelonné (>1 installment) → Stripe subscription (auto-charge)
     if (plan.method === "card" && plan.installments_total > 1) {
       const cadence = plan.cadence as Exclude<Cadence, "annual">;
       const interval = CADENCE_INTERVAL[cadence];
+      // Stripe prélève un montant identique à chaque échéance, donc le reste
+      // est ajouté en ligne unique: il n'est facturé que sur le 1er paiement.
+      const extra = Math.max(0, firstCents - per);
       const session = await stripe.checkout.sessions.create({
         mode: "subscription",
         payment_method_types: ["card"],
@@ -83,6 +97,18 @@ export async function POST(req: NextRequest) {
               },
             },
           },
+          ...(extra > 0
+            ? [
+                {
+                  quantity: 1,
+                  price_data: {
+                    currency: "chf",
+                    unit_amount: extra,
+                    product_data: { name: "Ajustement d'arrondi" },
+                  },
+                },
+              ]
+            : []),
         ],
         customer_email: user.email || undefined,
         success_url: successUrl,
@@ -94,13 +120,6 @@ export async function POST(req: NextRequest) {
     }
 
     // ---- Card annuel OR TWINT → one-time payment of the first installment.
-    const { data: firstInvoice } = await admin
-      .from("invoices")
-      .select("id")
-      .eq("payment_plan_id", plan.id)
-      .eq("installment_number", 1)
-      .maybeSingle<{ id: string }>();
-
     const methodTypes: Stripe.Checkout.SessionCreateParams.PaymentMethodType[] =
       plan.method === "twint" ? ["twint"] : ["card"];
 
@@ -112,7 +131,7 @@ export async function POST(req: NextRequest) {
           quantity: 1,
           price_data: {
             currency: "chf",
-            unit_amount: per,
+            unit_amount: firstCents,
             product_data: {
               name:
                 plan.installments_total > 1

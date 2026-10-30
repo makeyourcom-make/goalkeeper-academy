@@ -11,10 +11,10 @@ import { sendRegistrationConfirmation } from "@/lib/email/registration-confirmat
 import { rateLimit, clientIp } from "@/lib/security/rate-limit";
 import {
   CADENCE_MONTHS,
-  INSTALLMENTS,
   SESSION_ALLOWANCE,
   computeTotals,
   installmentCents,
+  installmentSplit,
   isAudience,
   isCadence,
   isFormula,
@@ -119,7 +119,10 @@ export async function submitRegistration(
   const { total } = computeTotals(keepers);
   if (total <= 0) return { status: "error" };
 
-  const installmentsTotal = INSTALLMENTS[cadence];
+  // Le détail des versements d'abord: leur somme vaut exactement le total,
+  // alors que le montant de référence est arrondi vers le bas.
+  const amounts = installmentSplit(total, cadence);
+  const installmentsTotal = amounts.length;
   const perCents = installmentCents(total, cadence);
 
   const admin = createSupabaseAdminClient();
@@ -196,14 +199,15 @@ export async function submitRegistration(
   let firstInvoiceId = "";
   let firstInvoiceNumber = "";
   let firstDueDate = "";
-  for (let i = 1; i <= installmentsTotal; i++) {
-    const dueDate = isoDate(addMonths(now, (i - 1) * CADENCE_MONTHS[cadence]));
+  for (const [index, amountCents] of amounts.entries()) {
+    const i = index + 1;
+    const dueDate = isoDate(addMonths(now, index * CADENCE_MONTHS[cadence]));
     const { data: inv, error: invErr } = await admin
       .from("invoices")
       .insert({
         profile_id: user.id,
         type: invoiceType,
-        amount_cents: perCents,
+        amount_cents: amountCents,
         currency: "CHF",
         status: "pending",
         due_date: dueDate,
@@ -290,7 +294,7 @@ export async function submitRegistration(
     cadence,
     installments: installmentsTotal,
     invoiceNumber: firstInvoiceNumber,
-    installmentCents: perCents,
+    installmentCents: amounts[0],
     dueDate: firstDueDate || null,
   });
 

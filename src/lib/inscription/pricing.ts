@@ -113,12 +113,18 @@ export const CADENCES: Cadence[] = [
   "monthly",
 ];
 
-// Number of installments per cadence. "monthly" = 10 (sports season Sep→Jun).
+// Un étalement ne peut pas courir au-delà de six mois. La saison de football
+// se termine en mai ou en juin: un plan signé fin octobre sur dix mensualités
+// arrivait à échéance le 29 juillet, soit deux mois après la dernière séance.
+// Toute cadence ajoutée ici doit vérifier planSpanMonths() <= MAX_PLAN_MONTHS.
+export const MAX_PLAN_MONTHS = 6;
+
+// Number of installments per cadence.
 export const INSTALLMENTS: Record<Cadence, number> = {
   annual: 1,
   semiannual: 2,
-  quarterly: 4,
-  monthly: 10,
+  quarterly: 3,
+  monthly: 6,
 };
 
 // Recurring interval for card auto-charge (Stripe subscriptions). "annual" is a
@@ -148,8 +154,42 @@ export function isCadence(v: unknown): v is Cadence {
   return (CADENCES as readonly string[]).includes(v as string);
 }
 
-// Per-installment amount in cents. Totals are whole CHF and every installment
-// count (1/2/4/10) divides 100 cleanly, so this is always an exact integer.
+// Mois écoulés entre la signature et le dernier versement.
+export function planSpanMonths(cadence: Cadence): number {
+  return (INSTALLMENTS[cadence] - 1) * CADENCE_MONTHS[cadence];
+}
+
+// Garde-fou contre le retour du plan sur dix mensualités: une cadence trop
+// longue fait échouer le build. Vérifié hors production seulement, où lever une
+// exception à l'import mettrait le site hors ligne pour une erreur de réglage.
+if (process.env.NODE_ENV !== "production") {
+  for (const c of CADENCES) {
+    if (planSpanMonths(c) > MAX_PLAN_MONTHS) {
+      throw new Error(
+        `Cadence "${c}" : ${planSpanMonths(c)} mois d'étalement, ${MAX_PLAN_MONTHS} au maximum.`,
+      );
+    }
+  }
+}
+
+// Montant de référence d'un versement, en centimes. C'est celui qui s'affiche
+// au tunnel d'inscription et que Stripe prélève à chaque échéance d'une carte.
 export function installmentCents(totalChf: number, cadence: Cadence): number {
-  return Math.round((totalChf * 100) / INSTALLMENTS[cadence]);
+  return Math.floor(Math.round(totalChf * 100) / INSTALLMENTS[cadence]);
+}
+
+// Le détail des versements, dont la somme vaut exactement le total. Un total
+// remisé (rabais multi-gardiens) ne se divise pas toujours en parts égales: le
+// reste, quelques centimes au plus, va sur le premier versement, celui qui est
+// encaissé tout de suite. La comptabilité doit tomber juste au centime.
+export function installmentSplit(
+  totalChf: number,
+  cadence: Cadence,
+): [number, ...number[]] {
+  const count = INSTALLMENTS[cadence];
+  const base = installmentCents(totalChf, cadence);
+  const rest = Math.round(totalChf * 100) - base * count;
+  const rows: [number, ...number[]] = [base + rest];
+  for (let i = 1; i < count; i++) rows.push(base);
+  return rows;
 }

@@ -1035,7 +1035,7 @@
         },
         {
           "heading": "Modalités de paiement",
-          "body": "Séance découverte et séances à l'unité : payables à 100 % avant la séance.\nTour et saison complète : paiement en une fois (au tour ou à la saison) ou de manière échelonnée (mensuelle ou trimestrielle). Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu.\nLe paiement s'effectue par carte bancaire ou TWINT (paiement en ligne sécurisé via Stripe), ou par facture QR suisse (virement bancaire).\nLa place est définitivement confirmée dès réception du paiement (ou du premier versement en cas de paiement échelonné)."
+          "body": "Séance découverte et séances à l'unité : payables à 100 % avant la séance.\nTour et saison complète : paiement en une fois (au tour ou à la saison) ou de manière échelonnée (semestrielle, trimestrielle ou mensuelle). Un paiement échelonné s'étale sur six mois au maximum à compter de l'inscription, afin que le forfait soit soldé avant la fin de la saison sportive. Le choix d'un Tour ou d'une saison constitue un engagement ferme portant sur la totalité du forfait, quel que soit le mode de paiement retenu.\nLe paiement s'effectue par carte bancaire ou TWINT, en ligne et de manière sécurisée via Stripe.\nLa place est définitivement confirmée dès réception du paiement (ou du premier versement en cas de paiement échelonné)."
         },
         {
           "heading": "Retard de paiement et exclusion",
@@ -2079,7 +2079,7 @@
     "payment": {
       "title": "Paiement",
       "methodLabel": "Moyen de paiement",
-      "cadenceLabel": "Rythme de paiement",
+      "cadenceLabel": "Rythme de paiement (six mois au maximum)",
       "methods": {
         "card": {
           "label": "Carte bancaire",
@@ -2102,12 +2102,6 @@
         "semiannual": "Semestriel",
         "quarterly": "Trimestriel",
         "monthly": "Mensuel"
-      },
-      "cadenceCount": {
-        "annual": "1 versement",
-        "semiannual": "2 versements",
-        "quarterly": "4 versements",
-        "monthly": "10 versements"
       },
       "perInstallment": "par versement",
       "breakdown": "{count} × {amount} CHF",
