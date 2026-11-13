@@ -52,6 +52,8 @@ type SubmitInput = {
   method: PaymentMethod;
   cadence: Cadence;
   phone?: string;
+  // Acceptation des CGV (incl. droit à l'image) cochée au récapitulatif.
+  termsAccepted?: boolean;
 };
 
 function registrationType(formula: string): string {
@@ -106,6 +108,10 @@ export async function submitRegistration(
   );
   if (keepers.length === 0) return { status: "error" };
 
+  // L'acceptation des CGV (droit à l'image compris) est obligatoire. Vérifiée
+  // ici aussi, jamais seulement côté client.
+  if (input.termsAccepted !== true) return { status: "error" };
+
   // A reachable number is mandatory: convocations, cancellations and
   // last-minute changes go by phone.
   const phone = (input.phone ?? "").trim();
@@ -130,6 +136,15 @@ export async function submitRegistration(
   // Save the number on the profile. Sign-up was the only other writer, so a
   // parent who already had an account never got their phone stored.
   await admin.from("profiles").update({ phone }).eq("id", user.id);
+
+  // Trace du consentement aux CGV (droit à l'image). Séparé de la mise à jour
+  // du téléphone, et en meilleur effort : tant que la migration ajoutant la
+  // colonne n'est pas appliquée, PostgREST renvoie une erreur sans lever, et
+  // l'inscription n'est jamais bloquée pour autant.
+  await admin
+    .from("profiles")
+    .update({ terms_accepted_at: new Date().toISOString() })
+    .eq("id", user.id);
 
   // 0. Guard against a duplicate order. If one of the keepers already has a
   //    registration awaiting payment for the same formula, stop here: creating

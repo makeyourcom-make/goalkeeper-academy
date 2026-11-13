@@ -1020,7 +1020,7 @@
       "metaTitle": "Terms of sale",
       "metaDescription": "General terms of sale applicable to The Last Line services.",
       "title": "Terms of sale",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-11-13",
       "intro": "These general terms govern registrations and services offered by the non-profit sports association The Last Line through thelastline.ch.",
       "sections": [
         {
@@ -1072,8 +1072,16 @@
           "body": "Each participant takes part at their own risk and must hold personal liability and accident insurance. The association declines all liability for accidents, injury, loss or theft, save for its gross negligence. Instructions from the coaching staff must be followed."
         },
         {
+          "heading": "Intellectual property",
+          "body": "All content made available by The Last Line, in particular training methods and content, drills, teaching materials, technical assessments, documents, text, photographs, videos, logos, the \"The Last Line Goalkeeper Academy\" brand and the slogan \"The school of No. 1s\", is protected by intellectual property law and remains the exclusive property of the association or its partners.\nAny reproduction, distribution, resale or use, in whole or in part, without the association's prior written authorisation is prohibited. Recordings made by participants during sessions are for private use only and may not be shared publicly without the association's written consent."
+        },
+        {
+          "heading": "Image rights, photos and videos (social media, website, advertising)",
+          "body": "In the course of its activities (pitch training, camps, events), The Last Line takes photographs and videos that may show participants, including minor goalkeepers, as well as, where applicable, the persons accompanying them.\nBy accepting these terms, the client, for themselves and, in the case of a minor, as the parent or legal representative entitled to consent on the child's behalf, grants the association, free of charge, the right to capture, record, reproduce and publish these images and videos for information, promotion and communication purposes, on social media (in particular Facebook and Instagram), the thelastline.ch website, and the printed and advertising materials of the association and its partners.\nThis authorisation is granted for Switzerland and abroad, for the legal term of protection and until revoked. It confers no right to remuneration. The association undertakes to use the images respectfully and with regard to the person's dignity, not to associate an image with disparaging content, and never to publish a child's full surname without separate consent.\nA participant who does not wish their image to be used may inform the association at any time; their participation in the activities is not affected.\nRevocation: the client may withdraw their consent at any time, for the future, by a simple written request to contact@thelastline.ch. Revocation affects neither the lawfulness of prior use nor materials already printed or distributed that cannot reasonably be recalled. The association will then cease any new use and will, as far as possible, remove content still under its control.\nThis consent is governed by Swiss federal law (art. 28 Civil Code and the revFADP) and applies identically to activities held in Valais and in the canton of Vaud."
+        },
+        {
           "heading": "Data protection",
-          "body": "Personal data processed in connection with registrations is described in our privacy policy, compliant with the nFADP and GDPR."
+          "body": "Personal data processed as part of registrations is described in our privacy policy, compliant with the revFADP and the GDPR. This processing includes photographs and videos within the meaning of the \"Image rights\" section above. The client has rights of access, rectification, objection and deletion, which can be exercised by writing to contact@thelastline.ch."
         },
         {
           "heading": "Changes to the GTS",
@@ -1081,7 +1089,7 @@
         },
         {
           "heading": "Governing law and jurisdiction",
-          "body": "These GTS are subject to Swiss law. Exclusive jurisdiction lies at the association's seat, in Torgon (Vionnaz, VS), subject to mandatory consumer-protection provisions."
+          "body": "These terms and any consent arising from them, including the image-use authorisation, are governed by Swiss (federal) law, which applies uniformly to the association's activities regardless of the canton in which they take place, in particular Valais and the canton of Vaud. The exclusive place of jurisdiction is the association's registered office in Torgon (Vionnaz, VS), subject to mandatory provisions protecting consumers."
         }
       ]
     },
@@ -2142,6 +2150,14 @@
       "createTitle": "Your account",
       "createSubtitle": "An account is created with these details to track your registrations and invoices.",
       "passwordPlaceholder": "Password (min. 8 characters)"
+    },
+    "consent": {
+      "pre": "I have read and accept the",
+      "terms": "terms and conditions",
+      "mid": ", which include the use of participants' photos and videos (image rights) for the association's communications, and the",
+      "privacy": "privacy policy",
+      "post": ". For a minor goalkeeper, I confirm that I am the parent or legal representative and consent on their behalf.",
+      "error": "You must accept the terms and conditions to complete the registration."
     }
   },
   "CookieBanner": {

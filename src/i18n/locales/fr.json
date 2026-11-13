@@ -1020,7 +1020,7 @@
       "metaTitle": "Conditions générales de vente",
       "metaDescription": "Conditions générales de vente applicables aux prestations de The Last Line.",
       "title": "Conditions générales de vente",
-      "lastUpdated": "2026-07-01",
+      "lastUpdated": "2026-11-13",
       "intro": "Les présentes conditions générales (CGV) régissent les inscriptions et prestations proposées par l'association sportive à but non lucratif The Last Line via le site thelastline.ch.",
       "sections": [
         {
@@ -1072,8 +1072,16 @@
           "body": "Chaque participant prend part aux activités sous sa propre responsabilité et doit être couvert par une assurance responsabilité civile et accident personnelle. L'association décline toute responsabilité en cas d'accident, de blessure, de perte ou de vol, sous réserve de sa faute grave. Les consignes de l'encadrement doivent être respectées."
         },
         {
+          "heading": "Propriété intellectuelle",
+          "body": "L'ensemble des contenus mis à disposition par The Last Line, notamment les méthodes et contenus d'entraînement, exercices, supports pédagogiques, bilans techniques, documents, textes, photographies, vidéos, logos, la marque « The Last Line Goalkeeper Academy » et le slogan « L'école des n°1 », est protégé par le droit de la propriété intellectuelle et demeure la propriété exclusive de l'association ou de ses partenaires.\nToute reproduction, diffusion, revente ou exploitation, totale ou partielle, sans autorisation écrite préalable de l'association est interdite. Les enregistrements réalisés par les participants durant les séances sont réservés à un usage privé et ne peuvent être diffusés publiquement sans l'accord écrit de l'association."
+        },
+        {
+          "heading": "Droit à l'image, photos et vidéos (réseaux sociaux, site, publicité)",
+          "body": "Dans le cadre de ses activités (entraînements sur le terrain, stages, événements), The Last Line réalise des photographies et des vidéos pouvant représenter les participants, y compris les gardiens mineurs, ainsi que, le cas échéant, les personnes qui les accompagnent.\nEn acceptant les présentes CGV, le client, pour lui-même et, s'agissant d'un mineur, en qualité de parent ou de représentant légal autorisé à consentir pour l'enfant, autorise gratuitement l'association à capter, enregistrer, reproduire et diffuser ces images et vidéos à des fins d'information, de promotion et de communication, sur les réseaux sociaux (notamment Facebook et Instagram), le site thelastline.ch, ainsi que les supports publicitaires et imprimés de l'association et de ses partenaires.\nCette autorisation est consentie pour la Suisse et l'étranger, pour la durée de protection légale et jusqu'à révocation. Elle ne confère aucun droit à rémunération. L'association s'engage à un usage respectueux de la personne et de sa dignité, à ne pas associer une image à un propos dénigrant, et à ne jamais publier le nom de famille complet d'un enfant sans accord distinct.\nLe participant qui ne souhaite pas que son image soit utilisée peut en informer l'association à tout moment ; sa participation aux activités n'en est pas affectée.\nRévocation : le client peut retirer son consentement en tout temps, pour l'avenir, par simple demande écrite à contact@thelastline.ch. La révocation n'affecte ni la licéité des usages antérieurs, ni les supports déjà imprimés ou diffusés qu'il n'est pas raisonnablement possible de retirer. L'association cesse alors toute nouvelle utilisation et retire, dans la mesure du possible, les contenus encore sous son contrôle.\nCe consentement relève du droit fédéral suisse (art. 28 CC et nLPD) et s'applique de façon identique aux activités se déroulant en Valais et dans le canton de Vaud."
+        },
+        {
           "heading": "Protection des données",
-          "body": "Les données personnelles traitées dans le cadre des inscriptions sont décrites dans notre politique de confidentialité, conforme à la nLPD et au RGPD."
+          "body": "Les données personnelles traitées dans le cadre des inscriptions sont décrites dans notre politique de confidentialité, conforme à la nLPD et au RGPD. Ce traitement inclut les photographies et vidéos au sens de l'article « Droit à l'image » ci-dessus. Le client dispose d'un droit d'accès, de rectification, d'opposition et de suppression, qu'il peut exercer en écrivant à contact@thelastline.ch."
         },
         {
           "heading": "Modification des CGV",
@@ -1081,7 +1089,7 @@
         },
         {
           "heading": "Droit applicable et for",
-          "body": "Les présentes CGV sont soumises au droit suisse. Le for exclusif est au siège de l'association, à Torgon (Vionnaz, VS), sous réserve des dispositions impératives protégeant les consommateurs."
+          "body": "Les présentes CGV et tout consentement qui en découle, y compris l'autorisation d'utilisation de l'image, sont soumis au droit suisse (droit fédéral), lequel s'applique de manière uniforme aux activités de l'association quel que soit le canton où elles se déroulent, notamment en Valais et dans le canton de Vaud. Le for exclusif est au siège de l'association, à Torgon (Vionnaz, VS), sous réserve des dispositions impératives protégeant les consommateurs."
         }
       ]
     },
@@ -2142,6 +2150,14 @@
       "createTitle": "Votre compte",
       "createSubtitle": "Un compte est créé avec ces coordonnées pour suivre vos inscriptions et factures.",
       "passwordPlaceholder": "Mot de passe (min. 8 caractères)"
+    },
+    "consent": {
+      "pre": "J'ai lu et j'accepte les",
+      "terms": "conditions générales de vente",
+      "mid": ", qui incluent l'utilisation de photos et vidéos des participants (droit à l'image) pour la communication de l'association, ainsi que la",
+      "privacy": "politique de confidentialité",
+      "post": ". Pour un gardien mineur, je confirme être le parent ou le représentant légal et consentir en son nom.",
+      "error": "Vous devez accepter les conditions générales pour finaliser l'inscription."
     }
   },
   "CookieBanner": {

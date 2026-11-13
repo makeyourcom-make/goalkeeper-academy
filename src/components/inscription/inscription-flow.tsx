@@ -96,6 +96,8 @@ export function InscriptionFlow({
   const [cadence, setCadence] = React.useState<Cadence>("annual");
   const [paidMethod, setPaidMethod] = React.useState<PaymentMethod>("card");
   const [accountCreated, setAccountCreated] = React.useState(false);
+  // Acceptation des CGV (incl. droit à l'image), obligatoire pour finaliser.
+  const [accepted, setAccepted] = React.useState(false);
 
   const isOrg = profile === "club";
   const keeperCount = keepers.length;
@@ -214,6 +216,7 @@ export function InscriptionFlow({
         method,
         cadence,
         phone: contact.phone,
+        termsAccepted: accepted,
       });
       if (result.status === "auth") {
         setSubmitting(false);
@@ -786,6 +789,35 @@ export function InscriptionFlow({
               </p>
             </div>
 
+            {/* Acceptation des CGV (droit à l'image compris), obligatoire. */}
+            <label className="border-grey-200 flex items-start gap-3 rounded-xl border bg-white p-4">
+              <input
+                type="checkbox"
+                checked={accepted}
+                onChange={(e) => setAccepted(e.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-orange"
+              />
+              <span className="text-sm text-grey-700">
+                {t("consent.pre")}{" "}
+                <Link
+                  href="/cgv"
+                  target="_blank"
+                  className="font-medium text-orange underline"
+                >
+                  {t("consent.terms")}
+                </Link>
+                {t("consent.mid")}{" "}
+                <Link
+                  href="/confidentialite"
+                  target="_blank"
+                  className="font-medium text-orange underline"
+                >
+                  {t("consent.privacy")}
+                </Link>
+                {t("consent.post")}
+              </span>
+            </label>
+
             {!isAuthed && (
               <div className="flex flex-col gap-2">
                 <Turnstile />
@@ -848,7 +880,11 @@ export function InscriptionFlow({
               {t("nav.next")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
-            <Button type="button" onClick={submit} disabled={submitting}>
+            <Button
+              type="button"
+              onClick={submit}
+              disabled={submitting || !accepted}
+            >
               {t("nav.confirm")} <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           )}
