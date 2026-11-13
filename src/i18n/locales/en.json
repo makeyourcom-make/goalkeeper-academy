@@ -1514,7 +1514,7 @@
       "metaTitle": "My pay",
       "eyebrow": "Coach",
       "title": "My pay",
-      "subtitle": "Your monthly summaries: sessions done and amount.",
+      "subtitle": "Your sessions, the amount to come, and your payments.",
       "backToDashboard": "← Back to dashboard",
       "empty": "No summary yet.",
       "period": "Period",
@@ -1524,7 +1524,23 @@
       "status": "Status",
       "paid": "Paid",
       "pending": "Pending",
-      "ibanNote": "Add your IBAN in your profile to get paid."
+      "ibanNote": "Add your IBAN in your profile to get paid.",
+      "summaryDone": "Sessions coached",
+      "summaryDoneSub": "incl. {count} private",
+      "summaryEarned": "Amount earned",
+      "summaryEarnedSub": "public sessions",
+      "summaryPaid": "Already paid",
+      "summaryUpcoming": "Still to come",
+      "historyTitle": "My coached sessions",
+      "historyEmpty": "No session coached yet.",
+      "statementsTitle": "My payment statements",
+      "privateNote": "Private sessions are shown for information only: they are not paid.",
+      "date": "Date",
+      "session": "Session",
+      "type": "Type",
+      "typePublic": "Public",
+      "typePrivate": "Private",
+      "notPaidLabel": "not paid"
     }
   },
   "BlogPage": {

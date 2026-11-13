@@ -1514,7 +1514,7 @@
       "metaTitle": "Mes rémunérations",
       "eyebrow": "Entraîneur",
       "title": "Mes rémunérations",
-      "subtitle": "Vos récapitulatifs mensuels : séances effectuées et montant.",
+      "subtitle": "Vos séances, le montant à venir, et vos paiements.",
       "backToDashboard": "← Retour au tableau de bord",
       "empty": "Aucun récapitulatif pour le moment.",
       "period": "Période",
@@ -1524,7 +1524,23 @@
       "status": "Statut",
       "paid": "Payé",
       "pending": "En attente",
-      "ibanNote": "Renseignez votre IBAN dans votre profil pour être payé·e."
+      "ibanNote": "Renseignez votre IBAN dans votre profil pour être payé·e.",
+      "summaryDone": "Séances effectuées",
+      "summaryDoneSub": "dont {count} privée·s",
+      "summaryEarned": "Montant gagné",
+      "summaryEarnedSub": "séances publiques",
+      "summaryPaid": "Déjà réglé",
+      "summaryUpcoming": "Reste à venir",
+      "historyTitle": "Mes séances effectuées",
+      "historyEmpty": "Aucune séance effectuée pour le moment.",
+      "statementsTitle": "Mes relevés de paiement",
+      "privateNote": "Les séances privées sont affichées pour information : elles ne sont pas rémunérées.",
+      "date": "Date",
+      "session": "Séance",
+      "type": "Type",
+      "typePublic": "Publique",
+      "typePrivate": "Privée",
+      "notPaidLabel": "non rémunérée"
     }
   },
   "BlogPage": {
