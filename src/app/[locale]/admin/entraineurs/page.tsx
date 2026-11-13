@@ -31,7 +31,12 @@ type CoachRow = {
     iban: string | null;
   } | null;
 };
-type PaymentRow = { coach_id: string; status: string };
+type PaymentRow = {
+  coach_id: string;
+  period: string;
+  amount: number;
+  status: string;
+};
 type EligibleRow = {
   id: string;
   first_name: string | null;
@@ -50,12 +55,6 @@ export default async function AdminCoachesPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Admin.coaches");
 
-  const now = new Date();
-  const period = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
-  const periodStart = `${period}-01`;
-  const next = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-  const periodEnd = `${next.getFullYear()}-${String(next.getMonth() + 1).padStart(2, "0")}-01`;
-
   const supabase = await createSupabaseServerClient();
   const [coachesRes, sessionsRes, paymentsRes, eligibleRes] = await Promise.all(
     [
@@ -66,18 +65,18 @@ export default async function AdminCoachesPage({ params }: Props) {
         )
         .order("created_at", { ascending: true })
         .returns<CoachRow[]>(),
+      // Toutes les séances effectuées, non privées : la base de ce qui est dû
+      // aux coachs, tous mois confondus (les privées ne sont pas rémunérées).
       supabase
         .from("sessions")
-        .select("id, coach_id")
-        .gte("starts_at", periodStart)
-        .lt("starts_at", periodEnd)
-        .neq("status", "cancelled")
+        .select("coach_id, starts_at")
+        .eq("status", "completed")
         .eq("is_private", false)
-        .returns<{ id: string; coach_id: string | null }[]>(),
+        .returns<{ coach_id: string | null; starts_at: string }[]>(),
+      // Tous les relevés de paiement, toutes périodes.
       supabase
         .from("coach_payments")
-        .select("coach_id, status")
-        .eq("period", period)
+        .select("coach_id, period, amount, status")
         .returns<PaymentRow[]>(),
       supabase
         .from("profiles")
@@ -90,6 +89,7 @@ export default async function AdminCoachesPage({ params }: Props) {
 
   const coaches = coachesRes.data ?? [];
   const eligible = eligibleRes.data ?? [];
+  const payments = paymentsRes.data ?? [];
   const eligibleName = (p: EligibleRow) =>
     `${p.first_name ?? ""} ${p.last_name ?? ""}`.trim() || p.email;
 
@@ -110,48 +110,60 @@ export default async function AdminCoachesPage({ params }: Props) {
     (a, b) =>
       (requestedCoach.has(a.id) ? 0 : 1) - (requestedCoach.has(b.id) ? 0 : 1),
   );
-  const sessionCount = new Map<string, number>();
-  for (const s of sessionsRes.data ?? []) {
-    if (s.coach_id)
-      sessionCount.set(s.coach_id, (sessionCount.get(s.coach_id) ?? 0) + 1);
-  }
-  const paidStatus = new Map<string, string>();
-  for (const p of paymentsRes.data ?? []) paidStatus.set(p.coach_id, p.status);
 
-  // Historique: toutes les périodes antérieures, pour pouvoir contrôler ce qui
-  // a réellement été versé. Sans lui, la page ne montre que le mois courant et
-  // ne permet aucune vérification a posteriori.
-  const { data: historyRows } = await supabase
-    .from("coach_payments")
-    .select("coach_id, period, sessions_count, amount, status")
-    .neq("period", period)
-    .order("period", { ascending: false })
-    .returns<
-      {
-        coach_id: string;
-        period: string;
-        sessions_count: number;
-        amount: number;
-        status: string;
-      }[]
-    >();
-  const history = historyRows ?? [];
-  const coachName = new Map(
-    (coachesRes.data ?? []).map((c) => [
-      c.id,
-      `${c.profiles?.first_name ?? ""} ${c.profiles?.last_name ?? ""}`.trim() ||
-        (c.profiles?.email ?? "—"),
-    ]),
+  // Décompte des séances par (coach, mois). Le mois vient de starts_at (AAAA-MM).
+  const cell = new Map<string, number>();
+  const monthsSet = new Set<string>();
+  for (const s of sessionsRes.data ?? []) {
+    if (!s.coach_id) continue;
+    const mo = s.starts_at.slice(0, 7);
+    monthsSet.add(mo);
+    const k = `${s.coach_id}|${mo}`;
+    cell.set(k, (cell.get(k) ?? 0) + 1);
+  }
+  // Statut de paiement par (coach, mois), et total déjà versé par coach.
+  const payStatus = new Map<string, string>();
+  const paidByCoach = new Map<string, number>();
+  for (const p of payments) {
+    monthsSet.add(p.period);
+    payStatus.set(`${p.coach_id}|${p.period}`, p.status);
+    if (p.status === "paid")
+      paidByCoach.set(
+        p.coach_id,
+        (paidByCoach.get(p.coach_id) ?? 0) + Number(p.amount),
+      );
+  }
+  const months = [...monthsSet].filter(Boolean).sort().reverse();
+
+  // Totaux par coach : séances, dû, déjà payé, reste.
+  const totals = coaches.map((c) => {
+    let sessions = 0;
+    for (const mo of monthsSet) sessions += cell.get(`${c.id}|${mo}`) ?? 0;
+    const owed = sessions * c.rate_per_session;
+    const paid = paidByCoach.get(c.id) ?? 0;
+    return { coach: c, sessions, owed, paid, remaining: owed - paid };
+  });
+  const grand = totals.reduce(
+    (a, t) => ({
+      sessions: a.sessions + t.sessions,
+      owed: a.owed + t.owed,
+      paid: a.paid + t.paid,
+      remaining: a.remaining + t.remaining,
+    }),
+    { sessions: 0, owed: 0, paid: 0, remaining: 0 },
   );
 
   const chf = new Intl.NumberFormat(locale === "en" ? "en-CH" : "fr-CH", {
     style: "currency",
     currency: "CHF",
   });
-  const monthLabel = new Intl.DateTimeFormat(locale, {
-    month: "long",
-    year: "numeric",
-  }).format(now);
+  const monthName = (ym: string) => {
+    const [y, m] = ym.split("-");
+    return new Intl.DateTimeFormat(locale, {
+      month: "long",
+      year: "numeric",
+    }).format(new Date(Number(y), Number(m) - 1, 1));
+  };
 
   const name = (c: CoachRow) =>
     `${c.profiles?.first_name ?? ""} ${c.profiles?.last_name ?? ""}`.trim() ||
@@ -365,11 +377,10 @@ export default async function AdminCoachesPage({ params }: Props) {
         </div>
       </div>
 
-      {/* Payments — current month */}
+      {/* Bilan par coach : totaux tous mois confondus (dû / payé / reste). */}
       <div className="mt-10 flex flex-col gap-3">
         <h2 className="font-anton text-xl uppercase text-navy">
-          {t("payments.title")}{" "}
-          <span className="text-orange">{monthLabel}</span>
+          {t("payments.overviewTitle")}
         </h2>
         <div className="overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
           <div className="overflow-x-auto">
@@ -381,156 +392,188 @@ export default async function AdminCoachesPage({ params }: Props) {
                     {t("payments.sessions")}
                   </th>
                   <th className="px-4 py-3 font-medium">
-                    {t("payments.rate")}
+                    {t("payments.owed")}
                   </th>
                   <th className="px-4 py-3 font-medium">
-                    {t("payments.amount")}
+                    {t("payments.paidAmount")}
                   </th>
                   <th className="px-4 py-3 font-medium">
-                    {t("payments.statusCol")}
+                    {t("payments.remaining")}
                   </th>
-                  <th className="px-4 py-3" />
                 </tr>
               </thead>
               <tbody className="divide-y divide-grey-100">
-                {coaches.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={6}
-                      className="px-4 py-8 text-center text-grey-500"
-                    >
-                      {t("empty")}
+                {totals.map((row) => (
+                  <tr key={row.coach.id} className="hover:bg-grey-100/40">
+                    <td className="px-4 py-3 font-medium text-navy">
+                      {name(row.coach)}
+                    </td>
+                    <td className="px-4 py-3 text-grey-700">{row.sessions}</td>
+                    <td className="px-4 py-3 text-grey-700">
+                      {chf.format(row.owed)}
+                    </td>
+                    <td className="px-4 py-3 text-success">
+                      {chf.format(row.paid)}
+                    </td>
+                    <td className="px-4 py-3 font-semibold text-navy">
+                      {chf.format(row.remaining)}
                     </td>
                   </tr>
-                ) : (
-                  coaches.map((c) => {
-                    const count = sessionCount.get(c.id) ?? 0;
-                    const amount = count * c.rate_per_session;
-                    const paid = paidStatus.get(c.id) === "paid";
-                    return (
-                      <tr key={c.id} className="hover:bg-grey-100/40">
-                        <td className="px-4 py-3 font-medium text-navy">
-                          {name(c)}
-                        </td>
-                        <td className="px-4 py-3 text-grey-700">{count}</td>
-                        <td className="px-4 py-3 text-grey-700">
-                          {chf.format(c.rate_per_session)}
-                        </td>
-                        <td className="px-4 py-3 font-medium text-navy">
-                          {chf.format(amount)}
-                        </td>
-                        <td className="px-4 py-3">
-                          <span
-                            className={
-                              paid
-                                ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
-                                : "inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange"
-                            }
-                          >
-                            {paid ? t("payments.paid") : t("payments.pending")}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-right">
-                          <form action={setCoachPayment}>
-                            <input type="hidden" name="coachId" value={c.id} />
-                            <input type="hidden" name="period" value={period} />
-                            <input
-                              type="hidden"
-                              name="sessionsCount"
-                              value={count}
-                            />
-                            <input
-                              type="hidden"
-                              name="rate"
-                              value={c.rate_per_session}
-                            />
-                            <input
-                              type="hidden"
-                              name="paid"
-                              value={paid ? "false" : "true"}
-                            />
-                            <Button
-                              type="submit"
-                              variant={paid ? "ghost" : "primary"}
-                              size="sm"
-                            >
-                              {paid
-                                ? t("payments.markUnpaid")
-                                : t("payments.markPaid")}
-                            </Button>
-                          </form>
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
+                ))}
               </tbody>
+              {coaches.length > 0 && (
+                <tfoot className="border-t-2 border-grey-100 bg-grey-100/30">
+                  <tr>
+                    <td className="px-4 py-3 font-anton uppercase text-navy">
+                      {t("payments.totalLabel")}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-navy">
+                      {grand.sessions}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-navy">
+                      {chf.format(grand.owed)}
+                    </td>
+                    <td className="px-4 py-3 font-medium text-success">
+                      {chf.format(grand.paid)}
+                    </td>
+                    <td className="px-4 py-3 font-anton text-orange">
+                      {chf.format(grand.remaining)}
+                    </td>
+                  </tr>
+                </tfoot>
+              )}
             </table>
           </div>
         </div>
+      </div>
 
-        {/* Historique: la vue du mois courant ne dit rien de ce qui a déjà été
-            versé, ce qui rend impossible tout contrôle a posteriori. */}
-        {history.length > 0 && (
-          <div className="mt-10">
-            <h2 className="font-anton text-xl uppercase text-navy">
-              {t("payments.historyTitle")}
-            </h2>
-            <div className="mt-4 overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
-                    <tr>
-                      <th className="px-4 py-3 font-medium">
-                        {t("payments.period")}
-                      </th>
-                      <th className="px-4 py-3 font-medium">
-                        {t("payments.coach")}
-                      </th>
-                      <th className="px-4 py-3 font-medium">
-                        {t("payments.sessions")}
-                      </th>
-                      <th className="px-4 py-3 font-medium">
-                        {t("payments.amount")}
-                      </th>
-                      <th className="px-4 py-3 font-medium">
-                        {t("payments.status")}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-grey-100">
-                    {history.map((h) => (
-                      <tr key={`${h.period}-${h.coach_id}`}>
-                        <td className="px-4 py-3 font-medium text-navy">
-                          {h.period}
-                        </td>
-                        <td className="px-4 py-3 text-grey-700">
-                          {coachName.get(h.coach_id) ?? "—"}
-                        </td>
-                        <td className="px-4 py-3 text-grey-700">
-                          {h.sessions_count}
-                        </td>
-                        <td className="px-4 py-3 font-medium text-navy">
-                          {chf.format(Number(h.amount))}
-                        </td>
-                        <td className="px-4 py-3">
-                          <span
-                            className={`rounded-full px-2 py-0.5 text-xs font-medium ${
-                              h.status === "paid"
-                                ? "bg-success/15 text-success"
-                                : "bg-warning/15 text-warning"
-                            }`}
-                          >
-                            {t(`payments.${h.status}`)}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      {/* Détail par mois : un bloc par mois, décompté sur les séances réelles,
+          avec le bouton pour marquer la période payée. */}
+      <div className="mt-10 flex flex-col gap-6">
+        <h2 className="font-anton text-xl uppercase text-navy">
+          {t("payments.detailTitle")}
+        </h2>
+        {months.length === 0 ? (
+          <p className="text-sm text-grey-500">{t("empty")}</p>
+        ) : (
+          months.map((mo) => {
+            const rows = coaches
+              .map((c) => ({
+                coach: c,
+                count: cell.get(`${c.id}|${mo}`) ?? 0,
+                status: payStatus.get(`${c.id}|${mo}`),
+              }))
+              .filter((r) => r.count > 0 || r.status);
+            if (rows.length === 0) return null;
+            return (
+              <div key={mo} className="flex flex-col gap-2">
+                <h3 className="font-anton text-base uppercase text-navy">
+                  <span className="capitalize text-orange">
+                    {monthName(mo)}
+                  </span>
+                </h3>
+                <div className="overflow-hidden rounded-2xl border border-grey-100 bg-white shadow-sm">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead className="border-b border-grey-100 bg-grey-100/40 text-left text-xs uppercase tracking-wide text-grey-500">
+                        <tr>
+                          <th className="px-4 py-3 font-medium">
+                            {t("table.name")}
+                          </th>
+                          <th className="px-4 py-3 font-medium">
+                            {t("payments.sessions")}
+                          </th>
+                          <th className="px-4 py-3 font-medium">
+                            {t("payments.rate")}
+                          </th>
+                          <th className="px-4 py-3 font-medium">
+                            {t("payments.amount")}
+                          </th>
+                          <th className="px-4 py-3 font-medium">
+                            {t("payments.statusCol")}
+                          </th>
+                          <th className="px-4 py-3" />
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-grey-100">
+                        {rows.map(({ coach: c, count, status }) => {
+                          const amount = count * c.rate_per_session;
+                          const paid = status === "paid";
+                          return (
+                            <tr key={c.id} className="hover:bg-grey-100/40">
+                              <td className="px-4 py-3 font-medium text-navy">
+                                {name(c)}
+                              </td>
+                              <td className="px-4 py-3 text-grey-700">
+                                {count}
+                              </td>
+                              <td className="px-4 py-3 text-grey-700">
+                                {chf.format(c.rate_per_session)}
+                              </td>
+                              <td className="px-4 py-3 font-medium text-navy">
+                                {chf.format(amount)}
+                              </td>
+                              <td className="px-4 py-3">
+                                <span
+                                  className={
+                                    paid
+                                      ? "inline-flex rounded-full bg-success/10 px-2 py-0.5 text-xs font-medium text-success"
+                                      : "inline-flex rounded-full bg-orange/10 px-2 py-0.5 text-xs font-medium text-orange"
+                                  }
+                                >
+                                  {paid
+                                    ? t("payments.paid")
+                                    : t("payments.pending")}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3 text-right">
+                                <form action={setCoachPayment}>
+                                  <input
+                                    type="hidden"
+                                    name="coachId"
+                                    value={c.id}
+                                  />
+                                  <input
+                                    type="hidden"
+                                    name="period"
+                                    value={mo}
+                                  />
+                                  <input
+                                    type="hidden"
+                                    name="sessionsCount"
+                                    value={count}
+                                  />
+                                  <input
+                                    type="hidden"
+                                    name="rate"
+                                    value={c.rate_per_session}
+                                  />
+                                  <input
+                                    type="hidden"
+                                    name="paid"
+                                    value={paid ? "false" : "true"}
+                                  />
+                                  <Button
+                                    type="submit"
+                                    variant={paid ? "ghost" : "primary"}
+                                    size="sm"
+                                  >
+                                    {paid
+                                      ? t("payments.markUnpaid")
+                                      : t("payments.markPaid")}
+                                  </Button>
+                                </form>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            );
+          })
         )}
       </div>
     </div>

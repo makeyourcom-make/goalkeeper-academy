@@ -776,7 +776,13 @@
         "markUnpaid": "Undo",
         "historyTitle": "Payment history",
         "period": "Period",
-        "coach": "Coach"
+        "coach": "Coach",
+        "overviewTitle": "Per-coach summary",
+        "detailTitle": "Monthly detail",
+        "owed": "Amount owed",
+        "paidAmount": "Already paid",
+        "remaining": "Remaining",
+        "totalLabel": "Total"
       },
       "viewAs": "View as",
       "promote": {

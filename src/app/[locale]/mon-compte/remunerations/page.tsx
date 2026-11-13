@@ -6,7 +6,7 @@ import { Wallet, CalendarCheck, TrendingUp, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -38,25 +38,24 @@ export default async function RemunerationsPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.pay");
 
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect(`/${locale}/connexion`);
+  // Compte effectif : celui qu'un admin consulte en « voir en tant que »,
+  // sinon le compte connecté. Sans cela, la page montrait les données de
+  // l'admin au lieu de celles du coach consulté.
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
 
-  const { data: coach } = await supabase
+  // Tout est lu avec le client service-role, strictement limité à ce coach :
+  // un coach ne peut pas lire ses séances ni ses relevés via RLS.
+  const admin = createSupabaseAdminClient();
+  const { data: coach } = await admin
     .from("coaches")
     .select("id, rate_per_session")
-    .eq("profile_id", user.id)
+    .eq("profile_id", ctx.userId)
     .maybeSingle<{ id: string; rate_per_session: number | null }>();
   if (!coach) redirect(`/${locale}/mon-compte`);
 
   const rate = Number(coach.rate_per_session ?? 0);
 
-  // Les séances déjà données sont lues avec le client service-role, strictement
-  // limité aux séances de ce coach : un coach ne peut pas lire ces lignes via
-  // RLS. Les relevés de paiement et l'IBAN passent par le client RLS habituel.
-  const admin = createSupabaseAdminClient();
   const [{ data: sessions }, { data: payments }, { data: profile }] =
     await Promise.all([
       admin
@@ -66,7 +65,7 @@ export default async function RemunerationsPage({ params }: Props) {
         .eq("status", "completed")
         .order("starts_at", { ascending: false })
         .returns<DoneSession[]>(),
-      supabase
+      admin
         .from("coach_payments")
         .select(
           "period, sessions_count, rate_per_session, amount, status, paid_at",
@@ -74,10 +73,10 @@ export default async function RemunerationsPage({ params }: Props) {
         .eq("coach_id", coach.id)
         .order("period", { ascending: false })
         .returns<PaymentRow[]>(),
-      supabase
+      admin
         .from("profiles")
         .select("iban")
-        .eq("id", user.id)
+        .eq("id", ctx.userId)
         .maybeSingle<{ iban: string | null }>(),
     ]);
 

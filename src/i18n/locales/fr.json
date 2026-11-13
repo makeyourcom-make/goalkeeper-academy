@@ -776,7 +776,13 @@
         "markUnpaid": "Annuler",
         "historyTitle": "Historique des paiements",
         "period": "Période",
-        "coach": "Coach"
+        "coach": "Coach",
+        "overviewTitle": "Bilan par coach",
+        "detailTitle": "Détail par mois",
+        "owed": "Montant dû",
+        "paidAmount": "Déjà payé",
+        "remaining": "Reste à payer",
+        "totalLabel": "Total"
       },
       "viewAs": "Voir en tant que",
       "promote": {

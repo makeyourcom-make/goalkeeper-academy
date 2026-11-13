@@ -6,7 +6,7 @@ import { CalendarRange, MapPin, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getAccountContext } from "@/lib/account/view-context";
 import { createSupabaseAdminClient } from "@/lib/supabase/admin";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -37,25 +37,23 @@ export default async function CoachingPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("Account.coaching");
 
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect(`/${locale}/connexion`);
+  // On résout le coach à partir du compte EFFECTIF : celui que l'admin
+  // consulte en « voir en tant que », sinon le compte connecté. Sans cela, la
+  // page affichait les séances de l'admin au lieu de celles du coach consulté.
+  const ctx = await getAccountContext();
+  if (!ctx) redirect(`/${locale}/connexion`);
 
-  const { data: coach } = await supabase
+  // Lecture via le client service-role, strictement limitée aux séances de ce
+  // coach : RLS n'expose pas les noms des gardiens à un coach.
+  const admin = createSupabaseAdminClient();
+  const { data: coach } = await admin
     .from("coaches")
     .select("id")
-    .eq("profile_id", user.id)
+    .eq("profile_id", ctx.userId)
     .maybeSingle<{ id: string }>();
   if (!coach) redirect(`/${locale}/mon-compte`);
 
   // Toutes les séances du coach, passées comme à venir, privées comprises.
-  // La page ne montrait que le futur public, donc un coach qui n'a que des
-  // séances déjà données (ou des séances privées) voyait un planning vide.
-  // Lecture via le client service-role, strictement limitée à ses séances :
-  // RLS n'expose pas les noms des gardiens à un coach.
-  const admin = createSupabaseAdminClient();
   const { data: sessions } = await admin
     .from("sessions")
     .select(
