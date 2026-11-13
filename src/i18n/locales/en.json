@@ -1503,12 +1503,16 @@
       "metaTitle": "My sessions",
       "eyebrow": "Coach",
       "title": "My sessions",
-      "subtitle": "Trainings where you are assigned as coach.",
+      "subtitle": "All your sessions, upcoming and past.",
       "backToDashboard": "← Back to dashboard",
-      "empty": "No upcoming session yet.",
+      "empty": "No session yet.",
       "meet": "Call time",
       "keepers": "Goalkeepers",
-      "noKeepers": "No goalkeeper convened"
+      "noKeepers": "No goalkeeper convened",
+      "upcomingTitle": "Upcoming",
+      "pastTitle": "Past sessions",
+      "private": "Private",
+      "emptyUpcoming": "No upcoming session yet."
     },
     "pay": {
       "metaTitle": "My pay",

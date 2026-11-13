@@ -18,6 +18,7 @@ type SessionRow = {
   meet_at: string | null;
   starts_at: string;
   ends_at: string;
+  is_private: boolean | null;
   session_attendees: {
     children: { first_name: string | null; last_name: string | null } | null;
   }[];
@@ -49,27 +50,82 @@ export default async function CoachingPage({ params }: Props) {
     .maybeSingle<{ id: string }>();
   if (!coach) redirect(`/${locale}/mon-compte`);
 
-  // Coaches can't read keeper names via RLS — fetch with the service-role
-  // client, strictly scoped to this coach's own sessions.
+  // Toutes les séances du coach, passées comme à venir, privées comprises.
+  // La page ne montrait que le futur public, donc un coach qui n'a que des
+  // séances déjà données (ou des séances privées) voyait un planning vide.
+  // Lecture via le client service-role, strictement limitée à ses séances :
+  // RLS n'expose pas les noms des gardiens à un coach.
   const admin = createSupabaseAdminClient();
   const { data: sessions } = await admin
     .from("sessions")
     .select(
-      "id, title, location, meet_at, starts_at, ends_at, session_attendees(children(first_name, last_name))",
+      "id, title, location, meet_at, starts_at, ends_at, is_private, session_attendees(children(first_name, last_name))",
     )
     .eq("coach_id", coach.id)
-    .gte("starts_at", new Date().toISOString())
     .neq("status", "cancelled")
-    .eq("is_private", false)
-    .order("starts_at", { ascending: true })
+    .order("starts_at", { ascending: false })
     .returns<SessionRow[]>();
 
-  const list = sessions ?? [];
+  const all = sessions ?? [];
+  const now = Date.now();
+  // À venir du plus proche au plus lointain ; passées de la plus récente à la
+  // plus ancienne.
+  const upcoming = all
+    .filter((s) => new Date(s.starts_at).getTime() >= now)
+    .sort(
+      (a, b) =>
+        new Date(a.starts_at).getTime() - new Date(b.starts_at).getTime(),
+    );
+  const past = all.filter((s) => new Date(s.starts_at).getTime() < now);
+
   const dateFmt = new Intl.DateTimeFormat(locale, {
     weekday: "long",
     day: "numeric",
     month: "long",
   });
+
+  const Card = ({ s }: { s: SessionRow }) => {
+    const keepers = (s.session_attendees ?? [])
+      .map((a) =>
+        `${a.children?.first_name ?? ""} ${a.children?.last_name ?? ""}`.trim(),
+      )
+      .filter(Boolean);
+    return (
+      <div className="flex flex-col gap-2 rounded-xl border border-grey-100 bg-white p-5 shadow-sm">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 className="inline-flex items-center gap-2 font-anton text-lg uppercase text-navy">
+            {s.title}
+            {s.is_private && (
+              <span className="rounded-full bg-grey-100 px-2 py-0.5 text-xs font-medium normal-case text-grey-500">
+                {t("private")}
+              </span>
+            )}
+          </h3>
+          <span className="text-sm font-medium capitalize text-navy">
+            {dateFmt.format(new Date(s.starts_at))}
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-grey-700">
+          <span>
+            {t("meet")} {hhmm(s.meet_at) || hhmm(s.starts_at)} ·{" "}
+            {hhmm(s.starts_at)}–{hhmm(s.ends_at)}
+          </span>
+          {s.location && (
+            <span className="inline-flex items-center gap-1">
+              <MapPin className="text-grey-400 h-3.5 w-3.5" />
+              {s.location}
+            </span>
+          )}
+        </div>
+        <div className="inline-flex items-center gap-2 text-sm text-grey-500">
+          <Users className="text-grey-400 h-4 w-4" />
+          {keepers.length > 0
+            ? `${t("keepers")} (${keepers.length}) : ${keepers.join(", ")}`
+            : t("noKeepers")}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -89,53 +145,36 @@ export default async function CoachingPage({ params }: Props) {
       </section>
 
       <section className="bg-white py-12 lg:py-16">
-        <div className="container flex max-w-3xl flex-col gap-3">
-          {list.length === 0 ? (
+        <div className="container flex max-w-3xl flex-col gap-10">
+          {all.length === 0 ? (
             <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-grey-300 bg-grey-100/40 p-10 text-center">
               <CalendarRange className="h-8 w-8 text-orange" />
               <p className="text-sm text-grey-700">{t("empty")}</p>
             </div>
           ) : (
-            list.map((s) => {
-              const keepers = (s.session_attendees ?? [])
-                .map((a) =>
-                  `${a.children?.first_name ?? ""} ${a.children?.last_name ?? ""}`.trim(),
-                )
-                .filter(Boolean);
-              return (
-                <div
-                  key={s.id}
-                  className="flex flex-col gap-2 rounded-xl border border-grey-100 bg-white p-5 shadow-sm"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h2 className="font-anton text-lg uppercase text-navy">
-                      {s.title}
-                    </h2>
-                    <span className="text-sm font-medium capitalize text-navy">
-                      {dateFmt.format(new Date(s.starts_at))}
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-grey-700">
-                    <span>
-                      {t("meet")} {hhmm(s.meet_at) || hhmm(s.starts_at)} ·{" "}
-                      {hhmm(s.starts_at)}–{hhmm(s.ends_at)}
-                    </span>
-                    {s.location && (
-                      <span className="inline-flex items-center gap-1">
-                        <MapPin className="text-grey-400 h-3.5 w-3.5" />
-                        {s.location}
-                      </span>
-                    )}
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-sm text-grey-500">
-                    <Users className="text-grey-400 h-4 w-4" />
-                    {keepers.length > 0
-                      ? `${t("keepers")} (${keepers.length}) : ${keepers.join(", ")}`
-                      : t("noKeepers")}
-                  </div>
+            <>
+              <div className="flex flex-col gap-3">
+                <h2 className="font-anton text-2xl uppercase text-navy">
+                  {t("upcomingTitle")}
+                </h2>
+                {upcoming.length === 0 ? (
+                  <p className="text-sm text-grey-500">{t("emptyUpcoming")}</p>
+                ) : (
+                  upcoming.map((s) => <Card key={s.id} s={s} />)
+                )}
+              </div>
+
+              {past.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <h2 className="font-anton text-2xl uppercase text-navy">
+                    {t("pastTitle")}
+                  </h2>
+                  {past.map((s) => (
+                    <Card key={s.id} s={s} />
+                  ))}
                 </div>
-              );
-            })
+              )}
+            </>
           )}
         </div>
       </section>

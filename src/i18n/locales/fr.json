@@ -1503,12 +1503,16 @@
       "metaTitle": "Mes séances",
       "eyebrow": "Entraîneur",
       "title": "Mes séances",
-      "subtitle": "Les entraînements où vous êtes désigné·e comme entraîneur.",
+      "subtitle": "Tous vos entraînements, à venir et passés.",
       "backToDashboard": "← Retour au tableau de bord",
-      "empty": "Aucune séance à venir pour le moment.",
+      "empty": "Aucune séance pour le moment.",
       "meet": "Convocation",
       "keepers": "Gardiens",
-      "noKeepers": "Aucun gardien convoqué"
+      "noKeepers": "Aucun gardien convoqué",
+      "upcomingTitle": "À venir",
+      "pastTitle": "Séances passées",
+      "private": "Privée",
+      "emptyUpcoming": "Aucune séance à venir pour le moment."
     },
     "pay": {
       "metaTitle": "Mes rémunérations",
