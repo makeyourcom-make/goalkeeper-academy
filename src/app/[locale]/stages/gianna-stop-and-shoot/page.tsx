@@ -95,12 +95,12 @@ export default async function GianaPage({ params }: Props) {
               ))}
             </dl>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
+          <div className="relative mx-auto aspect-[2/3] w-full max-w-sm overflow-hidden rounded-2xl shadow-md">
             <Image
-              src="/images/ph-1551958219.jpg"
-              alt=""
+              src="/images/gianna-stop-and-shoot.jpg"
+              alt="Affiche officielle de la 6e édition du Gianna Stop & Shoot, le samedi 19 juin 2027 à Collombey-Muraz."
               fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 384px"
               className="object-cover"
             />
           </div>
